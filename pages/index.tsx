@@ -1,5 +1,5 @@
 const LandingPage = () => (
-  <div></div>
+  <div>Moview Review landing page</div>
 )
 
 export default LandingPage
