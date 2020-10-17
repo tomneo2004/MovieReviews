@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../themes/defaultTheme';
 import type { AppProps /*, AppContext */ } from 'next/app';
+import MainLayout from '../layouts/main.layout';
 
 export default function MovieReviewApp(props:AppProps) {
     const {Component, pageProps} = props;
@@ -25,7 +26,9 @@ export default function MovieReviewApp(props:AppProps) {
         <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <Component {...pageProps} />
+            <MainLayout>
+                <Component {...pageProps} />
+            </MainLayout>
         </ThemeProvider>
         </React.Fragment>
     );
