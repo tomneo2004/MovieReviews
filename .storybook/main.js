@@ -13,7 +13,6 @@ module.exports = {
           ...baseConfig, 
           module:{...baseConfig.module, rules: nextConfig.webpack(baseConfig,null).module.rules}
         };
-        console.log(config.module)
         return config;
     },
     stories: ['../src/**/*.stories.@(tsx)']
