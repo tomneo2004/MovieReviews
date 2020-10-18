@@ -14,7 +14,8 @@
     "@material-ui/icons": "^4.9.1",
     "next": "latest",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-material-ui-carousel": "^2.0.1"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.0.26",

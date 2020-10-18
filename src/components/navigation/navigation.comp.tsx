@@ -16,8 +16,9 @@ interface IHideScrollProps{
 }
 
 const renderRightButtons = (buttons:React.ReactNode[])=>{
-   return buttons.map((btn, i)=>{
-    return <Box key={i} px={1}>{btn}</Box>
+    if(!buttons) return null;
+    return buttons.map((btn, i)=>{
+        return <Box key={i} px={1}>{btn}</Box>
     })
 }
 
@@ -44,7 +45,7 @@ const getAppBar = (props:IProps) =>{
         <AppBar {...rest}>
             <Toolbar>
                 <Box flex='1'>{brand?brand:null}</Box>
-                <Box flex='1' display='flex' justifyContent='flex-end'>{rightButtons?renderRightButtons(rightButtons):null}</Box>
+                <Box flex='1' display='flex' justifyContent='flex-end'>{renderRightButtons(rightButtons)}</Box>
             </Toolbar>
         </AppBar>
     )
