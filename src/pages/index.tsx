@@ -24,7 +24,7 @@ const LandingPage = () => {
         <HeroLayout 
           title={
             <Typography component='div' variant='h1'>
-              <Box>Welcome</Box>
+              <Box fontWeight={500}>Welcome</Box>
             </Typography>
           }
           carousel={
@@ -34,7 +34,7 @@ const LandingPage = () => {
                 caroselItems.map((item)=>{
                   return (
                     <Typography key={item} variant='h4'>
-                      <Box>{item}</Box>
+                      <Box fontWeight={500}>{item}</Box>
                     </Typography>
                   )
                 })
