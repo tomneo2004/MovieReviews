@@ -10,7 +10,7 @@ const PopularLayout = (props:IProps) => {
         title
     } = props;
     return (
-        <Box px={1} py={3}>
+        <Box px={1} py={3} alignSelf='stretch'>
             {title}
         </Box>
     );
