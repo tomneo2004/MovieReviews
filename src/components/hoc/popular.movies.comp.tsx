@@ -19,8 +19,13 @@ export interface IPopularMovieData{
     vote_average: number;
 }
 
+/**
+ * Wrapped component must extends props from this 
+ * in order to receive popular movie's data
+ */
 export interface IPopularMoviesProps {
-    popularMovies?: IPopularMovieData[];
+    popularMovies: IPopularMovieData[];
+    errorMessage?: string;
 }
 
 interface IProps {}
@@ -33,14 +38,25 @@ const fetcher = async (url:string)=>{
      return data;
 }
 
+/**
+ * A higher order component that is responsible for
+ * fetching popular movies' data
+ * 
+ * @param WrappedComponent React component that take popular movie data.
+ * This component's props must extends IPopularMoviesProps inorder to 
+ * receive popular movies' data 
+ */
 export default function withPopularMovies(WrappedComponent:React.ComponentType<IPopularMoviesProps>){
     return (props:IProps)=>{
         
         const {data, error} = useSWR(apiRoute, fetcher);
 
-        if(error) throw new Error(error.message);
+        let errorMsg = null;
+        if(error){
+            errorMsg = error.message;
+        }
 
-        return (<WrappedComponent popularMovies={data} {...props} />);
+        return (<WrappedComponent popularMovies={data} errorMessage={errorMsg} {...props} />);
     }
 
 } 

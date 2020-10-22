@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -34,11 +35,26 @@ const transformMovieDataToPosters = (movieData:IPopularMovieData[])=>{
     })
 }
 
+/**
+ * To fetch popular movies and render them in horizontal
+ * scollable collection
+ * 
+ * @param props 
+ */
 const PopularMovieCollection = (props:IProps) => {
     const {
-        popularMovies
+        popularMovies,
+        errorMessage,
     } = props;
 
+    if(errorMessage){
+        console.log(errorMessage);
+        return (
+            <Typography component='div' variant='h3'>
+                <Box>Sorry, popular movies are not avaliable at moment</Box>
+            </Typography>
+        )
+    }
     return (
         <HScroll>
         {()=>transformMovieDataToPosters(popularMovies)}    
