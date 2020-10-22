@@ -15,7 +15,8 @@
     "next": "latest",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-material-ui-carousel": "^2.0.1"
+    "react-material-ui-carousel": "^2.0.1",
+    "short-uuid": "^4.1.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.0.26",
