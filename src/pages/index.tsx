@@ -1,10 +1,10 @@
-import Navigation from "../components/navigation/navigation.comp"
+import Navigation from "../components/movie.review/navigation/navigation.comp"
 import PageLayout from "../layouts/page.layout"
 import LandingLayout from '../layouts/landing/landing.layout';
 import HeroLayout from "../layouts/landing/hero.layout";
 import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
-import SearchBar from '../components/landing.search/landing.search.comp';
+import SearchBar from '../components/movie.review/landing.search/landing.search.comp';
 import RoundButton from '../components/unit/round.button/round.button.comp';
 import PopularLayout from "../layouts/landing/popular.layout";
 import TrendingLayout from "../layouts/landing/trending.layout";

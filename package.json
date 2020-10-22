@@ -12,11 +12,14 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "axios": "^0.20.0",
     "next": "latest",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-material-ui-carousel": "^2.0.1",
-    "short-uuid": "^4.1.0"
+    "short-uuid": "^4.1.0",
+    "swr": "^0.3.6"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.0.26",
