@@ -7,8 +7,8 @@ import HScroll from '../../unit/horizontal.scroll/hScroll.comp';
 
 export interface IProps extends IPopularMoviesProps{}
 
-const transformMovieDataToItems = (movieData:IPopularMovieData[])=>{
-    if(movieData === null){
+const transformMovieDataToPosters = (movieData:IPopularMovieData[])=>{
+    if(!movieData){
         const skeletons = [];
         for(let i=0; i<12; i++){
             skeletons.push(
@@ -41,7 +41,7 @@ const PopularMovieCollection = (props:IProps) => {
 
     return (
         <HScroll>
-        {()=>transformMovieDataToItems(popularMovies)}    
+        {()=>transformMovieDataToPosters(popularMovies)}    
         </HScroll>
     );
 };

@@ -23,6 +23,8 @@ export interface IPopularMoviesProps {
     popularMovies?: IPopularMovieData[];
 }
 
+interface IProps {}
+
 const apiKey = process.env.REACT_APP_MOVIE_API_KEY;
 const apiRoute = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
 const fetcher = async (url:string)=>{
@@ -32,7 +34,7 @@ const fetcher = async (url:string)=>{
 }
 
 export default function withPopularMovies(WrappedComponent:React.ComponentType<IPopularMoviesProps>){
-    return (props:IPopularMoviesProps)=>{
+    return (props:IProps)=>{
         
         const {data, error} = useSWR(apiRoute, fetcher);
 
