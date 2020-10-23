@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
 import React from 'react';
-import withPopularMovies, {IPopularMovieData, IPopularMoviesProps} from '../../hoc/popular.movies.comp';
+import WithPopularMovies, {IPopularMovieData, IPopularMoviesProps} from '../../hoc/popular.movies.comp';
 import HScroll from '../../unit/horizontal.scroll/hScroll.comp';
 
 export interface IProps extends IPopularMoviesProps{}
@@ -62,4 +62,4 @@ const PopularMovieCollection = (props:IProps) => {
     );
 };
 
-export default withPopularMovies(PopularMovieCollection);
+export default WithPopularMovies(PopularMovieCollection);
