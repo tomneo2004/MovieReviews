@@ -46,7 +46,7 @@ const fetcher = async (url:string)=>{
  * This component's props must extends IPopularMoviesProps inorder to 
  * receive popular movies' data 
  */
-export default function withPopularMovies(WrappedComponent:React.ComponentType<IPopularMoviesProps>){
+export default function WithPopularMovies(WrappedComponent:React.ComponentType<IPopularMoviesProps>){
     return (props:IProps)=>{
         
         const {data, error} = useSWR(apiRoute, fetcher);
