@@ -10,3 +10,27 @@ export const Default = () => {
         <CircularRating />
     )
 }
+
+export const Postive = () => {
+  return (
+      <CircularRating value={70} />
+  )
+}
+
+export const Average = () => {
+  return (
+      <CircularRating value={60} />
+  )
+}
+
+export const Negative = () => {
+  return (
+      <CircularRating value={5} />
+  )
+}
+
+export const MaskOpacity = () => {
+  return (
+      <CircularRating value={5} maskOpacity={0.5} />
+  )
+}

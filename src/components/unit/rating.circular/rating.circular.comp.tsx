@@ -6,31 +6,88 @@ import style from './rating.circular.style';
 import React from 'react';
 
 export interface IProps{
-    opacity?: number;
+    /** Size of rating, default is 50 */
+    size?: number;
+    progressSize?: number;
+    /** value of rating 0~100, default is 50 */
+    value?: number;
+    maxValue?: number;
+    minValue?: number;
+    /** background color of rating */
+    bgcolor?: string;
+    postiveCriteria?: number;
+    averageCriteria?: number;
+    negativeCriteria?: number;
+    postiveColor?: string;
+    averageColor?: string;
+    negativeColor?: string;
+    maskOpacity?: number;
 }
-const CircularRating = () => {
-    const size = 50;
-    const circleSize = 46;
-    const diff = Math.ceil(Math.abs(size - circleSize) / 2);
-    const opacity = 0.7;
 
-    const classes = makeStyles(style)({opacity});
+export interface IStyleProps{
+    finalColor: string;
+    maskOpacity: number;
+}
+
+const CircularRating = (props:IProps) => {
+    const {
+        size = 50,
+        progressSize = 44,
+        value = 50,
+        maxValue = 100,
+        minValue = 0,
+        bgcolor = '#2d2d2d',
+        postiveCriteria = 70,
+        averageCriteria = 50,
+        negativeCriteria = 0,
+        postiveColor = '#4dd827',
+        averageColor = '#f2d50d',
+        negativeColor = '#fa050f',
+        maskOpacity = 0.5,
+    } = props;
+
+    const sizeDiff = Math.floor(Math.abs(size - progressSize) / 2);
+    const finalValue = Math.min(Math.max(value, minValue),maxValue);
+    let finalColor = postiveColor;
+    if(finalValue >= postiveCriteria){
+        finalColor = postiveColor;
+    }
+    else if(finalValue >= averageCriteria){
+        finalColor = averageColor;
+    }
+    else if(finalValue >= negativeCriteria){
+        finalColor = negativeColor;
+    }
+    else{
+        finalColor = 'primary'
+    }
+
+
+    const classes = makeStyles(style)({
+        finalColor,
+        maskOpacity
+    });
 
     return (
         <Box position='relative' width={size} height={size}>
+
             <Box position='absolute' left={0} right={0} top={0} bottom={0} 
-            borderRadius='50px' bgcolor='#2d2d2d' px={`${diff}px`} py={`${diff}px`}>
-                <CircularProgress className={classes.circleOpacity} size={circleSize} value={100} variant='static' />
+            borderRadius='50px' bgcolor={bgcolor} px={`${sizeDiff}px`} py={`${sizeDiff}px`}>
+                <CircularProgress className={classes.circleMask} size={progressSize} 
+                value={100} variant='static' />
             </Box>
+
             <Box position='absolute' left={0} right={0} top={0} bottom={0} 
-            borderRadius='50px' bgcolor='transparent' px={`${diff}px`} py={`${diff}px`}>
-                <CircularProgress className={classes.circleCap} color='secondary' size={circleSize} value={70} variant='static' />
+            borderRadius='50px' bgcolor='transparent' px={`${sizeDiff}px`} py={`${sizeDiff}px`}>
+                <CircularProgress className={classes.circleCap}
+                size={progressSize} value={value} variant='static' />
             </Box>
+
             <Box position='absolute' left={0} right={0} top={0} bottom={0}
             display='flex' justifyContent='center' alignItems='center'
             >
-                <Typography component='div' variant='caption' color='error'>
-                    <Box>70%</Box>
+                <Typography className={classes.text} component='div' variant='caption'>
+                    <Box>{value}%</Box>
                 </Typography>
             </Box>
         </Box>

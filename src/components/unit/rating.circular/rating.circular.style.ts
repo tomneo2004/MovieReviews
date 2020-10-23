@@ -1,11 +1,16 @@
 import { createStyles } from "@material-ui/core";
-import {IProps} from './rating.circular.comp';
+import {IStyleProps} from './rating.circular.comp';
 
 export default createStyles({
-    circleCap:{
+    circleCap:(props:IStyleProps)=>({
         strokeLinecap:'round',
-    },
-    circleOpacity:(props:IProps)=>({
-        opacity: props.opacity
+        color: props.finalColor,
+    }),
+    circleMask:(props:IStyleProps)=>({
+        opacity: props.maskOpacity,
+        color: props.finalColor,
+    }),
+    text:(props:IStyleProps)=>({
+        color:props.finalColor,
     })
 });
