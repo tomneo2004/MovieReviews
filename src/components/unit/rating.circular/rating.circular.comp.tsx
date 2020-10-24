@@ -4,24 +4,111 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import makeStyles from '@material-ui/styles/makeStyles';
 import style from './rating.circular.style';
 import React from 'react';
+import { Variant } from '@material-ui/core/styles/createTypography';
 
 export interface IProps{
-    /** Size of rating, default is 50 */
+    /** Size of rating, the outer circle
+     *
+     * default is 50 
+     */
     size?: number;
+    /** Size of circular progress, the inner circle
+     * 
+     * The size included circular mask and circular
+     * progress
+     * 
+     * default is 44
+     */
     progressSize?: number;
-    /** value of rating 0~100, default is 50 */
+    /** Value of rating 0~100, default is 50 */
     value?: number;
+    /** Max value of rating, this value is
+     * used to clamp value
+     */
     maxValue?: number;
+    /** Min value of rating, this value is
+     * used to clamp value
+     */
     minValue?: number;
-    /** background color of rating */
+    /** background color of rating, the outer circle */
     bgcolor?: string;
+    /** Criteria for postive rating
+     * 
+     * If value is above and equal to this is counted
+     * as postive
+     * 
+     * default 70
+     */
     postiveCriteria?: number;
+     /** Criteria for average rating
+     * 
+     * If value is above and equal to this is counted
+     * as average
+     * 
+     * default 50
+     */
     averageCriteria?: number;
+    /** Criteria for negative rating
+     * 
+     * If value is above and equal to this is counted
+     * as negative
+     * 
+     * default 0
+     */
     negativeCriteria?: number;
+    /** Color of rating when rating is postive
+     * 
+     * default '#4dd827'
+     */
     postiveColor?: string;
+    /** Color of rating when rating is average
+     * 
+     * default '#f2d50d'
+     */
     averageColor?: string;
+    /** Color of rating when rating is negative
+     * 
+     * default '#fa050f
+     */
     negativeColor?: string;
+    /** The opacity for circular mask
+     * 0~1
+     * 
+     * default 0.5
+     */
     maskOpacity?: number;
+    /** Should value to be displayed
+     * 
+     * default false
+     */
+    hideValue?: boolean;
+    /** Variant of value text
+     * 
+     * default 'caption'
+     */
+    valueVariant?: Variant;
+    /** FontWeight of value text 
+     * 
+     * default 400
+     */
+    valueFontWeight?: number;
+    /** FontSize of value text 
+     * 
+     * default '1em'  
+     */
+    valueFontSize?: any;
+    /** EndAdornment for value 
+     *
+     * default null 
+     */
+    valueEndAdornment?: React.ReactElement;
+
+    /**
+     * flexbox direction for value and EndAdornment
+     * 
+     * default is 'row'
+     */
+    valueFlexDirection?: 'column' | 'row'
 }
 
 export interface IStyleProps{
@@ -44,6 +131,12 @@ const CircularRating = (props:IProps) => {
         averageColor = '#f2d50d',
         negativeColor = '#fa050f',
         maskOpacity = 0.5,
+        hideValue = false,
+        valueVariant = 'caption',
+        valueFontWeight = 400,
+        valueFontSize = '1em',
+        valueEndAdornment = null,
+        valueFlexDirection='row',
     } = props;
 
     const sizeDiff = Math.floor(Math.abs(size - progressSize) / 2);
@@ -80,14 +173,23 @@ const CircularRating = (props:IProps) => {
             <Box position='absolute' left={0} right={0} top={0} bottom={0} 
             borderRadius='50px' bgcolor='transparent' px={`${sizeDiff}px`} py={`${sizeDiff}px`}>
                 <CircularProgress className={classes.circleCap}
-                size={progressSize} value={value} variant='static' />
+                size={progressSize} value={finalValue} variant='static' />
             </Box>
 
             <Box position='absolute' left={0} right={0} top={0} bottom={0}
             display='flex' justifyContent='center' alignItems='center'
             >
-                <Typography className={classes.text} component='div' variant='caption'>
-                    <Box>{value}%</Box>
+                <Typography className={classes.text} component='div' variant={valueVariant}>
+                    <Box display='flex' 
+                    flexDirection={valueFlexDirection} 
+                    justifyContent='center' alignItems='center'>
+                        {hideValue?null:
+                            <Box 
+                            fontSize={valueFontSize} 
+                            fontWeight={valueFontWeight}>{finalValue}</Box>
+                        }
+                        {valueEndAdornment}
+                    </Box>
                 </Typography>
             </Box>
         </Box>
