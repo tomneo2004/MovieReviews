@@ -83,7 +83,6 @@ const PopularMovieCollection = (props:IProps) => {
     } = props;
 
     if(errorMessage){
-        console.log(errorMessage);
         return (
             <Typography component='div' variant='h3'>
                 <Box>Sorry, popular movies are not avaliable at moment</Box>

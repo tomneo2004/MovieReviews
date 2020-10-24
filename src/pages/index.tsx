@@ -54,7 +54,7 @@ const LandingPage = () => {
           <PopularLayout 
           title={
             <Typography component='div' variant='h4'>
-              <Box pl={2}>What's popular</Box>
+              <Box pl={2} fontWeight={600}>What's popular</Box>
             </Typography>
           } 
           />

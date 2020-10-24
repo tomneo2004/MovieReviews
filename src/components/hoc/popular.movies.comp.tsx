@@ -30,7 +30,7 @@ export interface IPopularMoviesProps {
 
 interface IProps {}
 
-const apiKey = process.env.REACT_APP_MOVIE_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_MOVIE_API_KEY;
 const apiRoute = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
 const fetcher = async (url:string)=>{
      const resp = await axios.get(url);
@@ -53,6 +53,7 @@ export default function WithPopularMovies(WrappedComponent:React.ComponentType<I
 
         let errorMsg = null;
         if(error){
+            console.log(error.status_message);
             errorMsg = error.message;
         }
 
