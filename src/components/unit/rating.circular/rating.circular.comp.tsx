@@ -143,7 +143,7 @@ const CircularRating = (props:IProps) => {
     } = props;
 
     const sizeDiff = Math.floor(Math.abs(size - progressSize) / 2);
-    const finalValue = Math.min(Math.max(value, minValue),maxValue);
+    const finalValue = Math.round(Math.min(Math.max(value, minValue),maxValue));
     let finalColor = postiveColor;
     if(finalValue >= postiveCriteria){
         finalColor = postiveColor;

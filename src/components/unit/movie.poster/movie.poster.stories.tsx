@@ -14,6 +14,8 @@ export const Default = () => {
         <MoviePoster
         imageURL={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
         imageWidth={154}
+        minWidth={154}
+        maxWidth={154}
         title='This is a movie title'
         screenDate='04 Oct 2020'
         />
@@ -25,6 +27,8 @@ export const RatingGood = () => {
       <MoviePoster
       imageURL={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
       imageWidth={154}
+      minWidth={154}
+      maxWidth={154}
       title='This is a movie title'
       screenDate='04 Oct 2020'
       rating={
@@ -33,6 +37,8 @@ export const RatingGood = () => {
         valueEndAdornment={<ThumbUpIcon style={{width:'15px',height:'15px'}} />}
         />
       }
+      ratingOffsetX={-5}
+      ratingOffsetY={-5}
       />
   )
 }
@@ -40,8 +46,10 @@ export const RatingGood = () => {
 export const RatingAverage = () => {
   return (
       <MoviePoster
-      imageURL={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
+      imageURL={`https://image.tmdb.org/t/p/w200//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg`}
       imageWidth={154}
+      minWidth={154}
+      maxWidth={154}
       title='This is a movie title'
       screenDate='04 Oct 2020'
       rating={
@@ -59,6 +67,8 @@ export const RatingBad = () => {
       <MoviePoster
       imageURL={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
       imageWidth={154}
+      minWidth={154}
+      maxWidth={154}
       title='This is a movie title'
       screenDate='04 Oct 2020'
       rating={

@@ -15,6 +15,12 @@ export const Default = () => {
     )
 }
 
+export const FloatingValue = () => {
+  return (
+      <CircularRating value={56.64} />
+  )
+}
+
 export const Postive = () => {
   return (
       <CircularRating value={70} />

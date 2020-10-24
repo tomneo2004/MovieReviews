@@ -5,9 +5,36 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import React from 'react';
 import WithPopularMovies, {IPopularMovieData, IPopularMoviesProps} from '../../hoc/popular.movies.comp';
 import HScroll from '../../unit/horizontal.scroll/hScroll.comp';
+import MoviePoster from '../../unit/movie.poster/movie.poster.comp';
+import CircularRating from '../../unit/rating.circular/rating.circular.comp';
+import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
+import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp'; 
 
 export interface IProps extends IPopularMoviesProps{}
 
+
+
+const getRatingComponent = (voteAverage:number, voteCount:number)=>{
+
+    function getRatingIcon(rating:number){
+        const iconSize = {width:'15px',height:'15px'};
+        if(rating >= 70) return (<ThumbUpIcon style={iconSize} />);
+        if(rating >= 50) return (<ThumbsUpDownIcon style={iconSize} />);
+        if(rating >= 0) return (<ThumbDownIcon style={iconSize} />);
+    
+        return (<ThumbDownIcon style={iconSize} />)
+    }
+
+    if(voteCount <= 0) return null;
+    const rating = Math.round(voteAverage * 10);
+
+    return(
+        <CircularRating value={rating} valueFlexDirection='column'
+        valueEndAdornment={getRatingIcon(rating)}
+        />
+    )
+}
 const transformMovieDataToPosters = (movieData:IPopularMovieData[])=>{
     if(!movieData){
         const skeletons = [];
@@ -26,11 +53,19 @@ const transformMovieDataToPosters = (movieData:IPopularMovieData[])=>{
     }
 
     return movieData.map(data=>{
+        
         return(
-            <Paper key={data.id}>
-                <Box p={1}><img src={`https://image.tmdb.org/t/p/w200/${data.poster_path}`} /></Box>
-                <Box p={1}>{data.title}</Box>
-            </Paper>
+            <MoviePoster 
+            key={data.id}
+            imageURL={`https://image.tmdb.org/t/p/w200/${data.poster_path}`}
+            imageWidth={200}
+            minWidth={200}
+            title={data.title}
+            screenDate={data.release_date}
+            rating={getRatingComponent(data.vote_average, data.vote_count)}
+            ratingOffsetX={-8}
+            ratingOffsetY={-8}
+            />
         )
     })
 }
