@@ -11,6 +11,12 @@ export interface IProps {
     imageWidth?: number;
     title: string;
     screenDate: string;
+    rating?: React.ReactElement;
+}
+
+const renderRating = (rating:React.ReactElement)=>{
+    if(!rating) return null;
+    return (<Box position='absolute' top='9px' left='9px'>{rating}</Box>);
 }
 
 const MoviePoster = (props:IProps) => {
@@ -19,19 +25,21 @@ const MoviePoster = (props:IProps) => {
         imageWidth = 150,
         title,
         screenDate,
+        rating,
     } = props;
 
     const classes = makeStyles(style)();
 
     return (
         <Box width='max-content' p={1}>
-            <Card className={classes.hoverPointer}>
+            <Card elevation={4} className={classes.hoverPointer}>
                 <CardMedia 
                 component="img"
                 alt={`${title}`}
                 width={imageWidth}
                 image={`${imageURL}`}
                 />
+                {renderRating(rating)}
             </Card>
             <Typography component='div' variant='h6'>
                 <Box className={classes.hoverPointer} pt={1}>{title}</Box>

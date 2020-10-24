@@ -30,8 +30,11 @@ export interface IProps{
      * used to clamp value
      */
     minValue?: number;
-    /** background color of rating, the outer circle */
-    bgcolor?: string;
+    /** background color of rating, the outer circle 
+     * 
+     * default  '#2d2d2d'
+     */
+    bgcolor?: any;
     /** Criteria for postive rating
      * 
      * If value is above and equal to this is counted

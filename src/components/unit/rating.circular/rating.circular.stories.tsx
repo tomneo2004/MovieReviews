@@ -33,6 +33,12 @@ export const Negative = () => {
   )
 }
 
+export const TransparentBG = () => {
+  return (
+      <CircularRating value={5} bgcolor='rgba(0,0,0,0.5)' />
+  )
+}
+
 export const MaskOpacity = () => {
   return (
       <CircularRating value={5} maskOpacity={0.7} />
