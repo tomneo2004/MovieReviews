@@ -29,6 +29,7 @@ export interface ITrendingMoviesProps {
 }
 
 interface IProps {
+    [key:string]:any;
     timeWindow?:'day'|'week';
 }
 

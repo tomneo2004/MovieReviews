@@ -28,7 +28,9 @@ export interface IPopularMoviesProps {
     errorMessage?: string;
 }
 
-interface IProps {}
+interface IProps {
+    [key:string]:any;
+}
 
 const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/popular/movies`;
 

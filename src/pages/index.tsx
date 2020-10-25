@@ -53,17 +53,11 @@ const LandingPage = () => {
           />
           {/* Pouplar Collection */}
           <Box px={1} py={3} alignSelf='stretch'>
-            <Typography component='div' variant='h4'>
-              <Box pl={2} fontWeight={600}>What's popular</Box>
-            </Typography>
-            <Box pt={2}><PopularCollection /></Box>
+            <PopularCollection title="What's popular" />
           </Box>
           {/* Trending Collection */}
           <Box px={1} py={3} alignSelf='stretch'>
-            <Typography component='div' variant='h4'>
-              <Box pl={2} fontWeight={600}>Trending</Box>
-            </Typography>
-            <Box pt={2}><TrendingCollection timeWindow='day' /></Box>
+            <TrendingCollection timeWindow='day' />
           </Box>
       </LandingLayout>
     </PageLayout>

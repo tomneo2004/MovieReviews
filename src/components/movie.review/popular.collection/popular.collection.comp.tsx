@@ -12,7 +12,9 @@ import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp'; 
 import { buildImageQuery } from '../../../utils/api.query.builder';
 
-export interface IProps extends IPopularMoviesProps{}
+export interface IProps extends IPopularMoviesProps{
+    title?:string;
+}
 
 
 
@@ -79,6 +81,7 @@ const transformMovieDataToPosters = (movieData:IPopularMovieData[])=>{
  */
 const PopularMovieCollection = (props:IProps) => {
     const {
+        title = 'Popular',
         popularMovies,
         errorMessage,
     } = props;
@@ -91,9 +94,16 @@ const PopularMovieCollection = (props:IProps) => {
         )
     }
     return (
-        <HScroll>
-        {()=>transformMovieDataToPosters(popularMovies)}    
-        </HScroll>
+        <Box>
+            <Typography component='div' variant='h4'>
+                <Box pl={2} fontWeight={600}>{title}</Box>
+            </Typography>
+            <Box pt={2}>
+                <HScroll>
+                {()=>transformMovieDataToPosters(popularMovies)}    
+                </HScroll>
+            </Box>
+        </Box>
     );
 };
 

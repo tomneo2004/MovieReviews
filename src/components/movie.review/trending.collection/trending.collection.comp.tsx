@@ -12,7 +12,9 @@ import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp'; 
 import { buildImageQuery } from '../../../utils/api.query.builder';
 
-export interface IProps extends ITrendingMoviesProps{}
+export interface IProps extends ITrendingMoviesProps{
+    title?:string;
+}
 
 
 
@@ -80,6 +82,7 @@ const transformMovieDataToPosters = (movieData:ITrendingMovieData[])=>{
  */
 const TrendingMovieCollection = (props:IProps) => {
     const {
+        title = 'Trending',
         trendingMovies,
         errorMessage,
     } = props;
@@ -92,9 +95,16 @@ const TrendingMovieCollection = (props:IProps) => {
         )
     }
     return (
-        <HScroll>
-        {()=>transformMovieDataToPosters(trendingMovies)}    
-        </HScroll>
+        <Box>
+            <Typography component='div' variant='h4'>
+                <Box pl={2} fontWeight={600}>{title}</Box>
+            </Typography> 
+            <Box pt={2}>
+                <HScroll>
+                {()=>transformMovieDataToPosters(trendingMovies)}    
+                </HScroll>
+            </Box>   
+        </Box>
     );
 };
 
