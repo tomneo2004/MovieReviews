@@ -1,6 +1,6 @@
 module.exports = {
-    // target: "serverless",
-    webpack : (config, _options) => {
+    target: "serverless",
+    webpack : (config, options) => {
         config.module.rules.push(
             {
                 test: /\.(png|jpg|gif)$/i,
@@ -13,7 +13,7 @@ module.exports = {
                 use: [
                     {loader:'@svgr/webpack'}
                 ]
-            }
+            },
         )
 
         return config

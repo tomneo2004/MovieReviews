@@ -61,7 +61,7 @@ const LandingPage = () => {
           <TrendingLayout
           title={
             <Typography component='div' variant='h4'>
-              <Box pl={2}>Trending</Box>
+              <Box pl={2} fontWeight={600}>Trending</Box>
             </Typography>
           }  
           />

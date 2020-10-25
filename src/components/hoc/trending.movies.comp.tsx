@@ -2,7 +2,7 @@ import React from "react";
 import useSWR from 'swr';
 import axios from 'axios';
 
-export interface IPopularMovieData{
+export interface ITrendingMovieData{
     poster_path: string | null;
     adult: boolean;
     overview: string;
@@ -23,33 +23,37 @@ export interface IPopularMovieData{
  * Wrapped component must extends props from this 
  * in order to receive popular movie's data
  */
-export interface IPopularMoviesProps {
-    popularMovies: IPopularMovieData[];
+export interface ITrendingMoviesProps {
+    popularMovies: ITrendingMovieData[];
     errorMessage?: string;
 }
 
 interface IProps {}
 
-const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/popular/movies`;
+const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/trending/movies`;
 
 const fetcher = async (url:string)=>{
      const resp = await axios.get(url);
-     const data: IPopularMovieData[] = resp.data.results;
+     const data: ITrendingMovieData[] = resp.data.results;
      return data;
 }
 
 /**
  * A higher order component that is responsible for
- * fetching popular movies' data
+ * fetching trending movies' data
  * 
  * @param WrappedComponent React component that take popular movie data.
  * This component's props must extends IPopularMoviesProps inorder to 
  * receive popular movies' data 
  */
-export default function WithPopularMovies(WrappedComponent:React.ComponentType<IPopularMoviesProps>){
+export default function WithTrendingMovies(
+    WrappedComponent:React.ComponentType<ITrendingMoviesProps>,
+    timeWindow:'day'|'week'='day'){
+
     return (props:IProps)=>{
         
-        const {data, error} = useSWR(apiRoute, fetcher);
+        const newAPIRoute = `${apiRoute}?timeWindow=${timeWindow}`;
+        const {data, error} = useSWR(newAPIRoute, fetcher);
 
         let errorMsg = null;
         if(error){
