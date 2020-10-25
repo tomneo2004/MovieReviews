@@ -6,8 +6,8 @@ import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
 import SearchBar from '../components/movie.review/landing.search/landing.search.comp';
 import RoundButton from '../components/unit/round.button/round.button.comp';
-import PopularLayout from "../layouts/landing/popular.layout";
-import TrendingLayout from "../layouts/landing/trending.layout";
+import PopularCollection from '../components/movie.review/popular.collection/popular.collection.comp';
+import TrendingCollection from '../components/movie.review/trending.collection/trending.collection.comp';
 
 const caroselItems = [
   'Find Movies',
@@ -51,20 +51,20 @@ const LandingPage = () => {
               />
           }
           />
-          <PopularLayout 
-          title={
+          {/* Pouplar Collection */}
+          <Box px={1} py={3} alignSelf='stretch'>
             <Typography component='div' variant='h4'>
               <Box pl={2} fontWeight={600}>What's popular</Box>
             </Typography>
-          } 
-          />
-          <TrendingLayout
-          title={
+            <Box pt={2}><PopularCollection /></Box>
+          </Box>
+          {/* Trending Collection */}
+          <Box px={1} py={3} alignSelf='stretch'>
             <Typography component='div' variant='h4'>
               <Box pl={2} fontWeight={600}>Trending</Box>
             </Typography>
-          }  
-          />
+            <Box pt={2}><TrendingCollection /></Box>
+          </Box>
       </LandingLayout>
     </PageLayout>
   )

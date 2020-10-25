@@ -10,6 +10,7 @@ import CircularRating from '../../unit/rating.circular/rating.circular.comp';
 import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp'; 
+import { buildImageQuery } from '../../../utils/api.query.builder';
 
 export interface IProps extends ITrendingMoviesProps{}
 
@@ -35,6 +36,7 @@ const getRatingComponent = (voteAverage:number, voteCount:number)=>{
         />
     )
 }
+
 const transformMovieDataToPosters = (movieData:ITrendingMovieData[])=>{
     if(!movieData){
         const skeletons = [];
@@ -57,7 +59,7 @@ const transformMovieDataToPosters = (movieData:ITrendingMovieData[])=>{
         return(
             <MoviePoster 
             key={data.id}
-            imageURL={`https://image.tmdb.org/t/p/w200/${data.poster_path}`}
+            imageURL={buildImageQuery(data.poster_path, 200)}
             imageWidth={200}
             minWidth={200}
             title={data.title}
@@ -78,7 +80,7 @@ const transformMovieDataToPosters = (movieData:ITrendingMovieData[])=>{
  */
 const TrendingMovieCollection = (props:IProps) => {
     const {
-        popularMovies,
+        trendingMovies,
         errorMessage,
     } = props;
 
@@ -91,7 +93,7 @@ const TrendingMovieCollection = (props:IProps) => {
     }
     return (
         <HScroll>
-        {()=>transformMovieDataToPosters(popularMovies)}    
+        {()=>transformMovieDataToPosters(trendingMovies)}    
         </HScroll>
     );
 };

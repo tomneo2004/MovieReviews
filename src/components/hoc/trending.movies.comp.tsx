@@ -24,7 +24,7 @@ export interface ITrendingMovieData{
  * in order to receive popular movie's data
  */
 export interface ITrendingMoviesProps {
-    popularMovies: ITrendingMovieData[];
+    trendingMovies: ITrendingMovieData[];
     errorMessage?: string;
 }
 
@@ -61,7 +61,7 @@ export default function WithTrendingMovies(
             errorMsg = error.message;
         }
 
-        return (<WrappedComponent popularMovies={data} errorMessage={errorMsg} {...props} />);
+        return (<WrappedComponent trendingMovies={data} errorMessage={errorMsg} {...props} />);
     }
 
 } 

@@ -3,6 +3,7 @@ import urljoin from 'url-join';
 const movieAPI = process.env.MOVIE_API_URL;
 const movieAPIVersion = process.env.MOVIE_API_VERSION;
 const movieAPIKey = process.env.MOVIE_API_KEY;
+const imageAPI = process.env.NEXT_PUBLIC_API_IMAGE_ROUTE;
 
 function buildServiceQuery(serviceQuery:string){
     const query = urljoin(
@@ -38,6 +39,20 @@ function buildDefaultQueryParams(
             buildQuery = urljoin(buildQuery, `&${property}=${params[property]}`);
         }
     }
+
+    return buildQuery;
+}
+
+export function buildImageQuery(imagePath:string, imageSize:number = 200){
+    if(!imagePath) return '';
+
+    const buildQuery = urljoin(
+        imageAPI,
+        't',
+        'p',
+        `w${imageSize}`,
+        imagePath   
+    );
 
     return buildQuery;
 }
