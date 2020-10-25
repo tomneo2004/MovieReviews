@@ -98,4 +98,4 @@ const TrendingMovieCollection = (props:IProps) => {
     );
 };
 
-export default WithTrendingMovies(TrendingMovieCollection, 'week');
+export default WithTrendingMovies(TrendingMovieCollection);

@@ -63,7 +63,7 @@ const LandingPage = () => {
             <Typography component='div' variant='h4'>
               <Box pl={2} fontWeight={600}>Trending</Box>
             </Typography>
-            <Box pt={2}><TrendingCollection /></Box>
+            <Box pt={2}><TrendingCollection timeWindow='day' /></Box>
           </Box>
       </LandingLayout>
     </PageLayout>

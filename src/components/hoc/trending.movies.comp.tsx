@@ -28,7 +28,9 @@ export interface ITrendingMoviesProps {
     errorMessage?: string;
 }
 
-interface IProps {}
+interface IProps {
+    timeWindow?:'day'|'week';
+}
 
 const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/trending/movies`;
 
@@ -47,10 +49,12 @@ const fetcher = async (url:string)=>{
  * receive popular movies' data 
  */
 export default function WithTrendingMovies(
-    WrappedComponent:React.ComponentType<ITrendingMoviesProps>,
-    timeWindow:'day'|'week'='day'){
+    WrappedComponent:React.ComponentType<ITrendingMoviesProps>){
 
     return (props:IProps)=>{
+        const {
+            timeWindow = 'day'
+        } = props;
         
         const newAPIRoute = `${apiRoute}?timeWindow=${timeWindow}`;
         const {data, error} = useSWR(newAPIRoute, fetcher);
