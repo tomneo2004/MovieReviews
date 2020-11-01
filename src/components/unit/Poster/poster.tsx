@@ -24,7 +24,7 @@ const renderRating = (rating:React.ReactElement, xOffset:number, yOffset:number)
     return (<Box position='absolute' top={yOffset} left={xOffset}>{rating}</Box>);
 }
 
-const MoviePoster = (props:IProps) => {
+const Poster = (props:IProps) => {
     const {
         imageURL = '',
         imageWidth = 150,
@@ -60,4 +60,4 @@ const MoviePoster = (props:IProps) => {
     );
 };
 
-export default MoviePoster;
+export default Poster;
