@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import TheatersIcon from '@material-ui/icons/Theaters';
 import makeStyles from '@material-ui/styles/makeStyles';
-import style from './movie.poster.style';
+import style from './posterStyle';
 import React from 'react';
 
 export interface IProps {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, SvgIcon } from '@material-ui/core';
-import Navigation from './navigation.comp';
+import Navigation from './navigation';
 import BrandIcon from '../../../assets/test/unicorn.inline.svg';
 
 export default {

@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../themes/defaultTheme';
 import type { AppProps /*, AppContext */ } from 'next/app';
-import MainLayout from '../layouts/main.layout';
+import MainLayout from '../layouts/mainLayout';
 
 export default function MovieReviewApp(props:AppProps) {
     const {Component, pageProps} = props;

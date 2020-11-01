@@ -1,5 +1,5 @@
 import React from 'react';
-import HorizontalScroll, { IHorizontalScrollState } from './hScroll.comp';
+import HorizontalScroll, { IHorizontalScrollState } from './hScroll';
 import { action } from '@storybook/addon-actions';
 import Box from '@material-ui/core/Box';
 

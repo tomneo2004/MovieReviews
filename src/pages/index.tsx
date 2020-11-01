@@ -1,13 +1,13 @@
-import Navigation from "../components/movie.review/navigation/navigation.comp"
-import PageLayout from "../layouts/page.layout"
-import LandingLayout from '../layouts/landing/landing.layout';
-import HeroLayout from "../layouts/landing/hero.layout";
+import Navigation from "../components/movieReview/navigation/navigation"
+import PageLayout from "../layouts/pageLayout"
+import LandingLayout from '../layouts/landing/landingLayout';
+import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
-import SearchBar from '../components/movie.review/landing.search/landing.search.comp';
-import RoundButton from '../components/unit/round.button/round.button.comp';
-import PopularCollection from '../components/movie.review/popular.collection/popular.collection.comp';
-import TrendingCollection from '../components/movie.review/trending.collection/trending.collection.comp';
+import SearchBar from '../components/movieReview/landingSearch/landingSearch';
+import RoundButton from '../components/unit/roundButton/roundButton';
+import PopularCollection from '../components/movieReview/popularCollection/popularCollection';
+import TrendingCollection from '../components/movieReview/trendingCollection/trendingCollection';
 
 const caroselItems = [
   'Find Movies',

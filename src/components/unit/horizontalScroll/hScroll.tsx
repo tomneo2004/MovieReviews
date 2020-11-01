@@ -1,5 +1,5 @@
 import { Box, Grid, GridSpacing, makeStyles } from '@material-ui/core';
-import style from './hScroll.style';
+import style from './hScrollStyle';
 import React from 'react';
 import shortId from 'short-uuid';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import PopularCollection from './popular.collection.comp';
+import PopularCollection from './popularCollection';
 
 export default {
   title: 'Popular Collection',

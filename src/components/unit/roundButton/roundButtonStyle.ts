@@ -1,5 +1,5 @@
 import createStyles from "@material-ui/core/styles/createStyles";
-import {IProps} from './round.button.comp';
+import {IProps} from './roundButton';
 
 export default createStyles({
     root:(props:IProps)=>({

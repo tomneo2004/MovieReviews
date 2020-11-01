@@ -1,5 +1,5 @@
 import { createStyles } from "@material-ui/core";
-import {IStyleProps} from './rating.circular.comp';
+import {IStyleProps} from './circularRating';
 
 export default createStyles({
     circleCap:(props:IStyleProps)=>({

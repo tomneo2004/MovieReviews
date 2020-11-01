@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {getTrendingQuery} from '../../../../utils/api.query.builder';
+import {getTrendingQuery} from '../../../../utils/apiQueryBuilder';
 import axios from 'axios';
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse){

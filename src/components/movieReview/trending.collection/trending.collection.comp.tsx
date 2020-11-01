@@ -3,16 +3,16 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
 import React from 'react';
-import WithPopularMovies, {IPopularMovieData, IPopularMoviesProps} from '../../hoc/popular.movies.comp';
-import HScroll from '../../unit/horizontal.scroll/hScroll.comp';
-import MoviePoster from '../../unit/movie.poster/movie.poster.comp';
-import CircularRating from '../../unit/rating.circular/rating.circular.comp';
+import WithTrendingMovies, {ITrendingMovieData, ITrendingMoviesProps} from '../../hoc/withTrendingMovies';
+import HScroll from '../../unit/horizontalScroll/hScroll';
+import MoviePoster from '../../unit/Poster/poster';
+import CircularRating from '../../unit/circularRating/circularRating';
 import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp'; 
-import { buildImageQuery } from '../../../utils/api.query.builder';
+import { buildImageQuery } from '../../../utils/apiQueryBuilder';
 
-export interface IProps extends IPopularMoviesProps{
+export interface IProps extends ITrendingMoviesProps{
     title?:string;
 }
 
@@ -38,7 +38,8 @@ const getRatingComponent = (voteAverage:number, voteCount:number)=>{
         />
     )
 }
-const transformMovieDataToPosters = (movieData:IPopularMovieData[])=>{
+
+const transformMovieDataToPosters = (movieData:ITrendingMovieData[])=>{
     if(!movieData){
         const skeletons = [];
         for(let i=0; i<12; i++){
@@ -79,17 +80,17 @@ const transformMovieDataToPosters = (movieData:IPopularMovieData[])=>{
  * 
  * @param props 
  */
-const PopularMovieCollection = (props:IProps) => {
+const TrendingMovieCollection = (props:IProps) => {
     const {
-        title = 'Popular',
-        popularMovies,
+        title = 'Trending',
+        trendingMovies,
         errorMessage,
     } = props;
 
     if(errorMessage){
         return (
             <Typography component='div' variant='h3'>
-                <Box>Sorry, popular movies are not avaliable at moment</Box>
+                <Box>Sorry, trending movies are not avaliable at moment</Box>
             </Typography>
         )
     }
@@ -97,14 +98,14 @@ const PopularMovieCollection = (props:IProps) => {
         <Box>
             <Typography component='div' variant='h4'>
                 <Box pl={2} fontWeight={600}>{title}</Box>
-            </Typography>
+            </Typography> 
             <Box pt={2}>
                 <HScroll>
-                {()=>transformMovieDataToPosters(popularMovies)}    
+                {()=>transformMovieDataToPosters(trendingMovies)}    
                 </HScroll>
-            </Box>
+            </Box>   
         </Box>
     );
 };
 
-export default WithPopularMovies(PopularMovieCollection);
+export default WithTrendingMovies(TrendingMovieCollection);

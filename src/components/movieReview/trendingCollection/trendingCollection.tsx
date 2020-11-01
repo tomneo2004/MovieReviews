@@ -3,14 +3,14 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
 import React from 'react';
-import WithTrendingMovies, {ITrendingMovieData, ITrendingMoviesProps} from '../../hoc/trending.movies.comp';
-import HScroll from '../../unit/horizontal.scroll/hScroll.comp';
-import MoviePoster from '../../unit/movie.poster/movie.poster.comp';
-import CircularRating from '../../unit/rating.circular/rating.circular.comp';
+import WithTrendingMovies, {ITrendingMovieData, ITrendingMoviesProps} from '../../hoc/withTrendingMovies';
+import HScroll from '../../unit/horizontalScroll/hScroll';
+import MoviePoster from '../../unit/Poster/poster';
+import CircularRating from '../../unit/circularRating/circularRating';
 import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp'; 
-import { buildImageQuery } from '../../../utils/api.query.builder';
+import { buildImageQuery } from '../../../utils/apiQueryBuilder';
 
 export interface IProps extends ITrendingMoviesProps{
     title?:string;

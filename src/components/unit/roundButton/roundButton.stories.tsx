@@ -1,5 +1,5 @@
 import React from 'react';
-import RadiusButton from './round.button.comp';
+import RadiusButton from './roundButton';
 
 export default {
   title: 'Radius Button',

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import Button, { ButtonProps } from '@material-ui/core/Button';
 import React from 'react';
-import style from './round.button.style';
+import style from './roundButtonStyle';
 
 export interface IProps extends ButtonProps {
     children?: string|React.ReactElement;
