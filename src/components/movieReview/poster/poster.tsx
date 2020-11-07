@@ -8,7 +8,7 @@ import React from 'react';
 import CircularRating from '../../unit/circularRating/circularRating';
 import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
-import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp'; 
+import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp';
 
 export interface IProps {
     imageURL?: string;
@@ -27,6 +27,7 @@ export interface IProps {
     ratingScore?: number;
     ratingOffsetX?: number;
     ratingOffsetY?: number;
+    onMouseOver?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 const getCircularRating = (rating:number)=>{
@@ -46,8 +47,8 @@ const getCircularRating = (rating:number)=>{
     )
 }
 
-const renderRating = (ratingComp:React.ReactElement, xOffset:number, yOffset:number)=>{
-    if(!ratingComp) return null;
+const renderRating = (rating:number, xOffset:number, yOffset:number)=>{
+    const ratingComp = getCircularRating(rating);
     return (<Box position='absolute' top={yOffset} left={xOffset}>{ratingComp}</Box>);
 }
 
@@ -62,13 +63,14 @@ const Poster = (props:IProps) => {
         ratingScore = null,
         ratingOffsetX = 0,
         ratingOffsetY = 0,
+        onMouseOver = null,
     } = props;
 
     const classes = makeStyles(style)();
 
     return (
         <Box position='relative' minWidth={minWidth} maxWidth={maxWidth?maxWidth:'inherit'} p={1}>
-            <Card elevation={4} className={classes.hoverPointer}>
+            <Card elevation={4} className={classes.hoverPointer} onMouseOver={onMouseOver}>
                 <CardMedia 
                 component="img"
                 alt={`${title}`}
@@ -84,7 +86,7 @@ const Poster = (props:IProps) => {
                 {releaseDate}
                 </Box>
             </Typography>
-            {renderRating(getCircularRating(ratingScore), ratingOffsetX, ratingOffsetY)}    
+            {renderRating(ratingScore, ratingOffsetX, ratingOffsetY)}    
         </Box>
     );
 };

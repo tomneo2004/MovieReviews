@@ -199,4 +199,7 @@ const CircularRating = (props:IProps) => {
     );
 };
 
-export default CircularRating;
+export default React.memo(
+    CircularRating,
+    (preProps, nextProps)=>preProps.value === nextProps.value
+);

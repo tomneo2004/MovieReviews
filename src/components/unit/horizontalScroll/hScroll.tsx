@@ -1,11 +1,10 @@
 import { Box, Grid, GridSpacing, makeStyles } from '@material-ui/core';
 import style from './hScrollStyle';
 import React from 'react';
-import shortId from 'short-uuid';
 
 export interface IProps {
     /** A function that take no arguments and return an array of ReactNode */
-    children?: ()=>React.ReactElement[];
+    children: ()=>{id:string|number, element:React.ReactElement}[];
     /** Space between items
      * 
      * number from 0 ~ 10
@@ -34,7 +33,7 @@ const isSameState = (oldState:IHorizontalScrollState, newState:IHorizontalScroll
 
 const HorizontalScroll = (props:IProps) => {
     const {
-        children = ()=>[],
+        children,
         space = 2,
         width = null,
         onScrollStateChange,
@@ -118,8 +117,8 @@ const HorizontalScroll = (props:IProps) => {
             {
                 childNodes.map(node=>{
                     return(
-                        <Grid key={shortId.generate()} item>
-                        {node}
+                        <Grid key={node.id} item>
+                        {node.element}
                         </Grid>
                     )
                 })

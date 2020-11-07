@@ -43,14 +43,19 @@ function buildDefaultQueryParams(
     return buildQuery;
 }
 
-export function buildImageQuery(imagePath:string, imageSize:number = 200){
+/**
+ * 
+ * @param imagePath image path
+ * @param imageSize reference to https://developers.themoviedb.org/3/configuration/get-api-configuration
+ */
+export function buildImageQuery(imagePath:string, imageSize:string = 'w200'){
     if(!imagePath) return '';
 
     const buildQuery = urljoin(
         imageAPI,
         't',
         'p',
-        `w${imageSize}`,
+        imageSize,
         imagePath   
     );
 
