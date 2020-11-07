@@ -6,8 +6,14 @@ import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
 import SearchBar from '../components/movieReview/landingSearch/landingSearch';
 import RoundButton from '../components/unit/roundButton/roundButton';
-import PopularCollection from '../components/movieReview/popularCollection/popularCollection';
-import TrendingCollection from '../components/movieReview/trendingCollection/trendingCollection';
+import { IMovieData } from "../utils/apiModelTypes";
+import Paper from '@material-ui/core/Paper';
+import Skeleton from '@material-ui/lab/Skeleton';
+import MoviePoster from '../components/movieReview/poster/poster';
+import { buildImageQuery } from '../utils/apiQueryBuilder';
+import ScrollCollection from '../components/movieReview/hScrollCollection/hScrollCollection';
+import {usePopularMovies} from '../effects/popularMovies';
+import {useTrendingMovies} from '../effects/trendingMovies';
 
 const caroselItems = [
   'Find Movies',
@@ -15,7 +21,50 @@ const caroselItems = [
   'Explores',
 ]
 
+const transformMovieDataToPosters = (movieData:IMovieData[])=>{
+  if(!movieData){
+      const skeletons = [];
+      for(let i=0; i<12; i++){
+          skeletons.push(
+              <Paper key={i}>
+                  <Box width='150px' p={1}>
+                      <Skeleton animation="wave" variant='rect' height='150px'/>
+                      <Skeleton animation="wave" variant='text'/>
+                      <Skeleton animation="wave" variant='text'/>
+                  </Box>
+              </Paper>
+          );
+      }
+      return skeletons;
+  }
+
+  return movieData.map(data=>{
+  
+      let ratingScore: number = null;
+      if(data.vote_count > 0){
+          ratingScore = Math.round(data.vote_average * 10);
+      }
+      
+      return(
+          <MoviePoster 
+          key={data.id}
+          imageURL={buildImageQuery(data.poster_path, 200)}
+          imageWidth={200}
+          minWidth={200}
+          title={data.title}
+          releaseDate={data.release_date}
+          ratingScore={ratingScore}
+          ratingOffsetX={-8}
+          ratingOffsetY={-8}
+          />
+      )
+  })
+}
+
 const LandingPage = () => {
+  const popularMovies = usePopularMovies();
+  const trendingMovies = useTrendingMovies();
+
   return (
     <PageLayout
     navigation={<Navigation position='sticky' hideOnScroll={true} />}
@@ -53,11 +102,15 @@ const LandingPage = () => {
           />
           {/* Pouplar Collection */}
           <Box px={1} py={3} alignSelf='stretch'>
-            <PopularCollection title="What's popular" />
+            <ScrollCollection title="What's popular">
+              {()=>transformMovieDataToPosters(popularMovies.data)}
+            </ScrollCollection>
           </Box>
           {/* Trending Collection */}
           <Box px={1} py={3} alignSelf='stretch'>
-            <TrendingCollection timeWindow='day' />
+            <ScrollCollection title="Trending">
+              {()=>transformMovieDataToPosters(trendingMovies.data)}
+            </ScrollCollection>
           </Box>
       </LandingLayout>
     </PageLayout>
