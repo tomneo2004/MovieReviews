@@ -16,6 +16,12 @@ const theme = createMuiTheme({
     background: {
       default: '#fff',
     },
+    popularBackdrop:{
+      main: 'rgba(255,255,255,0.75)'
+    },
+    trendingBackdrop:{
+      main: 'rgba(255,255,255,0.75)'
+    },
   },
 });
 

@@ -13,8 +13,11 @@ for(let i=0; i<40; i++){
 }
 
 const getItems = ()=>{
-    return data.map(item=>{
-        return <Box bgcolor='#e21db1' key={item} p={1}>{item}</Box>
+    return data.map((item, i)=>{
+        return ({
+            id: i,
+            element: <Box bgcolor='#e21db1' key={item} p={1}>{item}</Box>,
+        })
     })
 }
 

@@ -15,6 +15,7 @@ import HorizontalScroll from '../components/unit/horizontalScroll/hScroll';
 import {usePopularMovies} from '../effects/popularMovies';
 import {useTrendingMovies} from '../effects/trendingMovies';
 import React from "react";
+import ProgressiveImage from "../components/unit/progressiveImage/progressiveImage";
 
 const caroselItems = [
   'Find Movies',
@@ -77,20 +78,18 @@ const HScroll = React.memo(HorizontalScroll);
 
 const LandingPage = () => {
   const [popularBackdropURL, setPopularBackdropURL] = React.useState<string>('');
+  const [trendingBackdropURL, setTrendingBackdropURL] = React.useState<string>('');
 
   const popularMovies = usePopularMovies();
   const trendingMovies = useTrendingMovies();
 
   const handlePopularMovieHover = (data:IMovieData)=>{
-    console.log('popular ',data.backdrop_path);
     setPopularBackdropURL(buildImageQuery(data.backdrop_path, 'original'));
   }
 
   const handleTrendingMovieHover = (data:IMovieData)=>{
-    console.log('trending ',data.backdrop_path);
+    setTrendingBackdropURL(buildImageQuery(data.backdrop_path, 'original'));
   }
-
-  console.log('popular backdrop ', popularBackdropURL)
 
   return (
     <PageLayout
@@ -128,27 +127,33 @@ const LandingPage = () => {
           }
           />
           {/* Pouplar Collection */}
-          <Box px={1} py={3} alignSelf='stretch'>
-            <Typography component='div' variant='h4'>
-                <Box pl={2} fontWeight={600}>{`What's popular`}</Box>
-            </Typography>
-            <Box pt={2}>
-                <HScroll>
-                {()=>transformMovieDataToPosters(popularMovies.data, handlePopularMovieHover)}    
-                </HScroll>
-            </Box>
-          </Box>
+          <ProgressiveImage image={popularBackdropURL} backdropColor='popularBackdrop.main'
+           px={1} py={3} alignSelf='stretch'>
+            <React.Fragment>
+              <Typography component='div' variant='h4'>
+                  <Box pl={2} fontWeight={600}>{`What's popular`}</Box>
+              </Typography>
+              <Box pt={2}>
+                  <HScroll>
+                  {()=>transformMovieDataToPosters(popularMovies.data, handlePopularMovieHover)}    
+                  </HScroll>
+              </Box>
+            </React.Fragment>
+          </ProgressiveImage>
           {/* Trending Collection */}
-          <Box px={1} py={3} alignSelf='stretch'>
-            <Typography component='div' variant='h4'>
-                <Box pl={2} fontWeight={600}>{'Trending'}</Box>
-            </Typography>
-            <Box pt={2}>
-                <HScroll>
-                {()=>transformMovieDataToPosters(trendingMovies.data, handleTrendingMovieHover)}    
-                </HScroll>
-            </Box>
-          </Box>
+          <ProgressiveImage image={trendingBackdropURL} backdropColor='trendingBackdrop.main'
+           px={1} py={3} alignSelf='stretch'>
+            <React.Fragment>
+              <Typography component='div' variant='h4'>
+                  <Box pl={2} fontWeight={600}>{'Trending'}</Box>
+              </Typography>
+              <Box pt={2}>
+                  <HScroll>
+                  {()=>transformMovieDataToPosters(trendingMovies.data, handleTrendingMovieHover)}    
+                  </HScroll>
+              </Box>
+            </React.Fragment>
+          </ProgressiveImage>
       </LandingLayout>
     </PageLayout>
   )
