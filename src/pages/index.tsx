@@ -71,6 +71,10 @@ const transformMovieDataToPosters = (
   })
 }
 
+//We dont rerender Popular and Trending scroll collection
+//Only render first time
+const HScroll = React.memo(HorizontalScroll);
+
 const LandingPage = () => {
   const [popularBackdropURL, setPopularBackdropURL] = React.useState<string>('');
 
@@ -129,9 +133,9 @@ const LandingPage = () => {
                 <Box pl={2} fontWeight={600}>{`What's popular`}</Box>
             </Typography>
             <Box pt={2}>
-                <HorizontalScroll>
+                <HScroll>
                 {()=>transformMovieDataToPosters(popularMovies.data, handlePopularMovieHover)}    
-                </HorizontalScroll>
+                </HScroll>
             </Box>
           </Box>
           {/* Trending Collection */}
@@ -140,9 +144,9 @@ const LandingPage = () => {
                 <Box pl={2} fontWeight={600}>{'Trending'}</Box>
             </Typography>
             <Box pt={2}>
-                <HorizontalScroll>
+                <HScroll>
                 {()=>transformMovieDataToPosters(trendingMovies.data, handleTrendingMovieHover)}    
-                </HorizontalScroll>
+                </HScroll>
             </Box>
           </Box>
       </LandingLayout>
