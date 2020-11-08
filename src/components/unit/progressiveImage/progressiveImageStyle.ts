@@ -8,7 +8,7 @@ export default createStyles({
         backgroundOrigin: 'border-box',
         backgroundPosition: 'center top',
         backgroundSize: 'cover',
-        transition: '0.5s filter linear',
-        filter: `${props.isLoading?'blur(50px)':''}`,
+        transition: `${props.transitionTimeout}ms all linear`,
+        filter: `${props.isLoading?'grayscale(1) opacity(0.3)':''}`,
     })
 })

@@ -77,18 +77,30 @@ const transformMovieDataToPosters = (
 const HScroll = React.memo(HorizontalScroll);
 
 const LandingPage = () => {
-  const [popularBackdropURL, setPopularBackdropURL] = React.useState<string>('');
-  const [trendingBackdropURL, setTrendingBackdropURL] = React.useState<string>('');
+  const [popularBackdrop, setPopularBackdrop] = React.useState<{preview:string, image:string}>({
+    preview: '',
+    image: '',
+  });
+  const [trendingBackdrop, setTrendingBackdrop] = React.useState<{preview:string, image:string}>({
+    preview: '',
+    image: '',
+  });
 
   const popularMovies = usePopularMovies();
   const trendingMovies = useTrendingMovies();
 
   const handlePopularMovieHover = (data:IMovieData)=>{
-    setPopularBackdropURL(buildImageQuery(data.backdrop_path, 'original'));
+    setPopularBackdrop({
+      preview: buildImageQuery(data.backdrop_path, 'w300'),
+      image: buildImageQuery(data.backdrop_path, 'original'),
+    });
   }
 
   const handleTrendingMovieHover = (data:IMovieData)=>{
-    setTrendingBackdropURL(buildImageQuery(data.backdrop_path, 'original'));
+    setTrendingBackdrop({
+      preview: buildImageQuery(data.backdrop_path, 'w300'),
+      image: buildImageQuery(data.backdrop_path, 'original'),
+    });
   }
 
   return (
@@ -127,8 +139,9 @@ const LandingPage = () => {
           }
           />
           {/* Pouplar Collection */}
-          <ProgressiveImage image={popularBackdropURL} backdropColor='popularBackdrop.main'
-           px={1} py={3} alignSelf='stretch'>
+          <ProgressiveImage preview={popularBackdrop.preview} image={popularBackdrop.image} 
+          backdropColor='popularBackdrop.main' px={1} py={3} alignSelf='stretch'
+          >
             <React.Fragment>
               <Typography component='div' variant='h4'>
                   <Box pl={2} fontWeight={600}>{`What's popular`}</Box>
@@ -141,8 +154,9 @@ const LandingPage = () => {
             </React.Fragment>
           </ProgressiveImage>
           {/* Trending Collection */}
-          <ProgressiveImage image={trendingBackdropURL} backdropColor='trendingBackdrop.main'
-           px={1} py={3} alignSelf='stretch'>
+          <ProgressiveImage preview={trendingBackdrop.preview} image={trendingBackdrop.image} 
+          backdropColor='trendingBackdrop.main' px={1} py={3} alignSelf='stretch'
+          >
             <React.Fragment>
               <Typography component='div' variant='h4'>
                   <Box pl={2} fontWeight={600}>{'Trending'}</Box>
