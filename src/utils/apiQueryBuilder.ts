@@ -5,6 +5,10 @@ const movieAPIVersion = process.env.MOVIE_API_VERSION;
 const movieAPIKey = process.env.MOVIE_API_KEY;
 const imageAPI = process.env.NEXT_PUBLIC_API_IMAGE_ROUTE;
 
+/**
+ * Add api_key to query string
+ * @param serviceQuery 
+ */
 function buildServiceQuery(serviceQuery:string){
     const query = urljoin(
         movieAPI,
@@ -106,6 +110,16 @@ export function getTrendingQuery(
     }
 
     const serviceQuery = `/trending/${mediaType}/${timeWindow}`;
+
+    let buildQuery = buildServiceQuery(serviceQuery);
+    buildQuery = buildDefaultQueryParams(buildQuery, params);
+
+    return buildQuery;
+}
+
+export function getSearchMovieQuery(query:string, params:IParams = defaultParams){
+
+    const serviceQuery = `/search/movie?query=${query}`;
 
     let buildQuery = buildServiceQuery(serviceQuery);
     buildQuery = buildDefaultQueryParams(buildQuery, params);

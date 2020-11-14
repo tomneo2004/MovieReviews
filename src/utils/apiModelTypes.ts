@@ -17,3 +17,10 @@ export interface IMovieData{
     video: boolean;
     vote_average: number;
 }
+
+export interface ISearchMovieData{
+    page: number;
+    total_results: number;
+    total_pages: number;
+    results: IMovieData[];
+}

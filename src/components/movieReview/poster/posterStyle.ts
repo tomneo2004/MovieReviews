@@ -5,5 +5,8 @@ export default createStyles({
         '&:hover':{
             cursor:'pointer',
         }
+    },
+    cardMedia:{
+        objectFit:'fill'
     }
 });

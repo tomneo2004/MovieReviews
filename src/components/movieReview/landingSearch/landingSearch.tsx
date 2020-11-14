@@ -12,7 +12,7 @@ export interface IProps extends InputBaseProps{
     endAdornment?: React.ReactElement;
 }
 
-const LandingSearch = (props:IProps) => {
+const LandingSearch = (props:IProps, ref:React.Ref<HTMLInputElement>) => {
     const {
         cornerRadius = '4px',
         borderWidth = 1,
@@ -29,10 +29,10 @@ const LandingSearch = (props:IProps) => {
         <Box pl={1} border={border} borderRadius={cornerRadius} 
         display='flex' alignItems='center' boxShadow={boxShadow}
         >
-            <InputBase fullWidth  {...rest} />
+            <InputBase inputRef={ref} fullWidth  {...rest} />
             {endAdornment}
         </Box>
     );
 };
 
-export default LandingSearch;
+export default React.forwardRef(LandingSearch);

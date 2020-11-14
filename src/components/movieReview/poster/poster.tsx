@@ -10,6 +10,8 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp';
 
+import imagePlacehoder from '../../../assets/placeholder/poster.svg';
+
 export interface IProps {
     imageURL?: string;
     imageWidth?: number;
@@ -36,9 +38,15 @@ const getCircularRating = (rating:number)=>{
 
     const iconSize = {width:'15px',height:'15px'};
     let icon = <ThumbDownIcon style={iconSize} />
-    if(rating >= 70) icon = <ThumbUpIcon style={iconSize} />;
-    if(rating >= 50) icon = <ThumbsUpDownIcon style={iconSize} />;
-    if(rating >= 0) icon = <ThumbDownIcon style={iconSize} />;
+    if(rating >= 70){ 
+        icon = <ThumbUpIcon style={iconSize} />;
+    }
+    else if(rating >= 50){
+        icon = <ThumbsUpDownIcon style={iconSize} />;
+    }
+    else if(rating >= 0){
+        icon = <ThumbDownIcon style={iconSize} />;
+    }
 
     return(
         <CircularRating value={rating} valueFlexDirection='column'
@@ -72,10 +80,12 @@ const Poster = (props:IProps) => {
         <Box position='relative' minWidth={minWidth} maxWidth={maxWidth?maxWidth:'inherit'} p={1}>
             <Card elevation={4} className={classes.hoverPointer} onMouseOver={onMouseOver}>
                 <CardMedia 
+                className={classes.cardMedia}
                 component="img"
                 alt={`${title}`}
                 width={imageWidth}
-                image={`${imageURL}`}
+                height={imageWidth*1.5}
+                src={imageURL?imageURL:imagePlacehoder}
                 />
             </Card>
             <Typography component='div' variant='h6'>

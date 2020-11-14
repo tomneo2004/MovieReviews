@@ -11,11 +11,13 @@ import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
 import MoviePoster from '../components/movieReview/poster/poster';
 import { buildImageQuery } from '../utils/apiQueryBuilder';
-import HorizontalScroll from '../components/unit/horizontalScroll/hScroll';
+import HScroll from '../components/unit/horizontalScroll/hScroll';
 import {usePopularMovies} from '../effects/popularMovies';
 import {useTrendingMovies} from '../effects/trendingMovies';
 import React from "react";
 import ProgressiveImage from "../components/unit/progressiveImage/progressiveImage";
+import {useRouter} from 'next/router';
+import getMovieRating from "../utils/movieRating";
 
 const caroselItems = [
   'Find Movies',
@@ -49,21 +51,16 @@ const transformMovieDataToPosters = (
   }
 
   return movieData.map(data=>{
-  
-      let ratingScore: number = null;
-      if(data.vote_count > 0){
-          ratingScore = Math.round(data.vote_average * 10);
-      }
-      
+
       return({
         id: data.id,
         element: (<MoviePoster 
-          imageURL={buildImageQuery(data.poster_path, 'w200')}
-          imageWidth={200}
+          imageURL={buildImageQuery(data.poster_path, 'w185')}
+          imageWidth={185}
           minWidth={200}
           title={data.title}
           releaseDate={data.release_date}
-          ratingScore={ratingScore}
+          ratingScore={getMovieRating(data.vote_count, data.vote_average)}
           ratingOffsetX={-8}
           ratingOffsetY={-8}
           onMouseOver={()=>handleMouseOver(data)}
@@ -71,10 +68,6 @@ const transformMovieDataToPosters = (
       })
   })
 }
-
-//We dont rerender Popular and Trending scroll collection
-//Only render first time
-const HScroll = React.memo(HorizontalScroll);
 
 const LandingPage = () => {
   const [popularBackdrop, setPopularBackdrop] = React.useState<{preview:string, image:string}>({
@@ -86,8 +79,11 @@ const LandingPage = () => {
     image: '',
   });
 
+  const searchInputRef = React.useRef(undefined);
+
   const popularMovies = usePopularMovies();
   const trendingMovies = useTrendingMovies();
+  const router = useRouter();
 
   const handlePopularMovieHover = (data:IMovieData)=>{
     setPopularBackdrop({
@@ -101,6 +97,14 @@ const LandingPage = () => {
       preview: buildImageQuery(data.backdrop_path, 'w300'),
       image: buildImageQuery(data.backdrop_path, 'original'),
     });
+  }
+
+  const handleOnSearch = ()=>{
+    router.push(`/search?query=${searchInputRef.current.value}`)
+  }
+
+  const handleOnSearchKeydown = (e:React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
+    if(e.key==='Enter') router.push(`/search?query=${searchInputRef.current.value}`)
   }
 
   return (
@@ -129,11 +133,14 @@ const LandingPage = () => {
             </Carousel>
           }
           search={
-              <SearchBar 
+              <SearchBar
+              ref={searchInputRef}
+              onKeyDown={handleOnSearchKeydown}
               placeholder='Movie Title' 
               cornerRadius='50px'
               endAdornment={
-                <RoundButton variant='outlined' cornerRadius='50px' size='large'>Search</RoundButton>
+                <RoundButton variant='outlined' cornerRadius='50px' 
+                size='large' onClick={handleOnSearch}>Search</RoundButton>
               } 
               />
           }

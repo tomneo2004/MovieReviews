@@ -128,4 +128,4 @@ const HorizontalScroll = (props:IProps) => {
     );
 };
 
-export default HorizontalScroll;
+export default React.memo(HorizontalScroll);
