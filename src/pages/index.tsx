@@ -4,8 +4,7 @@ import LandingLayout from '../layouts/landing/landingLayout';
 import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
-import SearchBar from '../components/movieReview/landingSearch/landingSearch';
-import RoundButton from '../components/unit/roundButton/roundButton';
+import SearchBar from '../components/movieReview/longSearchBar/longSearchBar';
 import { IMovieData } from "../utils/apiModelTypes";
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -79,8 +78,6 @@ const LandingPage = () => {
     image: '',
   });
 
-  const searchInputRef = React.useRef(undefined);
-
   const popularMovies = usePopularMovies();
   const trendingMovies = useTrendingMovies();
   const router = useRouter();
@@ -99,12 +96,8 @@ const LandingPage = () => {
     });
   }
 
-  const handleOnSearch = ()=>{
-    router.push(`/search?query=${searchInputRef.current.value}`)
-  }
-
-  const handleOnSearchKeydown = (e:React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
-    if(e.key==='Enter') router.push(`/search?query=${searchInputRef.current.value}`)
+  const handleOnSearchClick = (keyword:string)=>{
+    router.push(`/search?query=${keyword}`)
   }
 
   return (
@@ -132,18 +125,7 @@ const LandingPage = () => {
               }
             </Carousel>
           }
-          search={
-              <SearchBar
-              ref={searchInputRef}
-              onKeyDown={handleOnSearchKeydown}
-              placeholder='Movie Title' 
-              cornerRadius='50px'
-              endAdornment={
-                <RoundButton variant='outlined' cornerRadius='50px' 
-                size='large' onClick={handleOnSearch}>Search</RoundButton>
-              } 
-              />
-          }
+          search={<SearchBar onSearchClick={handleOnSearchClick} />}
           />
           {/* Pouplar Collection */}
           <ProgressiveImage preview={popularBackdrop.preview} image={popularBackdrop.image} 

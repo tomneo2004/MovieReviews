@@ -1,5 +1,5 @@
 import React from 'react';
-import LandingSearch from './landingSearch';
+import LandingSearch from './searchBar';
 import {action} from '@storybook/addon-actions';
 import { Button } from '@material-ui/core';
 
