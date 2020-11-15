@@ -16,9 +16,14 @@ export interface ISearchMovies{
     error: any | null;
 }
 
-export function useSearchMovies(keyword:string = ''):ISearchMovies{
+/**
+ * Side effect for search movies by keywords
+ * @param keyword search keyword
+ * @param page page to display
+ */
+export function useSearchMovies(keyword:string = '', page:number = 1):ISearchMovies{
 
-    const {data, error} = useSWR(()=>`${apiRoute}?query=${keyword}`, fetcher);
+    const {data, error} = useSWR(()=>`${apiRoute}?query=${keyword}&page=${page}`, fetcher);
 
     if(error){
         console.log(error);

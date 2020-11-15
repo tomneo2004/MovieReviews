@@ -16,6 +16,9 @@ export interface IPopularMovies{
     error: any | null;
 }
 
+/**
+ * Side effect for fetching popular movies
+ */
 export function usePopularMovies():IPopularMovies{
     const {data, error} = useSWR(apiRoute, fetcher);
 

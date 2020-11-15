@@ -16,6 +16,11 @@ export interface ITrendingMovies{
     error: any | null;
 }
 
+/**
+ * Side effect for fetching trending movies
+ * 
+ * @param timeWindow either day or week
+ */
 export function useTrendingMovies(timeWindow:'day'|'week' = 'day'):ITrendingMovies{
 
     const {data, error} = useSWR(()=>`${apiRoute}?timeWindow=${timeWindow}`, fetcher);

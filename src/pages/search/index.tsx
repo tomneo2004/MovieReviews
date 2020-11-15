@@ -9,6 +9,8 @@ import MoviePoster from '../../components/movieReview/poster/poster';
 import { buildImageQuery } from '../../utils/apiQueryBuilder';
 import Box from '@material-ui/core/Box/Box';
 import getMovieRating from '../../utils/movieRating';
+import Pagination from '@material-ui/lab/Pagination/Pagination';
+import SearchLayout from '../../layouts/search/searchLayout';
 
 const renderResults = (results:IMovieData[])=>{
     return (
@@ -37,18 +39,37 @@ const renderResults = (results:IMovieData[])=>{
         </Grid>
     )
 }
+
+const renderPagination = (totalPages:number, currentPage:number, 
+    onPageChange:(event: React.ChangeEvent<unknown>, page: number) => void)=>{
+
+    return(
+        <Box display='flex' justifyContent='center' alignItems='center'>
+            <Pagination count={totalPages} page={currentPage} onChange={onPageChange}
+            showFirstButton showLastButton
+            />
+        </Box>
+    )
+}
 const SearchPage = () => {
+    const [currentPage, setCurrentPage] = React.useState<number>(1);
     const router = useRouter();
     const {query} = router.query as {[key:string]:string};
-    const searchResult = useSearchMovies(query);
+    const {data} = useSearchMovies(query, currentPage);
+    window.scrollTo(0,0);
 
-    console.log(searchResult);
+    const handlePageChange = (_event:React.ChangeEvent<unknown>, page:number)=>{
+        setCurrentPage(page);
+    }
 
     return (
         <PageLayout
         navigation={<Navigation position='sticky' hideOnScroll={true} />}
         >
-        {searchResult.data?renderResults(searchResult.data.results):null}
+            <SearchLayout>
+            {data?renderResults(data.results):null}
+            {data?renderPagination(data.total_pages, data.page, handlePageChange):null}
+            </SearchLayout>    
         </PageLayout>
     );
 };
