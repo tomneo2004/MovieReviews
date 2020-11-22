@@ -117,9 +117,29 @@ export function getTrendingQuery(
     return buildQuery;
 }
 
+/**
+ *  Query for search movies by keyword
+ * @param query keyword
+ * @param params 
+ */
 export function getSearchMovieQuery(query:string, params:IParams = defaultParams){
 
     const serviceQuery = `/search/movie?query=${query}`;
+
+    let buildQuery = buildServiceQuery(serviceQuery);
+    buildQuery = buildDefaultQueryParams(buildQuery, params);
+
+    return buildQuery;
+}
+
+/**
+ * Query for getting detail for a specific movie
+ * @param id movie id
+ * @param params 
+ */
+export function getMovieDetailQuery(id:string, params:IParams = defaultParams){
+
+    const serviceQuery = `/movie/${id}?append_to_response=credits,videos`;
 
     let buildQuery = buildServiceQuery(serviceQuery);
     buildQuery = buildDefaultQueryParams(buildQuery, params);
