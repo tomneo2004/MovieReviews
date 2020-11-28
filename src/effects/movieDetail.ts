@@ -12,7 +12,7 @@ const fetcher = async (url:string)=>{
     return data;
 }
 
-export interface IPopularMovies{
+export interface IDetailMovies{
     data: IMovieDetailData | null;
     error: any | null;
 }
@@ -20,7 +20,7 @@ export interface IPopularMovies{
 /**
  * Side effect for fetching movie detail
  */
-export function useMovieDetail(id:number):IPopularMovies{
+export function useMovieDetail(id:number):IDetailMovies{
     const {data, error} = useSWR(()=>`${apiRoute}?id=${id}`, fetcher);
 
     if(error){

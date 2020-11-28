@@ -51,12 +51,17 @@ const renderPagination = (totalPages:number, currentPage:number,
         </Box>
     )
 }
+
+
 const SearchPage = () => {
     const [currentPage, setCurrentPage] = React.useState<number>(1);
     const router = useRouter();
     const {query} = router.query as {[key:string]:string};
     const {data} = useSearchMovies(query, currentPage);
-    window.scrollTo(0,0);
+    
+    React.useEffect(()=>{
+        window.scrollTo(0,0);
+    })
 
     const handlePageChange = (_event:React.ChangeEvent<unknown>, page:number)=>{
         setCurrentPage(page);

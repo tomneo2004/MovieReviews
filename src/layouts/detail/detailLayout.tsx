@@ -3,20 +3,19 @@ import React from 'react';
 
 export interface IProps{
     poster: React.ReactElement;
-    info: React.ReactElement;
 }
 
 const DetailLayout = (props:IProps) => {
     const {
         poster,
-        info
     } = props;
     return (
         <Box display='flex' flexDirection='column' justifyContent='flex-start'>
             {/* information */}
-            <Box display='flex' flexWrap='wrap' justifyContent='center' alignItems='center'>
+            <Box display='flex' flexWrap='wrap' justifyContent='flex-start' 
+            alignItems='center' p={2}
+            >
             {poster}
-            {info}
             </Box>
         </Box>
     );
