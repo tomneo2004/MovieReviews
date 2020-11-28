@@ -65,3 +65,19 @@ export const RatingBad = () => {
       />
   )
 }
+
+export const Placeholder = () => {
+  return (
+      <Poster
+      // imageURL={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
+      imageWidth={154}
+      minWidth={154}
+      maxWidth={154}
+      title='This is a movie title'
+      releaseDate='04 Oct 2020'
+      ratingScore={20}
+      ratingOffsetX={-5}
+      ratingOffsetY={-5}
+      />
+  )
+}
