@@ -1,7 +1,5 @@
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import makeStyles from '@material-ui/styles/makeStyles';
 import style from './posterStyle';
 import React from 'react';
@@ -9,8 +7,7 @@ import CircularRating from '../../unit/circularRating/circularRating';
 import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp';
-
-import imagePlacehoder from '../../../assets/placeholder/poster.svg';
+import PosterImage from '../../unit/posterImage/posterImage';
 
 export interface IProps {
     imageURL?: string;
@@ -78,16 +75,13 @@ const Poster = (props:IProps) => {
 
     return (
         <Box position='relative' minWidth={minWidth} maxWidth={maxWidth?maxWidth:'inherit'} p={1}>
-            <Card elevation={4} className={classes.hoverPointer} onMouseOver={onMouseOver}>
-                <CardMedia 
-                className={classes.cardMedia}
-                component="img"
-                alt={`${title}`}
-                width={imageWidth}
-                height={imageWidth*1.5}
-                src={imageURL?imageURL:imagePlacehoder}
-                />
-            </Card>
+            <PosterImage 
+            imageURL={imageURL}
+            elevation={4} 
+            className={classes.hoverPointer} 
+            onMouseOver={onMouseOver}
+            imageWidth={imageWidth}
+            />
             <Typography component='div' variant='h6'>
                 <Box className={classes.hoverPointer} pt={1}>{title}</Box>
             </Typography>
