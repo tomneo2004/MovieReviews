@@ -5,13 +5,21 @@ export default {
   title: 'Detail Info',
 };
 
+const genres = [
+  {id:1, name:'Drama'},
+  {id:2, name:'War'},
+  {id:3, name:'Thrill'},
+  {id:4, name:'Horro'},
+  {id:5, name:'Sci-fi'},
+]
+
 export const Default = () => {
     return (
         <DetailInfo
         title='Film title here'
         releaseDate='2020-8-12'
         length={125}
-        genre={['Drama', 'War', 'Thrill', 'Horro', 'Sci-fi']}
+        genre={genres}
         userScore={0}
         tagline='This is film tag line'
         overview={`After the fall of the Galactic Empire, 
@@ -28,7 +36,7 @@ export const GenreTitle = () => {
       title='Film title here'
       releaseDate='2020-8-12'
       length={125}
-      genre={['Drama', 'War', 'Thrill', 'Horro', 'Sci-fi']}
+      genre={genres}
       genreTitle='Categories:'
       userScore={40}
       tagline='This is film tag line'
@@ -46,7 +54,7 @@ export const OverviewTitle = () => {
       title='Film title here'
       releaseDate='2020-8-12'
       length={125}
-      genre={['Drama', 'War', 'Thrill', 'Horro', 'Sci-fi']}
+      genre={genres}
       userScore={70}
       tagline='This is film tag line'
       overview={`After the fall of the Galactic Empire, 

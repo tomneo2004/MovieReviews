@@ -8,6 +8,8 @@ import PosterImage from '../../components/unit/posterImage/posterImage';
 import { buildImageQuery } from '../../utils/apiQueryBuilder';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
+import DetailInfo from '../../components/movieReview/detailInfo/detailInfo';
+import getMovieRating from '../../utils/movieRating';
 
 const DetailPage = () => {
     const router = useRouter();
@@ -34,10 +36,21 @@ const DetailPage = () => {
         >
             <DetailLayout
             poster={
-            <PosterImage 
-            imageURL={buildImageQuery(data.poster_path, 'w342')}
-            imageWidth={342}
-            />
+                <PosterImage 
+                imageURL={buildImageQuery(data.poster_path, 'w342')}
+                imageWidth={342}
+                />
+            }
+            info={
+                <DetailInfo 
+                title={data.title}
+                releaseDate={data.release_date}
+                length={data.runtime}
+                genre={data.genres}
+                userScore={getMovieRating(data.vote_count, data.vote_average)}
+                tagline={data.tagline}
+                overview={data.overview}
+                />
             } 
             />
         </PageLayout>

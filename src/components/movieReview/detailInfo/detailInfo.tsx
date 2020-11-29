@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import React from 'react';
+import { IGenreData } from '../../../utils/apiModelTypes';
 import convertFilmLength from '../../../utils/filmLengthConverter';
 import {getCircularRating} from '../../unit/circularRating/circularRating';
 
@@ -8,7 +9,7 @@ export interface IProps {
     title: string;
     releaseDate: string;
     length: number;
-    genre: string[];
+    genre: IGenreData[];
     genreTitle?: string;
     userScore: number;
     tagline?: string;
@@ -16,11 +17,11 @@ export interface IProps {
     overviewTitle?: string;
 }
 
-const renderGenre = (genre:string[])=>{
+const renderGenre = (genre:IGenreData[])=>{
     return genre.map((g,i)=>{
         return (
-            <Typography key={i} component='div' variant='h6'>
-                <Box pl={i?2:0} fontWeight={400}>{g}</Box>
+            <Typography key={g.id} component='div' variant='h6'>
+                <Box pl={i?2:0} fontWeight={400}>{g.name}</Box>
             </Typography>
         )
     })
@@ -39,7 +40,7 @@ const DetailInfo = (props:IProps) => {
     } = props;
 
     return (
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column' p={2}>
             {/* title */}
             <Typography component='div' variant='h3'>
                 <Box fontWeight={600}>{title}</Box>
