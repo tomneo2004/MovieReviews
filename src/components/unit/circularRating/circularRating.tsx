@@ -5,6 +5,9 @@ import makeStyles from '@material-ui/styles/makeStyles';
 import style from './circularRatingStyle';
 import React from 'react';
 import { Variant } from '@material-ui/core/styles/createTypography';
+import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
+import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp';
 
 export interface IProps{
     /** Size of rating, the outer circle
@@ -203,3 +206,31 @@ export default React.memo(
     CircularRating,
     (preProps, nextProps)=>preProps.value === nextProps.value
 );
+
+/**
+ * helper function to create a circular rating by given rating number
+ * @param rating 0~100
+ * 
+ * @return null if rating is 0 otherwise CircularRating component with rating 
+ */
+export function getCircularRating(rating:number){
+    if(!rating) return null;
+
+    const iconSize = {width:'15px',height:'15px'};
+    let icon = <ThumbDownIcon style={iconSize} />
+    if(rating >= 70){ 
+        icon = <ThumbUpIcon style={iconSize} />;
+    }
+    else if(rating >= 50){
+        icon = <ThumbsUpDownIcon style={iconSize} />;
+    }
+    else if(rating >= 0){
+        icon = <ThumbDownIcon style={iconSize} />;
+    }
+
+    return(
+        <CircularRating value={rating} valueFlexDirection='column'
+        valueEndAdornment={icon}
+        />
+    )
+}
