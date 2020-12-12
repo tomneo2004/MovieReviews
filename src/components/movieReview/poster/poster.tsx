@@ -4,9 +4,6 @@ import makeStyles from '@material-ui/styles/makeStyles';
 import style from './posterStyle';
 import React from 'react';
 import {getCircularRating} from '../../unit/circularRating/circularRating';
-// import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
-// import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
-// import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp';
 import PosterImage from '../../unit/posterImage/posterImage';
 
 export interface IProps {
@@ -28,29 +25,6 @@ export interface IProps {
     ratingOffsetY?: number;
     onMouseOver?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
-
-// const getCircularRating = (rating:number)=>{
-
-//     if(!rating) return null;
-
-//     const iconSize = {width:'15px',height:'15px'};
-//     let icon = <ThumbDownIcon style={iconSize} />
-//     if(rating >= 70){ 
-//         icon = <ThumbUpIcon style={iconSize} />;
-//     }
-//     else if(rating >= 50){
-//         icon = <ThumbsUpDownIcon style={iconSize} />;
-//     }
-//     else if(rating >= 0){
-//         icon = <ThumbDownIcon style={iconSize} />;
-//     }
-
-//     return(
-//         <CircularRating value={rating} valueFlexDirection='column'
-//         valueEndAdornment={icon}
-//         />
-//     )
-// }
 
 const renderRating = (rating:number, xOffset:number, yOffset:number)=>{
     const ratingComp = getCircularRating(rating);
