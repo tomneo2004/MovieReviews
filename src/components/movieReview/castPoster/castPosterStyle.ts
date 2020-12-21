@@ -3,6 +3,6 @@ import {IProps} from './castPoster';
 
 export default createStyles({
     root:(props:IProps)=>({
-        maxWidth:props.imageWidth,
+        width:props.width,
     }),
 })

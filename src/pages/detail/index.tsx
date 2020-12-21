@@ -10,6 +10,26 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import DetailInfo from '../../components/movieReview/detailInfo/detailInfo';
 import getMovieRating from '../../utils/movieRating';
+import HScroll from '../../components/unit/horizontalScroll/hScroll';
+import { ICastData } from '../../utils/apiModelTypes';
+import CastPoster from '../../components/movieReview/castPoster/castPoster';
+import Typography from '@material-ui/core/Typography';
+
+const transformCastToPoster = (casts:ICastData[])=>{
+    return casts.map(cast=>{
+        const imgQuery = buildImageQuery(cast.profile_path, 'w138_and_h175_face')
+        return ({
+            id:cast.cast_id,
+            element: (<CastPoster
+                imageSrc={imgQuery}
+                name={cast.name}
+                characterName={cast.character}
+                imageWidth={138}
+                imageHeight={175}
+                />)
+        })
+    })
+}
 
 const DetailPage = () => {
     const router = useRouter();
@@ -52,7 +72,19 @@ const DetailPage = () => {
                 overview={data.overview}
                 />
             } 
-            />
+            >
+                <React.Fragment>
+                    {/* casts */}
+                    <Box pt={2}>
+                        <Typography component='div' variant='h4'>
+                            <Box pl={2} fontWeight={600}>{`Casts`}</Box>
+                        </Typography>
+                        <HScroll>
+                        {()=>transformCastToPoster(data.credits.cast)}    
+                        </HScroll>
+                    </Box>
+                </React.Fragment>
+            </DetailLayout>
         </PageLayout>
     );
 };

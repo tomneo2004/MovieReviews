@@ -5,12 +5,14 @@ import React from 'react';
 export interface IProps{
     poster: React.ReactElement;
     info: React.ReactElement;
+    children?: React.ReactElement;
 }
 
 const DetailLayout = (props:IProps) => {
     const {
         poster,
         info,
+        children = null
     } = props;
     return (
         <Box display='flex' flexDirection='column' justifyContent='flex-start' p={2}>
@@ -19,6 +21,7 @@ const DetailLayout = (props:IProps) => {
                 <Grid md={4} item container justify='center'>{poster}</Grid>
                 <Grid md={8} item container justify='center'>{info}</Grid>
             </Grid>
+            {children}
         </Box>
     );
 };
