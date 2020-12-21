@@ -1,12 +1,12 @@
 import { Typography } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import Box, { BoxProps } from '@material-ui/core/Box';
 import makeStyles from '@material-ui/styles/makeStyles';
 import style from './posterStyle';
 import React from 'react';
 import {getCircularRating} from '../../unit/circularRating/circularRating';
 import PosterImage from '../../unit/posterImage/posterImage';
 
-export interface IProps {
+export interface IProps extends BoxProps {
     imageURL?: string;
     imageWidth?: number;
     minWidth?: number;
@@ -43,12 +43,19 @@ const Poster = (props:IProps) => {
         ratingOffsetX = 0,
         ratingOffsetY = 0,
         onMouseOver = null,
+        ...rest
     } = props;
 
     const classes = makeStyles(style)();
 
     return (
-        <Box position='relative' minWidth={minWidth} maxWidth={maxWidth?maxWidth:'inherit'} p={1}>
+        <Box 
+        position='relative' 
+        minWidth={minWidth} 
+        maxWidth={maxWidth?maxWidth:'inherit'} 
+        p={1}
+        {...rest}
+        >
             <PosterImage 
             imageURL={imageURL}
             elevation={4} 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useRouter} from 'next/router';
+import {NextRouter, useRouter} from 'next/router';
 import {useSearchMovies} from '../../effects/searchMovies';
 import PageLayout from '../../layouts/pageLayout';
 import Navigation from '../../components/movieReview/navigation/navigation';
@@ -12,7 +12,7 @@ import getMovieRating from '../../utils/movieRating';
 import Pagination from '@material-ui/lab/Pagination/Pagination';
 import SearchLayout from '../../layouts/search/searchLayout';
 
-const renderResults = (results:IMovieData[])=>{
+const renderResults = (results:IMovieData[], router:NextRouter)=>{
     return (
         <Grid container>
         {
@@ -30,6 +30,7 @@ const renderResults = (results:IMovieData[])=>{
                             ratingScore={getMovieRating(result.vote_count, result.vote_average)}
                             ratingOffsetX={-8}
                             ratingOffsetY={-8}
+                            onClick={()=>router.push(`/detail?id=${result.id}`)}
                             />
                         </Box>
                     </Grid>
@@ -72,7 +73,7 @@ const SearchPage = () => {
         navigation={<Navigation position='sticky' hideOnScroll={true} />}
         >
             <SearchLayout>
-            {data?renderResults(data.results):null}
+            {data?renderResults(data.results, router):null}
             {data?renderPagination(data.total_pages, data.page, handlePageChange):null}
             </SearchLayout>    
         </PageLayout>
