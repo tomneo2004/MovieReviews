@@ -1,0 +1,11 @@
+{
+    //extends from tsconfig.json
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        //override target to suppress warning from ts-js
+        "target":"ES2019",
+        //override jsx to react from preserve(no change on jsx)
+        //https://www.typescriptlang.org/tsconfig#jsx
+        "jsx": "react"
+    }
+}
