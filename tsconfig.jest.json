@@ -1,3 +1,5 @@
+// The reason of this file exists
+// https://github.com/vercel/next.js/issues/8663
 {
     //extends from tsconfig.json
     "extends": "./tsconfig.json",
