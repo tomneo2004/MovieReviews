@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import { IGenreData } from '../../../utils/apiModelTypes';
+import { IGenreData } from '../../../utils/api/model/apiModelTypes';
 import convertFilmLength from '../../../utils/filmLengthConverter';
 import {getCircularRating} from '../../unit/circularRating/circularRating';
 

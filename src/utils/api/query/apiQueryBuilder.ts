@@ -1,51 +1,10 @@
 import urljoin from 'url-join';
+import {buildAPIQuery, IParams, defaultParams} from './queryHelper';
 
+const imageAPI = process.env.NEXT_PUBLIC_API_IMAGE_ROUTE;
 const movieAPI = process.env.MOVIE_API_URL;
 const movieAPIVersion = process.env.MOVIE_API_VERSION;
 const movieAPIKey = process.env.MOVIE_API_KEY;
-const imageAPI = process.env.NEXT_PUBLIC_API_IMAGE_ROUTE;
-
-/**
- * Add api_key to query string
- * @param serviceQuery 
- */
-function buildServiceQuery(serviceQuery:string){
-    const query = urljoin(
-        movieAPI,
-        movieAPIVersion,
-        serviceQuery,
-        `?api_key=${movieAPIKey}`
-    );
-
-    return query;
-}
-
-export interface IParams {
-    [key:string]:string;
-    page?:string;
-    language?:string;
-    region?:string;
-}
-
-const defaultParams:IParams = {
-    page: '1',
-    language: 'en-US',
-    region: 'US',
-}
-
-function buildDefaultQueryParams(
-    serviceQuery:string, params:IParams=defaultParams){
-    
-    let buildQuery = serviceQuery;
-
-    for(let property in params){
-        if(params[property]){
-            buildQuery = urljoin(buildQuery, `&${property}=${params[property]}`);
-        }
-    }
-
-    return buildQuery;
-}
 
 /**
  * 
@@ -74,12 +33,10 @@ export function buildImageQuery(imagePath:string, imageSize:string = 'w200'){
  * @param region  default us
  */
 export function getPouplarMoviesQuery(params:IParams = defaultParams){
-    const serviceQuery = '/movie/popular';
 
-    let buildQuery = buildServiceQuery(serviceQuery);
-    buildQuery = buildDefaultQueryParams(buildQuery, params);
-
-    return buildQuery;
+    const queryString = '/movie/popular';
+    const builtQuery = buildAPIQuery(queryString, movieAPI, movieAPIVersion, movieAPIKey, params);
+    return builtQuery;
 }
 
 const trendingMediaType: {[key:string]:boolean} = {
@@ -109,12 +66,9 @@ export function getTrendingQuery(
         throw Error(`${timeWindow} was not match any of ${trendingTimeWindow}`);
     }
 
-    const serviceQuery = `/trending/${mediaType}/${timeWindow}`;
-
-    let buildQuery = buildServiceQuery(serviceQuery);
-    buildQuery = buildDefaultQueryParams(buildQuery, params);
-
-    return buildQuery;
+    const queryString = `/trending/${mediaType}/${timeWindow}`;
+    const builtQuery = buildAPIQuery(queryString, movieAPI, movieAPIVersion, movieAPIKey, params);
+    return builtQuery;
 }
 
 /**
@@ -124,12 +78,9 @@ export function getTrendingQuery(
  */
 export function getSearchMovieQuery(query:string, params:IParams = defaultParams){
 
-    const serviceQuery = `/search/movie?query=${query}`;
-
-    let buildQuery = buildServiceQuery(serviceQuery);
-    buildQuery = buildDefaultQueryParams(buildQuery, params);
-
-    return buildQuery;
+    const queryString = `/search/movie?query=${query}`;
+    const builtQuery = buildAPIQuery(queryString, movieAPI, movieAPIVersion, movieAPIKey, params);
+    return builtQuery;
 }
 
 /**
@@ -139,12 +90,16 @@ export function getSearchMovieQuery(query:string, params:IParams = defaultParams
  */
 export function getMovieDetailQuery(id:string, params:IParams = defaultParams){
 
-    const serviceQuery = `/movie/${id}?append_to_response=credits,videos`;
+    const queryString = `/movie/${id}?append_to_response=credits,videos`;
+    const builtQuery = buildAPIQuery(queryString, movieAPI, movieAPIVersion, movieAPIKey, params);
+    return builtQuery;
+}
 
-    let buildQuery = buildServiceQuery(serviceQuery);
-    buildQuery = buildDefaultQueryParams(buildQuery, params);
-
-    return buildQuery;
+export function getMovieReviewQuery(id:string, params:IParams = defaultParams){
+    
+    const queryString = `/movie/${id}/reviews`;
+    const builtQuery = buildAPIQuery(queryString, movieAPI, movieAPIVersion, movieAPIKey, params);
+    return builtQuery;
 }
 
 

@@ -1,7 +1,7 @@
 
 import useSWR from 'swr';
 import axios from 'axios';
-import {IMovieDetailData} from '../utils/apiModelTypes';
+import {IMovieDetailData} from '../utils/api/model/apiModelTypes';
 
 const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/detail/movies`;
 

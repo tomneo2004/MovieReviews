@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import {ISearchMovieData} from '../utils/apiModelTypes';
+import {ISearchMovieData} from '../utils/api/model/apiModelTypes';
 
 const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/search/movies`;
 

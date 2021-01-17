@@ -5,13 +5,13 @@ import Navigation from '../../components/movieReview/navigation/navigation';
 import PageLayout from '../../layouts/pageLayout';
 import DetailLayout from '../../layouts/detail/detailLayout';
 import PosterImage from '../../components/unit/posterImage/posterImage';
-import { buildImageQuery } from '../../utils/apiQueryBuilder';
+import { buildImageQuery } from '../../utils/api/query/apiQueryBuilder';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import DetailInfo from '../../components/movieReview/detailInfo/detailInfo';
 import getMovieRating from '../../utils/movieRating';
 import HScroll from '../../components/unit/horizontalScroll/hScroll';
-import { ICastData } from '../../utils/apiModelTypes';
+import { ICastData } from '../../utils/api/model/apiModelTypes';
 import CastPoster from '../../components/movieReview/castPoster/castPoster';
 import Typography from '@material-ui/core/Typography';
 

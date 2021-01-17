@@ -1,14 +1,14 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {getTrendingQuery} from '../../../../utils/api/query/apiQueryBuilder';
+import {getMovieReviewQuery} from '../../../../utils/api/query/apiQueryBuilder';
 import axios from 'axios';
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse){
     try{
         const {language ,page, region} = req.query as {[key:string]:string};
-        const {mediaType ,timeWindow} = req.query as {[key:string]:string};
-        const query =  getTrendingQuery(mediaType, timeWindow, {language, page, region});
-        console.log('request:', query);
-        const resp = await axios.get(query);
+        const {id} = req.query as {[key:string]:string};
+        const buildQuery =  getMovieReviewQuery(id, {language, page, region});
+        console.log('request:', buildQuery);
+        const resp = await axios.get(buildQuery);
         res.status(resp.status).json(resp.data);
     }
     catch(err){

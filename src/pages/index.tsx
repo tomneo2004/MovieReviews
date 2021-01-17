@@ -5,11 +5,11 @@ import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
 import SearchBar from '../components/movieReview/longSearchBar/longSearchBar';
-import { IMovieData } from "../utils/apiModelTypes";
+import { IMovieData } from "../utils/api/model/apiModelTypes";
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
 import MoviePoster from '../components/movieReview/poster/poster';
-import { buildImageQuery } from '../utils/apiQueryBuilder';
+import { buildImageQuery } from '../utils/api/query/apiQueryBuilder';
 import HScroll from '../components/unit/horizontalScroll/hScroll';
 import {usePopularMovies} from '../effects/popularMovies';
 import {useTrendingMovies} from '../effects/trendingMovies';
