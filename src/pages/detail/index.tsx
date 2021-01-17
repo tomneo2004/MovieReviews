@@ -1,6 +1,6 @@
 import React from 'react';
 import {useRouter} from 'next/router';
-import {useMovieDetail} from '../../effects/movieDetail';
+import {useMovieDetail} from '../../effects/apiFetch/movieDetail';
 import Navigation from '../../components/movieReview/navigation/navigation';
 import PageLayout from '../../layouts/pageLayout';
 import DetailLayout from '../../layouts/detail/detailLayout';
@@ -14,6 +14,7 @@ import HScroll from '../../components/unit/horizontalScroll/hScroll';
 import { ICastData } from '../../utils/api/model/apiModelTypes';
 import CastPoster from '../../components/movieReview/castPoster/castPoster';
 import Typography from '@material-ui/core/Typography';
+import { useMovieReviews } from '../../effects/apiFetch/movieReviews';
 
 const transformCastToPoster = (casts:ICastData[])=>{
     return casts.map(cast=>{
@@ -34,9 +35,11 @@ const transformCastToPoster = (casts:ICastData[])=>{
 const DetailPage = () => {
     const router = useRouter();
     const {id} = router.query as {[key:string]:string};
-    const {data, error} = useMovieDetail(Number(id))
+    const {data, error} = useMovieDetail(Number(id));
+    const reviews = useMovieReviews(Number(id), 1);
 
     console.log(id, data, error);
+    console.log(id, reviews.data, reviews.error);
 
     if(!data){
         return (

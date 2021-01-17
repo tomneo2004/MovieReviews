@@ -126,16 +126,16 @@ export interface IMovieDetailData{
     videos: IVideosData;
 }
 
-export interface IAuthorDetails{
+export interface IAuthorDetailsData{
     name: string;
     username:string;
     avatar_path: string | null;
     rating: number | null;
 }
 
-export interface IReview {
+export interface IReviewData {
     author: string;
-    author_details: IAuthorDetails;
+    author_details: IAuthorDetailsData;
     content: string;
     created_at: string;
     id: string;
@@ -143,10 +143,10 @@ export interface IReview {
     url: string;
 }
 
-export interface IMovieReviews {
+export interface IMovieReviewsData {
     id: number;
     page: number;
-    results: IReview[];
+    results: IReviewData[];
     total_pages: number;
     total_results: number;
 }

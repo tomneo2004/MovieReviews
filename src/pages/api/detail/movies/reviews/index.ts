@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {getMovieReviewQuery} from '../../../../utils/api/query/apiQueryBuilder';
+import {getMovieReviewQuery} from '../../../../../utils/api/query/apiQueryBuilder';
 import axios from 'axios';
 
 export default async function handler(req:NextApiRequest, res:NextApiResponse){

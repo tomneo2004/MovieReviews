@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import {IMovieData} from '../utils/api/model/apiModelTypes';
+import {IMovieData} from '../../utils/api/model/apiModelTypes';
+import {IFetchResponse} from './fetchResponse';
 
 const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/popular/movies`;
 
@@ -11,15 +12,11 @@ const fetcher = async (url:string)=>{
     return data;
 }
 
-export interface IPopularMovies{
-    data: IMovieData[] | null;
-    error: any | null;
-}
 
 /**
  * Side effect for fetching popular movies
  */
-export function usePopularMovies():IPopularMovies{
+export function usePopularMovies():IFetchResponse<IMovieData[]>{
     const {data, error} = useSWR(apiRoute, fetcher);
 
     if(error){

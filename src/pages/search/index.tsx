@@ -1,6 +1,6 @@
 import React from 'react';
 import {NextRouter, useRouter} from 'next/router';
-import {useSearchMovies} from '../../effects/searchMovies';
+import {useSearchMovies} from '../../effects/apiFetch/searchMovies';
 import PageLayout from '../../layouts/pageLayout';
 import Navigation from '../../components/movieReview/navigation/navigation';
 import { Grid } from '@material-ui/core';

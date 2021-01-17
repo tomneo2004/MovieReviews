@@ -1,7 +1,8 @@
 
 import useSWR from 'swr';
 import axios from 'axios';
-import {IMovieDetailData} from '../utils/api/model/apiModelTypes';
+import {IMovieDetailData} from '../../utils/api/model/apiModelTypes';
+import {IFetchResponse} from './fetchResponse';
 
 const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/detail/movies`;
 
@@ -12,15 +13,10 @@ const fetcher = async (url:string)=>{
     return data;
 }
 
-export interface IDetailMovies{
-    data: IMovieDetailData | null;
-    error: any | null;
-}
-
 /**
  * Side effect for fetching movie detail
  */
-export function useMovieDetail(id:number):IDetailMovies{
+export function useMovieDetail(id:number):IFetchResponse<IMovieDetailData>{
     const {data, error} = useSWR(()=>`${apiRoute}?id=${id}`, fetcher);
 
     if(error){
