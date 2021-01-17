@@ -126,3 +126,28 @@ export interface IMovieDetailData{
     videos: IVideosData;
 }
 
+export interface IAuthorDetails{
+    name: string;
+    username:string;
+    avatar_path: string | null;
+    rating: number | null;
+}
+
+export interface IReview {
+    author: string;
+    author_details: IAuthorDetails;
+    content: string;
+    created_at: string;
+    id: string;
+    update_at: string;
+    url: string;
+}
+
+export interface IMovieReviews {
+    id: number;
+    page: number;
+    results: IReview[];
+    total_pages: number;
+    total_results: number;
+}
+
