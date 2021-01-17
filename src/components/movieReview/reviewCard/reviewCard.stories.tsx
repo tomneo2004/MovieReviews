@@ -30,7 +30,11 @@ Duis viverra orci vitae velit facilisis, vel laoreet mauris viverra. Fusce preti
 
 Proin varius rhoncus tortor sed gravida. Quisque lectus ante, efficitur ut commodo eu, convallis in dolor. Vivamus aliquet nibh et enim posuere pulvinar. Nullam nec rhoncus enim. Maecenas faucibus venenatis urna, ut rhoncus dolor. Nullam bibendum dignissim libero, ac efficitur libero commodo sed. Pellentesque ac ultrices tortor, quis finibus libero. Praesent diam metus, placerat id condimentum vitae, gravida vitae dolor. Maecenas lacus odio, semper ut aliquam ut, imperdiet ut nisl. In ac condimentum neque. Maecenas molestie laoreet lectus ut vestibulum. Nulla a dolor velit. In interdum orci.
 `
+const mediumReview = `
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget orci vitae leo feugiat vestibulum. Aenean non tortor laoreet, maximus nunc eget, aliquam tellus. Mauris tempor felis non lorem volutpat, vel auctor metus commodo. Nulla facilisi. Duis efficitur nulla eget dapibus tempor. Proin volutpat consectetur velit sit amet maximus. Nulla facilisi. Sed eget nisl metus. Maecenas vehicula nibh libero, ac semper velit scelerisque id. Praesent nisi elit, vulputate a congue id, ultricies vitae dui.
 
+Curabitur condimentum ex ac urna ullamcorper dapibus ut in purus. Praesent eget ligula quis odio blandit porta eget consequat ipsum. Nam vitae consequat orci, nec tincidunt odio. Praesent fermentum maximus cursus. Nunc semper porttitor mauris nec ultricies. Vestibulum felis ex, euismod et massa sed, imperdiet convallis metus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec pharetra, quam at tincidunt faucibus, erat ligula volutpat velit, sit amet tincidunt arcu magna quis est. Donec fringilla cursus blandit. Nullam mi quam, sagittis in lobortis eget, auctor laoreet augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec a commodo odio, id efficitur magna.
+`
 const shortReview = `Excellent`
 
 export const LongReview = () => {
@@ -39,6 +43,16 @@ export const LongReview = () => {
         authorName='Jennifier Claudy'
         createdAt='2012-Jan-14'
         paragraph={longReview}
+        />
+    )
+}
+
+export const MediumReview = () => {
+    return (
+        <ReviewCard
+        authorName='Jennifier Claudy'
+        createdAt='2012-Jan-14'
+        paragraph={mediumReview}
         />
     )
 }

@@ -7,6 +7,10 @@ import Typography from '@material-ui/core/Typography';
 import { partialSentenceFrom } from '../../../utils/sentenceExtractor';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMore from '@material-ui/icons/ExpandMoreSharp';
+import Collapse from '@material-ui/core/Collapse';
+import { makeStyles, useTheme } from '@material-ui/core';
+import style from './reviewCardStyle';
+import clsx from 'clsx';
 
 export interface IProps extends CardProps{
     authorName: string;
@@ -27,10 +31,23 @@ const ReviewCard = (props:IProps)=>{
         partialParagraph = 4,
     } = props;
 
+    const [expanded, setExpanded] = React.useState(false);
+    const theme = useTheme();
+
+    const handleExpand = ()=>{
+        setExpanded(!expanded);
+    }
+
     let extracted = partialSentenceFrom(paragraph, partialParagraph);
     if(!extracted.fullyExtracted){
         extracted.partial = extracted.partial + ' ...';
     } 
+
+    const classes = makeStyles(style)(theme);
+    const clx = {
+        [classes.expand]: !expanded,
+        [classes.expandOpen]: expanded,
+    }
 
     return (
         <Card>
@@ -39,21 +56,30 @@ const ReviewCard = (props:IProps)=>{
             subheader={createdAt}
             />
             <CardContent>
+            {
+                !expanded?
                 <Typography>
                     {extracted.partial}
                 </Typography>
+                :
+                null
+            }
+            <Collapse in={expanded} timeout='auto' unmountOnExit>
+                    <Typography>{paragraph}</Typography>
+            </Collapse>
             </CardContent>
             {
                 !extracted.fullyExtracted?
                 <CardActions>
-                    <IconButton>
+                    <IconButton
+                    className={clsx(clx)} 
+                    onClick={handleExpand}>
                         <ExpandMore />
                     </IconButton>
                 </CardActions>
                 :
                 null
             }
-            
         </Card>
     );
 }
