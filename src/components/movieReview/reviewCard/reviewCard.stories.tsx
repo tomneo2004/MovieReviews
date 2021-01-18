@@ -43,6 +43,8 @@ export const LongReview = () => {
         authorName='Jennifier Claudy'
         createdAt='2012-Jan-14'
         paragraph={longReview}
+        rating={5}
+        ratingMax={10}
         />
     )
 }
@@ -53,6 +55,8 @@ export const MediumReview = () => {
         authorName='Jennifier Claudy'
         createdAt='2012-Jan-14'
         paragraph={mediumReview}
+        rating={5}
+        ratingMax={10}
         />
     )
 }
@@ -63,6 +67,8 @@ export const ShortReview = () => {
         authorName='Jennifier Claudy'
         createdAt='2012-Jan-14'
         paragraph={shortReview}
+        rating={5}
+        ratingMax={10}
         />
     )
 }
@@ -82,6 +88,8 @@ export const Subheader = () => {
             </Box>
         }
         paragraph={longReview}
+        rating={5}
+        ratingMax={10}
         />
     )
 }

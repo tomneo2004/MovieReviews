@@ -8,9 +8,10 @@ import { partialSentenceFrom } from '../../../utils/sentenceExtractor';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMore from '@material-ui/icons/ExpandMoreSharp';
 import Collapse from '@material-ui/core/Collapse';
-import { makeStyles, useTheme } from '@material-ui/core';
+import { Box, Chip, makeStyles, useTheme } from '@material-ui/core';
 import style from './reviewCardStyle';
 import clsx from 'clsx';
+import { Rating } from '@material-ui/lab';
 
 export interface IProps extends CardProps{
     authorName: string;
@@ -21,6 +22,8 @@ export interface IProps extends CardProps{
      * as parital content, default is 4
      */
     partialParagraph?: number;
+    rating: number;
+    ratingMax: number;
 }
 
 const ReviewCard = (props:IProps)=>{
@@ -29,6 +32,8 @@ const ReviewCard = (props:IProps)=>{
         createdAt,
         paragraph,
         partialParagraph = 4,
+        rating,
+        ratingMax,
     } = props;
 
     const [expanded, setExpanded] = React.useState(false);
@@ -44,15 +49,27 @@ const ReviewCard = (props:IProps)=>{
     } 
 
     const classes = makeStyles(style)(theme);
-    const clx = {
+    const expandBtnClass = {
         [classes.expand]: !expanded,
         [classes.expandOpen]: expanded,
     }
 
     return (
-        <Card>
+        <Card raised>
             <CardHeader 
-            title={authorName}
+            title={
+            <Box display='flex' flexDirection='row' flexWrap='wrap'>
+                <Typography component='div'>
+                    <Box pr={1} fontWeight='800'>
+                        {`Written by ${authorName}`}
+                    </Box>
+                </Typography>
+                <Box pr={1}>
+                    <Rating value={rating} max={ratingMax} readOnly />
+                </Box>
+                <Chip label={`${rating}/${ratingMax}`} />
+            </Box>
+            }
             subheader={createdAt}
             />
             <CardContent>
@@ -65,14 +82,16 @@ const ReviewCard = (props:IProps)=>{
                 null
             }
             <Collapse in={expanded} timeout='auto' unmountOnExit>
-                    <Typography>{paragraph}</Typography>
+                    <Typography component='div'>
+                        <Box>{paragraph}</Box>
+                    </Typography>
             </Collapse>
             </CardContent>
             {
                 !extracted.fullyExtracted?
                 <CardActions>
                     <IconButton
-                    className={clsx(clx)} 
+                    className={clsx(expandBtnClass)} 
                     onClick={handleExpand}>
                         <ExpandMore />
                     </IconButton>

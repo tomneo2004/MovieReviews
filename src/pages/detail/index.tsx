@@ -11,10 +11,11 @@ import Box from '@material-ui/core/Box';
 import DetailInfo from '../../components/movieReview/detailInfo/detailInfo';
 import getMovieRating from '../../utils/movieRating';
 import HScroll from '../../components/unit/horizontalScroll/hScroll';
-import { ICastData } from '../../utils/api/model/apiModelTypes';
+import { ICastData, IReviewData } from '../../utils/api/model/apiModelTypes';
 import CastPoster from '../../components/movieReview/castPoster/castPoster';
 import Typography from '@material-ui/core/Typography';
 import { useMovieReviews } from '../../effects/apiFetch/movieReviews';
+import ReviewCard from '../../components/movieReview/reviewCard/reviewCard';
 
 const transformCastToPoster = (casts:ICastData[])=>{
     return casts.map(cast=>{
@@ -32,12 +33,35 @@ const transformCastToPoster = (casts:ICastData[])=>{
     })
 }
 
+const transformReviewsToReviewCard = (reviews:IReviewData[])=>{
+    if(!reviews) return null;
+
+    return reviews.map(review=>{
+        return (
+        <Box key={review.id} pt={1}>    
+            <ReviewCard
+            authorName={review.author}
+            createdAt={review.created_at}
+            paragraph={review.content}
+            rating={
+                review.author_details.rating?
+                review.author_details.rating
+                :
+                0
+            }
+            ratingMax={10}
+            />
+        </Box>)
+    })
+}
+
 const DetailPage = () => {
     const router = useRouter();
     const {id} = router.query as {[key:string]:string};
     const {data, error} = useMovieDetail(Number(id));
     const reviews = useMovieReviews(Number(id), 1);
 
+    console.log(router.query);
     console.log(id, data, error);
     console.log(id, reviews.data, reviews.error);
 
@@ -85,6 +109,18 @@ const DetailPage = () => {
                         <HScroll>
                         {()=>transformCastToPoster(data.credits.cast)}    
                         </HScroll>
+                    </Box>
+                    {/* reviews */}
+                    <Box pt={2}>
+                        <Typography component='div' variant='h4'>
+                            <Box pl={2} fontWeight={600}>{`Reviews`}</Box>
+                        </Typography>
+                        {
+                            reviews.data?
+                            transformReviewsToReviewCard(reviews.data.results)
+                            :
+                            null
+                        }
                     </Box>
                 </React.Fragment>
             </DetailLayout>
