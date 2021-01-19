@@ -14,6 +14,7 @@ export interface IProps {
     name: string;
     characterName: string;
     width?: number;
+    minHeight?: number;
 }
 
 const CastPoster = (props:IProps) => {
@@ -23,17 +24,19 @@ const CastPoster = (props:IProps) => {
         imageSrc,
         name,
         characterName,
-        width = imageWidth * 1.2
+        width = imageWidth * 1.2,
+        minHeight = 300,
     } = props;
 
     const classes = makeStyles(style)({
         ...props,
         imageWidth,
-        width
+        width,
+        minHeight,
     })
 
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} raised>
             <CardMedia 
             width={imageWidth}
             height={imageHeight}
