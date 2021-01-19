@@ -4,7 +4,6 @@ import CardHeader,{}  from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
-import { partialSentenceFrom } from '../../../utils/sentenceExtractor';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMore from '@material-ui/icons/ExpandMoreSharp';
 import Collapse from '@material-ui/core/Collapse';
@@ -16,12 +15,15 @@ import { Rating } from '@material-ui/lab';
 export interface IProps extends CardProps{
     authorName: string;
     createdAt: string | React.ReactElement;
-    paragraph: string;
     /**
-     * Number of sentences to be extracted from content
-     * as parital content, default is 4
+     * full paragraph
      */
-    partialParagraph?: number;
+    paragraph: string | React.ReactElement;
+    /**
+     * partial paragraph
+     */
+    partial: string | React.ReactElement;
+    expandable: boolean;
     rating: number;
     ratingMax: number;
 }
@@ -31,7 +33,8 @@ const ReviewCard = (props:IProps)=>{
         authorName,
         createdAt,
         paragraph,
-        partialParagraph = 4,
+        partial,
+        expandable,
         rating,
         ratingMax,
     } = props;
@@ -42,11 +45,6 @@ const ReviewCard = (props:IProps)=>{
     const handleExpand = ()=>{
         setExpanded(!expanded);
     }
-
-    let extracted = partialSentenceFrom(paragraph, partialParagraph);
-    if(!extracted.fullyExtracted){
-        extracted.partial = extracted.partial + ' ...';
-    } 
 
     const classes = makeStyles(style)(theme);
     const expandBtnClass = {
@@ -65,7 +63,7 @@ const ReviewCard = (props:IProps)=>{
                     </Box>
                 </Typography>
                 <Box pr={1}>
-                    <Rating value={rating} max={ratingMax} readOnly />
+                    <Rating value={rating} max={ratingMax} precision={0.5} readOnly />
                 </Box>
                 <Chip label={`${rating}/${ratingMax}`} />
             </Box>
@@ -76,19 +74,19 @@ const ReviewCard = (props:IProps)=>{
             {
                 !expanded?
                 <Typography>
-                    {extracted.partial}
+                    {partial}
                 </Typography>
                 :
                 null
             }
-            <Collapse in={expanded} timeout='auto' unmountOnExit>
-                    <Typography component='div'>
-                        <Box>{paragraph}</Box>
-                    </Typography>
-            </Collapse>
+                <Collapse in={expanded} timeout='auto' unmountOnExit>
+                        <Typography component='div'>
+                            <Box>{paragraph}</Box>
+                        </Typography>
+                </Collapse>
             </CardContent>
             {
-                !extracted.fullyExtracted?
+                expandable?
                 <CardActions>
                     <IconButton
                     className={clsx(expandBtnClass)} 

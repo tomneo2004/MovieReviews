@@ -16,6 +16,10 @@ import CastPoster from '../../components/movieReview/castPoster/castPoster';
 import Typography from '@material-ui/core/Typography';
 import { useMovieReviews } from '../../effects/apiFetch/movieReviews';
 import ReviewCard from '../../components/movieReview/reviewCard/reviewCard';
+import { dateFromUTC } from '../../utils/timeConverter';
+import { partialSentenceFrom } from '../../utils/sentenceExtractor';
+import ReactMarkdown from 'react-markdown';
+import gfm from 'remark-gfm';
 
 const transformCastToPoster = (casts:ICastData[])=>{
     return casts.map(cast=>{
@@ -36,22 +40,38 @@ const transformCastToPoster = (casts:ICastData[])=>{
 const transformReviewsToReviewCard = (reviews:IReviewData[])=>{
     if(!reviews) return null;
 
+    const fromRatingMax = 10;
+    const toRatingMax = 5;
+    const scale = toRatingMax / fromRatingMax;
+
     return reviews.map(review=>{
+
+        const extracted = partialSentenceFrom(review.content, 4);
+        const partialContent = extracted.partial + ' ...';
+        const mdParagraph = (
+            <ReactMarkdown plugins={[gfm]} children={review.content} allowDangerousHtml/>
+        )
+        const mdPartial = (
+            <ReactMarkdown plugins={[gfm]} children={partialContent} allowDangerousHtml />
+        )
+
         return (
-        <Box key={review.id} pt={1}>    
-            <ReviewCard
-            authorName={review.author}
-            createdAt={review.created_at}
-            paragraph={review.content}
-            rating={
-                review.author_details.rating?
-                review.author_details.rating
-                :
-                0
-            }
-            ratingMax={10}
-            />
-        </Box>)
+            <Box key={review.id} pt={1}>    
+                <ReviewCard
+                authorName={review.author}
+                createdAt={dateFromUTC(review.created_at)}
+                paragraph={mdParagraph}
+                partial={mdPartial}
+                expandable={!extracted.fullyExtracted}
+                rating={
+                    review.author_details.rating?
+                    review.author_details.rating * scale
+                    :
+                    0
+                }
+                ratingMax={toRatingMax}
+                />
+            </Box>)
     })
 }
 
