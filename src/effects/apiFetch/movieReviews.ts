@@ -22,7 +22,10 @@ const fetcher = async (url:string)=>{
  * Side effect for fetching reviews for movies
  */
 export function useMovieReviews(id:number, page:number=1):IFetchResponse<IMovieReviewsData>{
-    const {data, error} = useSWR(()=>`${apiRoute}?id=${id}&page=${page}`, fetcher);
+
+    const {data, error} = useSWR(
+        id?()=>`${apiRoute}?id=${id}&page=${page}`:null, 
+        fetcher);
 
     if(error){
         console.log(error);

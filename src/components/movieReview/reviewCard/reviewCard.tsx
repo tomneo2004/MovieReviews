@@ -73,7 +73,7 @@ const ReviewCard = (props:IProps)=>{
             <CardContent>
             {
                 !expanded?
-                <Typography>
+                <Typography component='div'>
                     {partial}
                 </Typography>
                 :

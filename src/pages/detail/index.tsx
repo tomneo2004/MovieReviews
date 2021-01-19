@@ -6,12 +6,11 @@ import PageLayout from '../../layouts/pageLayout';
 import DetailLayout from '../../layouts/detail/detailLayout';
 import PosterImage from '../../components/unit/posterImage/posterImage';
 import { buildImageQuery } from '../../utils/api/query/apiQueryBuilder';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 import DetailInfo from '../../components/movieReview/detailInfo/detailInfo';
 import getMovieRating from '../../utils/movieRating';
 import HScroll from '../../components/unit/horizontalScroll/hScroll';
-import { ICastData, IReviewData } from '../../utils/api/model/apiModelTypes';
+import {IMovieDetailData, IMovieReviewsData } from '../../utils/api/model/apiModelTypes';
 import CastPoster from '../../components/movieReview/castPoster/castPoster';
 import Typography from '@material-ui/core/Typography';
 import { useMovieReviews } from '../../effects/apiFetch/movieReviews';
@@ -20,8 +19,32 @@ import { dateFromUTC } from '../../utils/timeConverter';
 import { partialSentenceFrom } from '../../utils/sentenceExtractor';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
+import { Skeleton } from '@material-ui/lab';
+import { Card, CardContent } from '@material-ui/core';
+import { GetStaticProps } from 'next';
 
-const transformCastToPoster = (casts:ICastData[])=>{
+const renderCast = (movieDetail:IMovieDetailData)=>{
+    if(!movieDetail){
+        const skls = []
+
+        for(let i:number=0; i<4; i++){
+            skls.push({
+                id:i,
+                element: (
+                    <React.Fragment>
+                        <Skeleton variant='rect' width={138} height={175} />
+                        <Skeleton variant='text' />
+                        <Skeleton variant='text' />
+                    </React.Fragment>
+                )
+            })
+        }
+
+        return skls;
+    }
+
+    const casts = movieDetail.credits.cast;
+
     return casts.map(cast=>{
         const imgQuery = buildImageQuery(cast.profile_path, 'w138_and_h175_face')
         return ({
@@ -37,9 +60,23 @@ const transformCastToPoster = (casts:ICastData[])=>{
     })
 }
 
-const transformReviewsToReviewCard = (reviews:IReviewData[])=>{
-    if(!reviews) return null;
+const renderReviews = (movieReviews:IMovieReviewsData)=>{
+    if(!movieReviews){
+        return (
+            <Card raised>
+                <Skeleton variant='text' width='30%' />
+                <Skeleton variant='text' width='30%' />
+                <CardContent>
+                    <Skeleton variant='text' width='60%' />
+                    <Skeleton variant='text' width='60%' />
+                    <Skeleton variant='text' width='60%' />
+                    <Skeleton variant='text' width='60%' />
+                </CardContent>
+            </Card>
+        )
+    }
 
+    const reviews = movieReviews.results;
     const fromRatingMax = 10;
     const toRatingMax = 5;
     const scale = toRatingMax / fromRatingMax;
@@ -75,50 +112,65 @@ const transformReviewsToReviewCard = (reviews:IReviewData[])=>{
     })
 }
 
+const renderPoster = (movieDetail:IMovieDetailData)=>{
+    if(!movieDetail){
+        return (
+            <Skeleton variant='rect' width={342} height={342 * 2} />
+        )
+    }
+
+    return (
+        <PosterImage 
+        imageURL={buildImageQuery(movieDetail.poster_path, 'w342')}
+        imageWidth={342}
+        />
+    )
+}
+
+const renderMovieInfo = (movieDetail:IMovieDetailData)=>{
+    if(!movieDetail){
+        return (
+            <React.Fragment>
+                <Skeleton variant='text' width='60%' />
+                <Skeleton variant='text' width='60%' />
+                <Skeleton variant='text' width='60%' />
+                <Skeleton variant='text' width='60%' />
+                <Skeleton variant='text' width='60%' />
+                <Skeleton variant='text' width='60%' />
+            </React.Fragment>
+        )
+    }
+
+    return (
+        <DetailInfo 
+        title={movieDetail.title}
+        releaseDate={movieDetail.release_date}
+        length={movieDetail.runtime}
+        genre={movieDetail.genres}
+        userScore={getMovieRating(movieDetail.vote_count, movieDetail.vote_average)}
+        tagline={movieDetail.tagline}
+        overview={movieDetail.overview}
+        />
+    )
+}
+
 const DetailPage = () => {
     const router = useRouter();
     const {id} = router.query as {[key:string]:string};
-    const {data, error} = useMovieDetail(Number(id));
+    const detail = useMovieDetail(Number(id));
     const reviews = useMovieReviews(Number(id), 1);
 
     console.log(router.query);
-    console.log(id, data, error);
+    console.log(id, detail.data, detail.error);
     console.log(id, reviews.data, reviews.error);
-
-    if(!data){
-        return (
-            <PageLayout
-            navigation={<Navigation position='sticky' hideOnScroll={true} />}
-            >
-                <Box display='flex' justifyContent='center' alignItems='center' p={2}>
-                    <CircularProgress />
-                </Box>
-            </PageLayout>
-        )
-    }
 
     return (
         <PageLayout
         navigation={<Navigation position='sticky' hideOnScroll={true} />}
         >
             <DetailLayout
-            poster={
-                <PosterImage 
-                imageURL={buildImageQuery(data.poster_path, 'w342')}
-                imageWidth={342}
-                />
-            }
-            info={
-                <DetailInfo 
-                title={data.title}
-                releaseDate={data.release_date}
-                length={data.runtime}
-                genre={data.genres}
-                userScore={getMovieRating(data.vote_count, data.vote_average)}
-                tagline={data.tagline}
-                overview={data.overview}
-                />
-            } 
+            poster={renderPoster(detail.data)}
+            info={renderMovieInfo(detail.data)} 
             >
                 <React.Fragment>
                     {/* casts */}
@@ -127,7 +179,7 @@ const DetailPage = () => {
                             <Box pl={2} fontWeight={600}>{`Casts`}</Box>
                         </Typography>
                         <HScroll>
-                        {()=>transformCastToPoster(data.credits.cast)}    
+                        {()=>renderCast(detail.data)}    
                         </HScroll>
                     </Box>
                     {/* reviews */}
@@ -135,17 +187,18 @@ const DetailPage = () => {
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Reviews`}</Box>
                         </Typography>
-                        {
-                            reviews.data?
-                            transformReviewsToReviewCard(reviews.data.results)
-                            :
-                            null
-                        }
+                        {renderReviews(reviews.data)}
                     </Box>
                 </React.Fragment>
             </DetailLayout>
         </PageLayout>
     );
 };
+
+export const getStaticProps: GetStaticProps = async ()=>{
+    return {
+        props:{}
+    }
+}
 
 export default DetailPage;
