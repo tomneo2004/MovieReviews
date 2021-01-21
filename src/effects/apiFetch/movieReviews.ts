@@ -36,7 +36,7 @@ export function useMovieReviews(id:number):IFetchPageResponse{
         }, 
         fetcher);
 
-    function transform(pages:IMovieReviewsData[]){
+    function transformData(pages:IMovieReviewsData[]){
         if(!pages || !pages.length) return undefined;
 
         let transformed:IMovieReviewsData = {
@@ -64,7 +64,7 @@ export function useMovieReviews(id:number):IFetchPageResponse{
     (response.size > 0 && response.data && typeof response.data[response.size - 1] === "undefined");
 
     return {
-        data: transform(response.data),
+        data: transformData(response.data),
         error: response.error,
         size: response.size,
         setSize: response.setSize,
