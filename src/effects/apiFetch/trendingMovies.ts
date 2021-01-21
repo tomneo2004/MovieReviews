@@ -21,16 +21,20 @@ export function useTrendingMovies(timeWindow:'day'|'week' = 'day'):IFetchRespons
 
     const {data, error} = useSWR(()=>`${apiRoute}?timeWindow=${timeWindow}`, fetcher);
 
+    const isLoading = !data && !error;
+
     if(error){
         console.log(error);
         return {
             data: null,
             error,
+            isLoading
         }
     }
 
     return {
         data,
         error: null,
+        isLoading
     }
 }

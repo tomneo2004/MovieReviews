@@ -1,5 +1,5 @@
 
-import useSWR from 'swr';
+import {useSWRInfinite} from 'swr';
 import axios from 'axios';
 import {IMovieReviewsData} from '../../utils/api/model/apiModelTypes';
 import {IFetchResponse} from './fetchResponse';
@@ -18,25 +18,56 @@ const fetcher = async (url:string)=>{
     }
 }
 
+export interface IFetchPageResponse extends IFetchResponse<IMovieReviewsData>{
+    size:number;
+    setSize:(size: number | ((size: number) => number)) => Promise<any[] | undefined>;
+}
+
 /**
  * Side effect for fetching reviews for movies
  */
-export function useMovieReviews(id:number, page:number=1):IFetchResponse<IMovieReviewsData>{
+export function useMovieReviews(id:number):IFetchPageResponse{
 
-    const {data, error} = useSWR(
-        id?()=>`${apiRoute}?id=${id}&page=${page}`:null, 
+    const response = useSWRInfinite(
+        (pageIndex:number, previousData:IMovieReviewsData)=>{
+            if(previousData && !previousData.results.length || !id) return null;
+
+            return `${apiRoute}?id=${id}&page=${pageIndex+1}`
+        }, 
         fetcher);
 
-    if(error){
-        console.log(error);
-        return {
-            data: null,
-            error,
+    function transform(pages:IMovieReviewsData[]){
+        if(!pages || !pages.length) return undefined;
+
+        let transformed:IMovieReviewsData = {
+            id:0,
+            page:0,
+            results:[],
+            total_pages:0,
+            total_results:0
+        }; 
+
+        for(let i=0; i<pages.length; i++){
+            const {results, ...rest} = pages[i];
+            transformed = {
+                ...transformed,
+                results: transformed.results.concat(results),
+                ...rest
+            }
         }
+
+        return transformed;
     }
 
+    const isInitialLoading = (!response.data && !response.error)
+    const isLoading= isInitialLoading ||
+    (response.size > 0 && response.data && typeof response.data[response.size - 1] === "undefined");
+
     return {
-        data,
-        error: null,
-    }
+        data: transform(response.data),
+        error: response.error,
+        size: response.size,
+        setSize: response.setSize,
+        isLoading
+    };
 }

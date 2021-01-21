@@ -19,9 +19,12 @@ import { dateFromUTC } from '../../utils/timeConverter';
 import { partialSentenceFrom } from '../../utils/sentenceExtractor';
 import ReactMarkdown from 'react-markdown';
 import gfm from 'remark-gfm';
-import { Skeleton } from '@material-ui/lab';
-import { Card, CardContent } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import { GetStaticProps } from 'next';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 const renderCast = (movieDetail:IMovieDetailData)=>{
     if(!movieDetail){
@@ -61,6 +64,7 @@ const renderCast = (movieDetail:IMovieDetailData)=>{
 }
 
 const renderReviews = (movieReviews:IMovieReviewsData)=>{
+
     if(!movieReviews){
         return (
             <Card raised>
@@ -84,7 +88,11 @@ const renderReviews = (movieReviews:IMovieReviewsData)=>{
     return reviews.map(review=>{
 
         const extracted = partialSentenceFrom(review.content, 4);
-        const partialContent = extracted.partial + ' ...';
+        let partialContent = extracted.partial + ' ...';
+        if(extracted.fullyExtracted){
+            partialContent = review.content;
+        }
+
         const mdParagraph = (
             <ReactMarkdown plugins={[gfm]} children={review.content} allowDangerousHtml/>
         )
@@ -158,11 +166,19 @@ const DetailPage = () => {
     const router = useRouter();
     const {id} = router.query as {[key:string]:string};
     const detail = useMovieDetail(Number(id));
-    const reviews = useMovieReviews(Number(id), 1);
+    const reviews = useMovieReviews(Number(id));
 
-    console.log(router.query);
-    console.log(id, detail.data, detail.error);
-    console.log(id, reviews.data, reviews.error);
+    useBottomScrollListener(()=>{
+        if(reviews.data 
+            && reviews.data.page < reviews.data.total_pages
+            && !reviews.isLoading){
+            reviews.setSize(reviews.size+1);
+        }
+    })
+
+    // console.log(router.query);
+    // console.log(id, detail.data, detail.error);
+    // console.log(id, reviews.data, reviews.error);
 
     return (
         <PageLayout
@@ -183,11 +199,18 @@ const DetailPage = () => {
                         </HScroll>
                     </Box>
                     {/* reviews */}
-                    <Box pt={2}>
+                    <Box pt={2} pb={2}>
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Reviews`}</Box>
                         </Typography>
                         {renderReviews(reviews.data)}
+                        {/*loading more */}
+                        {reviews.isLoading && reviews.data?
+                            <Box p={1} display='flext' justifyContent='center'>
+                                <LinearProgress />
+                            </Box>
+                            :null
+                        }
                     </Box>
                 </React.Fragment>
             </DetailLayout>
@@ -196,6 +219,7 @@ const DetailPage = () => {
 };
 
 export const getStaticProps: GetStaticProps = async ()=>{
+    console.log('get static props detail page');
     return {
         props:{}
     }

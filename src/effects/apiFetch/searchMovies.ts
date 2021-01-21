@@ -22,16 +22,20 @@ export function useSearchMovies(keyword:string = '', page:number = 1):IFetchResp
 
     const {data, error} = useSWR(()=>`${apiRoute}?query=${keyword}&page=${page}`, fetcher);
 
+    const isLoading = !data && !error;
+
     if(error){
         console.log(error);
         return {
             data: null,
             error,
+            isLoading
         }
     }
 
     return {
         data,
         error: null,
+        isLoading
     }
 }

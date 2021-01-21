@@ -22,16 +22,20 @@ export function useMovieDetail(id:number):IFetchResponse<IMovieDetailData>{
         id?()=>`${apiRoute}?id=${id}`:null, 
         fetcher);
 
+    const isLoading = !data && !error;
+
     if(error){
         console.log(error);
         return {
             data: null,
             error,
+            isLoading
         }
     }
 
     return {
         data,
         error: null,
+        isLoading
     }
 }

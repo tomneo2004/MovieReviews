@@ -19,16 +19,20 @@ const fetcher = async (url:string)=>{
 export function usePopularMovies():IFetchResponse<IMovieData[]>{
     const {data, error} = useSWR(apiRoute, fetcher);
 
+    const isLoading = !data && !error;
+
     if(error){
         console.log(error);
         return {
             data: null,
             error,
+            isLoading
         }
     }
 
     return {
         data,
         error: null,
+        isLoading
     }
 }
