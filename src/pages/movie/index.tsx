@@ -80,6 +80,15 @@ const renderReviews = (movieReviews:IMovieReviewsData)=>{
         )
     }
 
+    //no reviews
+    if(!movieReviews.total_results){
+        return (
+            <Typography variant='h4' component='div'>
+                <Box display='flex' justifyContent='center'>{`We could not find any reviews`}</Box>
+            </Typography>
+        )
+    }
+
     const reviews = movieReviews.results;
     const fromRatingMax = 10;
     const toRatingMax = 5;
@@ -206,7 +215,7 @@ const DetailPage = () => {
                         {renderReviews(reviews.data)}
                         {/*loading more */}
                         {reviews.isLoading && reviews.data?
-                            <Box p={1} display='flext' justifyContent='center'>
+                            <Box p={3} display='flext' justifyContent='center'>
                                 <LinearProgress />
                             </Box>
                             :null

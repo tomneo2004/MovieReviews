@@ -30,7 +30,7 @@ const renderResults = (results:IMovieData[], router:NextRouter)=>{
                             ratingScore={getMovieRating(result.vote_count, result.vote_average)}
                             ratingOffsetX={-8}
                             ratingOffsetY={-8}
-                            onClick={()=>router.push(`/detail?id=${result.id}`)}
+                            onClick={()=>router.push(`/movie?id=${result.id}`)}
                             />
                         </Box>
                     </Grid>
