@@ -1,10 +1,10 @@
 import React from 'react';
-import {NextRouter, useRouter} from 'next/router';
+import {useRouter} from 'next/router';
 import {useSearchMovies} from '../../effects/apiFetch/searchMovies';
 import PageLayout from '../../layouts/pageLayout';
 import Navigation from '../../components/movieReview/navigation/navigation';
-import { Card, CardContent, CardMedia, Grid } from '@material-ui/core';
-import { IMovieData, ISearchMovieData } from '../../utils/api/model/apiModelTypes';
+import { Card, CardContent, Grid } from '@material-ui/core';
+import { ISearchMovieData } from '../../utils/api/model/apiModelTypes';
 import MoviePoster from '../../components/movieReview/poster/poster';
 import { buildImageQuery } from '../../utils/api/query/apiQueryBuilder';
 import Box from '@material-ui/core/Box/Box';
