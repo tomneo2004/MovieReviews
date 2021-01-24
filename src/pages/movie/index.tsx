@@ -131,7 +131,7 @@ const renderReviews = (movieReviews:IMovieReviewsData)=>{
 const renderPoster = (movieDetail:IMovieDetailData)=>{
     if(!movieDetail){
         return (
-            <Skeleton variant='rect' width={342} height={342 * 2} />
+            <Skeleton variant='rect' width={342} height={342 * 1.5} />
         )
     }
 
