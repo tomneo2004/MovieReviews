@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box/Box';
 import getMovieRating from '../../utils/movieRating';
 import Pagination from '@material-ui/lab/Pagination/Pagination';
 import SearchLayout from '../../layouts/search/searchLayout';
-import NavSearch from '../../components/unit/navSearch/navSearch';
+import SearchBar from '../../components/movieReview/searchBar/searchBar';
 import { Skeleton } from '@material-ui/lab';
 
 const renderResults = (data:ISearchMovieData, onPosterClick:(id:number)=>void|null)=>{
@@ -93,21 +93,13 @@ const SearchPage = () => {
     const router = useRouter();
     const {query, page} = router.query as {[key:string]:string};
     const {data} = useSearchMovies(query, Number(page));
-    const [search, setSearch] = React.useState('');
 
     const handlePageChange = (_event:React.ChangeEvent<unknown>, page:number)=>{
         router.push(`${router.pathname}?query=${query}&page=${page}`);
     }
-    
-    const handleSearchChange = (
-        event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
-        setSearch(event.target.value);
-    }
 
-    const handlSearchKeyPress = (event: React.KeyboardEvent<HTMLDivElement>)=>{
-        if(event.key === 'Enter' && search){
-            router.push(`/search?query=${search}`);
-        }
+    const handleSearch = (value:string)=>{
+        router.push(`${router.pathname}?query=${value}`)
     }
 
     const handlePosterClick = (id:number)=>{
@@ -120,11 +112,7 @@ const SearchPage = () => {
             position='sticky' 
             hideOnScroll={true}
             rightButtons={[
-                <NavSearch 
-                placeholder='Search...'
-                onChange={handleSearchChange}
-                onKeyPress={handlSearchKeyPress}
-                />
+                <SearchBar onSearchReady={handleSearch} />
             ]} 
         />}
         >
