@@ -227,11 +227,4 @@ const DetailPage = () => {
     );
 };
 
-export const getStaticProps: GetStaticProps = async ()=>{
-    console.log('get static props detail page');
-    return {
-        props:{}
-    }
-}
-
 export default DetailPage;
