@@ -23,7 +23,6 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { GetStaticProps } from 'next';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 const renderCast = (movieDetail:IMovieDetailData)=>{
