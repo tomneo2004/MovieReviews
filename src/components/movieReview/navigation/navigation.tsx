@@ -6,8 +6,8 @@ import { useScrollTrigger } from '@material-ui/core';
 import Slide from '@material-ui/core/Slide/Slide';
 
 export interface IProps extends AppBarProps {
-    brand?: React.ReactNode;
-    rightButtons?: React.ReactNode[];
+    brand?: React.ReactElement;
+    rightButtons?: React.ReactElement[];
     hideOnScroll?:boolean;
 }
 
