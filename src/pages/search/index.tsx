@@ -94,10 +94,6 @@ const SearchPage = () => {
     const {query, page} = router.query as {[key:string]:string};
     const {data} = useSearchMovies(query, Number(page));
     const [search, setSearch] = React.useState('');
-    
-    React.useEffect(()=>{
-        window.scrollTo(0,0);
-    })
 
     const handlePageChange = (_event:React.ChangeEvent<unknown>, page:number)=>{
         router.push(`${router.pathname}?query=${query}&page=${page}`);

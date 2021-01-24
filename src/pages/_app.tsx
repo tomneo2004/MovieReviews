@@ -13,7 +13,16 @@ Router.events.on('routeChangeStart', (url) => {
     console.log(`Loading: ${url}`)
     NProgress.start()
   })
-Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeComplete', () => {
+    //scroll page to top 
+    window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
+
+    NProgress.done()
+})
 Router.events.on('routeChangeError', () => NProgress.done())
 
 export default function MovieReviewApp(props:AppProps) {
