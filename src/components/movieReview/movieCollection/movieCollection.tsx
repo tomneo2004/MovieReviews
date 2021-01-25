@@ -97,6 +97,7 @@ const MovieCollection = (props:IProps) => {
 //make this component as pure component
 export default React.memo(MovieCollection, 
     (pre, next)=>{
-    if(pre.movieData === undefined || next.movieData === undefined) return false;
-    return true;
+
+        if(!pre.movieData || !next.movieData) return false;
+        return true;
 });

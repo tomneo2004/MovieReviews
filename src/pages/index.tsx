@@ -21,6 +21,7 @@ const caroselItems = [
 ]
 
 const LandingPage = () => {
+  const router = useRouter();
   const [popularBackdrop, setPopularBackdrop] = React.useState<{preview:string, image:string}>({
     preview: '',
     image: '',
@@ -29,10 +30,8 @@ const LandingPage = () => {
     preview: '',
     image: '',
   });
-
   const popularMovies = usePopularMovies();
   const trendingMovies = useTrendingMovies();
-  const router = useRouter();
 
   const handlePopularMovieHover = (data:IMovieData)=>{
     setPopularBackdrop({
