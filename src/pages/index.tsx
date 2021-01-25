@@ -6,67 +6,19 @@ import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
 import SearchBar from '../components/movieReview/longSearchBar/longSearchBar';
 import { IMovieData } from "../utils/api/model/apiModelTypes";
-import Paper from '@material-ui/core/Paper';
-import Skeleton from '@material-ui/lab/Skeleton';
-import MoviePoster from '../components/movieReview/poster/poster';
 import { buildImageQuery } from '../utils/api/query/apiQueryBuilder';
-import HScroll from '../components/unit/horizontalScroll/hScroll';
 import {usePopularMovies} from '../effects/apiFetch/popularMovies';
 import {useTrendingMovies} from '../effects/apiFetch/trendingMovies';
 import React from "react";
 import ProgressiveImage from "../components/unit/progressiveImage/progressiveImage";
 import {useRouter} from 'next/router';
-import getMovieRating from "../utils/movieRating";
+import MovieCollection from "../components/movieReview/movieCollection/movieCollection";
 
 const caroselItems = [
   'Find Movies',
   'See Reviews',
   'Explores',
 ]
-
-const transformMovieDataToPosters = (
-  movieData:IMovieData[],
-  onHover:(data:IMovieData)=>void = null)=>{
-
-  if(!movieData){
-      const skeletons = [];
-      for(let i=0; i<12; i++){
-          skeletons.push({
-            id:i,
-            element: (<Paper key={i}>
-              <Box width='150px' p={1}>
-                  <Skeleton animation="wave" variant='rect' height='150px'/>
-                  <Skeleton animation="wave" variant='text'/>
-                  <Skeleton animation="wave" variant='text'/>
-              </Box>
-          </Paper>)
-          });
-      }
-      return skeletons;
-  }
-
-  const handleMouseOver = (data:IMovieData)=>{
-    if(onHover) onHover(data);
-  }
-
-  return movieData.map(data=>{
-
-      return({
-        id: data.id,
-        element: (<MoviePoster 
-          imageURL={buildImageQuery(data.poster_path, 'w185')}
-          imageWidth={185}
-          minWidth={200}
-          title={data.title}
-          releaseDate={data.release_date}
-          ratingScore={getMovieRating(data.vote_count, data.vote_average)}
-          ratingOffsetX={-8}
-          ratingOffsetY={-8}
-          onMouseOver={()=>handleMouseOver(data)}
-          />)
-      })
-  })
-}
 
 const LandingPage = () => {
   const [popularBackdrop, setPopularBackdrop] = React.useState<{preview:string, image:string}>({
@@ -131,31 +83,21 @@ const LandingPage = () => {
           <ProgressiveImage preview={popularBackdrop.preview} image={popularBackdrop.image} 
           backdropColor='popularBackdrop.main' px={1} py={3} alignSelf='stretch'
           >
-            <React.Fragment>
-              <Typography component='div' variant='h4'>
-                  <Box pl={2} fontWeight={600}>{`What's popular`}</Box>
-              </Typography>
-              <Box pt={2}>
-                  <HScroll>
-                  {()=>transformMovieDataToPosters(popularMovies.data, handlePopularMovieHover)}    
-                  </HScroll>
-              </Box>
-            </React.Fragment>
+            <MovieCollection 
+            title={`What's popular`} 
+            movieData={popularMovies.data}
+            onHover={handlePopularMovieHover}
+            />
           </ProgressiveImage>
           {/* Trending Collection */}
           <ProgressiveImage preview={trendingBackdrop.preview} image={trendingBackdrop.image} 
           backdropColor='trendingBackdrop.main' px={1} py={3} alignSelf='stretch'
           >
-            <React.Fragment>
-              <Typography component='div' variant='h4'>
-                  <Box pl={2} fontWeight={600}>{'Trending'}</Box>
-              </Typography>
-              <Box pt={2}>
-                  <HScroll>
-                  {()=>transformMovieDataToPosters(trendingMovies.data, handleTrendingMovieHover)}    
-                  </HScroll>
-              </Box>
-            </React.Fragment>
+            <MovieCollection 
+            title='Trending'
+            movieData={trendingMovies.data}
+            onHover={handleTrendingMovieHover}
+            />
           </ProgressiveImage>
       </LandingLayout>
     </PageLayout>

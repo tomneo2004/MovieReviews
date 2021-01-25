@@ -2,9 +2,16 @@ import { Box, Grid, GridSpacing, makeStyles } from '@material-ui/core';
 import style from './hScrollStyle';
 import React from 'react';
 
+export interface HScrollChildProp {
+    id: string | number;
+    element: React.ReactElement;
+}
+
 export interface IProps {
-    /** A function that take no arguments and return an array of ReactNode */
-    children: ()=>{id:string|number, element:React.ReactElement}[];
+    /** A function that take no arguments and return an array of object
+     * which has properties of id and element which is ReactElement
+     */
+    children: ()=>HScrollChildProp[];
     /** Space between items
      * 
      * number from 0 ~ 10
@@ -128,4 +135,4 @@ const HorizontalScroll = (props:IProps) => {
     );
 };
 
-export default React.memo(HorizontalScroll);
+export default HorizontalScroll;
