@@ -10,8 +10,7 @@ export default {
 export const Default = () => {
     return (
         <ProgressiveImage 
-        preview='https://image.tmdb.org/t/p/w300/htBUhLSS7FfHtydgYxUWjL3J1Q1.jpg' 
-        image='https://image.tmdb.org/t/p/original/htBUhLSS7FfHtydgYxUWjL3J1Q1.jpg'
+        imageSrc='https://image.tmdb.org/t/p/original/htBUhLSS7FfHtydgYxUWjL3J1Q1.jpg'
         >
             <Box>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vulputate condimentum felis, eu condimentum odio sagittis at. Morbi posuere, enim sagittis ornare elementum, leo lectus auctor nibh, nec imperdiet eros turpis a arcu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras ornare consectetur mi eget convallis. Sed dapibus euismod ultrices. Aliquam quis dui id metus ullamcorper consectetur a eu ante. Suspendisse mattis, purus non aliquam efficitur, sem nibh cursus nisi, eu eleifend ante nibh a augue. Vestibulum pretium feugiat sapien vel accumsan.
@@ -53,8 +52,7 @@ export const Backdrop = () => {
 
     return (
         <ProgressiveImage 
-        preview={img.preview}
-        image={img.image}
+        imageSrc={img.image}
         backdropColor='rgba(255,255,255,0.6)'
         >
             <React.Fragment>
