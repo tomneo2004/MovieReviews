@@ -10,7 +10,7 @@ import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
 import getMovieRating from '../../../utils/movieRating';
 
 export interface IProps {
-    title?: string | null | undefined;
+    title?: React.ReactNode | null | undefined;
     movieData: IMovieData[] | null | undefined;
     onHover?:(data:IMovieData)=>void | null | undefined;
 }
@@ -69,6 +69,9 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
     )
 }
 
+/**
+ * Component wrap around horizontal scrol collection
+ */
 const MovieCollection = (props:IProps) => {
     const {
         title = null,
