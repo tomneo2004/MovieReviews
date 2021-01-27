@@ -22,29 +22,17 @@ const caroselItems = [
 
 const LandingPage = () => {
   const router = useRouter();
-  const [popularBackdrop, setPopularBackdrop] = React.useState<{preview:string, image:string}>({
-    preview: '',
-    image: '',
-  });
-  const [trendingBackdrop, setTrendingBackdrop] = React.useState<{preview:string, image:string}>({
-    preview: '',
-    image: '',
-  });
+  const [popularBg, setPopularBg] = React.useState<string>('');
+  const [trendingBg, setTrendingBg] = React.useState<string>('');
   const popularMovies = usePopularMovies();
   const trendingMovies = useTrendingMovies();
 
   const handlePopularMovieHover = (data:IMovieData)=>{
-    setPopularBackdrop({
-      preview: buildImageQuery(data.backdrop_path, 'w300'),
-      image: buildImageQuery(data.backdrop_path, 'original'),
-    });
+    setPopularBg(buildImageQuery(data.backdrop_path, 'original'));
   }
 
   const handleTrendingMovieHover = (data:IMovieData)=>{
-    setTrendingBackdrop({
-      preview: buildImageQuery(data.backdrop_path, 'w300'),
-      image: buildImageQuery(data.backdrop_path, 'original'),
-    });
+    setTrendingBg(buildImageQuery(data.backdrop_path, 'original'));
   }
 
   const handleOnSearchClick = (keyword:string)=>{
@@ -79,8 +67,18 @@ const LandingPage = () => {
           search={<SearchBar onSearchClick={handleOnSearchClick} />}
           />
           {/* Pouplar Collection */}
-          <ProgressiveImage preview={popularBackdrop.preview} image={popularBackdrop.image} 
+          <ProgressiveImage imageSrc={popularBg} 
           backdropColor='popularBackdrop.main' px={1} py={3} alignSelf='stretch'
+          keyframesAnimOut={{
+            '0%':{transform:'translateY(0%)'},
+            '100%':{transform:'translateY(100%)'}
+          }}
+          animOutTimeFun='ease'
+          keyframesAnimIn={{
+              '0%':{transform:'translateY(-100%)'},
+              '100%':{transform:'translateY(0%)'}
+          }}
+          animInTimeFun='ease'
           >
             <MovieCollection 
             title={`What's popular`} 
@@ -89,8 +87,18 @@ const LandingPage = () => {
             />
           </ProgressiveImage>
           {/* Trending Collection */}
-          <ProgressiveImage preview={trendingBackdrop.preview} image={trendingBackdrop.image} 
+          <ProgressiveImage imageSrc={trendingBg} 
           backdropColor='trendingBackdrop.main' px={1} py={3} alignSelf='stretch'
+          keyframesAnimOut={{
+            '0%':{transform:'translate(0%)'},
+            '100%':{transform:'translate(-100%)'}
+          }}
+          animOutTimeFun='ease'
+          keyframesAnimIn={{
+              '0%':{transform:'translate(100%)'},
+              '100%':{transform:'translate(0%)'}
+          }}
+          animInTimeFun='ease'
           >
             <MovieCollection 
             title='Trending'

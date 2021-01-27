@@ -17,10 +17,10 @@ const theme = createMuiTheme({
       default: '#fff',
     },
     popularBackdrop:{
-      main: 'rgba(255,255,255,0.75)'
+      main: 'rgba(235,235,235,0.6)'
     },
     trendingBackdrop:{
-      main: 'rgba(255,255,255,0.75)'
+      main: 'rgba(235,235,235,0.6)'
     },
   },
 });
