@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import useLayoutEffect from '../../../effects/isomorphic/isomorphicEffect';
 
-export interface IProps extends BoxProps {
+interface IProps {
     children?:React.ReactElement;
     /** image to fetch */
     imageSrc: string;
@@ -54,6 +54,8 @@ export interface IProps extends BoxProps {
     animOutTimeFun?:string;
 }
 
+export type ProgressiveImageProps = IProps;
+
 interface IImageState {
     src:string;
     isLoading:boolean;
@@ -61,9 +63,13 @@ interface IImageState {
 
 let img: HTMLImageElement;
 
-const ProgressiveImage = (props:IProps) => {
+/**
+ * Progressive loading image with customized transition
+ * 
+ * Parent element must have `relative` for position
+ */
+const ProgressiveImage = React.memo((props:IProps) => {
     const {
-        children,
         imageSrc,
         backdropColor,
         transitionTime = 5000,
@@ -77,7 +83,7 @@ const ProgressiveImage = (props:IProps) => {
         },
         animInTimeFun = 'linear',
         animOutTimeFun = 'linear',
-        ...rest
+        // ...rest
     } = props;
 
     const [lastImageSrc, setLastImageSrc] = React.useState<string>('');
@@ -139,35 +145,34 @@ const ProgressiveImage = (props:IProps) => {
     const animInBgClass = clsx(classes.common, classes.newBackground);
     const animOutBgClass = clsx(classes.common, classes.oldBackground);
 
+    const boxProps:BoxProps={
+        position:'absolute',
+        left:0, 
+        right:0,
+        top:0, 
+        bottom:0,
+        overflow:'hidden',
+    }
     return (
-        <Box position='relative' overflow='hidden'>
+        <Box {...boxProps}>
             {currentImage.isLoading?
-                <Box className={staticBgClass}
-                position='absolute' left={0} right={0} top={0} bottom={0}
+                <Box className={staticBgClass} {...boxProps}
                 />
                 :
                 <React.Fragment>
-                <Box className={animOutBgClass}
-                position='absolute' left={0} right={0} top={0} bottom={0}
-                />
-                <Box className={animInBgClass} 
-                position='absolute' left={0} right={0} top={0} bottom={0}
-                />
+                    <Box className={animOutBgClass} {...boxProps}/>
+                    <Box className={animInBgClass} {...boxProps}/>
                 </React.Fragment>
             }
-            
-            <Box bgcolor={backdropColor} {...rest} position='relative'>{children}</Box>
+            <Box  {...boxProps} bgcolor={backdropColor} />
         </Box>
-    );
-};
+    )
+},
 
-// export default ProgressiveImage;
-
-const Wrapper = (props:IProps) =>{
-    return <ProgressiveImage {...props} />
-}
-
-export default React.memo(Wrapper, (pre, next)=>{
+(pre, next)=>{
     if(!next.imageSrc) return false;
     return pre.imageSrc === next.imageSrc
-});
+}
+);
+
+export default ProgressiveImage;
