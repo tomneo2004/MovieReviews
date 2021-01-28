@@ -5,14 +5,10 @@ import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, Typography } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel'
 import SearchBar from '../components/movieReview/longSearchBar/longSearchBar';
-import { IMovieData } from "../utils/api/model/apiModelTypes";
-import { buildImageQuery } from '../utils/api/query/apiQueryBuilder';
-import {usePopularMovies} from '../effects/apiFetch/popularMovies';
-import {useTrendingMovies} from '../effects/apiFetch/trendingMovies';
 import React from "react";
 import {useRouter} from 'next/router';
-import MovieCollection from "../components/movieReview/movieCollection/movieCollection";
-import BackgroundImage from "../components/movieReview/backgroundImage/backgroundImage";
+import Trending from "../components/movieReview/trending/trending";
+import Popular from "../components/movieReview/popular/popular";
 
 const caroselItems = [
   'Find Movies',
@@ -22,18 +18,6 @@ const caroselItems = [
 
 const LandingPage = () => {
   const router = useRouter();
-  const [popularBg, setPopularBg] = React.useState<string>('');
-  const [trendingBg, setTrendingBg] = React.useState<string>('');
-  const popularMovies = usePopularMovies();
-  const trendingMovies = useTrendingMovies();
-
-  const handlePopularMovieHover = (data:IMovieData)=>{
-    setPopularBg(buildImageQuery(data.backdrop_path, 'original'));
-  }
-
-  const handleTrendingMovieHover = (data:IMovieData)=>{
-    setTrendingBg(buildImageQuery(data.backdrop_path, 'original'));
-  }
 
   const handleOnSearchClick = (keyword:string)=>{
     router.push(`/search?query=${keyword}`)
@@ -67,37 +51,9 @@ const LandingPage = () => {
           search={<SearchBar onSearchClick={handleOnSearchClick} />}
           />
           {/* Pouplar Collection */}
-          <BackgroundImage imageSrc={popularBg}
-          keyframesAnimIn={{
-            '0%':{transform:'translateY(-100%)'},
-            '100%':{transform:'translateY(0%)'}
-          }}
-          keyframesAnimOut={{
-            '0%':{transform:'translateY(0%)'},
-            '100%':{transform:'translateY(100%)'}
-          }}>
-            <MovieCollection 
-            title={`What's popular`} 
-            movieData={popularMovies.data}
-            onHover={handlePopularMovieHover}
-            />
-          </BackgroundImage>
+          <Popular />
           {/* Trending Collection */}
-          <BackgroundImage imageSrc={trendingBg}
-          keyframesAnimIn={{
-            '0%':{transform:'translate(100%)'},
-            '100%':{transform:'translate(0%)'}
-          }}
-          keyframesAnimOut={{
-            '0%':{transform:'translate(0%)'},
-            '100%':{transform:'translate(-100%)'}
-          }}>
-            <MovieCollection 
-            title='Trending'
-            movieData={trendingMovies.data}
-            onHover={handleTrendingMovieHover}
-            />
-          </BackgroundImage>
+          <Trending />
       </LandingLayout>
     </PageLayout>
   )

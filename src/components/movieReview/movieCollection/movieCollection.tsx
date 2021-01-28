@@ -97,10 +97,10 @@ const MovieCollection = (props:IProps) => {
     );
 };
 
-//make this component as pure component
+//render component when data are different
 export default React.memo(MovieCollection, 
     (pre, next)=>{
 
         if(!pre.movieData || !next.movieData) return false;
-        return true;
+        return pre.movieData === next.movieData;
 });
