@@ -7,6 +7,7 @@ import BackgroundImage from '../backgroundImage/backgroundImage';
 import FancyTab from '../fancyTab/fancyTab';
 import MovieCollection from '../movieCollection/movieCollection';
 
+let timerHandler:NodeJS.Timeout;
 const Trending = () => {
     const [trendingBg, setTrendingBg] = React.useState<string>('');
     const [trendingWindow, setTrendingWindow] = React.useState<'day' | 'week'>('day')
@@ -17,7 +18,10 @@ const Trending = () => {
     }
 
     const handleWindowChange = (value:any)=>{
-        setTrendingWindow(value);
+        timerHandler = setTimeout(()=>{
+            setTrendingWindow(value);
+            clearTimeout(timerHandler);
+        }, 500);
     }
 
     return (
@@ -37,8 +41,8 @@ const Trending = () => {
                 <Box pl={2}>
                   <FancyTab 
                   tabData={[
-                    {id:'day', value:'day', label:'Day'},
-                    {id:'week', value:'week', label:'Week'},
+                    {id:'day', value:'day', label:'To day'},
+                    {id:'week', value:'week', label:'This week'},
                   ]} 
                   onChange={handleWindowChange}/>
                 </Box>
