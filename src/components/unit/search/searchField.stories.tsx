@@ -1,7 +1,7 @@
 import { BookmarkSharp } from '@material-ui/icons';
 import React from 'react';
 import Navigation from '../../movieReview/navigation/navigation';
-import FlexSearch from './flexSearch';
+import FlexSearch from './searchField';
 import {action} from '@storybook/addon-actions';
 import { Box, Toolbar } from '@material-ui/core';
 
@@ -101,5 +101,21 @@ export const KeyPress = () => {
             <Toolbar />
             <div>{state}</div>
         </Box>
+    )
+}
+
+export const FocusAndBlur = () => {
+    return (
+        <Navigation 
+        rightButtons={[
+            <FlexSearch 
+            placeholder='Search...'
+            opacity={0.5}
+            opacityHover={0.7}
+            onFocus={()=>action('focus')()}
+            onBlur={()=>action('blur')()}
+            />
+        ]}
+        />
     )
 }
