@@ -1,5 +1,5 @@
 import React from 'react';
-import DetailInfo from './detailInfo';
+import DetailInfo from './movieInfo';
 
 export default {
   title: 'Detail Info',

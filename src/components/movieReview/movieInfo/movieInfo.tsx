@@ -26,7 +26,7 @@ const renderGenre = (genre:IGenreData[])=>{
         )
     })
 }
-const DetailInfo = (props:IProps) => {
+const MovieInfo = (props:IProps) => {
     const {
         title,
         releaseDate,
@@ -97,4 +97,4 @@ const DetailInfo = (props:IProps) => {
     );
 };
 
-export default DetailInfo;
+export default MovieInfo;

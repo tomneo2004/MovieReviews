@@ -2,7 +2,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
-import MoviePoster from '../poster/poster';
+import MoviePoster from '../moviePoster/moviePoster';
 import HScroll, { HScrollChildProp } from '../../unit/horizontalScroll/hScroll';
 import React from 'react';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';

@@ -1,5 +1,5 @@
 import React from 'react';
-import Poster from './poster';
+import Poster from './moviePoster';
 
 export default {
   title: 'Poster',

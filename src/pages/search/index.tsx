@@ -5,7 +5,7 @@ import PageLayout from '../../layouts/pageLayout';
 import Navigation from '../../components/movieReview/navigation/navigation';
 import { Card, CardContent, Grid } from '@material-ui/core';
 import { ISearchMovieData } from '../../utils/api/model/apiModelTypes';
-import MoviePoster from '../../components/movieReview/poster/poster';
+import MoviePoster from '../../components/movieReview/moviePoster/moviePoster';
 import { buildImageQuery } from '../../utils/api/query/apiQueryBuilder';
 import Box from '@material-ui/core/Box/Box';
 import getMovieRating from '../../utils/movieRating';

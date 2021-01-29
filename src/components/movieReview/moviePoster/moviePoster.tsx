@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import Box, { BoxProps } from '@material-ui/core/Box';
 import makeStyles from '@material-ui/styles/makeStyles';
-import style from './posterStyle';
+import style from './moviePosterStyle';
 import React from 'react';
 import {getCircularRating} from '../../unit/circularRating/circularRating';
 import PosterImage from '../../unit/posterImage/posterImage';

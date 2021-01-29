@@ -8,7 +8,7 @@ export interface IProps{
     children?: React.ReactElement;
 }
 
-const DetailLayout = (props:IProps) => {
+const MovieLayout = (props:IProps) => {
     const {
         poster,
         info,
@@ -26,4 +26,4 @@ const DetailLayout = (props:IProps) => {
     );
 };
 
-export default DetailLayout;
+export default MovieLayout;
