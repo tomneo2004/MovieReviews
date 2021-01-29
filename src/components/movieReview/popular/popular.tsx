@@ -1,3 +1,4 @@
+import {Box, LinearProgress } from '@material-ui/core';
 import React from 'react';
 import { usePopularMovies } from '../../../effects/apiFetch/popularMovies';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
@@ -13,7 +14,9 @@ const Popular = () => {
         setPopularBg(buildImageQuery(data.backdrop_path, 'original'));
     }
     return (
-        <BackgroundImage imageSrc={popularBg}
+        <BackgroundImage 
+        imageSrc={popularBg}
+        backdropColor='popularBackdrop.main'
         keyframesAnimIn={{
           '0%':{transform:'translateY(-100%)'},
           '100%':{transform:'translateY(0%)'}
@@ -21,7 +24,12 @@ const Popular = () => {
         keyframesAnimOut={{
           '0%':{transform:'translateY(0%)'},
           '100%':{transform:'translateY(100%)'}
-        }}>
+        }}
+        animOutTimeFun='ease'
+        animInTimeFun='ease'
+        loadingIndicator={
+          <Box><LinearProgress /></Box>
+        }>
           <MovieCollection 
           title={`What's popular`} 
           movieData={popularMovies.data}

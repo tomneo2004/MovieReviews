@@ -1,4 +1,5 @@
 import Box from '@material-ui/core/Box';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import React from 'react';
 import { useTrendingMovies } from '../../../effects/apiFetch/trendingMovies';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
@@ -25,15 +26,22 @@ const Trending = () => {
     }
 
     return (
-        <BackgroundImage imageSrc={trendingBg}
-          keyframesAnimIn={{
-            '0%':{transform:'translate(100%)'},
-            '100%':{transform:'translate(0%)'}
-          }}
-          keyframesAnimOut={{
-            '0%':{transform:'translate(0%)'},
-            '100%':{transform:'translate(-100%)'}
-          }}>
+        <BackgroundImage 
+        imageSrc={trendingBg}
+        backdropColor='trendingBackdrop.main'
+        keyframesAnimIn={{
+          '0%':{transform:'translate(100%)'},
+          '100%':{transform:'translate(0%)'}
+        }}
+        keyframesAnimOut={{
+          '0%':{transform:'translate(0%)'},
+          '100%':{transform:'translate(-100%)'}
+        }}
+        animOutTimeFun='ease'
+        animInTimeFun='ease'
+        loadingIndicator={
+          <Box><LinearProgress /></Box>
+        }>
             <MovieCollection 
             title={
               <Box display='flex'>

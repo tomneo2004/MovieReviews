@@ -52,6 +52,8 @@ interface IProps {
      * default linear
      */
     animOutTimeFun?:string;
+    zIndex?:number;
+    loadingIndicator?: React.ReactNode;
 }
 
 export type ProgressiveImageProps = IProps;
@@ -83,7 +85,8 @@ const ProgressiveImage = React.memo((props:IProps) => {
         },
         animInTimeFun = 'linear',
         animOutTimeFun = 'linear',
-        // ...rest
+        zIndex = -1,
+        loadingIndicator = null,
     } = props;
 
     const [lastImageSrc, setLastImageSrc] = React.useState<string>('');
@@ -103,7 +106,8 @@ const ProgressiveImage = React.memo((props:IProps) => {
             return;
         }
 
-        img = new Image();
+        if(!img) img = new Image();
+
         //on image loaded
         img.onload = ()=>{
             setLastAnimating(true);
@@ -182,10 +186,10 @@ const ProgressiveImage = React.memo((props:IProps) => {
     const classes = useStyle();
     const lastBgClass = clsx(classes.commonBg, classes.lastBg, {
         [classes.hidden]: !isAnimating(),
-        [classes.lastBgAnim]:isAnimating()
+        [classes.lastBgAnim]:isAnimating() && !currentImage.isLoading
     });
     const currentBgClass = clsx(classes.commonBg, classes.currentBg,{
-        [classes.currentBgAnim]:isAnimating(),
+        [classes.currentBgAnim]:isAnimating() && !currentImage.isLoading,
     });
 
     const boxProps:BoxProps={
@@ -197,23 +201,19 @@ const ProgressiveImage = React.memo((props:IProps) => {
         overflow:'hidden',
     }
     return (
-        <Box {...boxProps}>
-            {/* {currentImage.isLoading?
-                <Box className={staticBgClass} {...boxProps}
-                />
-                :
-                <React.Fragment>
-                    <Box className={animOutBgClass} {...boxProps}/>
-                    <Box className={animInBgClass} {...boxProps}/>
-                </React.Fragment>
-            } */}
+        <Box zIndex={zIndex} {...boxProps}>
             <RootRef rootRef={lastBgRef}>
                 <Box className={lastBgClass} {...boxProps} />
             </RootRef>
             <RootRef rootRef={currentBgRef}>
                 <Box className={currentBgClass} {...boxProps} />
             </RootRef>
+            {/* backdrop */}
             <Box  {...boxProps} bgcolor={backdropColor} />
+            {/* loading indicator */}
+            <Box {...boxProps}>
+            {currentImage.isLoading? loadingIndicator:null}
+            </Box>
         </Box>
     )
 },

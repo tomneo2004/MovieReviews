@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import React from 'react';
 import ProgressiveImage from './progressiveImage';
@@ -43,7 +43,7 @@ const imgSources = [
     }
 ];
 let counter = 0;
-export const Backdrop = () => {
+export const BackdropColor = () => {
     const [img, setImg] = React.useState(imgSources[0])
 
     const handleNextImage = ()=>{
@@ -52,17 +52,39 @@ export const Backdrop = () => {
     }
 
     return (
-        <ProgressiveImage 
-        imageSrc={img.image}
-        backdropColor='rgba(255,255,255,0.6)'
-        >
-            <React.Fragment>
-                <Box>
-                {text}
+        <React.Fragment>
+            <ProgressiveImage 
+            imageSrc={img.image}
+            backdropColor='rgba(255,255,255,0.6)'
+            />
+            <Box>{text}</Box>
+            <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
+        </React.Fragment>
+    )
+}
+
+export const LoadingIndicator = () => {
+    const [img, setImg] = React.useState(imgSources[0])
+
+    const handleNextImage = ()=>{
+        counter += 1;
+        setImg(imgSources[counter % imgSources.length])
+    }
+
+    return (
+        <React.Fragment>
+            <ProgressiveImage 
+            imageSrc={img.image}
+            backdropColor='rgba(255,255,255,0.6)'
+            loadingIndicator={
+                <Box position='absolute' right='1%' bottom='5%'>
+                    <CircularProgress />
                 </Box>
-                <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
-            </React.Fragment>
-        </ProgressiveImage>
+            }
+            />
+            <Box>{text}</Box>
+            <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
+        </React.Fragment>
     )
 }
 
@@ -75,27 +97,24 @@ export const SlideLeft = () => {
     }
 
     return (
-        <ProgressiveImage 
-        imageSrc={img.image}
-        backdropColor='rgba(255,255,255,0.6)'
-        keyframesAnimOut={{
-            '0%':{transform:'translate(0%)'},
-            '100%':{transform:'translate(-100%)'}
-        }}
-        animOutTimeFun='ease'
-        keyframesAnimIn={{
-            '0%':{transform:'translate(100%)'},
-            '100%':{transform:'translate(0%)'}
-        }}
-        animInTimeFun='ease'
-        >
-            <React.Fragment>
-                <Box>
-                {text}
-                </Box>
-                <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
-            </React.Fragment>
-        </ProgressiveImage>
+        <React.Fragment>
+            <ProgressiveImage 
+            imageSrc={img.image}
+            backdropColor='rgba(255,255,255,0.6)'
+            keyframesAnimOut={{
+                '0%':{transform:'translate(0%)'},
+                '100%':{transform:'translate(-100%)'}
+            }}
+            animOutTimeFun='ease'
+            keyframesAnimIn={{
+                '0%':{transform:'translate(100%)'},
+                '100%':{transform:'translate(0%)'}
+            }}
+            animInTimeFun='ease'
+            />
+            <Box>{text}</Box>
+            <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
+        </React.Fragment>
     )
 }
 
@@ -108,27 +127,24 @@ export const SlideDown = () => {
     }
 
     return (
-        <ProgressiveImage 
-        imageSrc={img.image}
-        backdropColor='rgba(255,255,255,0.6)'
-        keyframesAnimOut={{
-            '0%':{transform:'translateY(0%)'},
-            '100%':{transform:'translateY(100%)'}
-        }}
-        animOutTimeFun='ease'
-        keyframesAnimIn={{
-            '0%':{transform:'translateY(-100%)'},
-            '100%':{transform:'translateY(0%)'}
-        }}
-        animInTimeFun='ease'
-        >
-            <React.Fragment>
-                <Box>
-                {text}
-                </Box>
-                <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
-            </React.Fragment>
-        </ProgressiveImage>
+        <React.Fragment>
+            <ProgressiveImage 
+            imageSrc={img.image}
+            backdropColor='rgba(255,255,255,0.6)'
+            keyframesAnimOut={{
+                '0%':{transform:'translateY(0%)'},
+                '100%':{transform:'translateY(100%)'}
+            }}
+            animOutTimeFun='ease'
+            keyframesAnimIn={{
+                '0%':{transform:'translateY(-100%)'},
+                '100%':{transform:'translateY(0%)'}
+            }}
+            animInTimeFun='ease'
+            />
+            <Box>{text}</Box>
+            <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
+        </React.Fragment>
     )
 }
 
@@ -141,27 +157,24 @@ export const Scale = () => {
     }
 
     return (
-        <ProgressiveImage 
-        imageSrc={img.image}
-        backdropColor='rgba(255,255,255,0.6)'
-        keyframesAnimOut={{
-            '0%':{transform:'scale(1, 1)', opacity:1},
-            '100%':{transform:'scale(0, 0)', opacity:0.15}
-        }}
-        animOutTimeFun='ease'
-        keyframesAnimIn={{
-            '0%':{transform:'scale(0.1, 0.1)', opacity:0.15},
-            '100%':{transform:'scale(1, 1)', opacity:1}
-        }}
-        animInTimeFun='ease'
-        >
-            <React.Fragment>
-                <Box>
-                {text}
-                </Box>
-                <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
-            </React.Fragment>
-        </ProgressiveImage>
+        <React.Fragment>
+            <ProgressiveImage 
+            imageSrc={img.image}
+            backdropColor='rgba(255,255,255,0.6)'
+            keyframesAnimOut={{
+                '0%':{transform:'scale(1, 1)', opacity:1},
+                '100%':{transform:'scale(0, 0)', opacity:0.15}
+            }}
+            animOutTimeFun='ease'
+            keyframesAnimIn={{
+                '0%':{transform:'scale(0.1, 0.1)', opacity:0.15},
+                '100%':{transform:'scale(1, 1)', opacity:1}
+            }}
+            animInTimeFun='ease'
+            />
+            <Box>{text}</Box>
+            <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
+        </React.Fragment>
     )
 }
 
@@ -174,26 +187,24 @@ export const Flip = () => {
     }
 
     return (
-        <ProgressiveImage 
-        imageSrc={img.image}
-        backdropColor='rgba(255,255,255,0.6)'
-        keyframesAnimOut={{
-            '0%':{transform:'rotateY(0deg)', opacity:1},
-            '100%':{transform:'rotateY(180deg)', opacity:0}
-        }}
-        animOutTimeFun='ease'
-        keyframesAnimIn={{
-            '0%':{transform:'rotateY(180deg)', opacity:0},
-            '100%':{transform:'rotateY(0deg)', opacity:1}
-        }}
-        animInTimeFun='ease'
-        >
-            <React.Fragment>
-                <Box>
-                {text}
-                </Box>
-                <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
-            </React.Fragment>
-        </ProgressiveImage>
+        <React.Fragment>
+            <ProgressiveImage 
+            imageSrc={img.image}
+            backdropColor='rgba(255,255,255,0.6)'
+            keyframesAnimOut={{
+                '0%':{transform:'rotateY(0deg)', opacity:1},
+                '100%':{transform:'rotateY(180deg)', opacity:0}
+            }}
+            animOutTimeFun='ease'
+            keyframesAnimIn={{
+                '0%':{transform:'rotateY(180deg)', opacity:0},
+                '100%':{transform:'rotateY(0deg)', opacity:1}
+            }}
+            animInTimeFun='ease'
+            />
+                
+            <Box>{text}</Box>
+            <Button variant='contained' onClick={handleNextImage}>Next Image</Button>
+        </React.Fragment>
     )
 }

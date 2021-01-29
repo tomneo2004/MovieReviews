@@ -15,27 +15,11 @@ interface IProps extends ProgressiveImageProps{
 const BackgroundImage = (props:IProps) => {
     const {
         children,
-        imageSrc,
-        keyframesAnimIn = {
-            '0%':{transform:'translate(100%)'},
-            '100%':{transform:'translate(0%)'}
-        },
-        keyframesAnimOut = {
-            '0%':{transform:'translate(0%)'},
-            '100%':{transform:'translate(-100%)'}
-        },
-        animInTimeFun = 'ease',
-        animOutTimeFun = 'ease',
+        ...rest
     } = props;
     return (
         <Box position='relative' px={1} py={3}>
-            <ProgressiveImage imageSrc={imageSrc} 
-            backdropColor='trendingBackdrop.main'
-            keyframesAnimOut={keyframesAnimOut}
-            animOutTimeFun={animOutTimeFun}
-            keyframesAnimIn={keyframesAnimIn}
-            animInTimeFun={animInTimeFun}
-            />
+            <ProgressiveImage {...rest}/>
             <Box position='relative'>
               {children}
             </Box>
