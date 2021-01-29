@@ -46,7 +46,7 @@ const Search = (props:IProps) => {
             <Box display='flex' justifyContent='center' alignItems='center' px={1}>
             {icon}
             </Box>
-            <Box flex={1}>
+            <Box flex={1} display='flex' justifyContent='center' alignItems='center'>
                 <InputBase
                 inputRef={inputRef}
                 // className={classes.input}

@@ -116,7 +116,14 @@ const SearchPage = () => {
             position='sticky' 
             hideOnScroll={true}
             rightButtons={[
-                <SearchBar onSearchReady={handleSearch} />
+                <SearchBar 
+                fullWidth
+                placeholder='Search ...' 
+                onEnter={handleSearch} 
+                opacity={0.5}
+                opacityHover={0.7}
+                inputWidth='7.9em'
+                inputFocusWidth='9.5em' />
             ]} 
         />}
         >

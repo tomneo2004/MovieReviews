@@ -13,7 +13,7 @@ export const Default = () => {
         <Navigation 
         rightButtons={[
             <SearchBar 
-            placeholder='Search...'
+            placeholder='Enter keywords'
             opacity={0.5}
             opacityHover={0.7}
             inputWidth='7.5em'

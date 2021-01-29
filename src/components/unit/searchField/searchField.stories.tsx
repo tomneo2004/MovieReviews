@@ -6,7 +6,7 @@ import {action} from '@storybook/addon-actions';
 import { Box, Toolbar } from '@material-ui/core';
 
 export default {
-  title: 'Navigation Search',
+  title: 'Search Field',
 };
 
 export const Default = () => {

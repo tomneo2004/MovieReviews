@@ -3,13 +3,11 @@ import PageLayout from "../layouts/pageLayout"
 import LandingLayout from '../layouts/landing/landingLayout';
 import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, Typography } from "@material-ui/core";
-import Carousel from 'react-material-ui-carousel'
-import SearchBar from '../components/movieReview/longSearchBar/longSearchBar';
+import Carousel from 'react-material-ui-carousel';
 import React from "react";
-import {useRouter} from 'next/router';
 import Trending from "../components/movieReview/trending/trending";
 import Popular from "../components/movieReview/popular/popular";
-import { getRoute, RouteType } from "../routes/routesGenerator";
+import HeroSearchBar from "../components/Page/Landing/searchBar/heroSearchBar";
 
 const caroselItems = [
   'Find Movies',
@@ -18,11 +16,6 @@ const caroselItems = [
 ]
 
 const LandingPage = () => {
-  const router = useRouter();
-
-  const handleOnSearchClick = (keyword:string)=>{
-    router.push(getRoute(RouteType.search, {query:keyword}));
-  }
 
   return (
     <PageLayout
@@ -49,7 +42,7 @@ const LandingPage = () => {
               }
             </Carousel>
           }
-          search={<SearchBar onSearchClick={handleOnSearchClick} />}
+          search={<HeroSearchBar />}
           />
           {/* Pouplar Collection */}
           <Popular />

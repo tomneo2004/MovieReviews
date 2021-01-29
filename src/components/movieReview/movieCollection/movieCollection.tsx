@@ -62,8 +62,6 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
                         title={data.title}
                         releaseDate={data.release_date}
                         ratingScore={getMovieRating(data.vote_count, data.vote_average)}
-                        ratingOffsetX={-8}
-                        ratingOffsetY={-8}
                         onMouseOver={()=>handleMouseOver(data)}
                         />
                     </Link>)
