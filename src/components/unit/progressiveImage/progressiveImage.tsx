@@ -54,6 +54,8 @@ interface IProps {
     animOutTimeFun?:string;
     zIndex?:number;
     loadingIndicator?: React.ReactNode;
+    bgPosition?:string;
+    bgSize?:string;
 }
 
 export type ProgressiveImageProps = IProps;
@@ -87,6 +89,8 @@ const ProgressiveImage = React.memo((props:IProps) => {
         animOutTimeFun = 'linear',
         zIndex = -1,
         loadingIndicator = null,
+        bgPosition = 'center top',
+        bgSize = 'cover',
     } = props;
 
     const [lastImageSrc, setLastImageSrc] = React.useState<string>('');
@@ -161,8 +165,9 @@ const ProgressiveImage = React.memo((props:IProps) => {
         '@keyframes animOut':keyframesAnimOut,
         commonBg:{
             backgroundOrigin: 'border-box',
-            backgroundPosition: 'center top',
-            backgroundSize: 'cover',
+            backgroundPosition: bgPosition,
+            backgroundSize: bgSize,
+            backgroundRepeat:'no-repeat'
         },
         lastBg:{
             backgroundImage: `url(${lastImageSrc})`,

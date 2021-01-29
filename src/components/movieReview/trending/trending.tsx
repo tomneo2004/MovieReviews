@@ -1,3 +1,4 @@
+import { fade, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import React from 'react';
@@ -10,6 +11,7 @@ import MovieCollection from '../movieCollection/movieCollection';
 
 let timerHandler:NodeJS.Timeout;
 const Trending = () => {
+    const theme = useTheme();
     const [trendingBg, setTrendingBg] = React.useState<string>('');
     const [trendingWindow, setTrendingWindow] = React.useState<'day' | 'week'>('day')
     const trendingMovies = useTrendingMovies(trendingWindow);
@@ -28,7 +30,7 @@ const Trending = () => {
     return (
         <BackgroundImage 
         imageSrc={trendingBg}
-        backdropColor='trendingBackdrop.main'
+        backdropColor={fade(theme.palette.common.white, 0.6)}
         keyframesAnimIn={{
           '0%':{transform:'translate(100%)'},
           '100%':{transform:'translate(0%)'}

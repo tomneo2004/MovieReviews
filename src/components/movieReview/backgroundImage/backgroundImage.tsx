@@ -3,7 +3,7 @@ import React from 'react';
 import ProgressiveImage, {ProgressiveImageProps} from '../../unit/progressiveImage/progressiveImage';
 
 interface IProps extends ProgressiveImageProps{
-    children:React.ReactElement;
+    children?:React.ReactElement;
 }
 
 /**
