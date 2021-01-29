@@ -23,19 +23,19 @@ const HeroSearchBar = () => {
     return (
             <Box width='100%' display='flex' justifyContent='center'>
                 <Paper elevation={10}>
-                <SearchBar 
-                fullWidth
-                placeholder='Search ...' 
-                opacity={0.5}
-                opacityHover={0.7}
-                inputWidth='20em'
-                inputFocusWidth='24em' 
-                endAdornment={
-                    <Button variant='contained' onClick={handleSearchClick}>Search</Button>
-                }
-                onValueChange={handleSearchValueChange}
-                onEnter={handleEnterSearch}
-                />
+                    <SearchBar 
+                    fullWidth
+                    placeholder='Search ...' 
+                    opacity={0.5}
+                    opacityHover={0.7}
+                    inputWidth='20em'
+                    inputFocusWidth='24em' 
+                    endAdornment={
+                        <Button variant='contained' onClick={handleSearchClick}>Search</Button>
+                    }
+                    onValueChange={handleSearchValueChange}
+                    onEnter={handleEnterSearch}
+                    />
                 </Paper>
             </Box>
     );
