@@ -1,7 +1,7 @@
 import { BookmarkSharp } from '@material-ui/icons';
 import React from 'react';
 import Navigation from '../../movieReview/navigation/navigation';
-import NavSearch from './navSearch';
+import FlexSearch from './flexSearch';
 import {action} from '@storybook/addon-actions';
 import { Box, Toolbar } from '@material-ui/core';
 
@@ -13,7 +13,7 @@ export const Default = () => {
     return (
         <Navigation 
         rightButtons={[
-            <NavSearch 
+            <FlexSearch 
             placeholder='Search...'
             opacity={0.5}
             opacityHover={0.7}
@@ -27,7 +27,7 @@ export const Icon = () => {
     return (
         <Navigation 
         rightButtons={[
-            <NavSearch 
+            <FlexSearch 
             placeholder='Search...'
             opacity={0.5}
             opacityHover={0.7}
@@ -42,7 +42,7 @@ export const Color = () => {
     return (
         <Navigation 
         rightButtons={[
-            <NavSearch 
+            <FlexSearch 
             placeholder='Search...'
             bgColor='#17aeff'
             opacity={0.5}
@@ -60,7 +60,7 @@ export const ValueChange = () => {
         <Box>
             <Navigation 
             rightButtons={[
-                <NavSearch 
+                <FlexSearch 
                 placeholder='Search...'
                 bgColor='#17aeff'
                 opacity={0.5}
@@ -84,7 +84,7 @@ export const KeyPress = () => {
         <Box>
             <Navigation 
             rightButtons={[
-                <NavSearch 
+                <FlexSearch 
                 placeholder='Search...'
                 bgColor='#17aeff'
                 opacity={0.5}

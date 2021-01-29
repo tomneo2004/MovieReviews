@@ -1,5 +1,5 @@
 import React from 'react';
-import NavSearch from '../../unit/navSearch/navSearch';
+import FlexSearch from '../../unit/flexSearch/flexSearch';
 
 export interface IProps {
     onSearchReady:(value:string)=>void | null;
@@ -24,7 +24,7 @@ const SearchBar = (props:IProps) => {
     }
 
     return (
-        <NavSearch 
+        <FlexSearch 
         placeholder={search?search:'Search...'}
         opacity={0.5}
         opacityHover={0.7}
