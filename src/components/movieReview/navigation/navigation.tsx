@@ -2,8 +2,9 @@ import React from 'react';
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar, { AppBarProps } from "@material-ui/core/AppBar";
 import Box from '@material-ui/core/Box';
-import { useScrollTrigger } from '@material-ui/core';
+import { makeStyles, useScrollTrigger, useTheme } from '@material-ui/core';
 import Slide from '@material-ui/core/Slide/Slide';
+import style from './navigationStyle';
 
 export interface IProps extends AppBarProps {
     brand?: React.ReactElement;
@@ -40,9 +41,11 @@ const getAppBar = (props:IProps) =>{
         rightButtons = null,
         ...rest
     } = props;
+    const theme =useTheme();
+    const classes = makeStyles(style)({theme});
 
     return (
-        <AppBar {...rest}>
+        <AppBar className={classes.appBar} {...rest}>
             <Toolbar>
                 <Box flex='1'>{brand?brand:null}</Box>
                 <Box flex='1' display='flex' justifyContent='flex-end'>{renderRightButtons(rightButtons)}</Box>
