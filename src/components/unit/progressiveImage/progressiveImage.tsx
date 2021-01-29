@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, BoxProps, makeStyles } from '@material-ui/core';
+import { Box, BoxProps, makeStyles, RootRef } from '@material-ui/core';
 import clsx from 'clsx';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import useLayoutEffect from '../../../effects/isomorphic/isomorphicEffect';
@@ -91,6 +91,10 @@ const ProgressiveImage = React.memo((props:IProps) => {
         src: imageSrc,
         isLoading: true,
     });
+    const [lastAnimating, setLastAnimating] = React.useState<boolean>(false);
+    const [currentAnimating, setCurrentAnimating] = React.useState<boolean>(false);
+    const lastBgRef = React.useRef<HTMLDivElement>();
+    const currentBgRef = React.useRef<HTMLDivElement>();
 
     useLayoutEffect(()=>{
 
@@ -102,6 +106,8 @@ const ProgressiveImage = React.memo((props:IProps) => {
         img = new Image();
         //on image loaded
         img.onload = ()=>{
+            setLastAnimating(true);
+            setCurrentAnimating(true);
             setCurrentImage({src: img.src, isLoading:false});
         }
 
@@ -117,33 +123,70 @@ const ProgressiveImage = React.memo((props:IProps) => {
         }
     }, [imageSrc]);
 
+    useLayoutEffect(()=>{
+        const handleLastBgAnimStart = ()=>{
+            setLastAnimating(true);
+        }
+        const handleLastBgAnimEnd = ()=>{
+            setLastAnimating(false);
+        }
+        const handleCurrentBgAnimStart = ()=>{
+            setCurrentAnimating(true);
+        }
+        const handleCurrentBgAnimEnd = ()=>{
+            setCurrentAnimating(false);
+        }
+
+        lastBgRef.current.addEventListener('animationstart', handleLastBgAnimStart);
+        lastBgRef.current.addEventListener('animationend', handleLastBgAnimEnd);
+        currentBgRef.current.addEventListener('animationstart', handleCurrentBgAnimStart);
+        currentBgRef.current.addEventListener('animationend', handleCurrentBgAnimEnd);
+
+        return ()=>{
+            lastBgRef.current.removeEventListener('animationstart', handleLastBgAnimStart);
+            lastBgRef.current.removeEventListener('animationend', handleLastBgAnimEnd);
+            currentBgRef.current.removeEventListener('animationstart', handleCurrentBgAnimStart);
+            currentBgRef.current.removeEventListener('animationend', handleCurrentBgAnimEnd);
+        }
+    },[]);
+
+    const isAnimating = ()=>lastAnimating || currentAnimating;
+
     const useStyle = makeStyles({
         '@keyframes animIn':keyframesAnimIn,
         '@keyframes animOut':keyframesAnimOut,
-        common:{
+        commonBg:{
             backgroundOrigin: 'border-box',
             backgroundPosition: 'center top',
             backgroundSize: 'cover',
         },
-        staticBackground:{
+        lastBg:{
             backgroundImage: `url(${lastImageSrc})`,
         },
-        oldBackground:{
-            backgroundImage: `url(${lastImageSrc})`,
+        currentBg:{
+            backgroundImage: `url(${currentImage.src})`,
+        },
+        lastBgAnim:{
             animation: `$animOut ${transitionTime/2}ms ${animOutTimeFun}`,
             animationFillMode: 'both'
         },
-        newBackground:{
-            backgroundImage: `url(${currentImage.src})`,
+        currentBgAnim:{
             animation: `$animIn ${transitionTime/2}ms ${animInTimeFun}`,
             animationFillMode: 'both'
+        },
+        hidden:{
+            visibility:'hidden',
         },
     });
 
     const classes = useStyle();
-    const staticBgClass = clsx(classes.common, classes.staticBackground);
-    const animInBgClass = clsx(classes.common, classes.newBackground);
-    const animOutBgClass = clsx(classes.common, classes.oldBackground);
+    const lastBgClass = clsx(classes.commonBg, classes.lastBg, {
+        [classes.hidden]: !isAnimating(),
+        [classes.lastBgAnim]:isAnimating()
+    });
+    const currentBgClass = clsx(classes.commonBg, classes.currentBg,{
+        [classes.currentBgAnim]:isAnimating(),
+    });
 
     const boxProps:BoxProps={
         position:'absolute',
@@ -155,7 +198,7 @@ const ProgressiveImage = React.memo((props:IProps) => {
     }
     return (
         <Box {...boxProps}>
-            {currentImage.isLoading?
+            {/* {currentImage.isLoading?
                 <Box className={staticBgClass} {...boxProps}
                 />
                 :
@@ -163,7 +206,13 @@ const ProgressiveImage = React.memo((props:IProps) => {
                     <Box className={animOutBgClass} {...boxProps}/>
                     <Box className={animInBgClass} {...boxProps}/>
                 </React.Fragment>
-            }
+            } */}
+            <RootRef rootRef={lastBgRef}>
+                <Box className={lastBgClass} {...boxProps} />
+            </RootRef>
+            <RootRef rootRef={currentBgRef}>
+                <Box className={currentBgClass} {...boxProps} />
+            </RootRef>
             <Box  {...boxProps} bgcolor={backdropColor} />
         </Box>
     )
