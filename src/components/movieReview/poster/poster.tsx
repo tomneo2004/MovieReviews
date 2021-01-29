@@ -76,4 +76,4 @@ const Poster = (props:IProps) => {
     );
 };
 
-export default Poster;
+export default React.forwardRef((props:IProps, _ref)=><Poster {...props} />);

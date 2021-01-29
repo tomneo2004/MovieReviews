@@ -8,6 +8,8 @@ import React from 'react';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
 import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
 import getMovieRating from '../../../utils/movieRating';
+import Link from 'next/link';
+import { getRoute, RouteType } from '../../../routes/routesGenerator';
 
 export interface IProps {
     title?: React.ReactNode | null | undefined;
@@ -51,17 +53,20 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
             return movieData.map(data=>{
                 return({
                   id: data.id,
-                  element: (<MoviePoster 
-                    imageURL={buildImageQuery(data.poster_path, 'w185')}
-                    imageWidth={185}
-                    minWidth={200}
-                    title={data.title}
-                    releaseDate={data.release_date}
-                    ratingScore={getMovieRating(data.vote_count, data.vote_average)}
-                    ratingOffsetX={-8}
-                    ratingOffsetY={-8}
-                    onMouseOver={()=>handleMouseOver(data)}
-                    />)
+                  element: (
+                  <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
+                    <MoviePoster 
+                        imageURL={buildImageQuery(data.poster_path, 'w185')}
+                        imageWidth={185}
+                        minWidth={200}
+                        title={data.title}
+                        releaseDate={data.release_date}
+                        ratingScore={getMovieRating(data.vote_count, data.vote_average)}
+                        ratingOffsetX={-8}
+                        ratingOffsetY={-8}
+                        onMouseOver={()=>handleMouseOver(data)}
+                        />
+                    </Link>)
                 })
             })
         }}    

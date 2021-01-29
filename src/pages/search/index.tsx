@@ -13,6 +13,8 @@ import Pagination from '@material-ui/lab/Pagination/Pagination';
 import SearchLayout from '../../layouts/search/searchLayout';
 import SearchBar from '../../components/movieReview/searchBar/searchBar';
 import { Skeleton } from '@material-ui/lab';
+import { getRoute, RouteType } from '../../routes/routesGenerator';
+import Link from 'next/link';
 
 const renderResults = (data:ISearchMovieData, onPosterClick:(id:number)=>void|null)=>{
     if(!data){
@@ -53,20 +55,22 @@ const renderResults = (data:ISearchMovieData, onPosterClick:(id:number)=>void|nu
                 return (
                     <Grid key={result.id} item xs>
                         <Box display='flex' justifyContent='center' alignItems='center' p={2}>
-                            <MoviePoster 
-                            imageURL={buildImageQuery(result.poster_path, 'w185')}
-                            imageWidth={185}
-                            minWidth={200}
-                            maxWidth={200}
-                            title={result.title}
-                            releaseDate={result.release_date}
-                            ratingScore={getMovieRating(result.vote_count, result.vote_average)}
-                            ratingOffsetX={-8}
-                            ratingOffsetY={-8}
-                            onClick={()=>{
-                                if(onPosterClick) onPosterClick(result.id);
-                            }}
-                            />
+                            <Link href={getRoute(RouteType.movie, {id:result.id.toString()})}>
+                                <MoviePoster 
+                                imageURL={buildImageQuery(result.poster_path, 'w185')}
+                                imageWidth={185}
+                                minWidth={200}
+                                maxWidth={200}
+                                title={result.title}
+                                releaseDate={result.release_date}
+                                ratingScore={getMovieRating(result.vote_count, result.vote_average)}
+                                ratingOffsetX={-8}
+                                ratingOffsetY={-8}
+                                onClick={()=>{
+                                    if(onPosterClick) onPosterClick(result.id);
+                                }}
+                                />
+                            </Link>
                         </Box>
                     </Grid>
                 )
@@ -95,15 +99,15 @@ const SearchPage = () => {
     const {data} = useSearchMovies(query, Number(page));
 
     const handlePageChange = (_event:React.ChangeEvent<unknown>, page:number)=>{
-        router.push(`${router.pathname}?query=${query}&page=${page}`);
+        router.push(getRoute(RouteType.search, {query:query, page:page.toString()}))
     }
 
     const handleSearch = (value:string)=>{
-        router.push(`${router.pathname}?query=${value}`)
+        router.push(getRoute(RouteType.search, {query:value}))
     }
 
     const handlePosterClick = (id:number)=>{
-        router.push(`/movie?id=${id}`);
+        router.push(getRoute(RouteType.movie, {id:id.toString()}))
     }
 
     return (

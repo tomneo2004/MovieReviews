@@ -9,6 +9,7 @@ import React from "react";
 import {useRouter} from 'next/router';
 import Trending from "../components/movieReview/trending/trending";
 import Popular from "../components/movieReview/popular/popular";
+import { getRoute, RouteType } from "../routes/routesGenerator";
 
 const caroselItems = [
   'Find Movies',
@@ -20,7 +21,7 @@ const LandingPage = () => {
   const router = useRouter();
 
   const handleOnSearchClick = (keyword:string)=>{
-    router.push(`/search?query=${keyword}`)
+    router.push(getRoute(RouteType.search, {query:keyword}));
   }
 
   return (
