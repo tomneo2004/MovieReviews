@@ -7,7 +7,7 @@ import Carousel from 'react-material-ui-carousel';
 import React from "react";
 import Trending from "../components/movieReview/trending/trending";
 import Popular from "../components/movieReview/popular/popular";
-import HeroSearchBar from "../components/Page/Landing/searchBar/heroSearchBar";
+import HeroSearchBar from "../components/movieReview/heroSearchBar/heroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/progressiveImage/progressiveImage";
 

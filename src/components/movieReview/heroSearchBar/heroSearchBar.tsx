@@ -2,8 +2,8 @@ import { Box, Paper } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { getRoute, RouteType } from '../../../../routes/routesGenerator';
-import SearchBar from '../../../movieReview/searchBar/searchBar';
+import { getRoute, RouteType } from '../../../routes/routesGenerator';
+import SearchBar from '../searchBar/searchBar';
 
 const HeroSearchBar = () => {
     const router = useRouter();

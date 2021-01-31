@@ -8,8 +8,6 @@ import PosterImage from '../../components/unit/posterImage/posterImage';
 import { buildImageQuery } from '../../utils/api/query/apiQueryBuilder';
 import Box from '@material-ui/core/Box';
 import MovieInfo from '../../components/movieReview/movieInfo/movieInfo';
-import getMovieRating from '../../utils/movieRating';
-import {IMovieDetailData } from '../../utils/api/model/apiModelTypes';
 import Typography from '@material-ui/core/Typography';
 import { useMovieReviews } from '../../effects/apiFetch/movieReviews';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -17,48 +15,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CastCollection from '../../components/movieReview/castCollection/castCollection';
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
-
-const renderPoster = (movieDetail:IMovieDetailData)=>{
-    if(!movieDetail){
-        return (
-            <Skeleton variant='rect' width={342} height={342 * 1.5} />
-        )
-    }
-
-    return (
-        <PosterImage 
-        imageURL={buildImageQuery(movieDetail.poster_path, 'w342')}
-        imageWidth={342}
-        />
-    )
-}
-
-const renderMovieInfo = (movieDetail:IMovieDetailData)=>{
-    if(!movieDetail){
-        return (
-            <React.Fragment>
-                <Skeleton variant='text' width='60%' />
-                <Skeleton variant='text' width='60%' />
-                <Skeleton variant='text' width='60%' />
-                <Skeleton variant='text' width='60%' />
-                <Skeleton variant='text' width='60%' />
-                <Skeleton variant='text' width='60%' />
-            </React.Fragment>
-        )
-    }
-
-    return (
-        <MovieInfo 
-        title={movieDetail.title}
-        releaseDate={movieDetail.release_date}
-        length={movieDetail.runtime}
-        genre={movieDetail.genres}
-        userScore={getMovieRating(movieDetail.vote_count, movieDetail.vote_average)}
-        tagline={movieDetail.tagline}
-        overview={movieDetail.overview}
-        />
-    )
-}
 
 const MoviePage = () => {
     const router = useRouter();
@@ -79,8 +35,15 @@ const MoviePage = () => {
         navigation={<Navigation position='sticky' hideOnScroll={true} />}
         >
             <MovieLayout
-            poster={renderPoster(detail.data)}
-            info={renderMovieInfo(detail.data)} 
+            poster={
+                !detail.data? <Skeleton variant='rect' width={342} height={342 * 1.5} />
+                :
+                <PosterImage 
+                imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
+                imageWidth={342}
+                />
+            }
+            info={<MovieInfo movieDetailData={detail.data} />} 
             >
                 <React.Fragment>
                     {/* casts */}
