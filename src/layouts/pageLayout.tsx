@@ -17,8 +17,8 @@ const PageLayout = (props:IProps) => {
     const theme = useTheme();
 
     return (
-        <Box flexDirection='column' justifyContent='flex-start' alignItems='center' 
-        bgcolor={theme.palette.primary.light}>
+        <Box position='relative' flexDirection='column' justifyContent='flex-start' 
+        alignItems='center' bgcolor={theme.palette.primary.light} height='inherit'>
             {navigation?navigation:null}
             {children}
             {footer?footer:null}        

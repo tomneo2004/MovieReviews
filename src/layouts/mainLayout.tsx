@@ -10,7 +10,7 @@ const MainLayout = (props:IProps) => {
     } = props;
 
     return (
-        <Box>
+        <Box position='relative' height='inherit'>
             {children}
         </Box>
     );

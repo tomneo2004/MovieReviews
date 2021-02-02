@@ -25,6 +25,13 @@ const theme = createMuiTheme({
     },
   },
   overrides:{
+    MuiCssBaseline:{
+      '@global':{
+        html:{height:'100vh'},
+        body:{height:'100%'},
+        '#__next':{height:'inherit'}
+      }
+    },
     MuiDivider:{
       root:{
         height:'7px',
