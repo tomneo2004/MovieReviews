@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import React from 'react';
 
@@ -14,8 +14,11 @@ const MovieLayout = (props:IProps) => {
         info,
         children = null
     } = props;
+    const theme = useTheme();
     return (
-        <Box display='flex' flexDirection='column' justifyContent='flex-start' p={2}>
+        <Box display='flex' flexDirection='column' justifyContent='flex-start' 
+        p={2} bgcolor={theme.palette.primary.light}
+        >
             {/* information */}
             <Grid container>
                 <Grid md={4} item container justify='center'>{poster}</Grid>
