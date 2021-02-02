@@ -1,5 +1,5 @@
 
-import { Box } from '@material-ui/core';
+import { Box, useTheme } from '@material-ui/core';
 import React from 'react';
 
 export interface IProps{
@@ -14,8 +14,11 @@ const PageLayout = (props:IProps) => {
         footer = null,
     } = props;
 
+    const theme = useTheme();
+
     return (
-        <Box flexDirection='column' justifyContent='flex-start' alignItems='center'>
+        <Box flexDirection='column' justifyContent='flex-start' alignItems='center' 
+        bgcolor={theme.palette.primary.light}>
             {navigation?navigation:null}
             {children}
             {footer?footer:null}        
