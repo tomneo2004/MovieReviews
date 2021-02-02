@@ -1,30 +1,90 @@
-import { Box, Dialog, DialogProps, makeStyles } from '@material-ui/core';
+import { Box, Card, CardActionArea, CardMedia, Dialog, makeStyles } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 import React from 'react';
 import ReactPlayer from 'react-player';
+import { useNoembed } from '../../../effects/apiFetch/noembed';
 import style from './videoPlayerStyle';
 
-interface IProps extends DialogProps{
+interface IProps{
     videoSrc:string;
+    onOpen?: ()=>void;
+    onClose?: (event: {}, reason: "backdropClick" | "escapeKeyDown")=>void;
 }
+
+const renderSkeletons = ()=>{
+    return (
+        <Card>
+            <Skeleton variant='rect' width='300px' height='350px' />
+        </Card>
+    )
+}
+
+let img:HTMLImageElement;
+
 const VideoPlayer = (props:IProps) => {
     const {
         videoSrc,
-        ...rest
+        onOpen,
+        onClose,
     } = props;
+    const [open, setOpen] = React.useState<boolean>(false);
+    const {data, error} = useNoembed(videoSrc);
+    const [thumbReady, setThumbReady] = React.useState<boolean>(false);
+    const classes = makeStyles(style)({
+        thumbWidth: data?data.thumbnail_width:0,
+        thumbHeight: data?data.thumbnail_height:0
+    });
 
-    const classes = makeStyles(style)()
+    React.useEffect(()=>{
+        if(!data){
+            setThumbReady(false);
+            return;
+        };
+
+        img = new Image();
+        img.onload = ()=>{
+            setThumbReady(true);
+        }
+        setThumbReady(false)
+        img.src = data.thumbnail_url;
+
+        return ()=>{
+            if(img) img.onload=null;
+        }
+    },[data])
+
+    const handleVideoClick = ()=>{
+        setOpen(true);
+        if (onOpen) onOpen();
+    }
+
+    const handleVideoClose = (event: {}, reason: "backdropClick" | "escapeKeyDown")=>{
+        setOpen(false);
+        if(onClose) onClose(event, reason);
+    }
+
+    if(!thumbReady || error || !data) return renderSkeletons();
 
     return (
-        <Dialog classes={{paper:classes.paper}} {...rest}>
-            <Box display='flex' justifyContent='center' alignItems='center' p={1}  height='100%'>
-                <ReactPlayer
-                url={videoSrc}
-                width='100%'
-                height='100%'
-                controls
-                />
-            </Box>
-        </Dialog>
+        <React.Fragment>
+            <Card onClick={handleVideoClick}>
+                <CardActionArea>
+                    <CardMedia className={classes.media} src={data.thumbnail_url} component='img' />
+                </CardActionArea>
+            </Card>
+            <Dialog classes={{paper:classes.paper}} 
+            fullWidth maxWidth='lg' open={open} onClose={handleVideoClose}>
+                <Box display='flex' justifyContent='center' alignItems='center' p={1}  height='100%'>
+                    <ReactPlayer
+                    url={videoSrc}
+                    width='100%'
+                    height='100%'
+                    controls
+                    playing={open}
+                    />
+                </Box>
+            </Dialog>
+        </React.Fragment>
     );
 };
 

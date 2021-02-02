@@ -17,14 +17,12 @@ import CastCollection from '../../components/movieReview/castCollection/castColl
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
 import { Divider } from '@material-ui/core';
 import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
-import TrailerPlayer from '../../components/movieReview/videoPlayer/videoPlayer';
 
 const MoviePage = () => {
     const router = useRouter();
     const {id} = router.query as {[key:string]:string};
     const detail = useMovieDetail(Number(id));
     const reviews = useMovieReviews(Number(id));
-    const [trailerURL, setTrailerURL] = React.useState<string>('');
 
     useBottomScrollListener(()=>{
         if(reviews.data 
@@ -33,14 +31,6 @@ const MoviePage = () => {
             reviews.setSize(reviews.size+1);
         }
     })
-
-    const handleVideoClick = (vidoeURL:string)=>{
-        setTrailerURL(vidoeURL);
-    }
-
-    const handleVideoClose = ()=>{
-        setTrailerURL('');
-    }
 
     return (
         <PageLayout
@@ -67,7 +57,6 @@ const MoviePage = () => {
                         {detail.data?
                         <TrailerCollection 
                         trailersData={detail.data.videos.results}
-                        onTrailerClick={handleVideoClick}
                         />
                         : <TrailerCollection trailersData={null} />
                         }
@@ -99,13 +88,6 @@ const MoviePage = () => {
                             :null
                         }
                     </Box>
-                    <TrailerPlayer 
-                    fullWidth
-                    maxWidth='lg'
-                    videoSrc={trailerURL} 
-                    open={trailerURL?true:false} 
-                    onClose={handleVideoClose} 
-                    />
                 </React.Fragment>
             </MovieLayout>
         </PageLayout>

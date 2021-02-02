@@ -4,22 +4,17 @@ import React from 'react';
 import { IVideoData } from '../../../utils/api/model/apiModelTypes';
 import { getVideoURL } from '../../../utils/api/video/videoHelper';
 import HScroll from '../../unit/horizontalScroll/hScroll';
-import TrailerThumbnail from '../videoThumbnail/videoThumbnail';
+import VideoPlayer from '../videoPlayer/videoPlayer';
 
 interface IProps {
     trailersData:IVideoData[];
-    onTrailerClick?:(videoURL:string)=>void;
+    // onTrailerClick?:(videoURL:string)=>void;
 }
 
 const VideoCollection = (props:IProps) => {
     const {
         trailersData,
-        onTrailerClick = null,
     } = props;
-
-    const handleTrailerClick = (videoURL:string)=>{
-        if(onTrailerClick) onTrailerClick(videoURL);
-    }
 
     if(!trailersData) return null;
 
@@ -39,9 +34,7 @@ const VideoCollection = (props:IProps) => {
                 return ({
                     id:trailer.id,
                     element: (
-                    <Box key={trailer.id} onClick={()=>handleTrailerClick(videoURL)}>    
-                        <TrailerThumbnail videoSrc={videoURL} />
-                    </Box>
+                    <VideoPlayer videoSrc={videoURL} />
                     )
                 })
             })
