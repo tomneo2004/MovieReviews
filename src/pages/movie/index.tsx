@@ -16,12 +16,15 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CastCollection from '../../components/movieReview/castCollection/castCollection';
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
 import { Divider } from '@material-ui/core';
+import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
+import TrailerPlayer from '../../components/movieReview/videoPlayer/videoPlayer';
 
 const MoviePage = () => {
     const router = useRouter();
     const {id} = router.query as {[key:string]:string};
     const detail = useMovieDetail(Number(id));
     const reviews = useMovieReviews(Number(id));
+    const [trailerURL, setTrailerURL] = React.useState<string>('');
 
     useBottomScrollListener(()=>{
         if(reviews.data 
@@ -30,6 +33,14 @@ const MoviePage = () => {
             reviews.setSize(reviews.size+1);
         }
     })
+
+    const handleTrailerClick = (vidoeURL:string)=>{
+        setTrailerURL(vidoeURL);
+    }
+
+    const handleTrailerClose = ()=>{
+        setTrailerURL('');
+    }
 
     return (
         <PageLayout
@@ -47,6 +58,20 @@ const MoviePage = () => {
             info={<MovieInfo movieDetailData={detail.data} />} 
             >
                 <React.Fragment>
+                    <Box p={1}><Divider variant='middle' /></Box>
+                    {/* trailers */}
+                    <Box pt={2}>
+                        <Typography component='div' variant='h4'>
+                            <Box pl={2} fontWeight={600}>{`Videos`}</Box>
+                        </Typography>
+                        {detail.data?
+                        <TrailerCollection 
+                        trailersData={detail.data.videos.results}
+                        onTrailerClick={handleTrailerClick}
+                        />
+                        : <TrailerCollection trailersData={null} />
+                        }
+                    </Box>
                     <Box p={1}><Divider variant='middle' /></Box>
                     {/* casts */}
                     <Box pt={2}>
@@ -74,6 +99,13 @@ const MoviePage = () => {
                             :null
                         }
                     </Box>
+                    <TrailerPlayer 
+                    fullWidth
+                    maxWidth='lg'
+                    videoSrc={trailerURL} 
+                    open={trailerURL?true:false} 
+                    onClose={handleTrailerClose} 
+                    />
                 </React.Fragment>
             </MovieLayout>
         </PageLayout>
