@@ -14,6 +14,7 @@ import MoviePoster from '../moviePoster/moviePoster';
 
 interface IProps {
     data:IMovieData[];
+    keywords?:string;
     onPosterClick?:(id:number)=>void
 }
 
@@ -49,6 +50,7 @@ const renderSkeletons = ()=>{
 const SearchResults = (props:IProps) => {
     const {
         data,
+        keywords = '',
         onPosterClick,
     } = props;
 
@@ -57,7 +59,9 @@ const SearchResults = (props:IProps) => {
     if(!data.length){
         return (
             <Typography variant='h4' component='div'>
-                <Box display='flex' justifyContent='center'>{`We could not find any results`}</Box>
+                <Box display='flex' justifyContent='center'>
+                    {`We could not find any results for ${keywords}`}
+                </Box>
             </Typography>
         )
     }

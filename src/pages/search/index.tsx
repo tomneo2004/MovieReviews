@@ -45,11 +45,11 @@ const SearchPage = () => {
         />}
         >
             <SearchLayout>
-            {data?<SearchResults data={data.results} onPosterClick={handlePosterClick} />
+            {data?<SearchResults data={data.results} keywords={query} onPosterClick={handlePosterClick} />
             :
-            <SearchResults data={null} />
+            <SearchResults data={null} keywords={query} />
             }
-            {!data?null
+            {!data || !data.results.length?null
             :
             <Pagination count={data.total_pages} page={data.page} onChange={handlePageChange}
             showFirstButton showLastButton
