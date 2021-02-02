@@ -14,7 +14,7 @@ const SearchLayout = (props:IProps) => {
     
     return (
         <Box display='flex' flexDirection='column' justifyContent='flex-start'
-        py={2} bgcolor={theme.palette.primary.light}
+         alignItems='center' py={2} bgcolor={theme.palette.primary.light}
         >
         {children}
         </Box>
