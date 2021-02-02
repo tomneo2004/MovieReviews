@@ -21,7 +21,7 @@ export function useNoembed(videoSrc:string):IFetchResponse<INoembedData>{
     const {data, error} = useSWR(()=>`${apiRoute}${videoSrc}`, fetcher);
 
     const isLoading = !data && !error;
-
+    console.log(data);
     if(error){
         console.log(error);
         return {

@@ -39,7 +39,7 @@ const VideoCollection = (props:IProps) => {
                 return ({
                     id:trailer.id,
                     element: (
-                    <Box onClick={()=>handleTrailerClick(videoURL)}>    
+                    <Box key={trailer.id} onClick={()=>handleTrailerClick(videoURL)}>    
                         <TrailerThumbnail videoSrc={videoURL} />
                     </Box>
                     )

@@ -8,7 +8,7 @@
 export function getVideoURL(key:string, site:string){
     switch (site) {
         case 'YouTube':
-            return `https://www.youtube.com/watch?v=${key}`;
+            return `https://www.youtu.be/${key}`;
         case 'Vimeo':
             return `https://vimeo.com/${key}`;
         default:

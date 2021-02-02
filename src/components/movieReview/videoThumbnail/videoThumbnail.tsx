@@ -11,7 +11,7 @@ let img:HTMLImageElement;
 const renderSkeletons = ()=>{
     return (
         <Card>
-            <Skeleton variant='rect' width='100%' height='100%' />
+            <Skeleton variant='rect' width='300px' height='350px' />
         </Card>
     )
 }
@@ -38,7 +38,7 @@ const VideoThumbnail = (props:IThumbProps)=>{
             if(img) img.onload=null;
         }
     },[data])
-    console.log(data)
+    
     if(!ready || error || !data) return renderSkeletons();
 
     return(
