@@ -14,15 +14,18 @@ const HeroLayout = (props:IProps) => {
         carousel,
         search,
     } = props;
+
     return (
         <Box position='relative' px={2} py={7} overflow='hidden'
         display='flex' flexDirection='column' justifyContent='center' 
         alignItems='center' alignSelf='stretch'>
             {background}
-            {title}
-            {carousel}
-            <Box pt={6} alignSelf='stretch'>
-                {search}
+            <Box zIndex={1} textAlign='center'>
+                {title}
+                {carousel}
+                <Box pt={6} alignSelf='stretch'>
+                    {search}
+                </Box>
             </Box>
         </Box>
     );

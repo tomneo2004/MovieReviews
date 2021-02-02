@@ -52,7 +52,6 @@ interface IProps {
      * default linear
      */
     animOutTimeFun?:string;
-    zIndex?:number;
     loadingIndicator?: React.ReactNode;
     bgPosition?:string;
     bgSize?:string;
@@ -87,7 +86,6 @@ const ProgressiveImage = React.memo((props:IProps) => {
         },
         animInTimeFun = 'linear',
         animOutTimeFun = 'linear',
-        zIndex = -1,
         loadingIndicator = null,
         bgPosition = 'center top',
         bgSize = 'cover',
@@ -206,7 +204,7 @@ const ProgressiveImage = React.memo((props:IProps) => {
         overflow:'hidden',
     }
     return (
-        <Box zIndex={zIndex} {...boxProps}>
+        <Box {...boxProps}>
             <RootRef rootRef={lastBgRef}>
                 <Box className={lastBgClass} {...boxProps} />
             </RootRef>

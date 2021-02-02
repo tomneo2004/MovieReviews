@@ -20,7 +20,7 @@ const BackgroundImage = (props:IProps) => {
     return (
         <Box position='relative' px={1} py={3}>
             <ProgressiveImage {...rest}/>
-            <Box position='relative'>
+            <Box zIndex={1} position='relative'>
               {children}
             </Box>
           </Box>
