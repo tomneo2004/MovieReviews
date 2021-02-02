@@ -36,7 +36,7 @@ const theme = createMuiTheme({
           ${primaryMain}, 
           #fff)`
       }
-    }
+    },
   }
 });
 

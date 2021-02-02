@@ -30,7 +30,7 @@ const Trending = () => {
     return (
         <BackgroundImage 
         imageSrc={trendingBg}
-        backdropColor={fade(theme.palette.common.white, 0.6)}
+        backdropColor={fade(theme.palette.primary.light, 0.6)}
         keyframesAnimIn={{
           '0%':{transform:'translate(100%)'},
           '100%':{transform:'translate(0%)'}

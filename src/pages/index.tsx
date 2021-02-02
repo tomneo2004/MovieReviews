@@ -33,7 +33,7 @@ const LandingPage = (pageProps:IPageProps) => {
         <HeroLayout
           background={
             <ProgressiveImage 
-            backdropColor={fade(theme.palette.common.white, 0.3)} 
+            backdropColor={fade(theme.palette.primary.light, 0.3)} 
             imageSrc={bgImageSrc}
             bgPosition='center center'
             />

@@ -17,7 +17,7 @@ const Popular = () => {
     return (
         <BackgroundImage 
         imageSrc={popularBg}
-        backdropColor={fade(theme.palette.common.white, 0.6)}
+        backdropColor={fade(theme.palette.primary.light, 0.6)}
         keyframesAnimIn={{
           '0%':{transform:'translateY(-100%)'},
           '100%':{transform:'translateY(0%)'}
