@@ -15,6 +15,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CastCollection from '../../components/movieReview/castCollection/castCollection';
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
+import { Divider } from '@material-ui/core';
 
 const MoviePage = () => {
     const router = useRouter();
@@ -46,6 +47,7 @@ const MoviePage = () => {
             info={<MovieInfo movieDetailData={detail.data} />} 
             >
                 <React.Fragment>
+                    <Box p={1}><Divider variant='middle' /></Box>
                     {/* casts */}
                     <Box pt={2}>
                         <Typography component='div' variant='h4'>
@@ -56,6 +58,7 @@ const MoviePage = () => {
                         }
                     </Box>
                     {/* reviews */}
+                    <Box p={1}><Divider variant='middle' /></Box>
                     <Box pt={2} pb={2}>
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Reviews`}</Box>
