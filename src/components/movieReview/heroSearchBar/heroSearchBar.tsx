@@ -10,10 +10,12 @@ const HeroSearchBar = () => {
     const [keywords, setKeywords] = React.useState<string>('');
 
     const handleSearchClick = ()=>{
+        if(!keywords) return;
         router.push(getRoute(RouteType.search, {query:keywords}));
     }
 
     const handleEnterSearch = (value:string)=>{
+        if(!value) return;
         router.push(getRoute(RouteType.search, {query:value}));
     }
 

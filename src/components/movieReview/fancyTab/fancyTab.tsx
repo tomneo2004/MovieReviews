@@ -1,4 +1,4 @@
-import { makeStyles, useTheme } from '@material-ui/core';
+import { Box, makeStyles, Typography, useTheme } from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import React from 'react';
@@ -47,7 +47,15 @@ const FancyTab = (props:IProps) => {
         {
             tabData.map(data=>{
                 return (
-                    <Tab key={data.id} classes={tabItemClasses} label={data.label} disableRipple />
+                    <Tab 
+                    key={data.id} 
+                    classes={tabItemClasses} 
+                    label={
+                        <Typography component='div'>
+                            <Box>{data.label}</Box>
+                        </Typography>
+                    } 
+                    disableRipple />
                 )
             })
         }

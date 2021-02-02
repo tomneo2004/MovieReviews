@@ -34,11 +34,11 @@ const MoviePage = () => {
         }
     })
 
-    const handleTrailerClick = (vidoeURL:string)=>{
+    const handleVideoClick = (vidoeURL:string)=>{
         setTrailerURL(vidoeURL);
     }
 
-    const handleTrailerClose = ()=>{
+    const handleVideoClose = ()=>{
         setTrailerURL('');
     }
 
@@ -67,7 +67,7 @@ const MoviePage = () => {
                         {detail.data?
                         <TrailerCollection 
                         trailersData={detail.data.videos.results}
-                        onTrailerClick={handleTrailerClick}
+                        onTrailerClick={handleVideoClick}
                         />
                         : <TrailerCollection trailersData={null} />
                         }
@@ -104,7 +104,7 @@ const MoviePage = () => {
                     maxWidth='lg'
                     videoSrc={trailerURL} 
                     open={trailerURL?true:false} 
-                    onClose={handleTrailerClose} 
+                    onClose={handleVideoClose} 
                     />
                 </React.Fragment>
             </MovieLayout>

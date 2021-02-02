@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, CardActionArea, CardMedia } from '@material-ui/core';
+import { Card, CardActionArea, CardMedia, makeStyles } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { useNoembed } from '../../../effects/apiFetch/noembed';
+import style from './videoThumbnailStyle';
 
 interface IThumbProps{
     videoSrc: string;
@@ -21,6 +22,11 @@ const VideoThumbnail = (props:IThumbProps)=>{
     const {data, error} = useNoembed(videoSrc);
     const [ready, setReady] = React.useState<boolean>(false);
 
+    const classes = makeStyles(style)({
+        thumbWidth: data?data.thumbnail_width:0,
+        thumbHeight: data?data.thumbnail_height:0
+    });
+
     React.useEffect(()=>{
         if(!data){
             setReady(false);
@@ -38,13 +44,13 @@ const VideoThumbnail = (props:IThumbProps)=>{
             if(img) img.onload=null;
         }
     },[data])
-    
+
     if(!ready || error || !data) return renderSkeletons();
 
     return(
         <Card>
             <CardActionArea>
-                <CardMedia src={data.thumbnail_url} component='img' />
+                <CardMedia className={classes.media} src={data.thumbnail_url} component='img' />
             </CardActionArea>
         </Card>
     )

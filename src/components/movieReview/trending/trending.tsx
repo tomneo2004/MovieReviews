@@ -46,16 +46,14 @@ const Trending = () => {
         }>
             <MovieCollection 
             title={
-              <Box display='flex'>
-                {`Trending`}
-                <Box pl={2}>
-                  <FancyTab 
+              <Box display='flex' flexWrap='wrap' alignItems='center'>
+                <Box pr={2}>{`Trending`}</Box>
+                <FancyTab 
                   tabData={[
                     {id:'day', value:'day', label:'To day'},
                     {id:'week', value:'week', label:'This week'},
                   ]} 
                   onChange={handleWindowChange}/>
-                </Box>
               </Box>
             }
             movieData={trendingMovies.data}
