@@ -8,6 +8,8 @@ import SearchLayout from '../../layouts/search/searchLayout';
 import SearchBar from '../../components/movieReview/searchBar/searchBar';
 import { getRoute, RouteType } from '../../routes/routesGenerator';
 import SearchResults from '../../components/movieReview/searchResults/searchResults';
+import { motion } from 'framer-motion';
+import { LayoutIdType } from '../../framer/layoutId';
 
 
 const SearchPage = () => {
@@ -29,7 +31,9 @@ const SearchPage = () => {
 
     return (
         <PageLayout
-        navigation={<Navigation 
+        navigation={
+        <motion.div layoutId={LayoutIdType.navigation}>
+        <Navigation 
             position='sticky' 
             hideOnScroll={true}
             rightButtons={[
@@ -42,8 +46,9 @@ const SearchPage = () => {
                 inputWidth='7.9em'
                 inputFocusWidth='9.5em' />
             ]} 
-        />}
-        >
+        />
+        </motion.div>
+        }>
             <SearchLayout>
             {data?<SearchResults data={data.results} keywords={query} onPosterClick={handlePosterClick} />
             :

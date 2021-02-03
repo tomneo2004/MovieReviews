@@ -17,6 +17,8 @@ import CastCollection from '../../components/movieReview/castCollection/castColl
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
 import { Divider } from '@material-ui/core';
 import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
+import { motion } from 'framer-motion';
+import { LayoutIdType } from '../../framer/layoutId';
 
 const MoviePage = () => {
     const router = useRouter();
@@ -34,8 +36,11 @@ const MoviePage = () => {
 
     return (
         <PageLayout
-        navigation={<Navigation position='sticky' hideOnScroll={true} />}
-        >
+        navigation={
+        <motion.div layoutId={LayoutIdType.navigation}>    
+            <Navigation position='sticky' hideOnScroll={true} />
+        </motion.div>
+        }>
             <MovieLayout
             poster={
                 !detail.data? <Skeleton variant='rect' width={342} height={342 * 1.5} />

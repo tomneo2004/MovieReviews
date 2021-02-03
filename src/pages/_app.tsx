@@ -7,6 +7,7 @@ import type { AppProps /*, AppContext */ } from 'next/app';
 import MainLayout from '../layouts/mainLayout';
 import NProgress from 'nprogress';
 import Router from 'next/router'
+import { AnimateSharedLayout } from 'framer-motion';
 
 NProgress.configure({showSpinner:false})
 Router.events.on('routeChangeStart', (url) => {
@@ -47,9 +48,11 @@ export default function MovieReviewApp(props:AppProps) {
         <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <MainLayout>
-                <Component {...pageProps} />
-            </MainLayout>
+            <AnimateSharedLayout>
+                <MainLayout>
+                    <Component {...pageProps} />
+                </MainLayout>
+            </AnimateSharedLayout>
         </ThemeProvider>
         </React.Fragment>
     );
