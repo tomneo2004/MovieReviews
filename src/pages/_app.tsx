@@ -48,8 +48,11 @@ export default function MovieReviewApp(props:AppProps) {
         <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
+            {/* use for page transition, layoutId is needed for components */}
             <AnimateSharedLayout>
+                {/* use for exit animation key is needed for tracking components */}
                 <AnimatePresence exitBeforeEnter>
+                    {/* wrap page component so we can play exit animatoin */}
                     <motion.div key={router.route} variants={{
                         init:{},
                         enter:{transition:{when:'beforeChildren'}},
