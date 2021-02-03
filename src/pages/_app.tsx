@@ -4,10 +4,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../themes/defaultTheme';
 import type { AppProps /*, AppContext */ } from 'next/app';
-import MainLayout from '../layouts/mainLayout';
 import NProgress from 'nprogress';
 import Router from 'next/router'
-import {AnimateSharedLayout } from 'framer-motion';
+import {AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 NProgress.configure({showSpinner:false})
 Router.events.on('routeChangeStart', (url) => {
@@ -27,7 +26,7 @@ Router.events.on('routeChangeComplete', () => {
 Router.events.on('routeChangeError', () => NProgress.done())
 
 export default function MovieReviewApp(props:AppProps) {
-    const {Component, pageProps} = props;
+    const {Component, pageProps, router} = props;
 
     React.useEffect(() => {
         // Remove the server-side injected CSS.
@@ -45,13 +44,20 @@ export default function MovieReviewApp(props:AppProps) {
             {/* Import CSS for nprogress */}
             <link rel="stylesheet" type="text/css" href="/nprogress.css" />
         </Head>
+        
         <ThemeProvider theme={theme}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
             <AnimateSharedLayout>
-                <MainLayout>
-                    <Component {...pageProps} />
-                </MainLayout>
+                <AnimatePresence exitBeforeEnter>
+                    <motion.div key={router.route} variants={{
+                        init:{},
+                        enter:{transition:{when:'beforeChildren'}},
+                        exit:{transition:{when:'afterChildren'}},
+                    }} initial='init' animate='enter' exit='exit'>
+                        <Component {...pageProps} />
+                    </motion.div>
+                </AnimatePresence>
             </AnimateSharedLayout>
         </ThemeProvider>
         </React.Fragment>

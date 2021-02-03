@@ -1,6 +1,6 @@
 import { Box, Grid, GridSpacing, makeStyles } from '@material-ui/core';
 import style from './hScrollStyle';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 export interface HScrollChildProp {
     id: string | number;
@@ -47,6 +47,8 @@ const HorizontalScroll = (props:IProps) => {
     } = props;
 
     const classes = makeStyles(style)();
+
+    const childNodes = useMemo(()=>children(), [children]);
         
     const gridRef = React.useRef(null);
     const [scrollState,setScrollState] = React.useState<IHorizontalScrollState>({
@@ -109,8 +111,6 @@ const HorizontalScroll = (props:IProps) => {
     const boxProps = {
         width: width?`${width}px`:'auto',
     }
-
-    const childNodes = children();
 
     return (
         <Box {...boxProps}>

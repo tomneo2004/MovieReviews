@@ -52,26 +52,32 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
     }
 
     return (
-        // <motion.div variants={{
-        //     init:{},
-        //     animate:{
-        //         transition:{staggerChildren:0.2}
-        //     }
-        // }} initial='init' animate='animate'>
+        <motion.div key={shortid.generate()} variants={{
+            init:{},
+            enter:{
+                transition:{when:'beforeChildren', staggerChildren:0.08}
+            },
+            exit:{
+                transition:{when:'afterChildren', staggerChildren:0.08}
+            }
+        }} initial='init' animate='enter' exit='exit'>
         <HScroll>
         {()=>{
-            return movieData.map((data, i)=>{
+            return movieData.map(data=>{
                 return({
                   id: data.id,
                   element: (
                     <motion.div key={`${data.id}-${shortid.generate()}`} variants={{
                         init:{opacity:0, scale:0.5},
-                        animate:{
+                        enter:{
                             opacity:1,
                             scale:1, 
-                            transition:{delay:i*0.12}
                         },
-                    }} initial='init' animate='animate'>
+                        exit:{
+                            opacity:0,
+                            scale:0.5,
+                        }
+                    }}>
                         <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
                             <MoviePoster 
                                 imageURL={buildImageQuery(data.poster_path, 'w185')}
@@ -89,7 +95,7 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
             })
         }}    
         </HScroll>
-        
+        </motion.div>
     )
 }
 
