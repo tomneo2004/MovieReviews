@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
 import { motion } from 'framer-motion';
 import shortid from 'shortid';
+import { orchestration } from '../../../framer/animation';
 
 
 export interface IProps {
@@ -52,15 +53,8 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
     }
 
     return (
-        <motion.div key={shortid.generate()} variants={{
-            init:{},
-            enter:{
-                transition:{when:'beforeChildren', staggerChildren:0.08}
-            },
-            exit:{
-                transition:{when:'afterChildren', staggerChildren:0.08}
-            }
-        }} initial='init' animate='enter' exit='exit'>
+        <motion.div key={shortid.generate()} 
+        variants={orchestration} initial='init' animate='enter' exit='exit'>
         <HScroll>
         {()=>{
             return movieData.map(data=>{

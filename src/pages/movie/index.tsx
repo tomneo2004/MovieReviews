@@ -18,7 +18,7 @@ import ReviewCollection from '../../components/movieReview/reviewCollection/revi
 import { Divider } from '@material-ui/core';
 import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
 import { motion } from 'framer-motion';
-import { LayoutIdType } from '../../framer/layoutId';
+import { LayoutIdType } from '../../framer/layoutIdType';
 
 const MoviePage = () => {
     const router = useRouter();

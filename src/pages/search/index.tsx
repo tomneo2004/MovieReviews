@@ -9,7 +9,7 @@ import SearchBar from '../../components/movieReview/searchBar/searchBar';
 import { getRoute, RouteType } from '../../routes/routesGenerator';
 import SearchResults from '../../components/movieReview/searchResults/searchResults';
 import { motion } from 'framer-motion';
-import { LayoutIdType } from '../../framer/layoutId';
+import { LayoutIdType } from '../../framer/layoutIdType';
 
 
 const SearchPage = () => {
