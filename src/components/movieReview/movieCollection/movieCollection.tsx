@@ -11,6 +11,7 @@ import getMovieRating from '../../../utils/movieRating';
 import Link from 'next/link';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
 import { motion } from 'framer-motion';
+import shortid from 'shortid';
 
 
 export interface IProps {
@@ -51,22 +52,26 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
     }
 
     return (
-        <motion.div variants={{
-            init:{},
-            animate:{
-                transition:{staggerChildren:0.2}
-            }
-        }} initial='init' animate='animate'>
+        // <motion.div variants={{
+        //     init:{},
+        //     animate:{
+        //         transition:{staggerChildren:0.2}
+        //     }
+        // }} initial='init' animate='animate'>
         <HScroll>
         {()=>{
-            return movieData.map(data=>{
+            return movieData.map((data, i)=>{
                 return({
                   id: data.id,
                   element: (
-                    <motion.div key={data.id.toString()} variants={{
-                        init:{opacity:0, transform: 'scale(0'},
-                        animate:{opacity:1, transform: 'scale(1)'},
-                    }}>
+                    <motion.div key={`${data.id}-${shortid.generate()}`} variants={{
+                        init:{opacity:0, scale:0.5},
+                        animate:{
+                            opacity:1,
+                            scale:1, 
+                            transition:{delay:i*0.12}
+                        },
+                    }} initial='init' animate='animate'>
                         <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
                             <MoviePoster 
                                 imageURL={buildImageQuery(data.poster_path, 'w185')}
@@ -84,7 +89,7 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
             })
         }}    
         </HScroll>
-        </motion.div>
+        
     )
 }
 
