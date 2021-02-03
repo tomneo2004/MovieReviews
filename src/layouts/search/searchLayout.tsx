@@ -1,4 +1,5 @@
 
+import { useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import React from 'react';
 
@@ -11,9 +12,10 @@ const SearchLayout = (props:IProps) => {
         children
     } = props;
     
+    const theme = useTheme();
     return (
         <Box display='flex' flexDirection='column' justifyContent='flex-start'
-        py={2}
+         alignItems='center' py={2} bgcolor={theme.palette.primary.light}
         >
         {children}
         </Box>
