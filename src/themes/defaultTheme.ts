@@ -29,7 +29,6 @@ const theme = createMuiTheme({
       '@global':{
         html:{height:'100vh'},
         body:{height:'100%'},
-        '#__next':{height:'inherit'}
       }
     },
     MuiDivider:{
