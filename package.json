@@ -31,6 +31,7 @@
     "remark-gfm": "^1.0.0",
     "sentence-tokenizer": "^1.0.1",
     "short-uuid": "^4.1.0",
+    "shortid": "^2.2.16",
     "swr": "^0.3.6",
     "url-join": "^4.0.1"
   },
@@ -46,6 +47,7 @@
     "@types/nprogress": "^0.2.0",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "@types/shortid": "0.0.29",
     "babel-loader": "^8.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",

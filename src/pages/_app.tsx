@@ -7,7 +7,7 @@ import type { AppProps /*, AppContext */ } from 'next/app';
 import MainLayout from '../layouts/mainLayout';
 import NProgress from 'nprogress';
 import Router from 'next/router'
-import { AnimateSharedLayout } from 'framer-motion';
+import {AnimateSharedLayout } from 'framer-motion';
 
 NProgress.configure({showSpinner:false})
 Router.events.on('routeChangeStart', (url) => {

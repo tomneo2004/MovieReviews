@@ -10,6 +10,8 @@ import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
 import getMovieRating from '../../../utils/movieRating';
 import Link from 'next/link';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
+import { motion } from 'framer-motion';
+
 
 export interface IProps {
     title?: React.ReactNode | null | undefined;
@@ -20,16 +22,18 @@ export interface IProps {
 const renderSkeletons = ()=>{
     const skeletons:HScrollChildProp[] = [];
     
-      for(let i=0; i<12; i++){
+      for(let i=0; i<4; i++){
           skeletons.push({
             id:i,
-            element: (<Paper key={i}>
-              <Box width='150px' p={1}>
-                  <Skeleton animation="wave" variant='rect' height='150px'/>
-                  <Skeleton animation="wave" variant='text'/>
-                  <Skeleton animation="wave" variant='text'/>
-              </Box>
-          </Paper>)
+            element: (
+                <Paper key={i}>
+                    <Box width='150px' p={1}>
+                        <Skeleton animation="wave" variant='rect' height='150px'/>
+                        <Skeleton animation="wave" variant='text'/>
+                        <Skeleton animation="wave" variant='text'/>
+                    </Box>
+                </Paper>
+            )
           });
       }
 
@@ -46,29 +50,41 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
         if(onHover) onHover(data);
     }
 
-
     return (
+        <motion.div variants={{
+            init:{},
+            animate:{
+                transition:{staggerChildren:0.2}
+            }
+        }} initial='init' animate='animate'>
         <HScroll>
         {()=>{
             return movieData.map(data=>{
                 return({
                   id: data.id,
                   element: (
-                  <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
-                    <MoviePoster 
-                        imageURL={buildImageQuery(data.poster_path, 'w185')}
-                        imageWidth={185}
-                        minWidth={200}
-                        title={data.title}
-                        releaseDate={data.release_date}
-                        ratingScore={getMovieRating(data.vote_count, data.vote_average)}
-                        onMouseOver={()=>handleMouseOver(data)}
-                        />
-                    </Link>)
+                    <motion.div key={data.id.toString()} variants={{
+                        init:{opacity:0, transform: 'scale(0'},
+                        animate:{opacity:1, transform: 'scale(1)'},
+                    }}>
+                        <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
+                            <MoviePoster 
+                                imageURL={buildImageQuery(data.poster_path, 'w185')}
+                                imageWidth={185}
+                                minWidth={200}
+                                title={data.title}
+                                releaseDate={data.release_date}
+                                ratingScore={getMovieRating(data.vote_count, data.vote_average)}
+                                onMouseOver={()=>handleMouseOver(data)}
+                                />
+                        </Link>
+                    </motion.div>    
+                    )
                 })
             })
         }}    
         </HScroll>
+        </motion.div>
     )
 }
 
