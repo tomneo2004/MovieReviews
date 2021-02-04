@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import React from 'react';
 
 export interface IProps{
-    children: React.ReactElement[];
+    children: React.ReactElement;
 }
 
 const SearchLayout = (props:IProps) => {

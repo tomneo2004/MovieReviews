@@ -68,7 +68,7 @@ const SearchResults = (props:IProps) => {
     }
 
     return (
-        <motion.div key={shortid.generate()} 
+        <motion.div key='container' 
         variants={orchestration} initial='init' animate='enter' exit='exit'>
             <Grid container>
             {

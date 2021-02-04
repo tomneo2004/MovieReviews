@@ -53,7 +53,7 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
     }
 
     return (
-        <motion.div key={shortid.generate()} 
+        <motion.div key={'container'} 
         variants={orchestration} initial='init' animate='enter' exit='exit'>
         <HScroll>
         {()=>{

@@ -10,12 +10,58 @@ import { getRoute, RouteType } from '../../routes/routesGenerator';
 import SearchResults from '../../components/movieReview/searchResults/searchResults';
 import { motion } from 'framer-motion';
 import { LayoutIdType } from '../../framer/layoutIdType';
+import { GetServerSideProps } from 'next';
+import { ISearchMovieData } from '../../utils/api/model/apiModelTypes';
+import axios from 'axios';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
+async function fetchData(url:string){
+    try{
+        const resp = await axios.get(url);
+        const data: ISearchMovieData = resp.data;
+        return data;
+    }
+    catch(e){
+        return Promise.reject(e);
+    }
+}
 
-const SearchPage = () => {
+const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/search/movies`;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const {query, page=1} = context.query as {[key:string]:string};
+    try{
+        const data = await fetchData(`${apiRoute}?query=${query}&page=${page}`);
+        return {
+            props:{
+                query:query,
+                data:data,
+                error:null,
+            }
+        }
+    }
+    catch(e){
+        return {
+            props:{
+                query:query,
+                data:null,
+                error:e.message,
+            }
+        }
+    }
+    
+}
+
+interface IPageProps {
+    query:string;
+    data:ISearchMovieData;
+    error:any
+}
+
+const SearchPage = (pageProps:IPageProps) => {
+    const {data, error, query} = pageProps;
     const router = useRouter();
-    const {query, page} = router.query as {[key:string]:string};
-    const {data} = useSearchMovies(query, Number(page));
 
     const handlePageChange = (_event:React.ChangeEvent<unknown>, page:number)=>{
         router.push(getRoute(RouteType.search, {query:query, page:page.toString()}))
@@ -46,16 +92,17 @@ const SearchPage = () => {
         </motion.div>
         }>
             <SearchLayout>
-            {data?<SearchResults data={data.results} keywords={query} />
+            {error?
+                <Typography variant='h4' component='div'>
+                    <Box display='flex' justifyContent='center'>{'Ooops, somthing is not right'}</Box>
+                </Typography>
                 :
-                <SearchResults data={null} keywords={query} />
-            }
-            {!data || !data.results.length?null
-                :
-                <Pagination count={data.total_pages} page={data.page} onChange={handlePageChange}
-                showFirstButton showLastButton
-            />
-            }
+                <React.Fragment>
+                    <SearchResults data={data.results} keywords={query} />
+                    <Pagination count={data.total_pages} page={data.page} onChange={handlePageChange}
+                    showFirstButton showLastButton />
+                </React.Fragment>
+            }    
             </SearchLayout>    
         </PageLayout>
     );
