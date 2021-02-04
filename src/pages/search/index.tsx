@@ -1,6 +1,5 @@
 import React from 'react';
 import {useRouter} from 'next/router';
-import {useSearchMovies} from '../../effects/apiFetch/searchMovies';
 import PageLayout from '../../layouts/pageLayout';
 import Navigation from '../../components/movieReview/navigation/navigation';
 import Pagination from '@material-ui/lab/Pagination/Pagination';

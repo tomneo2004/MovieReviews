@@ -7,8 +7,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
-import shortid from 'shortid';
-import { orchestration, scaleFadeMotion } from '../../../framer/animation';
+import { orchestration, scaleFadeMotion, scaleFadeSpringMotion } from '../../../framer/animation';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
 import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
@@ -77,7 +76,7 @@ const SearchResults = (props:IProps) => {
                         <Grid key={movie.id} item xs>
                             <Box display='flex' justifyContent='center' alignItems='center' p={2}>
                                 <motion.div key={`${movie.id}`}
-                                variants={scaleFadeMotion}>
+                                variants={scaleFadeSpringMotion}>
                                     <Link href={getRoute(RouteType.movie, {id:movie.id.toString()})}>
                                         <MoviePoster 
                                         imageURL={buildImageQuery(movie.poster_path, 'w185')}
