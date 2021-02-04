@@ -16,7 +16,7 @@ const MovieLayout = (props:IProps) => {
     } = props;
     const theme = useTheme();
     return (
-        <Box display='flex' flexDirection='column' justifyContent='flex-start' 
+        <Box position='relative' display='flex' flexDirection='column' justifyContent='flex-start' 
         p={2} bgcolor={theme.palette.primary.light}
         >
             {/* information */}

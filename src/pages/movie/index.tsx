@@ -15,7 +15,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CastCollection from '../../components/movieReview/castCollection/castCollection';
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
-import { Dialog, Divider } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
 import { motion } from 'framer-motion';
 import { LayoutIdType } from '../../framer/layoutIdType';
@@ -25,7 +25,6 @@ const MoviePage = () => {
     const {id} = router.query as {[key:string]:string};
     const detail = useMovieDetail(Number(id));
     const reviews = useMovieReviews(Number(id));
-    const [enlarge, setEnlarge] = React.useState<boolean>(false);
 
     useBottomScrollListener(()=>{
         if(reviews.data 
@@ -34,14 +33,6 @@ const MoviePage = () => {
             reviews.setSize(reviews.size+1);
         }
     })
-
-    const handleEnlarge = ()=>{
-        setEnlarge(true);
-    }
-
-    const handleCloseEnlarge = ()=>{
-        setEnlarge(false);
-    }
 
     return (
         <PageLayout
@@ -54,12 +45,10 @@ const MoviePage = () => {
             poster={
                 !detail.data? <Skeleton variant='rect' width={342} height={342 * 1.5} />
                 :
-                <Box onClick={handleEnlarge}>
-                    <PosterImage 
-                    imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
-                    imageWidth={342}
-                    />
-                </Box>
+                <PosterImage 
+                imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
+                imageWidth={342}
+                />
             }
             info={<MovieInfo movieDetailData={detail.data} />} 
             >
@@ -104,18 +93,6 @@ const MoviePage = () => {
                             :null
                         }
                     </Box>
-                    <Dialog open={enlarge} onClose={handleCloseEnlarge}>
-                        <Box display='flex' justifyContent='center' alignItems='center' height='100%'>
-                        {
-                            !detail.data? <Skeleton variant='rect' width={342} height={342 * 1.5} />
-                                :
-                                <PosterImage 
-                                imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
-                                imageWidth={342}
-                                />
-                        }
-                        </Box>
-                    </Dialog>
                 </React.Fragment>
             </MovieLayout>
         </PageLayout>
