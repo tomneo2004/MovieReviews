@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
 import { motion } from 'framer-motion';
 import shortid from 'shortid';
-import { orchestration } from '../../../framer/animation';
+import { orchestration, scaleFadeMotion } from '../../../framer/animation';
 
 
 export interface IProps {
@@ -61,17 +61,8 @@ const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>voi
                 return({
                   id: data.id,
                   element: (
-                    <motion.div key={`${data.id}-${shortid.generate()}`} variants={{
-                        init:{opacity:0, scale:0.5},
-                        enter:{
-                            opacity:1,
-                            scale:1, 
-                        },
-                        exit:{
-                            opacity:0,
-                            scale:0.5,
-                        }
-                    }}>
+                    <motion.div key={`${data.id}-${shortid.generate()}`} 
+                    variants={scaleFadeMotion}>
                         <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
                             <MoviePoster 
                                 imageURL={buildImageQuery(data.poster_path, 'w185')}

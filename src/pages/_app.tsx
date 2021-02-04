@@ -58,7 +58,7 @@ export default function MovieReviewApp(props:AppProps) {
                         enter:{transition:{when:'beforeChildren'}},
                         exit:{transition:{when:'afterChildren'}},
                     }} initial='init' animate='enter' exit='exit'>
-                        <Component {...pageProps} />
+                        <Component {...pageProps}/>
                     </motion.div>
                 </AnimatePresence>
             </AnimateSharedLayout>

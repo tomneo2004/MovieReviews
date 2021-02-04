@@ -25,10 +25,6 @@ const SearchPage = () => {
         router.push(getRoute(RouteType.search, {query:value}))
     }
 
-    const handlePosterClick = (id:number)=>{
-        router.push(getRoute(RouteType.movie, {id:id.toString()}))
-    }
-
     return (
         <PageLayout
         navigation={
@@ -50,14 +46,14 @@ const SearchPage = () => {
         </motion.div>
         }>
             <SearchLayout>
-            {data?<SearchResults data={data.results} keywords={query} onPosterClick={handlePosterClick} />
-            :
-            <SearchResults data={null} keywords={query} />
+            {data?<SearchResults data={data.results} keywords={query} />
+                :
+                <SearchResults data={null} keywords={query} />
             }
             {!data || !data.results.length?null
-            :
-            <Pagination count={data.total_pages} page={data.page} onChange={handlePageChange}
-            showFirstButton showLastButton
+                :
+                <Pagination count={data.total_pages} page={data.page} onChange={handlePageChange}
+                showFirstButton showLastButton
             />
             }
             </SearchLayout>    
