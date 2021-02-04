@@ -54,9 +54,9 @@ export default function MovieReviewApp(props:AppProps) {
                 <AnimatePresence exitBeforeEnter>
                     {/* wrap page component so we can play exit animatoin */}
                     <motion.div key={router.route} variants={{
-                        init:{},
-                        enter:{transition:{when:'beforeChildren'}},
-                        exit:{transition:{when:'afterChildren'}},
+                        init:{opacity:0.5},
+                        enter:{opacity:1,transition:{when:'beforeChildren'}},
+                        exit:{opacity:0.5,transition:{when:'afterChildren'}},
                     }} initial='init' animate='enter' exit='exit'>
                         <Component {...pageProps}/>
                     </motion.div>
