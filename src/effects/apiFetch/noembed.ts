@@ -18,7 +18,10 @@ const fetcher = async (url:string)=>{
  * https://noembed.com/
  */
 export function useNoembed(videoSrc:string):IFetchResponse<INoembedData>{
-    const {data, error} = useSWR(()=>`${apiRoute}${videoSrc}`, fetcher);
+    const {data, error} = useSWR(()=>{
+        if(!videoSrc) return null;
+        return `${apiRoute}${videoSrc}`;
+    }, fetcher);
 
     const isLoading = !data && !error;
     console.log(data);

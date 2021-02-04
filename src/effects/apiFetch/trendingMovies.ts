@@ -19,7 +19,10 @@ const fetcher = async (url:string)=>{
  */
 export function useTrendingMovies(timeWindow:'day'|'week' = 'day'):IFetchResponse<IMovieData[]>{
 
-    const {data, error} = useSWR(()=>`${apiRoute}?timeWindow=${timeWindow}`, fetcher);
+    const {data, error} = useSWR(()=>{
+        if(!timeWindow) return null;
+        return `${apiRoute}?timeWindow=${timeWindow}`;
+    }, fetcher);
 
     const isLoading = !data && !error;
 

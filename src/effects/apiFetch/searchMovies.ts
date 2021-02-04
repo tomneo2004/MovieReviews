@@ -21,7 +21,10 @@ const fetcher = async (url:string)=>{
 export function useSearchMovies(keyword:string = '', page:number = 1):IFetchResponse<ISearchMovieData>{
 
     if(!page) page = 1;
-    const {data, error} = useSWR(()=>`${apiRoute}?query=${keyword}&page=${page}`, fetcher);
+    const {data, error} = useSWR(()=>{
+        if(!keyword) return null;
+        return `${apiRoute}?query=${keyword}&page=${page}`;
+    }, fetcher);
 
     const isLoading = !data && !error;
 
