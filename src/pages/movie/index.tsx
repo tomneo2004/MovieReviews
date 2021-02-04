@@ -15,16 +15,18 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CastCollection from '../../components/movieReview/castCollection/castCollection';
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
-import { Divider } from '@material-ui/core';
+import { Divider, makeStyles, Modal } from '@material-ui/core';
 import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
 import { motion } from 'framer-motion';
 import { LayoutIdType } from '../../framer/layoutIdType';
+import { springTransition } from '../../framer/animation';
 
 const MoviePage = () => {
     const router = useRouter();
     const {id} = router.query as {[key:string]:string};
     const detail = useMovieDetail(Number(id));
     const reviews = useMovieReviews(Number(id));
+    const [enlarge, setEnlarge] = React.useState<boolean>(false);
 
     useBottomScrollListener(()=>{
         if(reviews.data 
@@ -33,6 +35,25 @@ const MoviePage = () => {
             reviews.setSize(reviews.size+1);
         }
     })
+
+    const classes = makeStyles({
+        modal:{
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+        },
+        pointer:{
+            cursor:'pointer',
+        }
+    })();
+
+    const motionDivStyle = {
+        width:'fit-content',
+        height:'fit-content',
+        outline:'none'
+    }
+
+    const toggleEnlarge = ()=>setEnlarge(state=>!state);
 
     return (
         <PageLayout
@@ -45,13 +66,20 @@ const MoviePage = () => {
             poster={
                 !detail.data? <Skeleton variant='rect' width={342} height={342 * 1.5} />
                 :
-                <PosterImage 
-                imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
-                imageWidth={342}
-                />
+                enlarge? null:
+                <motion.div layoutId={LayoutIdType.moviePosterImage}
+                style={motionDivStyle} transition={springTransition}>
+                    <PosterImage 
+                    className={classes.pointer}
+                    onClick={toggleEnlarge}
+                    imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
+                    imageWidth={342}
+                    />
+                </motion.div>
             }
-            info={<MovieInfo movieDetailData={detail.data} />} 
-            >
+            info={
+                <MovieInfo movieDetailData={detail.data} />    
+            }>
                 <React.Fragment>
                     <Box p={1}><Divider variant='middle' /></Box>
                     {/* trailers */}
@@ -93,6 +121,20 @@ const MoviePage = () => {
                             :null
                         }
                     </Box>
+                    {
+                    !detail.data || !enlarge? null:
+                    <Modal className={classes.modal} open={enlarge} onClose={toggleEnlarge}>
+                        <motion.div layoutId={LayoutIdType.moviePosterImage} 
+                        style={motionDivStyle} transition={springTransition}>
+                            <PosterImage
+                            raised
+                            onClick={toggleEnlarge} 
+                            imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
+                            imageWidth={342}
+                            />
+                        </motion.div>
+                    </Modal>
+                    }
                 </React.Fragment>
             </MovieLayout>
         </PageLayout>
