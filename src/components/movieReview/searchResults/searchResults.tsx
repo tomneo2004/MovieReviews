@@ -7,6 +7,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
+import shortid from 'shortid';
 import { orchestration, scaleFadeSpringMotion } from '../../../framer/animation';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
@@ -67,7 +68,7 @@ const SearchResults = (props:IProps) => {
     }
 
     return (
-        <motion.div key='container' 
+        <motion.div key={shortid.generate()}
         variants={orchestration} initial='init' animate='enter' exit='exit'>
             <Grid container>
             {
