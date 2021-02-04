@@ -7,7 +7,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
-import { orchestration, scaleFadeMotion, scaleFadeSpringMotion } from '../../../framer/animation';
+import { orchestration, scaleFadeSpringMotion } from '../../../framer/animation';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
 import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
