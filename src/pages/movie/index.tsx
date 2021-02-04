@@ -64,7 +64,7 @@ const MoviePage = () => {
         }>
             <MovieLayout
             poster={
-                !detail.data? <Skeleton variant='rect' width={342} height={342 * 1.5} />
+                !detail.data?<Skeleton variant='rect' width={342} height={342 * 1.5} />
                 :
                 enlarge? null:
                 <motion.div layoutId={LayoutIdType.moviePosterImage}
@@ -121,6 +121,7 @@ const MoviePage = () => {
                             :null
                         }
                     </Box>
+                    {/* enlarge image */}
                     {
                     !detail.data || !enlarge? null:
                     <Modal className={classes.modal} open={enlarge} onClose={toggleEnlarge}>

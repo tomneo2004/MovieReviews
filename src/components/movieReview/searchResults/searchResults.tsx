@@ -76,7 +76,7 @@ const SearchResults = (props:IProps) => {
                     return (
                         <Grid key={movie.id} item xs>
                             <Box display='flex' justifyContent='center' alignItems='center' p={2}>
-                                <motion.div key={`${movie.id}-${shortid.generate()}`}
+                                <motion.div key={`${movie.id}`}
                                 variants={scaleFadeMotion}>
                                     <Link href={getRoute(RouteType.movie, {id:movie.id.toString()})}>
                                         <MoviePoster 
