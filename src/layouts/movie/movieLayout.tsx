@@ -33,7 +33,7 @@ const MovieLayout = (props:IProps) => {
                     <motion.div layout>{info}</motion.div>
                 </Grid>
             </Grid>
-            <motion.div layout>{children}</motion.div>
+            {children}
         </Box>
     );
 };

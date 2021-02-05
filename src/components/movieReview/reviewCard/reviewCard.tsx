@@ -6,11 +6,11 @@ import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMore from '@material-ui/icons/ExpandMoreSharp';
-import Collapse from '@material-ui/core/Collapse';
 import { Box, Chip, makeStyles, useTheme } from '@material-ui/core';
 import style from './reviewCardStyle';
 import clsx from 'clsx';
 import { Rating } from '@material-ui/lab';
+import { motion } from 'framer-motion';
 
 export interface IProps extends CardProps{
     authorName: string;
@@ -53,51 +53,45 @@ const ReviewCard = (props:IProps)=>{
     }
 
     return (
-        <Card raised>
-            <CardHeader 
-            title={
-            <Box display='flex' flexDirection='row' flexWrap='wrap'>
-                <Typography component='div'>
-                    <Box pr={1} fontWeight='800'>
-                        {`Written by ${authorName}`}
-                    </Box>
-                </Typography>
-                <Box pr={1}>
-                    <Rating value={rating} max={ratingMax} precision={0.5} readOnly />
-                </Box>
-                <Chip label={`${rating}/${ratingMax}`} />
-            </Box>
-            }
-            subheader={createdAt}
-            />
-            <CardContent>
-            {
-                !expanded?
-                <Typography component='div'>
-                    {partial}
-                </Typography>
-                :
-                null
-            }
-                <Collapse in={expanded} timeout='auto' unmountOnExit>
+        <motion.div layout={!expanded}>
+            <Card raised>
+                <motion.div layout={expanded}>
+                    <CardHeader 
+                    title={    
+                    <Box display='flex' flexDirection='row' flexWrap='wrap'>
                         <Typography component='div'>
-                            <Box>{paragraph}</Box>
+                            <Box pr={1} fontWeight='800'>
+                                {`Written by ${authorName}`}
+                            </Box>
                         </Typography>
-                </Collapse>
-            </CardContent>
-            {
-                expandable?
-                <CardActions>
-                    <IconButton
-                    className={clsx(expandBtnClass)} 
-                    onClick={handleExpand}>
-                        <ExpandMore />
-                    </IconButton>
-                </CardActions>
-                :
-                null
-            }
-        </Card>
+                        <Box pr={1}>
+                            <Rating value={rating} max={ratingMax} precision={0.5} readOnly />
+                        </Box>
+                        <Chip label={`${rating}/${ratingMax}`} />
+                    </Box>
+                    }
+                    subheader={createdAt}
+                    />
+                </motion.div>
+                <CardContent>
+                    <Typography>
+                    {expanded?paragraph:partial}
+                    </Typography>
+                </CardContent>
+                {!expandable? null
+                    :
+                    <motion.div layout>
+                        <CardActions>
+                            <IconButton
+                            className={clsx(expandBtnClass)} 
+                            onClick={handleExpand}>
+                                <ExpandMore />
+                            </IconButton>
+                        </CardActions>
+                    </motion.div>
+                }
+            </Card>
+        </motion.div>
     );
 }
 

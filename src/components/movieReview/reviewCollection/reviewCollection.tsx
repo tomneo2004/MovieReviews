@@ -10,9 +10,12 @@ import { partialSentenceFrom } from '../../../utils/sentenceExtractor';
 import gfm from 'remark-gfm';
 import ReviewCard from '../reviewCard/reviewCard';
 import { dateFromUTC } from '../../../utils/timeConverter';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { motion } from 'framer-motion';
 
 interface IProps {
     reviewData:IMovieReviewsData;
+    isLoadingMore?:boolean;
 }
 
 const renderSkeletons = ()=>{
@@ -31,7 +34,10 @@ const renderSkeletons = ()=>{
     )
 }
 const ReviewCollection = (props:IProps) => {
-    const {reviewData} = props;
+    const {
+        reviewData,
+        isLoadingMore = false,
+    } = props;
 
     if(!reviewData) return renderSkeletons();
 
@@ -68,7 +74,7 @@ const ReviewCollection = (props:IProps) => {
                 )
 
                 return (
-                    <Box key={review.id} pt={1}>    
+                    <Box key={review.id} pt={1}> 
                         <ReviewCard
                         authorName={review.author}
                         createdAt={dateFromUTC(review.created_at)}
@@ -83,9 +89,18 @@ const ReviewCollection = (props:IProps) => {
                         }
                         ratingMax={toRatingMax}
                         />
-                    </Box>)
+                    </Box>
+                    )
             })
         }
+        <motion.div layout>
+        {!isLoadingMore? null
+            :
+            <Box pt={3} width='inherit' >
+                <LinearProgress />
+            </Box>
+        }
+        </motion.div>
         </React.Fragment>
     )
 };

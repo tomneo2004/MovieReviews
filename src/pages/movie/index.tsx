@@ -11,7 +11,6 @@ import MovieInfo from '../../components/movieReview/movieInfo/movieInfo';
 import Typography from '@material-ui/core/Typography';
 import { useMovieReviews } from '../../effects/apiFetch/movieReviews';
 import Skeleton from '@material-ui/lab/Skeleton';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CastCollection from '../../components/movieReview/castCollection/castCollection';
 import ReviewCollection from '../../components/movieReview/reviewCollection/reviewCollection';
@@ -81,8 +80,8 @@ const MoviePage = () => {
                 <MovieInfo movieDetailData={detail.data} />    
             }>
                 <React.Fragment>
-                    <Box p={1}><Divider variant='middle' /></Box>
                     {/* trailers */}
+                    <Box p={1}><Divider variant='middle' /></Box>
                     <Box pt={2}>
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Videos`}</Box>
@@ -94,8 +93,8 @@ const MoviePage = () => {
                         : <TrailerCollection trailersData={null} />
                         }
                     </Box>
-                    <Box p={1}><Divider variant='middle' /></Box>
                     {/* casts */}
+                    <Box p={1}><Divider variant='middle' /></Box>
                     <Box pt={2}>
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Casts`}</Box>
@@ -110,15 +109,11 @@ const MoviePage = () => {
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Reviews`}</Box>
                         </Typography>
-                        {reviews.data? <ReviewCollection reviewData={reviews.data} />
-                        : <ReviewCollection reviewData={null} />
-                        }
-                        {/*loading more */}
-                        {reviews.isLoading && reviews.data?
-                            <Box p={3} display='flext' justifyContent='center'>
-                                <LinearProgress />
-                            </Box>
-                            :null
+                        {reviews.data? 
+                            <ReviewCollection reviewData={reviews.data} 
+                            isLoadingMore={reviews.isLoading} />
+                            : 
+                            <ReviewCollection reviewData={null} />
                         }
                     </Box>
                     {/* enlarge image */}
