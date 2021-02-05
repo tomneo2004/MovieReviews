@@ -72,7 +72,7 @@ const SearchResults = (props:IProps) => {
                 return (
                     <Grid key={movie.id} item xs>
                         <Box display='flex' justifyContent='center' alignItems='center' p={2}>
-                            <ScaleFadeFlow enterDelay={i*0.08} exitDelay={i*0.08}>
+                            <ScaleFadeFlow enterDelay={i*0.08} exitDelay={i*0.04}>
                                 <Link href={getRoute(RouteType.movie, {id:movie.id.toString()})}>
                                     <MoviePoster 
                                     imageURL={buildImageQuery(movie.poster_path, 'w185')}

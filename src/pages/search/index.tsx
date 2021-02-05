@@ -8,7 +8,7 @@ import SearchBar from '../../components/movieReview/searchBar/searchBar';
 import { getRoute, RouteType } from '../../routes/routesGenerator';
 import SearchResults from '../../components/movieReview/searchResults/searchResults';
 import { motion } from 'framer-motion';
-import { LayoutIdType } from '../../framer/layoutIdType';
+import { LayoutIdTypes } from '../../framer/LayoutIdTypes';
 import { GetServerSideProps } from 'next';
 import { ISearchMovieData } from '../../utils/api/model/apiModelTypes';
 import axios from 'axios';
@@ -73,7 +73,7 @@ const SearchPage = (pageProps:IPageProps) => {
     return (
         <PageLayout
         navigation={
-        <motion.div layoutId={LayoutIdType.navigation}>
+        <motion.div layoutId={LayoutIdTypes.navigation}>
         <Navigation 
             position='sticky' 
             hideOnScroll={true}

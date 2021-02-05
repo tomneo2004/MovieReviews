@@ -1,4 +1,4 @@
-export enum LayoutIdType {
+export enum LayoutIdTypes {
     'navigation' = 'navigation',
     'moviePosterImage' = 'moviePosterImage',
 }

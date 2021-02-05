@@ -11,7 +11,7 @@ import HeroSearchBar from "../components/movieReview/heroSearchBar/heroSearchBar
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/progressiveImage/progressiveImage";
 import { motion } from "framer-motion";
-import { LayoutIdType } from "../framer/LayoutIdType";
+import { LayoutIdTypes } from "../framer/LayoutIdTypes";
 
 const caroselItems = [
   'Find Movies',
@@ -30,7 +30,7 @@ const LandingPage = (pageProps:IPageProps) => {
   return (
     <PageLayout
     navigation={
-    <motion.div layoutId={LayoutIdType.navigation}>
+    <motion.div layoutId={LayoutIdTypes.navigation}>
       <Navigation position='sticky' hideOnScroll={true} />
     </motion.div>  
     }>

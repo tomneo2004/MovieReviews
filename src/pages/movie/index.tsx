@@ -18,7 +18,7 @@ import ReviewCollection from '../../components/movieReview/reviewCollection/revi
 import { Divider, makeStyles, Modal } from '@material-ui/core';
 import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
 import { motion } from 'framer-motion';
-import { LayoutIdType } from '../../framer/LayoutIdType';
+import { LayoutIdTypes } from '../../framer/LayoutIdTypes';
 import { springTransition } from '../../framer/Transition';
 
 const MoviePage = () => {
@@ -58,7 +58,7 @@ const MoviePage = () => {
     return (
         <PageLayout
         navigation={
-        <motion.div layoutId={LayoutIdType.navigation}>    
+        <motion.div layoutId={LayoutIdTypes.navigation}>    
             <Navigation position='sticky' hideOnScroll={true} />
         </motion.div>
         }>
@@ -67,7 +67,7 @@ const MoviePage = () => {
                 !detail.data?<Skeleton variant='rect' width={342} height={342 * 1.5} />
                 :
                 enlarge? null:
-                <motion.div layoutId={LayoutIdType.moviePosterImage}
+                <motion.div layoutId={LayoutIdTypes.moviePosterImage}
                 style={motionDivStyle} transition={springTransition()}>
                     <PosterImage 
                     className={classes.pointer}
@@ -125,7 +125,7 @@ const MoviePage = () => {
                     {
                     !detail.data || !enlarge? null:
                     <Modal className={classes.modal} open={enlarge} onClose={toggleEnlarge}>
-                        <motion.div layoutId={LayoutIdType.moviePosterImage} 
+                        <motion.div layoutId={LayoutIdTypes.moviePosterImage} 
                         style={motionDivStyle} transition={springTransition()}>
                             <PosterImage
                             raised
