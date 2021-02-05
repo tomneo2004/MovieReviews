@@ -4,11 +4,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
-import shortid from 'shortid';
-import { orchestration, scaleFadeSpringMotion } from '../../../framer/animation';
+import ScaleFadeFlow from '../../../framer/ScaleFadeMotion';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
 import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
@@ -68,37 +66,33 @@ const SearchResults = (props:IProps) => {
     }
 
     return (
-        <motion.div key={shortid.generate()}
-        variants={orchestration} initial='init' animate='enter' exit='exit'>
-            <Grid container>
-            {
-                data.map(movie=>{
-                    return (
-                        <Grid key={movie.id} item xs>
-                            <Box display='flex' justifyContent='center' alignItems='center' p={2}>
-                                <motion.div key={`${movie.id}`}
-                                variants={scaleFadeSpringMotion}>
-                                    <Link href={getRoute(RouteType.movie, {id:movie.id.toString()})}>
-                                        <MoviePoster 
-                                        imageURL={buildImageQuery(movie.poster_path, 'w185')}
-                                        imageWidth={185}
-                                        minWidth={200}
-                                        maxWidth={200}
-                                        title={movie.title}
-                                        releaseDate={movie.release_date}
-                                        ratingScore={getMovieRating(movie.vote_count, movie.vote_average)}
-                                        ratingOffsetX={-8}
-                                        ratingOffsetY={-8}
-                                        />
-                                    </Link>
-                                </motion.div>
-                            </Box>
-                        </Grid>
-                    )
-                })
-            }    
-            </Grid>
-        </motion.div>
+        <Grid container>
+        {
+            data.map((movie,i)=>{
+                return (
+                    <Grid key={movie.id} item xs>
+                        <Box display='flex' justifyContent='center' alignItems='center' p={2}>
+                            <ScaleFadeFlow enterDelay={i*0.08} exitDelay={i*0.08}>
+                                <Link href={getRoute(RouteType.movie, {id:movie.id.toString()})}>
+                                    <MoviePoster 
+                                    imageURL={buildImageQuery(movie.poster_path, 'w185')}
+                                    imageWidth={185}
+                                    minWidth={200}
+                                    maxWidth={200}
+                                    title={movie.title}
+                                    releaseDate={movie.release_date}
+                                    ratingScore={getMovieRating(movie.vote_count, movie.vote_average)}
+                                    ratingOffsetX={-8}
+                                    ratingOffsetY={-8}
+                                    />
+                                </Link>
+                            </ScaleFadeFlow>
+                        </Box>
+                    </Grid>
+                )
+            })
+        }    
+        </Grid>
     )
 };
 

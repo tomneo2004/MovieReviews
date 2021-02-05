@@ -11,7 +11,7 @@ import HeroSearchBar from "../components/movieReview/heroSearchBar/heroSearchBar
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/progressiveImage/progressiveImage";
 import { motion } from "framer-motion";
-import { LayoutIdType } from "../framer/layoutIdType";
+import { LayoutIdType } from "../framer/LayoutIdType";
 
 const caroselItems = [
   'Find Movies',

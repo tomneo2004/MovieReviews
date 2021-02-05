@@ -10,9 +10,7 @@ import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
 import getMovieRating from '../../../utils/movieRating';
 import Link from 'next/link';
 import { getRoute, RouteType } from '../../../routes/routesGenerator';
-import { motion } from 'framer-motion';
-import shortid from 'shortid';
-import { orchestration, scaleFadeSpringMotion } from '../../../framer/animation';
+import ScaleFadeFlow from '../../../framer/ScaleFadeMotion';
 
 
 export interface IProps {
@@ -46,44 +44,6 @@ const renderSkeletons = ()=>{
       )
 }
 
-const renderCollection = (movieData:IMovieData[], onHover:(data:IMovieData)=>void = null)=>{
-    
-    const handleMouseOver = (data:IMovieData)=>{
-        if(onHover) onHover(data);
-    }
-
-    return (
-        <motion.div key={shortid.generate()}
-        variants={orchestration} initial='init' animate='enter' exit='exit'>
-        <HScroll>
-        {()=>{
-            return movieData.map(data=>{
-                return({
-                  id: data.id,
-                  element: (
-                    <motion.div key={`${data.id}-${shortid.generate()}`} 
-                    variants={scaleFadeSpringMotion}>
-                        <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
-                            <MoviePoster 
-                                imageURL={buildImageQuery(data.poster_path, 'w185')}
-                                imageWidth={185}
-                                minWidth={200}
-                                title={data.title}
-                                releaseDate={data.release_date}
-                                ratingScore={getMovieRating(data.vote_count, data.vote_average)}
-                                onMouseOver={()=>handleMouseOver(data)}
-                                />
-                        </Link>
-                    </motion.div>    
-                    )
-                })
-            })
-        }}    
-        </HScroll>
-        </motion.div>
-    )
-}
-
 /**
  * Component wrap around horizontal scrol collection
  */
@@ -94,6 +54,10 @@ const MovieCollection = (props:IProps) => {
         onHover = null,
     } = props;
 
+    const handleMouseOver = (data:IMovieData)=>{
+        if(onHover) onHover(data);
+    }
+
     return (
         <Box>
             {title?
@@ -103,9 +67,32 @@ const MovieCollection = (props:IProps) => {
                 :null
             }
             <Box pt={2}>
-            {movieData?
-                renderCollection(movieData, onHover)
-                :renderSkeletons()
+            {!movieData? renderSkeletons()
+                :
+                <HScroll>
+                {()=>{
+                    return movieData.map((data, i)=>{
+                        return({
+                        id: data.id,
+                        element: (
+                            <ScaleFadeFlow enterDelay={i*0.08} exitDelay={i*0.08} layout>
+                                <Link href={getRoute(RouteType.movie, {id:data.id.toString()})}>
+                                    <MoviePoster 
+                                        imageURL={buildImageQuery(data.poster_path, 'w185')}
+                                        imageWidth={185}
+                                        minWidth={200}
+                                        title={data.title}
+                                        releaseDate={data.release_date}
+                                        ratingScore={getMovieRating(data.vote_count, data.vote_average)}
+                                        onMouseOver={()=>handleMouseOver(data)}
+                                        />
+                                </Link>
+                            </ScaleFadeFlow>    
+                            )
+                        })
+                    })
+                }}    
+                </HScroll>
             }
             </Box>
         </Box>

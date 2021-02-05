@@ -44,7 +44,7 @@ const Trending = () => {
         loadingIndicator={
           <Box><LinearProgress /></Box>
         }>
-            <MovieCollection 
+            <MovieCollection
             title={
               <Box display='flex' flexWrap='wrap' alignItems='center'>
                 <Box pr={2}>{`Trending`}</Box>

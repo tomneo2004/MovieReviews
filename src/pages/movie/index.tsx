@@ -18,8 +18,8 @@ import ReviewCollection from '../../components/movieReview/reviewCollection/revi
 import { Divider, makeStyles, Modal } from '@material-ui/core';
 import TrailerCollection from '../../components/movieReview/videoCollection/videoCollection';
 import { motion } from 'framer-motion';
-import { LayoutIdType } from '../../framer/layoutIdType';
-import { springTransition } from '../../framer/animation';
+import { LayoutIdType } from '../../framer/LayoutIdType';
+import { springTransition } from '../../framer/Transition';
 
 const MoviePage = () => {
     const router = useRouter();
@@ -68,7 +68,7 @@ const MoviePage = () => {
                 :
                 enlarge? null:
                 <motion.div layoutId={LayoutIdType.moviePosterImage}
-                style={motionDivStyle} transition={springTransition}>
+                style={motionDivStyle} transition={springTransition()}>
                     <PosterImage 
                     className={classes.pointer}
                     onClick={toggleEnlarge}
@@ -126,7 +126,7 @@ const MoviePage = () => {
                     !detail.data || !enlarge? null:
                     <Modal className={classes.modal} open={enlarge} onClose={toggleEnlarge}>
                         <motion.div layoutId={LayoutIdType.moviePosterImage} 
-                        style={motionDivStyle} transition={springTransition}>
+                        style={motionDivStyle} transition={springTransition()}>
                             <PosterImage
                             raised
                             onClick={toggleEnlarge} 
