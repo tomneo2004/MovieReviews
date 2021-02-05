@@ -22,7 +22,7 @@ const renderSkeletons = ()=>{
         width:'60%',
     }
     return (
-        <Box width='100%' display='flex' flexDirection='column'>
+        <Box width='inherit' display='flex' flexDirection='column'>
             <Skeleton {...skProps1} />
             <Skeleton {...skProps2} />
             <Skeleton {...skProps1} />
