@@ -44,7 +44,7 @@ const LandingPage = (pageProps:IPageProps) => {
             />
           } 
           title={
-            <Typography component='div' variant='h1'>
+            <Typography id='hero-title' component='div' variant='h1'>
               <Box fontWeight={500}>Welcome</Box>
             </Typography>
           }
@@ -65,9 +65,9 @@ const LandingPage = (pageProps:IPageProps) => {
           search={<HeroSearchBar />}
           />
           {/* Pouplar Collection */}
-          <Popular />
+          <Box id='popular'><Popular /></Box>
           {/* Trending Collection */}
-          <Trending />
+          <Box id='trending'><Trending /></Box>
       </LandingLayout>
     </PageLayout>
   )

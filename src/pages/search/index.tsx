@@ -78,14 +78,17 @@ const SearchPage = (pageProps:IPageProps) => {
             position='sticky' 
             hideOnScroll={true}
             rightButtons={[
-                <SearchBar 
-                fullWidth
-                placeholder='Search ...' 
-                onEnter={handleSearch} 
-                opacity={0.5}
-                opacityHover={0.7}
-                inputWidth='7.9em'
-                inputFocusWidth='9.5em' />
+                <Box id='nav-search-bar'>
+                    <SearchBar 
+                    fullWidth
+                    placeholder='Search ...' 
+                    onEnter={handleSearch} 
+                    opacity={0.5}
+                    opacityHover={0.7}
+                    inputWidth='7.9em'
+                    inputFocusWidth='9.5em' 
+                    />
+                </Box>
             ]} 
         />
         </motion.div>

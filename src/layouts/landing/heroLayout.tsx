@@ -20,10 +20,10 @@ const HeroLayout = (props:IProps) => {
         display='flex' flexDirection='column' justifyContent='center' 
         alignItems='center' alignSelf='stretch'>
             {background}
-            <Box zIndex={1} textAlign='center'>
+            <Box id='hero-layout' zIndex={1} textAlign='center'>
                 {title}
                 {carousel}
-                <Box pt={6} alignSelf='stretch'>
+                <Box id='search-area' pt={6} alignSelf='stretch'>
                     {search}
                 </Box>
             </Box>
