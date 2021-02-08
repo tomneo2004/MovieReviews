@@ -47,7 +47,7 @@ const FancyTab = (props:IProps) => {
         {
             tabData.map(data=>{
                 return (
-                    <Tab 
+                    <Tab
                     key={data.id} 
                     classes={tabItemClasses} 
                     label={

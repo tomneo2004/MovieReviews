@@ -1,4 +1,4 @@
-import {dateFromUTC} from '../../../src/utils/timeConverter';
+import {dateFromUTC} from '../../../../src/utils/timeConverter';
 
 describe('Utils test', ()=>{
     context('timerConverter.ts', ()=>{

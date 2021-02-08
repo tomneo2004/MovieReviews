@@ -101,7 +101,7 @@ const SearchPage = (pageProps:IPageProps) => {
                 :
                 <React.Fragment>
                     <SearchResults data={data.results} keywords={query} />
-                    <Pagination count={data.total_pages} page={data.page} onChange={handlePageChange}
+                    <Pagination id='paging' count={data.total_pages} page={data.page} onChange={handlePageChange}
                     showFirstButton showLastButton />
                 </React.Fragment>
             }    

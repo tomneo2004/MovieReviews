@@ -13,6 +13,7 @@
 // the project's config changing)
 
 const preprocessor = require('@cypress/react/plugins/next')
+const codeCoverage = require('@cypress/code-coverage/task')
 /**
  * @type {Cypress.PluginConfig}
  */
@@ -20,5 +21,6 @@ module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   preprocessor(on, config)
+  codeCoverage(on, config)
   return config
 }

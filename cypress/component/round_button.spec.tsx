@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount} from '@cypress/react';
-import RoundButton from '../../../src/components/unit/roundButton/roundButton';
+import RoundButton from '../../src/components/unit/roundButton/roundButton';
 
 describe('Round Button Component', ()=>{
     it('render without issues', ()=>{
