@@ -1,8 +1,11 @@
 import createStyles from "@material-ui/core/styles/createStyles";
-import {IProps} from './roundButton';
+
+type IStyleProps = {
+    cornerRadius: string | number
+}
 
 export default createStyles({
-    root:(props:IProps)=>({
+    root:(props:IStyleProps)=>({
         borderRadius: props.cornerRadius
     })
 })

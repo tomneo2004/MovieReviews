@@ -1,14 +1,13 @@
 import { makeStyles } from '@material-ui/core';
 import Button, { ButtonProps } from '@material-ui/core/Button';
 import React from 'react';
-import style from './roundButtonStyle';
+import style from './RoundButtonStyle';
 
-export interface IProps extends ButtonProps {
-    children?: string|React.ReactElement;
+export type IProps = ButtonProps & {
     cornerRadius?: string;
 }
 
-const ExtendButton = (props:IProps) => {
+const ExtendButton: React.FC<IProps> = (props:IProps) => {
     const {
         children,
         cornerRadius = '4px',
