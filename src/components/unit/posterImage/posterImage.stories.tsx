@@ -1,5 +1,5 @@
 import React from 'react';
-import PosterImage from './posterImage';
+import PosterImage from './PosterImage';
 
 export default {
   title: 'Poster Image',

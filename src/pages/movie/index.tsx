@@ -4,7 +4,7 @@ import {useMovieDetail} from '../../effects/apiFetch/movieDetail';
 import Navigation from '../../components/movieReview/navigation/navigation';
 import PageLayout from '../../layouts/pageLayout';
 import MovieLayout from '../../layouts/movie/movieLayout';
-import PosterImage from '../../components/unit/posterImage/posterImage';
+import PosterImage from '../../components/unit/PosterImage/PosterImage';
 import { buildImageQuery } from '../../utils/api/query/apiQueryBuilder';
 import Box from '@material-ui/core/Box';
 import MovieInfo from '../../components/movieReview/movieInfo/movieInfo';
