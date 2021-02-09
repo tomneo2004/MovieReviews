@@ -1,5 +1,5 @@
 import React from 'react';
-import CircularRating from './circularRating';
+import CircularRating from './CircularRating';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';

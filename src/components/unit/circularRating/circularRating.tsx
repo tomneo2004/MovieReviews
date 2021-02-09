@@ -2,19 +2,20 @@ import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import makeStyles from '@material-ui/styles/makeStyles';
-import style from './circularRatingStyle';
+import style from './CircularRatingStyle';
 import React from 'react';
 import { Variant } from '@material-ui/core/styles/createTypography';
 import ThumbUpIcon from '@material-ui/icons/ThumbUpSharp';
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDownSharp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDownSharp';
 
-export interface IProps{
+type CircularRatingProps = React.ComponentProps<typeof Box> & {
     /** Size of rating, the outer circle
      *
      * default is 50 
      */
     size?: number;
+
     /** Size of circular progress, the inner circle
      * 
      * The size included circular mask and circular
@@ -23,21 +24,27 @@ export interface IProps{
      * default is 44
      */
     progressSize?: number;
-    /** Value of rating 0~100, default is 50 */
+
+    /** Value of rating, 
+     * base on 0 ~ maxValue
+     *
+     *  default is 50 
+     */
     value?: number;
-    /** Max value of rating, this value is
+
+    /** Max value of rating, this maxValue is
      * used to clamp value
+     * 
+     * default 100
      */
     maxValue?: number;
-    /** Min value of rating, this value is
-     * used to clamp value
-     */
-    minValue?: number;
+
     /** background color of rating, the outer circle 
      * 
      * default  '#2d2d2d'
      */
     bgcolor?: any;
+
     /** Criteria for postive rating
      * 
      * If value is above and equal to this is counted
@@ -46,6 +53,7 @@ export interface IProps{
      * default 70
      */
     postiveCriteria?: number;
+
      /** Criteria for average rating
      * 
      * If value is above and equal to this is counted
@@ -54,6 +62,7 @@ export interface IProps{
      * default 50
      */
     averageCriteria?: number;
+
     /** Criteria for negative rating
      * 
      * If value is above and equal to this is counted
@@ -62,73 +71,93 @@ export interface IProps{
      * default 0
      */
     negativeCriteria?: number;
+
     /** Color of rating when rating is postive
      * 
      * default '#4dd827'
      */
     postiveColor?: string;
+
     /** Color of rating when rating is average
      * 
      * default '#f2d50d'
      */
     averageColor?: string;
+
     /** Color of rating when rating is negative
      * 
      * default '#fa050f
      */
     negativeColor?: string;
+
     /** The opacity for circular mask
      * 0~1
      * 
      * default 0.5
      */
     maskOpacity?: number;
+
     /** Should value to be displayed
      * 
      * default false
      */
     hideValue?: boolean;
+
     /** Variant of value text
      * 
      * default 'caption'
      */
     valueVariant?: Variant;
+
     /** FontWeight of value text 
      * 
      * default 400
      */
     valueFontWeight?: number;
+
     /** FontSize of value text 
      * 
      * default '1em'  
      */
     valueFontSize?: any;
+
     /** EndAdornment for value 
      *
      * default null 
      */
-    valueEndAdornment?: React.ReactElement;
+    valueEndAdornment?: React.ReactNode;
 
     /**
      * flexbox direction for value and EndAdornment
      * 
-     * default is 'row'
+     * default is 'column'
      */
     valueFlexDirection?: 'column' | 'row'
 }
 
-export interface IStyleProps{
-    finalColor: string;
-    maskOpacity: number;
-}
-
-const CircularRating = (props:IProps) => {
+/**
+ * Component CircularRating
+ * 
+ * Component display a circular shape with rating in it with
+ * Material-UI Box.
+ * 
+ * Customizable different color for different level of rating
+ *  and circular progress bar.
+ * 
+ * Customizable endAdornment with icon
+ * 
+ * Return null if value is other type than number
+ * 
+ * Use 'getCircularRating' function to get a quick pre-made CircularRating component
+ * 
+ * @param {CircularRatingProps} props 
+ */
+const CircularRating: React.FC<CircularRatingProps> = (props:CircularRatingProps) => {
     const {
         size = 50,
         progressSize = 44,
         value = 50,
         maxValue = 100,
-        minValue = 0,
         bgcolor = '#2d2d2d',
         postiveCriteria = 70,
         averageCriteria = 50,
@@ -142,11 +171,21 @@ const CircularRating = (props:IProps) => {
         valueFontWeight = 400,
         valueFontSize = '1em',
         valueEndAdornment = null,
-        valueFlexDirection='row',
+        valueFlexDirection='column',
+        ...rest
     } = props;
 
+    if(typeof value !== 'number' ) return null;
+
     const sizeDiff = Math.floor(Math.abs(size - progressSize) / 2);
-    const finalValue = Math.round(Math.min(Math.max(value, minValue),maxValue));
+
+    //clamp value
+    const finalValue = Math.round(Math.min(Math.max(value, 0),maxValue));
+
+    //progress value base on 0 ~ 100
+    const progressValue = value / maxValue * 100;
+
+    //color adjustment
     let finalColor = postiveColor;
     if(finalValue >= postiveCriteria){
         finalColor = postiveColor;
@@ -168,20 +207,22 @@ const CircularRating = (props:IProps) => {
     });
 
     return (
-        <Box position='relative' width={size} height={size}>
-
+        <Box {...rest} position='relative' width={size} height={size}>
+            {/* circular progress of bottom mask */}
             <Box position='absolute' left={0} right={0} top={0} bottom={0} 
             borderRadius='50px' bgcolor={bgcolor} px={`${sizeDiff}px`} py={`${sizeDiff}px`}>
                 <CircularProgress className={classes.circleMask} size={progressSize} 
                 value={100} variant='static' />
             </Box>
 
+            {/* circular progress */}
             <Box position='absolute' left={0} right={0} top={0} bottom={0} 
             borderRadius='50px' bgcolor='transparent' px={`${sizeDiff}px`} py={`${sizeDiff}px`}>
                 <CircularProgress className={classes.circleCap}
-                size={progressSize} value={finalValue} variant='static' />
+                size={progressSize} value={progressValue} variant='static' />
             </Box>
 
+            {/* value and endAdornment */}
             <Box position='absolute' left={0} right={0} top={0} bottom={0}
             display='flex' justifyContent='center' alignItems='center'
             >
@@ -208,7 +249,11 @@ export default React.memo(
 );
 
 /**
- * helper function to create a circular rating by given rating number
+ * helper function to create a CircularRating by given rating number
+ * 
+ * The CircularRating with Thumb Up/Down or UpDown icon which is from 
+ * Material-UI
+ * 
  * @param rating 0~100
  * 
  * @return null if rating is 0 otherwise CircularRating component with rating 

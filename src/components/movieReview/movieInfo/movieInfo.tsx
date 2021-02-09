@@ -5,7 +5,7 @@ import React from 'react';
 import { IGenreData, IMovieDetailData } from '../../../utils/api/model/apiModelTypes';
 import convertFilmLength from '../../../utils/filmLengthConverter';
 import getMovieRating from '../../../utils/movieRating';
-import {getCircularRating} from '../../unit/circularRating/circularRating';
+import {getCircularRating} from '../../unit/CircularRating/CircularRating';
 
 export interface IProps {
     movieDetailData: IMovieDetailData;

@@ -3,7 +3,7 @@ import Box, { BoxProps } from '@material-ui/core/Box';
 import makeStyles from '@material-ui/styles/makeStyles';
 import style from './moviePosterStyle';
 import React from 'react';
-import {getCircularRating} from '../../unit/circularRating/circularRating';
+import {getCircularRating} from '../../unit/CircularRating/CircularRating';
 import PosterImage from '../../unit/posterImage/posterImage';
 
 export interface IProps extends BoxProps {
