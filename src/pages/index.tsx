@@ -9,7 +9,7 @@ import Trending from "../components/movieReview/trending/trending";
 import Popular from "../components/movieReview/popular/popular";
 import HeroSearchBar from "../components/movieReview/heroSearchBar/heroSearchBar";
 import { GetStaticProps } from "next";
-import ProgressiveImage from "../components/unit/progressiveImage/progressiveImage";
+import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import { motion } from "framer-motion";
 import { LayoutIdTypes } from "../framer/LayoutIdTypes";
 

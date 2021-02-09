@@ -1,10 +1,8 @@
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import ProgressiveImage, {ProgressiveImageProps} from '../../unit/progressiveImage/progressiveImage';
+import ProgressiveImage, {ProgressiveImageProps} from '../../unit/ProgressiveImage/ProgressiveImage';
 
-interface IProps extends ProgressiveImageProps{
-    children?:React.ReactElement;
-}
+type BackgroundImageProps = ProgressiveImageProps;
 
 /**
  * Component warp around ProgressiveImage component
@@ -12,7 +10,7 @@ interface IProps extends ProgressiveImageProps{
  * Render image as background image and
  * take a children component render on top
  */
-const BackgroundImage = (props:IProps) => {
+const BackgroundImage: React.FC<BackgroundImageProps> = (props:BackgroundImageProps) => {
     const {
         children,
         ...rest

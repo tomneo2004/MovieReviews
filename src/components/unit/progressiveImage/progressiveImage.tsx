@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import useLayoutEffect from '../../../effects/isomorphic/isomorphicEffect';
 
-interface IProps {
+export type ProgressiveImageProps = React.ComponentProps<typeof Box> & {
     children?:React.ReactElement;
     /** image to fetch */
     imageSrc: string;
@@ -57,8 +57,6 @@ interface IProps {
     bgSize?:string;
 }
 
-export type ProgressiveImageProps = IProps;
-
 interface IImageState {
     src:string;
     isLoading:boolean;
@@ -67,11 +65,18 @@ interface IImageState {
 let img: HTMLImageElement;
 
 /**
- * Progressive loading image with customized transition
+ * Component ProgressiveImage
  * 
- * Parent element must have `relative` for position
+ * Progressive loading image in background and cached image
+ * 
+ * Customizable tranistion for background image from last image to current image
+ * 
+ * Parent element must have `relative` for position, as component is
+ * absolute `position`
+ * 
+ * @param {ProgressiveImageProps} props
  */
-const ProgressiveImage = React.memo((props:IProps) => {
+const ProgressiveImage: React.FC<ProgressiveImageProps> = (props:ProgressiveImageProps) => {
     const {
         imageSrc,
         backdropColor,
@@ -89,6 +94,7 @@ const ProgressiveImage = React.memo((props:IProps) => {
         loadingIndicator = null,
         bgPosition = 'center top',
         bgSize = 'cover',
+        ...rest
     } = props;
 
     const [lastImageSrc, setLastImageSrc] = React.useState<string>('');
@@ -204,27 +210,25 @@ const ProgressiveImage = React.memo((props:IProps) => {
         overflow:'hidden',
     }
     return (
-        <Box {...boxProps}>
+        <Box {...rest} {...boxProps}>
             <RootRef rootRef={lastBgRef}>
-                <Box className={lastBgClass} {...boxProps} />
+                <Box id='last-bg' data-src={lastImageSrc} className={lastBgClass} {...boxProps} />
             </RootRef>
             <RootRef rootRef={currentBgRef}>
-                <Box className={currentBgClass} {...boxProps} />
+                <Box id='current-bg' data-src={currentImage.src} 
+                className={currentBgClass} {...boxProps} />
             </RootRef>
             {/* backdrop */}
-            <Box  {...boxProps} bgcolor={backdropColor} />
+            <Box id='backdrop'  {...boxProps} bgcolor={backdropColor} />
             {/* loading indicator */}
-            <Box {...boxProps}>
+            <Box id='indicator' {...boxProps}>
             {currentImage.isLoading? loadingIndicator:null}
             </Box>
         </Box>
     )
-},
+};
 
-(pre, next)=>{
+export default React.memo(ProgressiveImage, (pre, next)=>{
     if(!next.imageSrc) return false;
     return pre.imageSrc === next.imageSrc
-}
-);
-
-export default ProgressiveImage;
+})

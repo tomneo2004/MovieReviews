@@ -148,7 +148,7 @@ type CircularRatingProps = React.ComponentProps<typeof Box> & {
  * 
  * Return null if value is other type than number
  * 
- * Use 'getCircularRating' function to get a quick pre-made CircularRating component
+ * Use `getCircularRating` function to get a quick pre-made CircularRating component
  * 
  * @param {CircularRatingProps} props 
  */

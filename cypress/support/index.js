@@ -21,3 +21,4 @@ import './commands'
 
 import '@cypress/react/support'
 import '@cypress/code-coverage/support'
+import 'cypress-react-selector'

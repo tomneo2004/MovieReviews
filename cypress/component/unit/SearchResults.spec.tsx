@@ -1,6 +1,6 @@
 import mount from '@cypress/react/dist';
 import React from 'react';
-import SearchResults from '../../src/components/movieReview/SearchResults/SearchResults';
+import SearchResults from '../../../src/components/movieReview/SearchResults/SearchResults';
 
 describe('Search Results Component', ()=>{
     const fakeMovieData = [

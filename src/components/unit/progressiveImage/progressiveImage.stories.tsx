@@ -1,7 +1,7 @@
 import { Button, CircularProgress } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import ProgressiveImage from './progressiveImage';
+import ProgressiveImage from './ProgressiveImage';
 
 export default {
   title: 'Progressive Image',

@@ -8,7 +8,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["dom", "es2017"],
-    "types": ["cypress"],
+    "types": ["cypress", "cypress-react-selector"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,

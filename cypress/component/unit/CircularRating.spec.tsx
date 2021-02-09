@@ -1,8 +1,8 @@
 import React from 'react';
 import {mount} from '@cypress/react';
-import CircularRating, { getCircularRating } from '../../src/components/unit/CircularRating/CircularRating';
+import CircularRating, { getCircularRating } from '../../../src/components/unit/CircularRating/CircularRating';
 
-describe('Round Button Component', ()=>{
+describe('CircularRating Component', ()=>{
     it('Render successful', ()=>{
         mount(<CircularRating id='rating' />);
 
