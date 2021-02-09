@@ -1,6 +1,6 @@
 import mount from '@cypress/react/dist';
 import React from 'react';
-import SearchResults from '../../src/components/movieReview/searchResults/searchResults';
+import SearchResults from '../../src/components/movieReview/SearchResults/SearchResults';
 
 describe('Search Results Component', ()=>{
     const fakeMovieData = [
@@ -28,7 +28,7 @@ describe('Search Results Component', ()=>{
 
     it('Successful render', ()=>{
         mount(<SearchResults id='results' data={fakeMovieData} />);
-        
+
         cy.get('#results')
           .should('be.visible');
     })

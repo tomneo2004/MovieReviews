@@ -6,7 +6,7 @@ import Pagination from '@material-ui/lab/Pagination/Pagination';
 import SearchLayout from '../../layouts/search/searchLayout';
 import SearchBar from '../../components/movieReview/searchBar/searchBar';
 import { getRoute, RouteType } from '../../routes/routesGenerator';
-import SearchResults from '../../components/movieReview/searchResults/searchResults';
+import SearchResults from '../../components/movieReview/SearchResults/SearchResults';
 import { motion } from 'framer-motion';
 import { LayoutIdTypes } from '../../framer/LayoutIdTypes';
 import { GetServerSideProps } from 'next';
