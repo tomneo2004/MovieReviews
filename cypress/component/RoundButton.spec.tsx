@@ -3,34 +3,34 @@ import {mount} from '@cypress/react';
 import RoundButton from '../../src/components/unit/RoundButton/RoundButton';
 
 describe('Round Button Component', ()=>{
-    it('render without issues', ()=>{
+    it('Render Successful', ()=>{
         mount(<RoundButton>text</RoundButton>);
         cy.contains('text')
           .should('be.visible');
         
     })
 
-    it('render with corner radius', ()=>{
+    it('Corner radius', ()=>{
         mount(<RoundButton cornerRadius='5px'>text</RoundButton>);
         cy.contains('text')
           .should('be.visible');
     })
 
-    it('render with text only', ()=>{
+    it('Text style', ()=>{
         mount(<RoundButton cornerRadius='5px'>text</RoundButton>);
         cy.get('.MuiButton-text')
           .contains('text')
           .should('be.visible');
     })
 
-    it('render with outlined style', ()=>{
+    it('Outlined style', ()=>{
         mount(<RoundButton cornerRadius='15px' variant='outlined'>text</RoundButton>);
         cy.get('.MuiButton-outlined')
           .contains('text')
           .should('be.visible');
     })
 
-    it('render with contained style', ()=>{
+    it('Contained style', ()=>{
         mount(<RoundButton cornerRadius='20px' variant='contained'>text</RoundButton>);
         cy.get('.MuiButton-contained')
           .contains('text')

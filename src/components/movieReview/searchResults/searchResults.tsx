@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
+import Grid, { GridProps } from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Link from 'next/link';
@@ -13,19 +13,31 @@ import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
 import getMovieRating from '../../../utils/movieRating';
 import MoviePoster from '../moviePoster/moviePoster';
 
-interface IProps {
+type SearchResultsProps = React.ComponentProps<typeof Grid> & {
+    /**
+     * array of data of IMovieData
+     */
     data:IMovieData[];
+
+    /**
+     * keywords was used for searching
+     */
     keywords?:string;
+
+    /**
+     * when data is empty, fallback is shown
+     */
+    fallback?:React.ReactNode;
 }
 
-const renderSkeletons = ()=>{
+const renderSkeletons = (id:string, gridProps:GridProps)=>{
     const skls = [];
     for(let i=0; i<4; i++){
         skls.push(i);
     }
 
     return (
-        <Grid container>
+        <Grid id={id} {...gridProps} container>
         {
             skls.map(sk=>{
                 return (
@@ -47,26 +59,41 @@ const renderSkeletons = ()=>{
     )
 }
 
-const SearchResults = (props:IProps) => {
+/**
+ * Component SearchResults
+ * 
+ * A concrete component, display an array of data of IMovieData
+ * with Material-UI Grid
+ * 
+ * 
+ * @param {SearchResultsProps} props
+ */
+const SearchResults: React.FC<SearchResultsProps> = (props:SearchResultsProps) => {
     const {
         data,
         keywords = '',
+        fallback,
+        id,
+        ...rest
     } = props;
 
-    if(!data) return renderSkeletons();
+    if(!data) return renderSkeletons(id, rest);
 
     if(!data.length){
         return (
-            <Typography variant='h4' component='div'>
+            <Typography id={id} variant='h4' component='div'>
                 <Box display='flex' justifyContent='center'>
-                    {`We could not find any results for ${keywords}`}
+                    {fallback? fallback
+                        :
+                        `We could not find any results for ${keywords}`
+                    }
                 </Box>
             </Typography>
         )
     }
 
     return (
-        <Grid container>
+        <Grid id={id} {...rest} container>
         {
             data.map((movie,i)=>{
                 return (

@@ -1,9 +1,9 @@
 import urljoin from 'url-join';
 import {buildAPIQuery, IParams, defaultParams} from './queryHelper';
 
-const imageAPI = process.env.NEXT_PUBLIC_API_IMAGE_ROUTE;
-const movieAPI = process.env.MOVIE_API_URL;
-const movieAPIVersion = process.env.MOVIE_API_VERSION;
+const imageAPI = 'https://image.tmdb.org';
+const movieAPI = 'https://api.themoviedb.org';
+const movieAPIVersion = '3';
 const movieAPIKey = process.env.MOVIE_API_KEY;
 
 /**

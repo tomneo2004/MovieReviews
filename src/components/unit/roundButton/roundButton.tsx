@@ -3,11 +3,18 @@ import Button, { ButtonProps } from '@material-ui/core/Button';
 import React from 'react';
 import style from './RoundButtonStyle';
 
-export type IProps = ButtonProps & {
-    cornerRadius?: string;
+type RoundButtonProps = ButtonProps & {
+    /**
+     * corner radius for button
+     */
+    cornerRadius?: string | number;
 }
-
-const ExtendButton: React.FC<IProps> = (props:IProps) => {
+/**
+ * Component RoundButton
+ * 
+ * @param {RoundButtonProps} props 
+ */
+const RoundButton: React.FC<RoundButtonProps> = (props:RoundButtonProps) => {
     const {
         children,
         cornerRadius = '4px',
@@ -21,4 +28,4 @@ const ExtendButton: React.FC<IProps> = (props:IProps) => {
     );
 };
 
-export default ExtendButton;
+export default RoundButton;
