@@ -1,39 +1,31 @@
 import mount from '@cypress/react/dist';
 import React from 'react';
 import SearchResults from '../../../src/components/movieReview/SearchResults/SearchResults';
+import { IMovieData } from '../../../src/utils/api/model/apiModelTypes';
 
 describe('Search Results Component', ()=>{
-    const fakeMovieData = [
-        {
-            "poster_path": "/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
-            "adult": false,
-            "overview": "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
-            "release_date": "2012-04-25",
-            "genre_ids": [
-              878,
-              28,
-              12
-            ],
-            "id": 24428,
-            "original_title": "The Avengers",
-            "original_language": "en",
-            "title": "The Avengers",
-            "backdrop_path": "/hbn46fQaRmlpBuUrEiFqv0GDL6Y.jpg",
-            "popularity": 7.353212,
-            "vote_count": 8503,
-            "video": false,
-            "vote_average": 7.33
-          },
-    ]
 
     it('Successful render', ()=>{
-        mount(<SearchResults id='results' data={fakeMovieData} />);
+      cy.fixture<IMovieData[]>('fakeMovieData').then((data)=>{
+        mount(<SearchResults id='results' data={data} />);
 
         cy.get('#results')
           .should('be.visible');
+      })
     })
 
-    it('Skelentons results', ()=>{
+    it('Render data', ()=>{
+      cy.fixture<IMovieData[]>('fakeMovieData').then((data)=>{
+        mount(<SearchResults id='results' data={data} />);
+
+        cy.get('#results')
+          .children()
+          .its('length')
+          .should('be.greaterThan', 0);
+      })
+    })
+
+    it('Waiting data', ()=>{
         mount(<SearchResults id='results' data={null} />);
         
         cy.get('#results')
