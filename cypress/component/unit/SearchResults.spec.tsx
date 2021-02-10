@@ -3,43 +3,51 @@ import React from 'react';
 import SearchResults from '../../../src/components/movieReview/SearchResults/SearchResults';
 import { IMovieData } from '../../../src/utils/api/model/apiModelTypes';
 
-describe('Search Results Component', ()=>{
-
-    it('Successful render', ()=>{
+describe('SearchResults component', ()=>{
+  describe('Render successful', ()=>{
+    beforeEach(()=>{
       cy.fixture<IMovieData[]>('fakeMovieData').then((data)=>{
         mount(<SearchResults id='results' data={data} />);
-
-        cy.get('#results')
-          .should('be.visible');
       })
     })
-
+  
+    it('Visible', ()=>{
+      cy.get('#results')
+          .should('be.visible');
+    })
+  
     it('Render data', ()=>{
-      cy.fixture<IMovieData[]>('fakeMovieData').then((data)=>{
-        mount(<SearchResults id='results' data={data} />);
-
-        cy.get('#results')
+      cy.get('#results')
           .children()
           .its('length')
           .should('be.greaterThan', 0);
-      })
     })
-
-    it('Waiting data', ()=>{
-        mount(<SearchResults id='results' data={null} />);
-        
-        cy.get('#results')
+  })
+  
+  describe('Waiting data', ()=>{
+    beforeEach(()=>{
+      mount(<SearchResults id='results' data={null} />);
+    })
+  
+    it('Loading placeholder', ()=>{
+        cy.get('#loading-placeholder')
           .should('be.visible');
     })
-
-    it('Empty array of data', ()=>{
-        const keywords = 'abc';
-
-        mount(<SearchResults id='results' 
+  })
+  
+  describe('Empty data', ()=>{
+  
+    const keywords = 'abc';
+  
+    beforeEach(()=>{
+      mount(<SearchResults id='results' 
         data={[]} keywords={keywords} fallback={`No results for ${keywords}`} />);
-
+    })
+    
+    it('Empty array of data', ()=>{
         cy.contains(`No results for ${keywords}`);
     })
+  })
 })
 
 export {}

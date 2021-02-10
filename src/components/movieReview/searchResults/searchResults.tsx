@@ -1,7 +1,7 @@
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Grid, { GridProps } from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Link from 'next/link';
@@ -30,14 +30,14 @@ type SearchResultsProps = React.ComponentProps<typeof Grid> & {
     fallback?:React.ReactNode;
 }
 
-const renderSkeletons = (id:string, gridProps:GridProps)=>{
+const renderSkeletons = ()=>{
     const skls = [];
     for(let i=0; i<4; i++){
         skls.push(i);
     }
 
     return (
-        <Grid id={id} {...gridProps} container>
+        <Grid id='loading-placeholder' container>
         {
             skls.map(sk=>{
                 return (
@@ -77,7 +77,7 @@ const SearchResults: React.FC<SearchResultsProps> = (props:SearchResultsProps) =
         ...rest
     } = props;
 
-    if(!data) return renderSkeletons(id, rest);
+    if(!data) return renderSkeletons();
 
     if(!data.length){
         return (
