@@ -1,12 +1,12 @@
 import React from 'react';
 import {useRouter} from 'next/router';
 import PageLayout from '../../layouts/pageLayout';
-import Navigation from '../../components/movieReview/navigation/navigation';
+import Navigation from '../../components/concrete/Navigation/Navigation';
 import Pagination from '@material-ui/lab/Pagination/Pagination';
 import SearchLayout from '../../layouts/search/searchLayout';
-import SearchBar from '../../components/movieReview/searchBar/searchBar';
+import SearchBar from '../../components/concrete/SearchBar/SearchBar';
 import { getRoute, RouteType } from '../../routes/routesGenerator';
-import SearchResults from '../../components/movieReview/SearchResults/SearchResults';
+import SearchResults from '../../components/concrete/SearchResults/SearchResults';
 import { motion } from 'framer-motion';
 import { LayoutIdTypes } from '../../framer/LayoutIdTypes';
 import { GetServerSideProps } from 'next';

@@ -1,13 +1,13 @@
-import Navigation from "../components/movieReview/navigation/navigation"
+import Navigation from "../components/concrete/Navigation/Navigation"
 import PageLayout from "../layouts/pageLayout"
 import LandingLayout from '../layouts/landing/landingLayout';
 import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, fade, Typography, useTheme } from "@material-ui/core";
 import Carousel from 'react-material-ui-carousel';
 import React from "react";
-import Trending from "../components/movieReview/trending/trending";
-import Popular from "../components/movieReview/popular/popular";
-import HeroSearchBar from "../components/movieReview/heroSearchBar/heroSearchBar";
+import Trending from "../components/concrete/Trending/Trending";
+import Popular from "../components/concrete/Popular/Popular";
+import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import { motion } from "framer-motion";

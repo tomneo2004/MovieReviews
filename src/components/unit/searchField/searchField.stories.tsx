@@ -1,6 +1,6 @@
 import { BookmarkSharp } from '@material-ui/icons';
 import React from 'react';
-import Navigation from '../../movieReview/navigation/navigation';
+import Navigation from '../../concrete/Navigation/Navigation';
 import FlexSearch from './SearchField';
 import {action} from '@storybook/addon-actions';
 import { Box, Toolbar } from '@material-ui/core';

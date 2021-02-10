@@ -1,6 +1,6 @@
 import mount from '@cypress/react/dist';
 import React from 'react';
-import SearchResults from '../../../src/components/movieReview/SearchResults/SearchResults';
+import SearchResults from '../../../src/components/concrete/SearchResults/SearchResults';
 import { IMovieData } from '../../../src/utils/api/model/apiModelTypes';
 
 describe('SearchResults component', ()=>{
