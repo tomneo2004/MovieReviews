@@ -5,7 +5,7 @@ import { IMovieData } from '../../../src/utils/api/model/apiModelTypes';
 
 describe('SearchResults component', ()=>{
   describe('Render successful', ()=>{
-    beforeEach(()=>{
+    before(()=>{
       cy.fixture<IMovieData[]>('fakeMovieData').then((data)=>{
         mount(<SearchResults id='results' data={data} />);
       })
