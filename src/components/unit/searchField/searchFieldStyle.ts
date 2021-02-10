@@ -6,8 +6,6 @@ export interface IStyleProps {
     bgColor: string;
     opacity: number;
     opacityHover: number;
-    // inputWidth:string;
-    // inputWidthFocus:string;
 }
 export default createStyles({
     root:(props:IStyleProps)=>({
@@ -20,11 +18,4 @@ export default createStyles({
             duration: 500,
         }),
     }),
-    // input:(props:IStyleProps)=>({
-    //     width: props.inputWidth,
-    //     '&.Mui-focused': {
-    //         width: props.inputWidthFocus,
-    //       },
-    //     transition: props.theme.transitions.create('width'),
-    // }),
 });

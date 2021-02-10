@@ -1,19 +1,24 @@
-import { Box, InputBase, InputBaseProps, makeStyles, useTheme } from '@material-ui/core';
+import { Box, InputBase, makeStyles, useTheme } from '@material-ui/core';
 import { SearchSharp } from '@material-ui/icons';
 import React from 'react';
-import style from './searchFieldStyle';
+import style from './SearchFieldStyle';
 
-interface IProps extends InputBaseProps {
+export type SearchFieldProps = React.ComponentProps<typeof InputBase> & {
     bgColor?: string;
     opacity?: number;
     opacityHover?: number;
+    /**
+     * icon infront of input 
+     */
     icon?: React.ReactElement;
+
+    /**
+     * On input field focus callback
+     */
     onFocus?: ()=>void;
 }
 
-export type SearchFieldProps = IProps
-
-const Search = (props:IProps) => {
+const Search: React.FC<SearchFieldProps> = (props:SearchFieldProps) => {
     const theme = useTheme();
     const {
         bgColor = theme.palette.common.white,
@@ -22,6 +27,7 @@ const Search = (props:IProps) => {
         icon = <SearchSharp />,
         onFocus = null,
         endAdornment,
+        id,
         ...restInput
     } = props;
     const inputRef = React.useRef<HTMLInputElement>();
@@ -42,7 +48,7 @@ const Search = (props:IProps) => {
     });
 
     return (
-        <Box className={classes.root} display='flex'>
+        <Box id={id} className={classes.root} display='flex'>
             <Box display='flex' justifyContent='center' alignItems='center' px={1}>
             {icon}
             </Box>

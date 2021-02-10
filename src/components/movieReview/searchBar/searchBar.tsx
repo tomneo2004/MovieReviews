@@ -1,7 +1,7 @@
 import { makeStyles, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import SearchField, { SearchFieldProps } from '../../unit/searchField/searchField';
+import SearchField, { SearchFieldProps } from '../../unit/SearchField/SearchField';
 import style from './searchBarStyle';
 
 export interface IProps extends SearchFieldProps {
