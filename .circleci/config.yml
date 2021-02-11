@@ -4,6 +4,7 @@ jobs:
   e2e-test: # job test
     docker:
       - image: cimg/node:15.8.0-browsers
+    working_directory: ~/repo  
     resource_class: medium
     steps:
       - checkout
@@ -21,7 +22,7 @@ jobs:
       - save_cache:
           key: v1-dependencies-{{arch}}-{{.Branch}}-{{checksum "package.json"}}
           paths: 
-            - ~/node_modules
+            - ./node_modules
       
       - run: npm run ci-test-record
 workflows:
