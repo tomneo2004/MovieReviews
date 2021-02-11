@@ -24,7 +24,9 @@ jobs:
           paths: 
             - ./node_modules
       
-      - run: npm run ci-test-record
+      - run: 
+          name: Run e2e test
+          command: npm run ci-test-record
 workflows:
     test:
       jobs:
