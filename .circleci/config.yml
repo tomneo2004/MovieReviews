@@ -5,16 +5,18 @@ workflows:
   build:
     jobs:
       - cypress/install
+          name: Install
 
       - cypress/run:
           name: Test
           requires:
-            - cypress/install
+            - Install
           debug: 'cypress:cli'
           command: npm run ci-test
 
       - cypress/run:
           name: Build
           requires:
-            - cypress/run
-          command: npm run build              
+            - Test
+          command: npm run build
+              
