@@ -4,7 +4,9 @@ jobs:
   e2e-test: # job test
     docker:
       - image: cimg/node:15.8.0-browsers
-    working_directory: ~/repo  
+    working_directory: ~/repo
+    environment:
+       NODE_ENV: development  
     resource_class: medium
     steps:
       - checkout
