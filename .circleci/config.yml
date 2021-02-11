@@ -5,8 +5,9 @@ workflows:
   build:
     jobs:
       - cypress/run:
-          name: Development Integration
+          name: Development Build
           debug: 'cypress:cli'
+          build: npm run build
           command: npm run ci-test
           filters:
               branches:
