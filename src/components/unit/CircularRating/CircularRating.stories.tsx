@@ -111,7 +111,7 @@ export const AnimateValue = () => {
 
   return (
       <CircularRating value={rating} 
-      minValue={0} maxValue={100} valueFontSize='1em' valueEndAdornment={
+      maxValue={100} valueFontSize='1em' valueEndAdornment={
         <Box>%</Box>
       } />
   )
@@ -149,7 +149,7 @@ export const AnimateValueAndAdornemnt = () => {
 
   return (
       <CircularRating size={80} progressSize={74} value={rating.value} 
-      minValue={0} maxValue={100} valueFontSize='1em' valueFontWeight={600}
+      maxValue={100} valueFontSize='1em' valueFontWeight={600}
       valueVariant='h5' valueFlexDirection='column' valueEndAdornment={rating.ado} />
   )
 }
