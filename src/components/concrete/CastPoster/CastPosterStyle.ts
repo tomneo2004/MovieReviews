@@ -1,8 +1,11 @@
 import { createStyles } from '@material-ui/core';
-import {IProps} from './CastPoster';
 
+interface IStyleProps {
+    width: string | number;
+    minHeight: string | number;
+}
 export default createStyles({
-    root:(props:IProps)=>({
+    root:(props:IStyleProps)=>({
         width:props.width,
         minHeight:props.minHeight,
     }),

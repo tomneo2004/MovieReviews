@@ -30,8 +30,6 @@ const CastPoster: React.FC<CastPosterProps> = (props:CastPosterProps) => {
     } = props;
 
     const classes = makeStyles(style)({
-        ...props,
-        imageWidth,
         width,
         minHeight,
     })

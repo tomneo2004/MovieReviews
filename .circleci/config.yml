@@ -4,12 +4,17 @@ orbs:
 workflows:
   build:
     jobs:
+      - cypress/install
+
       - cypress/run:
-          name: Development Build
+          name: Test
+          requires:
+            - cypress/install
           debug: 'cypress:cli'
-          build: npm run build
           command: npm run ci-test
-          filters:
-              branches:
-                  ignore:
-                    - master
+
+      - cypress/run:
+          name: Build
+          requires:
+            - cypress/run
+          command: npm run build              
