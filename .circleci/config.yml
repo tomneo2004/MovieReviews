@@ -5,5 +5,11 @@ workflows:
   build:
     jobs:
       - cypress/run:
+          name: Development Integration
+          debug: 'cypress:cli'
           start: npm run dev
           wait-on: 'http://localhost:3000'
+          filters:
+              branches:
+                  ignore:
+                    - master
