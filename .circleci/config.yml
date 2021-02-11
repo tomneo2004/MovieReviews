@@ -1,36 +1,7 @@
 version: 2.1
-# Define jobs
-jobs:
-  e2e-test: # job test
-    docker:
-      - image: cimg/node:15.8.0
-    working_directory: ~/repo
-    environment:
-       NODE_ENV: development  
-    resource_class: medium
-    steps:
-      - checkout
-
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{arch}}-{{.Branch}}-{{checksum "package.json"}}
-            - v1-dependencies-{{arch}}-{{.Branch}} 
-            - v1-dependencies
-
-      - run:
-          name: Install dependencies
-          command: npm install
-
-      - save_cache:
-          key: v1-dependencies-{{arch}}-{{.Branch}}-{{checksum "package.json"}}
-          paths: 
-            - ./node_modules
-            - ./Cypress
-      
-      - run: 
-          name: Run e2e test
-          command: npm run ci-test-record
+orbs:
+  cypress: cypress-io/cypress@1.27.0
 workflows:
-    test:
-      jobs:
-        - e2e-test
+  build:
+    jobs:
+      - cypress/run
