@@ -32,7 +32,7 @@ workflows:
           start: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
           command: npx semantic-release
           post-steps:
-            - run: npm install netlify-cli
+            - run: npm install -g netlify-cli
             - run: netlify -- prod --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
           filters:
               branches:
