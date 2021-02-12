@@ -15,6 +15,12 @@ import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
+interface IPageProps {
+    query:string;
+    data:ISearchMovieData;
+    error:any
+}
+
 async function fetchData(url:string){
     try{
         const resp = await axios.get(url);
@@ -50,12 +56,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     }
     
-}
-
-interface IPageProps {
-    query:string;
-    data:ISearchMovieData;
-    error:any
 }
 
 const SearchPage = (pageProps:IPageProps) => {
