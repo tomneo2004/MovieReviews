@@ -27,4 +27,7 @@ workflows:
           command: npx run netlify-build
           post-steps:
             - run: npx semantic-release
+          filters:
+              branches:
+                  only: alpha
               
