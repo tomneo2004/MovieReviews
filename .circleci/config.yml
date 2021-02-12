@@ -29,7 +29,7 @@ workflows:
           requires:
             - Building Project
           attach-workspace: true
-          command: npm semantic-release
+          command: npx semantic-release
           filters:
               branches:
                   only: alpha
