@@ -23,7 +23,7 @@ workflows:
           command: npm run build
           post-steps:
             - persist_to_workspace:
-                root: ''
+                root: './'
                 paths: .next
 
       - cypress/run:
