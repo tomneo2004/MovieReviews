@@ -33,7 +33,7 @@ workflows:
           command: npx semantic-release
           post-steps:
             - run: npm install -g netlify-cli
-            - run: netlify -- prod --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
+            - run: netlify deploy --prod --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
           filters:
               branches:
                   only: alpha
