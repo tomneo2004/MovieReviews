@@ -3,9 +3,6 @@
     functions = "out_functions"
     publish = "out_publish"
 
-[build.environment]
-    MOVIE_API_KEY = "60f81c7a8084a617e79e9b3696dd08ad"
-
 [dev]
     functions = "out_functions"
     publish = "out_publish"

@@ -21,15 +21,15 @@ workflows:
             - Testing Project
           attach-workspace: true
           command: npm run build
+          post-steps:
+            - run: npm run netlify-build
 
       - cypress/run:
-          name: Alpha Netlify Release
+          name: Alpha Release
           requires:
             - Building Project
           attach-workspace: true
-          command: npm run netlify-build
-          post-steps:
-            - run: npm semantic-release
+          command: npm semantic-release
           filters:
               branches:
                   only: alpha
