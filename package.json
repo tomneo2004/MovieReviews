@@ -1,25 +1,25 @@
 {
   "name": "with-typescript",
   "version": "1.0.0",
-  "plugins": [
-    [
-      "@semantic-release/changelog",
-      {
-        "changelogFile": "docs/CHANGELOG.md"
-      }
-    ],
-    [
-      "@semantic-release/npm", 
-      {
-        "npmPublish": false
-      }
-    ],
-    "@semantic-release/git",
-    "@eclass/semantic-release-netlify"
-  ],
   "release": {
     "branches": [
       "alpha"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "docs/CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/npm", 
+        {
+          "npmPublish": false
+        }
+      ],
+      "@semantic-release/git",
+      "@eclass/semantic-release-netlify"
     ]
   },
   "scripts": {
