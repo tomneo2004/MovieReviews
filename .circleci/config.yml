@@ -23,8 +23,9 @@ workflows:
           command: npm run build
           post-steps:
             - persist_to_workspace:
-                root: './'
-                paths: .next
+                root: ~/
+                paths: 
+                  - project
 
       - cypress/run:
           name: Alpha Netlify Release
