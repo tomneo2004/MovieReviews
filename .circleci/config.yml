@@ -12,11 +12,19 @@ workflows:
           requires:
             - Install Dependencies
           debug: 'cypress:cli'
-          command: npm run ci-test
+          command: npx run ci-test
 
       - cypress/run:
           name: Building Project
           requires:
             - Testing Project
-          command: npm run build
+          command: npx run build
+
+      - cypress/run:
+          name: Alpha Netlify Release
+          requires:
+            - Building Project
+          command: npx run netlify-build
+          post-steps:
+            - run: npx semantic-release
               

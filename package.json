@@ -1,6 +1,13 @@
 {
   "name": "with-typescript",
   "version": "1.0.0",
+  "plugins": [
+    "@semantic-release/changelog",
+    "@eclass/semantic-release-netlify"
+  ],
+  "release": {
+    "branches": ["alpha"]
+  },
   "scripts": {
     "test": "jest",
     "dev": "next",
@@ -15,7 +22,7 @@
     "cy-open": "cypress open",
     "cy-run": "cypress run",
     "cy-run-record": "cypress run --record",
-    "postbuild": "next-on-netlify"
+    "netlify-build": "next-on-netlify"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -48,6 +55,7 @@
     "@babel/plugin-transform-modules-amd": "^7.12.1",
     "@cypress/code-coverage": "^3.8.6",
     "@cypress/react": "^4.16.4",
+    "@eclass/semantic-release-netlify": "^1.0.2",
     "@storybook/addon-actions": "^6.1.15",
     "@storybook/addon-links": "^6.1.15",
     "@storybook/addons": "^6.1.15",
@@ -61,6 +69,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-istanbul": "^6.0.0",
     "cypress": "^6.4.0",
+    "semantic-release": "^17.3.8",
     "start-server-and-test": "^1.12.0",
     "typescript": "^4.0.5",
     "url-loader": "^4.1.1"
