@@ -29,6 +29,7 @@ workflows:
           requires:
             - Building Project
           attach-workspace: true
+          start: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
           command: npx semantic-release
           filters:
               branches:
