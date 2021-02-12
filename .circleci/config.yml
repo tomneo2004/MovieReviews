@@ -22,14 +22,26 @@ workflows:
           attach-workspace: true
           command: npm run build
           post-steps:
-            - run: npm run netlify-build
+            - persist_to_workspace:
+                root: ''
+                paths: .next
 
       - cypress/run:
-          name: Alpha Release
+          name: Prepare for semantic-release
           requires:
             - Building Project
+          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+          post-steps:
+            - persist_to_workspace:
+                root: '~/'
+                paths: .ssh
+
+      - cypress/run:
+          name: Alpha Netlify Release
+          requires:
+            - Prepare for semantic-release
           attach-workspace: true
-          start: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+          start: npm run netlify-build
           command: npx semantic-release
           post-steps:
             - run: npm install -g netlify-cli
