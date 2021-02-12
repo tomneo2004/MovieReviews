@@ -41,7 +41,6 @@ describe('RoundButton component', ()=>{
   describe('Style outlined', ()=>{
     beforeEach(()=>{
       mount(<RoundButton id='btn' cornerRadius='15px' variant='outlined'>text</RoundButton>);
-      cy.waitForReact();
     })
     
     it('Outlined style', ()=>{
@@ -53,12 +52,11 @@ describe('RoundButton component', ()=>{
   
   describe('Style contained', ()=>{
     beforeEach(()=>{
-      mount(<RoundButton cornerRadius='20px' variant='contained'>text</RoundButton>);
-      cy.waitForReact();
+      mount(<RoundButton id='btn' cornerRadius='20px' variant='contained'>text</RoundButton>);
     })
   
     it('Contained style', ()=>{
-        cy.react('RoundButton')
+        cy.get('#btn')
           .contains('text')
           .should('be.visible');
     })
