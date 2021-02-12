@@ -14,7 +14,8 @@
     "ci-test-record": "server-test dev :3000 cy-run-record",
     "cy-open": "cypress open",
     "cy-run": "cypress run",
-    "cy-run-record": "cypress run --record"
+    "cy-run-record": "cypress run --record",
+    "postbuild": "next-on-netlify"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -28,6 +29,7 @@
     "framer-motion": "^3.3.0-beta.22",
     "moment": "^2.29.1",
     "next": "latest",
+    "next-on-netlify": "^2.8.7",
     "nprogress": "^0.2.0",
     "react": "^16.12.0",
     "react-bottom-scroll-listener": "^5.0.0",

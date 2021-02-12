@@ -4,7 +4,7 @@ import axios from 'axios';
 import {IMovieReviewsData} from '../../utils/api/model/apiModelTypes';
 import {IFetchResponse} from './fetchResponse';
 
-const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/detail/movies/reviews`;
+const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE||''}/api/detail/movies/reviews`;
 
 const fetcher = async (url:string)=>{
 
