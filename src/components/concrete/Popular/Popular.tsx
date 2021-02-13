@@ -1,6 +1,5 @@
 import {Box, fade, LinearProgress, useTheme } from '@material-ui/core';
 import React from 'react';
-// import { usePopularMovies } from '../../../effects/apiFetch/popularMovies';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
 import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
 import BackgroundImage from '../BackgroundImage/BackgroundImage';
@@ -17,7 +16,6 @@ const Popular: React.FC<PopualrProps> = (props:PopualrProps) => {
     } = props;
     const theme = useTheme();
     const [popularBg, setPopularBg] = React.useState<string>('');
-    // const popularMovies = usePopularMovies();
 
     const handlePopularMovieHover = (data:IMovieData)=>{
         setPopularBg(buildImageQuery(data.backdrop_path, 'original'));

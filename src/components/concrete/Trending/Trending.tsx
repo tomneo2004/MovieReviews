@@ -2,7 +2,6 @@ import { fade, useTheme } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import React from 'react';
-// import { useTrendingMovies } from '../../../effects/apiFetch/trendingMovies';
 import { IMovieData } from '../../../utils/api/model/apiModelTypes';
 import { buildImageQuery } from '../../../utils/api/query/apiQueryBuilder';
 import BackgroundImage from '../BackgroundImage/BackgroundImage';
@@ -30,7 +29,6 @@ const Trending: React.FC<TrendingProps> = (props:TrendingProps) => {
 
     const theme = useTheme();
     const [trendingBg, setTrendingBg] = React.useState<string>('');
-    // const trendingMovies = useTrendingMovies(trendingWindow);
     const [movieData, setMovieData] = React.useState<IMovieData[]>(byDay);
 
     const handleTrendingMovieHover = (data:IMovieData)=>{
