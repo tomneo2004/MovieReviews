@@ -45,6 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (e) {
+    console.log(e);
     return {
       props: {
         query: query,

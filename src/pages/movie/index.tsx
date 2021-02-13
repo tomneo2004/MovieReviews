@@ -66,6 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (
       },
     };
   } catch (e) {
+    console.log(e);
     return {
       props: {
         movieId: null,

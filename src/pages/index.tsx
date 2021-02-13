@@ -90,6 +90,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
       revalidate,
     };
   } catch (e) {
+    console.log(e);
     return {
       props: {
         bgImageSrc,
