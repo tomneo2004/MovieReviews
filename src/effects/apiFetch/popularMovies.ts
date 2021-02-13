@@ -1,38 +1,38 @@
-import useSWR from 'swr';
-import axios from 'axios';
-import {IMovieData} from '../../utils/api/model/apiModelTypes';
-import {IFetchResponse} from './fetchResponse';
+import useSWR from "swr";
+import axios from "axios";
+import { IMovieData } from "../../utils/api/model/apiModelTypes";
+import { IFetchResponse } from "./fetchResponse";
 
-const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE||''}/api/popular/movies`;
+const apiRoute = `${
+  process.env.NEXT_PUBLIC_API_BASE_ROUTE || ""
+}/api/popular/movies`;
 
-const fetcher = async (url:string)=>{
-
-    const resp = await axios.get(url);
-    const data: IMovieData[] = resp.data.results;
-    return data;
-}
-
+const fetcher = async (url: string) => {
+  const resp = await axios.get(url);
+  const data: IMovieData[] = resp.data.results;
+  return data;
+};
 
 /**
  * Side effect for fetching popular movies
  */
-export function usePopularMovies():IFetchResponse<IMovieData[]>{
-    const {data, error} = useSWR(apiRoute, fetcher);
+export function usePopularMovies(): IFetchResponse<IMovieData[]> {
+  const { data, error } = useSWR(apiRoute, fetcher);
 
-    const isLoading = !data && !error;
+  const isLoading = !data && !error;
 
-    if(error){
-        console.log(error);
-        return {
-            data: null,
-            error,
-            isLoading
-        }
-    }
-
+  if (error) {
+    console.log(error);
     return {
-        data,
-        error: null,
-        isLoading
-    }
+      data: null,
+      error,
+      isLoading,
+    };
+  }
+
+  return {
+    data,
+    error: null,
+    isLoading,
+  };
 }

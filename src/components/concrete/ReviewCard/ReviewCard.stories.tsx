@@ -1,10 +1,10 @@
-import React from 'react';
-import ReviewCard from './ReviewCard';
-import Typography from '@material-ui/core/Typography';
-import { Box } from '@material-ui/core';
+import React from "react";
+import ReviewCard from "./ReviewCard";
+import Typography from "@material-ui/core/Typography";
+import { Box } from "@material-ui/core";
 
 export default {
-  title: 'ReviewCard',
+  title: "ReviewCard",
 };
 
 const longReview = `
@@ -29,75 +29,75 @@ Nam at malesuada leo. Nam at nibh rutrum, iaculis felis sed, ornare eros. Morbi 
 Duis viverra orci vitae velit facilisis, vel laoreet mauris viverra. Fusce pretium malesuada auctor. Suspendisse nibh metus, commodo et tellus sit amet, luctus imperdiet tortor. Ut at elit ac tellus iaculis molestie vel id nunc. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed sit amet dapibus augue. Nunc dictum elit risus, sit amet commodo magna sodales et. Mauris ultrices, lacus sed tristique dignissim, lectus diam semper massa, hendrerit luctus arcu risus vitae massa. Vivamus arcu sapien, ultrices nec lorem eget, vehicula viverra felis.
 
 Proin varius rhoncus tortor sed gravida. Quisque lectus ante, efficitur ut commodo eu, convallis in dolor. Vivamus aliquet nibh et enim posuere pulvinar. Nullam nec rhoncus enim. Maecenas faucibus venenatis urna, ut rhoncus dolor. Nullam bibendum dignissim libero, ac efficitur libero commodo sed. Pellentesque ac ultrices tortor, quis finibus libero. Praesent diam metus, placerat id condimentum vitae, gravida vitae dolor. Maecenas lacus odio, semper ut aliquam ut, imperdiet ut nisl. In ac condimentum neque. Maecenas molestie laoreet lectus ut vestibulum. Nulla a dolor velit. In interdum orci.
-`
+`;
 const mediumReview = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget orci vitae leo feugiat vestibulum. Aenean non tortor laoreet, maximus nunc eget, aliquam tellus. Mauris tempor felis non lorem volutpat, vel auctor metus commodo. Nulla facilisi. Duis efficitur nulla eget dapibus tempor. Proin volutpat consectetur velit sit amet maximus. Nulla facilisi. Sed eget nisl metus. Maecenas vehicula nibh libero, ac semper velit scelerisque id. Praesent nisi elit, vulputate a congue id, ultricies vitae dui.
 
 Curabitur condimentum ex ac urna ullamcorper dapibus ut in purus. Praesent eget ligula quis odio blandit porta eget consequat ipsum. Nam vitae consequat orci, nec tincidunt odio. Praesent fermentum maximus cursus. Nunc semper porttitor mauris nec ultricies. Vestibulum felis ex, euismod et massa sed, imperdiet convallis metus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec pharetra, quam at tincidunt faucibus, erat ligula volutpat velit, sit amet tincidunt arcu magna quis est. Donec fringilla cursus blandit. Nullam mi quam, sagittis in lobortis eget, auctor laoreet augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec a commodo odio, id efficitur magna.
-`
-const shortReview = `Excellent`
+`;
+const shortReview = `Excellent`;
 
 export const LongReview = () => {
-    return (
-        <ReviewCard
-        authorName='Jennifier Claudy'
-        createdAt='2012-Jan-14'
-        paragraph={longReview}
-        partial={`expand for more ...`}
-        expandable={true}
-        rating={5}
-        ratingMax={10}
-        />
-    )
-}
+  return (
+    <ReviewCard
+      authorName="Jennifier Claudy"
+      createdAt="2012-Jan-14"
+      paragraph={longReview}
+      partial={`expand for more ...`}
+      expandable={true}
+      rating={5}
+      ratingMax={10}
+    />
+  );
+};
 
 export const MediumReview = () => {
-    return (
-        <ReviewCard
-        authorName='Jennifier Claudy'
-        createdAt='2012-Jan-14'
-        paragraph={mediumReview}
-        partial={`expand for more ...`}
-        expandable={true}
-        rating={5}
-        ratingMax={10}
-        />
-    )
-}
+  return (
+    <ReviewCard
+      authorName="Jennifier Claudy"
+      createdAt="2012-Jan-14"
+      paragraph={mediumReview}
+      partial={`expand for more ...`}
+      expandable={true}
+      rating={5}
+      ratingMax={10}
+    />
+  );
+};
 
 export const ShortReview = () => {
-    return (
-        <ReviewCard
-        authorName='Jennifier Claudy'
-        createdAt='2012-Jan-14'
-        paragraph={shortReview}
-        partial={shortReview}
-        expandable={false}
-        rating={5}
-        ratingMax={10}
-        />
-    )
-}
+  return (
+    <ReviewCard
+      authorName="Jennifier Claudy"
+      createdAt="2012-Jan-14"
+      paragraph={shortReview}
+      partial={shortReview}
+      expandable={false}
+      rating={5}
+      ratingMax={10}
+    />
+  );
+};
 
 export const Subheader = () => {
-    return (
-        <ReviewCard
-        authorName='Jennifier Claudy'
-        createdAt={
-            <Box display='flex' flexDirection='row'>
-                <Typography variant='body1'>
-                    <Box mr={1}>Created at</Box>
-                </Typography>
-                <Typography variant='body1'>
-                    <Box fontWeight='800'>2020-Feb-09</Box>
-                </Typography>
-            </Box>
-        }
-        paragraph={longReview}
-        partial={`expand for more ...`}
-        expandable={true}
-        rating={5}
-        ratingMax={10}
-        />
-    )
-}
+  return (
+    <ReviewCard
+      authorName="Jennifier Claudy"
+      createdAt={
+        <Box display="flex" flexDirection="row">
+          <Typography variant="body1">
+            <Box mr={1}>Created at</Box>
+          </Typography>
+          <Typography variant="body1">
+            <Box fontWeight="800">2020-Feb-09</Box>
+          </Typography>
+        </Box>
+      }
+      paragraph={longReview}
+      partial={`expand for more ...`}
+      expandable={true}
+      rating={5}
+      ratingMax={10}
+    />
+  );
+};

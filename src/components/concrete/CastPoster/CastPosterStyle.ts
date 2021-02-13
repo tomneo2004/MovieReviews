@@ -1,12 +1,12 @@
-import { createStyles } from '@material-ui/core';
+import { createStyles } from "@material-ui/core";
 
 interface IStyleProps {
-    width: string | number;
-    minHeight: string | number;
+  width: string | number;
+  minHeight: string | number;
 }
 export default createStyles({
-    root:(props:IStyleProps)=>({
-        width:props.width,
-        minHeight:props.minHeight,
-    }),
-})
+  root: (props: IStyleProps) => ({
+    width: props.width,
+    minHeight: props.minHeight,
+  }),
+});
