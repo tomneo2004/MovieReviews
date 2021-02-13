@@ -1,7 +1,7 @@
 {
   "name": "with-typescript",
   "version": "1.0.0",
-  "homepage": "https://moview-review.netlify.app/",
+  "homepage": "https://digmovie.netlify.app/",
   "repository": {
     "type" : "git",
     "url" : "https://github.com/tomneo2004/MovieReviews"
