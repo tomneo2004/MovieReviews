@@ -1,6 +1,4 @@
 import React from 'react';
-import {useRouter} from 'next/router';
-import {useMovieDetail} from '../../effects/apiFetch/movieDetail';
 import Navigation from '../../components/concrete/Navigation/Navigation';
 import PageLayout from '../../layouts/pageLayout';
 import MovieLayout from '../../layouts/movie/movieLayout';
@@ -10,7 +8,6 @@ import Box from '@material-ui/core/Box';
 import MovieInfo from '../../components/concrete/MovieInfo/MovieInfo';
 import Typography from '@material-ui/core/Typography';
 import { useMovieReviews } from '../../effects/apiFetch/movieReviews';
-import Skeleton from '@material-ui/lab/Skeleton';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import CastCollection from '../../components/concrete/CastCollection/CastCollection';
 import ReviewCollection from '../../components/concrete/ReviewCollection/ReviewCollection';
@@ -19,12 +16,74 @@ import TrailerCollection from '../../components/concrete/VideoCollection/VideoCo
 import { motion } from 'framer-motion';
 import { LayoutIdTypes } from '../../framer/LayoutIdTypes';
 import { springTransition } from '../../framer/Transition';
+import axios from 'axios';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { IMovieDetailData } from '../../utils/api/model/apiModelTypes';
 
-const MoviePage = () => {
-    const router = useRouter();
-    const {id} = router.query as {[key:string]:string};
-    const detail = useMovieDetail(Number(id));
-    const reviews = useMovieReviews(Number(id));
+interface IPageProps {
+    movieId: string;
+    movieDetail: IMovieDetailData;
+    error: any;
+}
+const apiMovieDetailRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE||''}/api/detail/movies`;
+
+const fetchMovieDetail = async (movieId:string)=>{
+
+    try{
+        const resp = await axios.get(`${apiMovieDetailRoute}?id=${movieId}`);
+        const data: IMovieDetailData = resp.data;
+        return data;
+    }
+    catch(e){
+        return Promise.reject(e);
+    }
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+    context:GetServerSidePropsContext) =>{
+
+    const {query} = context;
+    const {id} = query as {[key:string]:string};
+
+    if(!id){
+        return {
+            props:{
+                movieId: null,
+                movieDetail: null,
+                error: 'Movie id was not given'
+            }
+        }
+    }
+
+    try{
+        const movieDetail = await fetchMovieDetail(id);
+
+        return{
+            props:{
+                movieId: id,
+                movieDetail: movieDetail,
+                error: null
+            }
+        }
+    }
+    catch(e){
+        return {
+            props:{
+                movieId: null,
+                movieDetail: null,
+                error: e.message
+            }
+        }
+    }
+}
+
+const MoviePage = (pageProps:IPageProps) => {
+    const {
+        movieId,
+        movieDetail,
+        error,
+    } = pageProps;
+    const reviews = useMovieReviews(Number(movieId));
     const [enlarge, setEnlarge] = React.useState<boolean>(false);
 
     useBottomScrollListener(()=>{
@@ -61,23 +120,26 @@ const MoviePage = () => {
             <Navigation position='sticky' hideOnScroll={true} />
         </motion.div>
         }>
+        {error?
+            <Typography variant='h4' component='div'>
+                <Box display='flex' justifyContent='center'>{'Ooops, somthing is not right'}</Box>
+            </Typography>
+            :
             <MovieLayout
-            poster={
-                !detail.data?<Skeleton variant='rect' width={342} height={342 * 1.5} />
-                :
-                enlarge? null:
-                <motion.div layoutId={LayoutIdTypes.moviePosterImage}
-                style={motionDivStyle} transition={springTransition()}>
-                    <PosterImage 
-                    className={classes.pointer}
-                    onClick={toggleEnlarge}
-                    imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
-                    imageWidth={342}
-                    />
-                </motion.div>
+            poster={enlarge? null
+                        :
+                        <motion.div layoutId={LayoutIdTypes.moviePosterImage}
+                        style={motionDivStyle} transition={springTransition()}>
+                            <PosterImage 
+                            className={classes.pointer}
+                            onClick={toggleEnlarge}
+                            imageURL={buildImageQuery(movieDetail.poster_path, 'w342')}
+                            imageWidth={342}
+                            />
+                        </motion.div>
             }
             info={
-                <MovieInfo movieDetailData={detail.data} />    
+                <MovieInfo movieDetailData={movieDetail} />    
             }>
                 <React.Fragment>
                     {/* trailers */}
@@ -86,9 +148,9 @@ const MoviePage = () => {
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Videos`}</Box>
                         </Typography>
-                        {detail.data?
+                        {movieDetail?
                         <TrailerCollection 
-                        trailersData={detail.data.videos.results}
+                        trailersData={movieDetail.videos.results}
                         />
                         : <TrailerCollection trailersData={null} />
                         }
@@ -99,7 +161,7 @@ const MoviePage = () => {
                         <Typography component='div' variant='h4'>
                             <Box pl={2} fontWeight={600}>{`Casts`}</Box>
                         </Typography>
-                        {detail.data?<CastCollection castData={detail.data.credits.cast}/>
+                        {movieDetail?<CastCollection castData={movieDetail.credits.cast}/>
                         : <CastCollection castData={null} />
                         }
                     </Box>
@@ -118,14 +180,14 @@ const MoviePage = () => {
                     </Box>
                     {/* enlarge image */}
                     {
-                    !detail.data || !enlarge? null:
+                    !movieDetail || !enlarge? null:
                     <Modal className={classes.modal} open={enlarge} onClose={toggleEnlarge}>
                         <motion.div layoutId={LayoutIdTypes.moviePosterImage} 
                         style={motionDivStyle} transition={springTransition()}>
                             <PosterImage
                             raised
                             onClick={toggleEnlarge} 
-                            imageURL={buildImageQuery(detail.data.poster_path, 'w342')}
+                            imageURL={buildImageQuery(movieDetail.poster_path, 'w342')}
                             imageWidth={342}
                             />
                         </motion.div>
@@ -133,6 +195,7 @@ const MoviePage = () => {
                     }
                 </React.Fragment>
             </MovieLayout>
+        }    
         </PageLayout>
     );
 };

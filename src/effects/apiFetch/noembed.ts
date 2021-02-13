@@ -24,7 +24,7 @@ export function useNoembed(videoSrc:string):IFetchResponse<INoembedData>{
     }, fetcher);
 
     const isLoading = !data && !error;
-    console.log(data);
+    // console.log(data);
     if(error){
         console.log(error);
         return {

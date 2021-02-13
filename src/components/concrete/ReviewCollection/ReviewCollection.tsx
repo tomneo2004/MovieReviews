@@ -13,7 +13,7 @@ import { dateFromUTC } from '../../../utils/timeConverter';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { motion } from 'framer-motion';
 
-type ReviewCollectionProps = React.ComponentProps<typeof React.Component> &{
+type ReviewCollectionProps = React.ComponentProps<typeof Box> &{
     reviewData:IMovieReviewsData;
     isLoadingMore?:boolean;
 }
@@ -57,7 +57,7 @@ const ReviewCollection: React.FC<ReviewCollectionProps> = (props:ReviewCollectio
     const scale = toRatingMax / fromRatingMax;
 
     return (
-        <React.Fragment {...rest}>
+        <Box {...rest}>
         {
             reviews.map(review=>{
 
@@ -102,7 +102,7 @@ const ReviewCollection: React.FC<ReviewCollectionProps> = (props:ReviewCollectio
             </Box>
         }
         </motion.div>
-        </React.Fragment>
+        </Box>
     )
 };
 

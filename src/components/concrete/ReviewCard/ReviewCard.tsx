@@ -75,7 +75,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props:ReviewCardProps)=>{
                     />
                 </motion.div>
                 <CardContent>
-                    <Typography>
+                    <Typography component='div'>
                     {expanded?paragraph:partial}
                     </Typography>
                 </CardContent>
