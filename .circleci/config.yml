@@ -13,7 +13,7 @@ workflows:
             - Install Dependencies
           debug: 'cypress:cli'
           attach-workspace: true
-          command: npm run ci-test
+          command: npm run ci-test-record
 
       - cypress/run:
           name: Building Project
