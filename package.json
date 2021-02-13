@@ -7,9 +7,6 @@
     "url" : "https://github.com/tomneo2004/MovieReviews"
   },
   "release": {
-    "branches": [
-      {"name":"alpha", "prerelease": true}
-    ],
     "plugins": [
       [
         "@semantic-release/changelog",
