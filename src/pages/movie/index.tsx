@@ -11,11 +11,9 @@ import { useMovieReviews } from "../../effects/apiFetch/movieReviews";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import CastCollection from "../../components/concrete/CastCollection/CastCollection";
 import ReviewCollection from "../../components/concrete/ReviewCollection/ReviewCollection";
-import { Divider, makeStyles, Modal } from "@material-ui/core";
+import { Divider, makeStyles } from "@material-ui/core";
 import TrailerCollection from "../../components/concrete/VideoCollection/VideoCollection";
 import { motion } from "framer-motion";
-import { LayoutIdTypes } from "../../framer/LayoutIdTypes";
-import { springTransition } from "../../framer/Transition";
 import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { IMovieDetailData } from "../../utils/api/model/apiModelTypes";
@@ -80,7 +78,6 @@ export const getServerSideProps: GetServerSideProps = async (
 const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, error } = pageProps;
   const reviews = useMovieReviews(Number(movieId));
-  const [enlarge, setEnlarge] = React.useState<boolean>(false);
 
   useBottomScrollListener(() => {
     if (
@@ -93,23 +90,10 @@ const MoviePage = (pageProps: IPageProps) => {
   });
 
   const classes = makeStyles({
-    modal: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    },
     pointer: {
       cursor: "pointer",
     },
   })();
-
-  const motionDivStyle = {
-    width: "fit-content",
-    height: "fit-content",
-    outline: "none",
-  };
-
-  const toggleEnlarge = () => setEnlarge((state) => !state);
 
   return (
     <PageLayout
@@ -126,22 +110,18 @@ const MoviePage = (pageProps: IPageProps) => {
       ) : (
         <MovieLayout
           poster={
-            enlarge ? null : (
-              <motion.div
-                layoutId={LayoutIdTypes.moviePosterImage}
-                style={motionDivStyle}
-                transition={springTransition()}
-              >
-                <PosterImage
-                  className={classes.pointer}
-                  onClick={toggleEnlarge}
-                  imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
-                  imageWidth={342}
-                />
-              </motion.div>
-            )
+            <PosterImage
+              className={classes.pointer}
+              imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
+              imageWidth={342}
+              enlargeWidth={342}
+            />
           }
-          info={<MovieInfo movieDetailData={movieDetail} />}
+          info={
+            <motion.div layout='position'>
+              <MovieInfo movieDetailData={movieDetail} />
+            </motion.div>
+          }
         >
           <React.Fragment>
             {/* trailers */}
@@ -189,27 +169,6 @@ const MoviePage = (pageProps: IPageProps) => {
                 <ReviewCollection reviewData={null} />
               )}
             </Box>
-            {/* enlarge image */}
-            {!movieDetail || !enlarge ? null : (
-              <Modal
-                className={classes.modal}
-                open={enlarge}
-                onClose={toggleEnlarge}
-              >
-                <motion.div
-                  layoutId={LayoutIdTypes.moviePosterImage}
-                  style={motionDivStyle}
-                  transition={springTransition()}
-                >
-                  <PosterImage
-                    raised
-                    onClick={toggleEnlarge}
-                    imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
-                    imageWidth={342}
-                  />
-                </motion.div>
-              </Modal>
-            )}
           </React.Fragment>
         </MovieLayout>
       )}

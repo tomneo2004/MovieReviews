@@ -4,4 +4,9 @@ export default createStyles({
   cardMedia: {
     objectFit: "fill",
   },
+  modal: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

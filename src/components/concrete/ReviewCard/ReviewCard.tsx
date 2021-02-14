@@ -54,9 +54,9 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
   };
 
   return (
-    <motion.div layout={!expanded}>
+    <motion.div layout='position'>
       <Card {...rest} raised>
-        <motion.div layout={expanded}>
+        <motion.div layout='position'>
           <CardHeader
             title={
               <Box display="flex" flexDirection="row" flexWrap="wrap">
@@ -85,7 +85,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
           </Typography>
         </CardContent>
         {!expandable ? null : (
-          <motion.div layout>
+          <motion.div layout='position'>
             <CardActions>
               <IconButton
                 className={clsx(expandBtnClass)}

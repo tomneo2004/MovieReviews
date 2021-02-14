@@ -1,6 +1,5 @@
 import { Grid, useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import { motion } from "framer-motion";
 import React from "react";
 
 export interface IProps {
@@ -25,11 +24,11 @@ const MovieLayout = (props: IProps) => {
       <Grid container>
         {poster ? (
           <Grid md={4} item container justify="center">
-            <motion.div layout>{poster}</motion.div>
+            {poster}
           </Grid>
         ) : null}
         <Grid md={8} item container justify="center">
-          <motion.div layout>{info}</motion.div>
+          {info}
         </Grid>
       </Grid>
       {children}

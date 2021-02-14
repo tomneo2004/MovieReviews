@@ -98,7 +98,7 @@ const ReviewCollection: React.FC<ReviewCollectionProps> = (
           </Box>
         );
       })}
-      <motion.div layout>
+      <motion.div layout='position'>
         {!isLoadingMore ? null : (
           <Box pt={3} width="inherit">
             <LinearProgress />
