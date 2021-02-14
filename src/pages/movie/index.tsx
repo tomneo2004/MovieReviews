@@ -26,7 +26,7 @@ interface IPageProps {
   error: any;
 }
 const apiMovieDetailRoute = `${
-  process.env.NEXT_PUBLIC_API_BASE_ROUTE || ""
+  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
 }/api/detail/movies`;
 
 const fetchMovieDetail = async (movieId: string) => {

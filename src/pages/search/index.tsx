@@ -31,7 +31,7 @@ async function fetchData(url: string) {
   }
 }
 
-const apiRoute = `${process.env.NEXT_PUBLIC_API_BASE_ROUTE}/api/search/movies`;
+const apiRoute = `${process.env.NEXT_PUBLIC_WEBSITE_ROUTE}/api/search/movies`;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query, page = 1 } = context.query as { [key: string]: string };

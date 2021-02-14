@@ -4,7 +4,7 @@ import { IMovieData } from "../../utils/api/model/apiModelTypes";
 import { IFetchResponse } from "./fetchResponse";
 
 const apiRoute = `${
-  process.env.NEXT_PUBLIC_API_BASE_ROUTE || ""
+  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
 }/api/trending/movies`;
 
 const fetcher = async (url: string) => {
