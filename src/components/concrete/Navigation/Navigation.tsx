@@ -9,6 +9,9 @@ import style from "./NavigationStyle";
 type NavigationProps = React.ComponentProps<typeof AppBar> & {
   brand?: React.ReactElement;
   rightButtons?: React.ReactElement[];
+  /**
+   * default false
+   */
   hideOnScroll?: boolean;
 };
 

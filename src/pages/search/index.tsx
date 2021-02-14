@@ -7,8 +7,6 @@ import SearchLayout from "../../layouts/search/searchLayout";
 import SearchBar from "../../components/concrete/SearchBar/SearchBar";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import SearchResults from "../../components/concrete/SearchResults/SearchResults";
-import { motion } from "framer-motion";
-import { LayoutIdTypes } from "../../framer/LayoutIdTypes";
 import { GetServerSideProps } from "next";
 import { ISearchMovieData } from "../../utils/api/model/apiModelTypes";
 import axios from "axios";
@@ -76,10 +74,8 @@ const SearchPage = (pageProps: IPageProps) => {
   return (
     <PageLayout
       navigation={
-        <motion.div layoutId={LayoutIdTypes.navigation}>
           <Navigation
             position="sticky"
-            hideOnScroll={true}
             rightButtons={[
               <Box id="nav-search-bar">
                 <SearchBar
@@ -94,7 +90,6 @@ const SearchPage = (pageProps: IPageProps) => {
               </Box>,
             ]}
           />
-        </motion.div>
       }
     >
       <SearchLayout>

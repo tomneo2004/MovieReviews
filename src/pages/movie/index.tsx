@@ -114,9 +114,7 @@ const MoviePage = (pageProps: IPageProps) => {
   return (
     <PageLayout
       navigation={
-        <motion.div layoutId={LayoutIdTypes.navigation}>
-          <Navigation position="sticky" hideOnScroll={true} />
-        </motion.div>
+          <Navigation position="sticky" />
       }
     >
       {error ? (

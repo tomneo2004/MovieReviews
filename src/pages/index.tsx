@@ -10,8 +10,6 @@ import Popular from "../components/concrete/Popular/Popular";
 import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
-import { motion } from "framer-motion";
-import { LayoutIdTypes } from "../framer/LayoutIdTypes";
 import axios from "axios";
 import { IMovieData } from "../utils/api/model/apiModelTypes";
 
@@ -110,9 +108,7 @@ const LandingPage = (pageProps: IPageProps) => {
   return (
     <PageLayout
       navigation={
-        <motion.div layoutId={LayoutIdTypes.navigation}>
-          <Navigation position="sticky" hideOnScroll={true} />
-        </motion.div>
+          <Navigation position="sticky" />
       }
     >
       <LandingLayout>
