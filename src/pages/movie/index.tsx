@@ -1,5 +1,4 @@
 import React from "react";
-import Navigation from "../../components/concrete/Navigation/Navigation";
 import PageLayout from "../../layouts/pageLayout";
 import MovieLayout from "../../layouts/movie/movieLayout";
 import PosterImage from "../../components/unit/PosterImage/PosterImage";
@@ -17,6 +16,9 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { IMovieDetailData } from "../../utils/api/model/apiModelTypes";
+import SearchNavigation from "../../components/concrete/SearchNavigation/SearchNavigation";
+import { getRoute, RouteType } from "../../routes/routesGenerator";
+import { useRouter } from "next/router";
 
 interface IPageProps {
   movieId: string;
@@ -77,6 +79,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
 const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, error } = pageProps;
+  const router = useRouter(); 
   const reviews = useMovieReviews(Number(movieId));
 
   useBottomScrollListener(() => {
@@ -95,10 +98,14 @@ const MoviePage = (pageProps: IPageProps) => {
     },
   })();
 
+  const handleSearch = (value: string) => {
+    router.push(getRoute(RouteType.search, { query: value }));
+  };
+
   return (
     <PageLayout
       navigation={
-          <Navigation position="sticky" />
+          <SearchNavigation onSearch={handleSearch} />
       }
     >
       {error ? (

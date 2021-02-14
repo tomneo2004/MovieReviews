@@ -1,10 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 import PageLayout from "../../layouts/pageLayout";
-import Navigation from "../../components/concrete/Navigation/Navigation";
 import Pagination from "@material-ui/lab/Pagination/Pagination";
 import SearchLayout from "../../layouts/search/searchLayout";
-import SearchBar from "../../components/concrete/SearchBar/SearchBar";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import SearchResults from "../../components/concrete/SearchResults/SearchResults";
 import { GetServerSideProps } from "next";
@@ -12,6 +10,7 @@ import { ISearchMovieData } from "../../utils/api/model/apiModelTypes";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import SearchNavigation from "../../components/concrete/SearchNavigation/SearchNavigation";
 
 interface IPageProps {
   query: string;
@@ -74,22 +73,7 @@ const SearchPage = (pageProps: IPageProps) => {
   return (
     <PageLayout
       navigation={
-          <Navigation
-            position="sticky"
-            rightButtons={[
-              <Box id="nav-search-bar">
-                <SearchBar
-                  fullWidth
-                  placeholder="Search ..."
-                  onEnter={handleSearch}
-                  opacity={0.5}
-                  opacityHover={0.7}
-                  inputWidth="7.9em"
-                  inputFocusWidth="9.5em"
-                />
-              </Box>,
-            ]}
-          />
+        <SearchNavigation onSearch={handleSearch} />
       }
     >
       <SearchLayout>
