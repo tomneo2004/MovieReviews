@@ -1,4 +1,3 @@
-import Navigation from "../components/concrete/Navigation/Navigation";
 import PageLayout from "../layouts/pageLayout";
 import LandingLayout from "../layouts/landing/landingLayout";
 import HeroLayout from "../layouts/landing/heroLayout";
@@ -106,11 +105,7 @@ const LandingPage = (pageProps: IPageProps) => {
   const theme = useTheme();
 
   return (
-    <PageLayout
-      navigation={
-          <Navigation position="sticky" />
-      }
-    >
+    <PageLayout>
       <LandingLayout>
         <HeroLayout
           background={
