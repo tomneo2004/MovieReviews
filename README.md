@@ -198,9 +198,7 @@ This is a service that is provided by Cypress. You can upload testing results to
     5. Generate a new token
     6. Write down or remember the token
 
-6. NPM Token
-
-7. Setup Circle.ci
+6. Setup Circle.ci
     1. Go to dashboard in Circle.ci
     2. Go to forked project 
     3. Click `Project Settings`
@@ -216,7 +214,7 @@ This is a service that is provided by Cypress. You can upload testing results to
         - NETLIFY_AUTH_TOKEN: Remember we genreate token from Netlify at step 3
         - NETLIFY_SITE_ID: Remeber `API ID` from Netlify at step 3
 
-8. Push branch to github
+7. Push branch to github
     1. Install commitizen if you haven't
         ```
         npm install commitizen -g
