@@ -60,6 +60,8 @@ let timer: NodeJS.Timeout;
  * 
  * A carousel looping a set of group of motion text
  * 
+ * Motion is `RevealFadeMotion`
+ * 
  * @param {RFCarouselProps} props 
  */
 const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
