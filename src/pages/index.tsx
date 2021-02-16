@@ -2,7 +2,6 @@ import PageLayout from "../layouts/pageLayout";
 import LandingLayout from "../layouts/landing/landingLayout";
 import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, fade, Typography, useTheme } from "@material-ui/core";
-import Carousel from "react-material-ui-carousel";
 import React from "react";
 import Trending from "../components/concrete/Trending/Trending";
 import Popular from "../components/concrete/Popular/Popular";
@@ -11,11 +10,13 @@ import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import axios from "axios";
 import { IMovieData } from "../utils/api/model/apiModelTypes";
+import RFCarousel, { RFCMotionOptions, RFCTextGroup } from "../components/concrete/RFCarousel/RFCarousel";
+import { springTransition } from "../framer/Transition";
 
-const caroselItems = ["Find Movies", "See Reviews", "Explores"];
 
 interface IPageProps {
   bgImageSrc: string;
+  carousel:RFCTextGroup[];
   popularMovies: IMovieData[];
   trendingMovies: {
     day: IMovieData[];
@@ -64,10 +65,53 @@ const fetchTrendingMoviesByWeek = async () => {
   }
 };
 
+const prepareCarousel = ()=>{
+  const option1: RFCMotionOptions = {
+    axis:'y',
+    opacity:{from:0, to:1},
+    enterTranistion: springTransition(300, 55, 0.1),
+    exitTranistion: springTransition(300, 55, 1)
+  }
+
+  const option2: RFCMotionOptions = {
+    ...option1,
+    axis:'both',
+    enterTranistion: springTransition(355, 30, 1.5),
+    exitTranistion: springTransition(300, 105, 0.1)
+  }
+
+  const option3: RFCMotionOptions = {
+    ...option1,
+    enterTranistion: springTransition(300, 55, 0.5),
+    exitTranistion: springTransition(300, 55, 0.5)
+  }
+
+  const set = [
+    [
+        {text:'See', motionOptions:option1}, 
+        {text:'What movies are', motionOptions:option2},
+        {text:'popular', motionOptions:option3}
+    ],
+    [
+        {text:'Search', motionOptions:option1}, 
+        {text:'Favorite movies', motionOptions:option2},
+        {text:'With title', motionOptions:option3}
+    ],
+    [
+        {text:'Explore', motionOptions:option1}, 
+        {text:'All movies', motionOptions:option2},
+        {text:'And see what others say', motionOptions:option3}
+    ]
+  ] 
+
+  return set;
+}
+
 export const getStaticProps: GetStaticProps<IPageProps> = async () => {
   const bgImageSrc =
     "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
   const revalidate = 86400;
+  const carousel = prepareCarousel();
 
   try {
     const popular = await fetchPopularMovies();
@@ -77,6 +121,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
     return {
       props: {
         bgImageSrc,
+        carousel,
         popularMovies: popular,
         trendingMovies: {
           day: trendingByDay,
@@ -91,6 +136,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
     return {
       props: {
         bgImageSrc,
+        carousel,
         popularMovies: null,
         trendingMovies: null,
         error: e.message,
@@ -101,7 +147,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
 };
 
 const LandingPage = (pageProps: IPageProps) => {
-  const { bgImageSrc, popularMovies, trendingMovies, error } = pageProps;
+  const { bgImageSrc, carousel, popularMovies, trendingMovies, error } = pageProps;
   const theme = useTheme();
 
   return (
@@ -117,24 +163,11 @@ const LandingPage = (pageProps: IPageProps) => {
           }
           title={
             <Typography id="hero-title" component="div" variant="h1">
-              <Box fontWeight={500}>Welcome</Box>
+              <Box fontWeight={500}>Start Explore</Box>
             </Typography>
           }
           carousel={
-            <Carousel
-              indicators={false}
-              navButtonsAlwaysVisible={false}
-              navButtonsAlwaysInvisible={true}
-              animation="slide"
-            >
-              {caroselItems.map((item) => {
-                return (
-                  <Typography key={item} variant="h4">
-                    <Box fontWeight={500}>{item}</Box>
-                  </Typography>
-                );
-              })}
-            </Carousel>
+            <RFCarousel height='10rem' textSet={carousel} interval={7000} />
           }
           search={<HeroSearchBar />}
         />

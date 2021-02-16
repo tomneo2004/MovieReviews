@@ -16,17 +16,21 @@ export type RFCMotionOptions = {
     /** Transition for exit */
     exitTranistion: Transition
 }
-type RFCText = {
-    text:string;
+export type RFCText = {
+    text:React.ReactNode;
     motionOptions?:RFCMotionOptions
 }
 
-type RFCTextGroup = RFCText[];
+export type RFCTextGroup = RFCText[];
 
-type RFCarouselProps = React.ComponentProps<typeof React.Component> & {
+type RFCarouselProps = React.ComponentProps<typeof Box> & {
     /**
      * How long is a group be presented
      * before preseting next group
+     * 
+     * number in ms
+     * 
+     * default 5000 ms
      */
     interval?: number;
 
@@ -38,11 +42,17 @@ type RFCarouselProps = React.ComponentProps<typeof React.Component> & {
      * Should account for animation out and in time
      * 
      * [Group A animate out] + [Group B animate in] = transition
+     * 
+     * number in ms
+     * 
+     * default 3000 ms
      */
     transition?: number;
 
     /**
      * Index of group will be presented at beginning
+     * 
+     * default 0
      */
     defaultGroupIndex?: number;
 
@@ -67,8 +77,10 @@ let timer: NodeJS.Timeout;
 const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
     const {
         interval = 5000,
+        transition = 3000,
         defaultGroupIndex = 0,
         textSet = [],
+        ...rest
     } = props;
 
     const [index, setIndex] = React.useState<number>(defaultGroupIndex);
@@ -76,7 +88,7 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
     React.useEffect(()=>{
         timer = setTimeout(()=>{
             setIndex(index=>index+1);
-        }, interval + (index?3000:0));
+        }, interval + (index?transition:0));
 
         return ()=>{
             if(timer) clearTimeout(timer);
@@ -86,6 +98,7 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
     const textGroup = textSet[index % textSet.length];
 
     return (
+        <Box {...rest}>
         <AnimatePresence exitBeforeEnter>
         {
             textGroup.map(value=>{
@@ -135,6 +148,7 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
             })
         }
         </AnimatePresence>
+        </Box>
     );
 };
 
