@@ -2,21 +2,12 @@ import React from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import Box from "@material-ui/core/Box";
-import { makeStyles, useScrollTrigger, useTheme } from "@material-ui/core";
-import Slide from "@material-ui/core/Slide/Slide";
-import style from "./NavigationStyle";
+import useIsomorphicEffect from "../../../effects/isomorphic/isomorphicEffect";
 
 type NavigationProps = React.ComponentProps<typeof AppBar> & {
   brand?: React.ReactElement;
   rightButtons?: React.ReactElement[];
-  /**
-   * default false
-   */
-  hideOnScroll?: boolean;
-};
-
-type HideScrollProps = React.ComponentProps<typeof Slide> & {
-  children: React.ReactElement;
+  elevateThreshold?: number;
 };
 
 const renderRightButtons = (buttons: React.ReactNode[]) => {
@@ -30,25 +21,57 @@ const renderRightButtons = (buttons: React.ReactNode[]) => {
   });
 };
 
-const HideOnScroll = (props: HideScrollProps) => {
-  const { children, ...rest } = props;
+/**
+ * Component Navigation
+ * 
+ * Wrapped Material-UI AppBar
+ * 
+ * Component include brand on left and buttons on right
+ * 
+ * @param {NavigationProps} props 
+ */
+const Navigation: React.FC<NavigationProps> = (props: NavigationProps) => {
+  const { 
+    brand = null, 
+    rightButtons = null, 
+    elevation = 4,
+    elevateThreshold = 0,
+    ...rest 
+  } = props;
 
-  const trigger = useScrollTrigger();
+  const appbarRef = React.useRef<HTMLDivElement>();
+  const [elevate, setElevate] = React.useState<boolean>(false);
+  const [boundaryY, setBoundaryY] = React.useState<number>(0);
+
+  useIsomorphicEffect(()=>{
+    const top = appbarRef.current.getBoundingClientRect().top;
+    setBoundaryY(top+elevateThreshold);
+  }, []);
+
+  React.useEffect(()=>{
+
+    const handleWindowScroll = ()=>{
+      if(window.scrollY>boundaryY){
+        setElevate(true);
+      }
+      else{
+        setElevate(false);
+      }
+    }
+
+    if(window){
+      window.addEventListener('scroll', handleWindowScroll);
+    }
+
+    return ()=>{
+      if(window){
+         window.removeEventListener('scroll', handleWindowScroll);
+      }
+    }
+  }, [boundaryY])
 
   return (
-    <Slide {...rest} appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-};
-
-const getAppBar = (props: NavigationProps) => {
-  const { brand = null, rightButtons = null, ...rest } = props;
-  const theme = useTheme();
-  const classes = makeStyles(style)({ theme });
-
-  return (
-    <AppBar className={classes.appBar} {...rest}>
+    <AppBar ref={appbarRef} {...rest} elevation={elevate?elevation:0}>
       <Toolbar>
         <Box flex="1">{brand ? brand : null}</Box>
         <Box flex="1" display="flex" justifyContent="flex-end">
@@ -56,17 +79,7 @@ const getAppBar = (props: NavigationProps) => {
         </Box>
       </Toolbar>
     </AppBar>
-  );
-};
-
-const Navigation: React.FC<NavigationProps> = (props: NavigationProps) => {
-  const { hideOnScroll = false, ...rest } = props;
-
-  if (hideOnScroll) {
-    return <HideOnScroll>{getAppBar(rest)}</HideOnScroll>;
-  }
-
-  return getAppBar(rest);
+  )
 };
 
 export default Navigation;

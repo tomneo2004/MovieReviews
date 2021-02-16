@@ -9,7 +9,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.inline.svg$/,
+                test: /\.svg$/,
                 use: [
                     {loader:'@svgr/webpack'}
                 ]
