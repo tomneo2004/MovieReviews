@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "homepage": "https://digmovie.netlify.app/",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/tomneo2004/MovieReviews"
+    "type": "git",
+    "url": "https://github.com/tomneo2004/MovieReviews"
   },
   "release": {
     "plugins": [
