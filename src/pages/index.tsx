@@ -9,13 +9,14 @@ import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import axios from "axios";
-import { IMovieData } from "../utils/api/model/apiModelTypes";
+import { IMovieData, ITopRatedMoviesData } from "../utils/api/model/apiModelTypes";
 import RFCarousel, { RFCMotionOptions, RFCTextGroup } from "../components/concrete/RFCarousel/RFCarousel";
 import { springTransition } from "../framer/Transition";
+import { buildImageQuery } from "../utils/api/query/apiQueryBuilder";
 
 
 interface IPageProps {
-  bgImageSrc: string;
+  heroBackdrop: string;
   carousel:RFCTextGroup[];
   popularMovies: IMovieData[];
   trendingMovies: {
@@ -31,6 +32,9 @@ const apiPopularRoute = `${
 const apiTrendingRoute = `${
   process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
 }/api/trending/movies`;
+const apiTopRatedRoute = `${
+  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
+}/api/toprated`;
 
 //https://developers.themoviedb.org/3/movies/get-popular-movies
 const fetchPopularMovies = async () => {
@@ -65,6 +69,16 @@ const fetchTrendingMoviesByWeek = async () => {
   }
 };
 
+const fetchTopRatedMovies = async ()=>{
+  try {
+    const resp = await axios.get(apiTopRatedRoute);
+    const data: ITopRatedMoviesData = resp.data;
+    return data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+}
+
 const prepareCarousel = ()=>{
   const option1: RFCMotionOptions = {
     axis:'y',
@@ -76,12 +90,14 @@ const prepareCarousel = ()=>{
   const option2: RFCMotionOptions = {
     ...option1,
     axis:'both',
+    indent:2,
     enterTranistion: springTransition(355, 30, 1.5),
     exitTranistion: springTransition(300, 105, 0.1)
   }
 
   const option3: RFCMotionOptions = {
     ...option1,
+    indent:4,
     enterTranistion: springTransition(300, 55, 0.5),
     exitTranistion: springTransition(300, 55, 0.5)
   }
@@ -89,18 +105,18 @@ const prepareCarousel = ()=>{
   const set = [
     [
         {text:'See', motionOptions:option1}, 
-        {text:'What movies are', motionOptions:option2},
+        {text:'what movies are', motionOptions:option2},
         {text:'popular', motionOptions:option3}
     ],
     [
         {text:'Search', motionOptions:option1}, 
-        {text:'Favorite movies', motionOptions:option2},
-        {text:'With title', motionOptions:option3}
+        {text:'favorite movies', motionOptions:option2},
+        {text:'with title', motionOptions:option3}
     ],
     [
         {text:'Explore', motionOptions:option1}, 
-        {text:'All movies', motionOptions:option2},
-        {text:'And see what others say', motionOptions:option3}
+        {text:'all movies', motionOptions:option2},
+        {text:'and see what others say', motionOptions:option3}
     ]
   ] 
 
@@ -108,10 +124,21 @@ const prepareCarousel = ()=>{
 }
 
 export const getStaticProps: GetStaticProps<IPageProps> = async () => {
-  const bgImageSrc =
-    "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+  const heroBackdropDefault = "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
   const revalidate = 86400;
   const carousel = prepareCarousel();
+
+  const topRatedMovies = await fetchTopRatedMovies();
+  let heroBackdrop = heroBackdropDefault;
+
+  //find hero backdrop from top rated movies
+  for(let i=0; i<topRatedMovies.results.length; i++){
+    const backdropPath = topRatedMovies.results[i].backdrop_path;
+    if(backdropPath){
+      heroBackdrop = buildImageQuery(backdropPath, "original");;
+      break;
+    }
+  }
 
   try {
     const popular = await fetchPopularMovies();
@@ -120,7 +147,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
 
     return {
       props: {
-        bgImageSrc,
+        heroBackdrop,
         carousel,
         popularMovies: popular,
         trendingMovies: {
@@ -135,7 +162,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
     console.log(e);
     return {
       props: {
-        bgImageSrc,
+        heroBackdrop,
         carousel,
         popularMovies: null,
         trendingMovies: null,
@@ -147,7 +174,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
 };
 
 const LandingPage = (pageProps: IPageProps) => {
-  const { bgImageSrc, carousel, popularMovies, trendingMovies, error } = pageProps;
+  const { heroBackdrop, carousel, popularMovies, trendingMovies, error } = pageProps;
   const theme = useTheme();
 
   return (
@@ -157,7 +184,7 @@ const LandingPage = (pageProps: IPageProps) => {
           background={
             <ProgressiveImage
               backdropColor={fade(theme.palette.primary.light, 0.3)}
-              imageSrc={bgImageSrc}
+              imageSrc={heroBackdrop}
               bgPosition="center center"
             />
           }
@@ -167,7 +194,7 @@ const LandingPage = (pageProps: IPageProps) => {
             </Typography>
           }
           carousel={
-            <RFCarousel height='10rem' textSet={carousel} interval={7000} />
+            <RFCarousel height='12rem' textSet={carousel} interval={7000} />
           }
           search={<HeroSearchBar />}
         />

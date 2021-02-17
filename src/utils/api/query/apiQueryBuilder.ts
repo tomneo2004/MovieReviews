@@ -118,11 +118,48 @@ export function getMovieDetailQuery(
   return builtQuery;
 }
 
+/**
+ * Query for specific movie's reviews
+ * @param id id of movie
+ * @param params 
+ */
 export function getMovieReviewQuery(
   id: string,
   params: IParams = defaultParams
 ) {
   const queryString = `/movie/${id}/reviews`;
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
+/**
+ * Query for latest movie
+ * @param params 
+ */
+export function getLatestMovieQuery(params:IParams = defaultParams){
+  const queryString = `/movie/latest`;
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
+/**
+ * Query for top rated movie
+ * @param params 
+ */
+export function getTopRatedMovieQuery(params:IParams = defaultParams){
+  const queryString = `/movie/top_rated`;
   const builtQuery = buildAPIQuery(
     queryString,
     movieAPI,

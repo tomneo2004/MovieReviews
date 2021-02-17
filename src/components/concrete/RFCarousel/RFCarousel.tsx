@@ -9,6 +9,14 @@ import { springTransition } from '../../../framer/Transition';
 export type RFCMotionOptions = {
     /** direction of motion */
     axis: 'x'|'y'|'both',
+    /**
+     * indentation from last sentence
+     * 
+     * also can think it as padding left
+     * 
+     * default 0
+     */
+    indent?: number | string,
     /** motion opacity */
     opacity: {from:number, to:number},
     /** Transition for enter */
@@ -106,6 +114,7 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
                 if(!option){
                     option = {
                         axis: 'y',
+                        indent: 0,
                         opacity: {from: 0, to: 1},
                         enterTranistion: springTransition(300, 55, 0.1),
                         exitTranistion: springTransition(300, 55, 0)
@@ -138,8 +147,8 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
                     enterSize={enterSize}
                     exitSize={exitSize}
                     >
-                        <Typography key={`${shortid.generate()}`} variant='h4' component='div' noWrap={option.axis!=='y'}>
-                            <Box fontSize='3rem'>
+                        <Typography key={`${shortid.generate()}`} variant='h1' component='div' noWrap={option.axis!=='y'}>
+                            <Box pl={option.indent} fontSize='3rem'>
                                 {value.text}
                             </Box>
                         </Typography>

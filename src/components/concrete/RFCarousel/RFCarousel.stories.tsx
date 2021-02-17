@@ -133,3 +133,55 @@ export const Sequence2 = () => {
     </React.Fragment>
   );
 };
+
+export const Indentation = () => {
+  
+  const option1: RFCMotionOptions = {
+    axis:'y',
+    indent:0,
+    opacity:{from:0, to:1},
+    enterTranistion: springTransition(300, 55, 0.1),
+    exitTranistion: springTransition(300, 55, 1)
+  }
+
+  const option2: RFCMotionOptions = {
+    ...option1,
+    axis:'both',
+    indent:1,
+    enterTranistion: springTransition(300, 55, 1),
+    exitTranistion: springTransition(300, 55, 0.1)
+  }
+
+  const option3: RFCMotionOptions = {
+    ...option1,
+    indent:2,
+    enterTranistion: springTransition(300, 55, 0.5),
+    exitTranistion: springTransition(300, 55, 0.5)
+  }
+
+  return (
+    <React.Fragment>
+    <AnimateSharedLayout>
+        <RFCarousel
+        textSet={[
+            [
+                {text:'First text', motionOptions:option1}, 
+                {text:'Second text', motionOptions:option2},
+                {text:'Third text', motionOptions:option3}
+            ],
+            [
+                {text:'One', motionOptions:option1}, 
+                {text:'Two', motionOptions:option2},
+                {text:'Three', motionOptions:option3}
+            ],
+            [
+                {text:'Today', motionOptions:option1}, 
+                {text:'is a beautiful day', motionOptions:option2},
+                {text:'like to go out', motionOptions:option3}
+            ]
+        ]}
+        />
+    </AnimateSharedLayout>
+    </React.Fragment>
+  );
+};
