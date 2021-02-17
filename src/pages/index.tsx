@@ -12,7 +12,7 @@ import axios from "axios";
 import { IMovieData, ITopRatedMoviesData } from "../utils/api/model/apiModelTypes";
 import RFCarousel, { RFCMotionOptions, RFCTextGroup } from "../components/concrete/RFCarousel/RFCarousel";
 import { springTransition } from "../framer/Transition";
-import { buildImageQuery } from "../utils/api/query/apiQueryBuilder";
+import { buildImageQuery, getPouplarMoviesQuery, getTopRatedMovieQuery, getTrendingQuery } from "../utils/api/query/apiQueryBuilder";
 
 
 interface IPageProps {
@@ -26,15 +26,10 @@ interface IPageProps {
   error: any;
 }
 
-const apiPopularRoute = `${
-  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
-}/api/popular/movies`;
-const apiTrendingRoute = `${
-  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
-}/api/trending/movies`;
-const apiTopRatedRoute = `${
-  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
-}/api/toprated`;
+const apiPopularRoute = getPouplarMoviesQuery();
+const apiDayTrendingRoute = getTrendingQuery('movie', 'day');
+const apiWeekTrendingRoute = getTrendingQuery('movie', 'week');
+const apiTopRatedRoute = getTopRatedMovieQuery();
 
 //https://developers.themoviedb.org/3/movies/get-popular-movies
 const fetchPopularMovies = async () => {
@@ -50,7 +45,7 @@ const fetchPopularMovies = async () => {
 //https://developers.themoviedb.org/3/trending/get-trending
 const fetchTrendingMoviesByDay = async () => {
   try {
-    const resp = await axios.get(`${apiTrendingRoute}?timeWindow=day`);
+    const resp = await axios.get(apiDayTrendingRoute);
     const data: IMovieData[] = resp.data.results;
     return data;
   } catch (e) {
@@ -61,7 +56,7 @@ const fetchTrendingMoviesByDay = async () => {
 //https://developers.themoviedb.org/3/trending/get-trending
 const fetchTrendingMoviesByWeek = async () => {
   try {
-    const resp = await axios.get(`${apiTrendingRoute}?timeWindow=week`);
+    const resp = await axios.get(apiWeekTrendingRoute);
     const data: IMovieData[] = resp.data.results;
     return data;
   } catch (e) {

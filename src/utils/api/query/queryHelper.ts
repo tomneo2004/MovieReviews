@@ -25,7 +25,7 @@ function buildQuery(
  *
  * @return a query string with api_key parameter added to it
  */
-function addAPIKey(queryString: string, apiKey: string) {
+export function addAPIKey(queryString: string, apiKey: string) {
   const query = urljoin(queryString, `?api_key=${apiKey}`);
 
   return query;
