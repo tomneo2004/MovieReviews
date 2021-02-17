@@ -102,10 +102,8 @@ const SearchResults: React.FC<SearchResultsProps> = (
               p={2}
             >
               <ScaleFadeFlow enterDelay={i * 0.08} exitDelay={i * 0.04}>
-                <Link
-                  href={getRoute(RouteType.movie, { id: movie.id.toString() })}
-                >
                   <MoviePoster
+                    linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
                     imageURL={buildImageQuery(movie.poster_path, "w185")}
                     imageWidth={185}
                     minWidth={200}
@@ -119,7 +117,6 @@ const SearchResults: React.FC<SearchResultsProps> = (
                     ratingOffsetX={-8}
                     ratingOffsetY={-8}
                   />
-                </Link>
               </ScaleFadeFlow>
             </Box>
           </Grid>
