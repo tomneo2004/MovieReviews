@@ -5,8 +5,10 @@ import style from "./MoviePosterStyle";
 import React from "react";
 import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 import PosterImage from "../../unit/PosterImage/PosterImage";
+import Link from "next/link";
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
+  linkTo?: string;
   imageURL?: string;
   imageWidth?: number;
   minWidth?: number;
@@ -37,6 +39,7 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
 
 const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
+    linkTo = '#', 
     imageURL = "",
     imageWidth = 150,
     minWidth = imageWidth,
@@ -60,15 +63,17 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
       maxWidth={maxWidth ? maxWidth : "inherit"}
       p={1}
     >
-      <PosterImage
-        imageURL={imageURL}
-        elevation={4}
-        className={classes.hoverPointer}
-        onMouseOver={onMouseOver}
-        imageWidth={imageWidth}
-      />
+      <Link href={linkTo}>
+        <PosterImage
+          imageURL={imageURL}
+          elevation={4}
+          className={classes.hoverPointer}
+          onMouseOver={onMouseOver}
+          imageWidth={imageWidth}
+        />
+      </Link>
       <Typography component="div" variant="h6">
-        <Box className={classes.hoverPointer} pt={1}>
+        <Box pt={1}>
           {title}
         </Box>
       </Typography>

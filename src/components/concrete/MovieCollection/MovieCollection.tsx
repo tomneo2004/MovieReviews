@@ -10,7 +10,7 @@ import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
-import Link from "next/link";
+// import Link from "next/link";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import ScaleFadeFlow from "../../../framer/ScaleFadeMotion";
 
@@ -77,24 +77,19 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
                       exitDelay={i * 0.08}
                       layout
                     >
-                      <Link
-                        href={getRoute(RouteType.movie, {
-                          id: data.id.toString(),
-                        })}
-                      >
-                        <MoviePoster
-                          imageURL={buildImageQuery(data.poster_path, "w185")}
-                          imageWidth={185}
-                          minWidth={200}
-                          title={data.title}
-                          releaseDate={data.release_date}
-                          ratingScore={getMovieRating(
-                            data.vote_count,
-                            data.vote_average
-                          )}
-                          onMouseOver={() => handleMouseOver(data)}
-                        />
-                      </Link>
+                      <MoviePoster
+                        linkTo={getRoute(RouteType.movie, {id: data.id.toString(),})}
+                        imageURL={buildImageQuery(data.poster_path, "w185")}
+                        imageWidth={185}
+                        minWidth={200}
+                        title={data.title}
+                        releaseDate={data.release_date}
+                        ratingScore={getMovieRating(
+                          data.vote_count,
+                          data.vote_average
+                        )}
+                        onMouseOver={() => handleMouseOver(data)}
+                      />
                     </ScaleFadeFlow>
                   ),
                 };
