@@ -4,12 +4,17 @@ module.exports = {
         config.module.rules.push(
             {
                 test: /\.(png|jpg|gif|svg)$/i,
+                exclude:{
+                    test:[
+                        /\.inline.svg$/
+                    ]
+                },
                 use:[
                     {loader:'url-loader'}
                 ]
             },
             {
-                test: /\.svg$/,
+                test: /\.inline.svg$/,
                 use: [
                     {loader:'@svgr/webpack'}
                 ]

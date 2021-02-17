@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, SvgIcon } from "@material-ui/core";
 import Navigation from "./Navigation";
-import BrandIcon from "../../../assets/test/unicorn.svg";
+import BrandIcon from "../../../assets/test/unicorn.inline.svg";
 
 export default {
   title: "Navigation",
@@ -165,7 +165,7 @@ export const RightButtons = () => {
       position="relative"
       brand={
         <SvgIcon fontSize="large">
-          <BrandIcon />
+         <BrandIcon />
         </SvgIcon>
       }
       rightButtons={[

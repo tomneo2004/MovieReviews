@@ -58,7 +58,7 @@ type PosterImageProps = React.ComponentProps<typeof Card> & {
  *
  * @param {PosterImageProps} props
  */
-const PosterImage: React.FC<PosterImageProps> = (props: PosterImageProps) => {
+const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterImageProps, _ref) => {
   const {
     alt = "image",
     imageURL = "",
@@ -143,6 +143,6 @@ const PosterImage: React.FC<PosterImageProps> = (props: PosterImageProps) => {
       </motion.div>
     </Box>
   );
-};
+});
 
 export default PosterImage;
