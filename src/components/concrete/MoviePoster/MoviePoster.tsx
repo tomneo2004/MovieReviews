@@ -78,7 +78,7 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
         </Box>
       </Typography>
       <Typography component="div" variant="subtitle1">
-        <Box display="flex" alignItems="center">
+        <Box display="flex" fontWeight='600' alignItems="center">
           {releaseDate}
         </Box>
       </Typography>
