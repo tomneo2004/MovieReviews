@@ -19,7 +19,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = (
 ) => {
   const { children, id, ...rest } = props;
   return (
-    <Box id={id} position="relative" px={1} py={3}>
+    <Box id={id} position="relative">
       <ProgressiveImage {...rest} />
       <Box zIndex={1} position="relative">
         {children}

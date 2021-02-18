@@ -1,4 +1,4 @@
-import { fade, useTheme } from "@material-ui/core";
+import { fade, SvgIcon, useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import React from "react";
@@ -9,6 +9,8 @@ import FancyTab from "../FancyTab/FancyTab";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import LeftArrowIcon from '../../../assets/icons/left-arrow.inline.svg';
+import RightArrowIcon from '../../../assets/icons/right-arrow.inline.svg';
 
 let timerHandler: NodeJS.Timeout;
 
@@ -92,6 +94,16 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
           {...rest}
           movieData={movieData}
           onHover={handleTrendingMovieHover}
+          scrollLeft={
+            <SvgIcon fontSize='large'>
+              <LeftArrowIcon />
+            </SvgIcon>
+          }
+          scrollRight={
+            <SvgIcon fontSize='large'>
+              <RightArrowIcon />
+            </SvgIcon>
+          }
         />
       </BackgroundImage>
     </Box>

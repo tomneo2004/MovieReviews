@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
 import MoviePoster from "../MoviePoster/MoviePoster";
 import HScroll, {
-  HScrollChildProp,
+  HScrollChildProp, IHorizontalScrollState,
 } from "../../unit/HorizontalScroll/HorizontalScroll";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
@@ -12,10 +12,13 @@ import getMovieRating from "../../../utils/movieRating";
 // import Link from "next/link";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import ScaleFadeFlow from "../../../framer/ScaleFadeMotion";
+import { fade, useTheme } from "@material-ui/core";
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
   movieData: IMovieData[] | null | undefined;
   onHover?: (data: IMovieData) => void | null | undefined;
+  scrollLeft?: React.ReactNode;
+  scrollRight?: React.ReactNode;
 };
 
 const renderSkeletons = () => {
@@ -45,19 +48,29 @@ const renderSkeletons = () => {
 const MovieCollection: React.FC<MovieCollectionProps> = (
   props: MovieCollectionProps
 ) => {
-  const {movieData = null, onHover = null, ...rest } = props;
+  const {movieData = null, onHover = null, scrollLeft = null, scrollRight = null, ...rest } = props;
+  const theme = useTheme();
+  const [scrollState, setScrollState] = React.useState<IHorizontalScrollState>({
+    endLeft: false,
+    endRight: false
+  });
 
   const handleMouseOver = (data: IMovieData) => {
     if (onHover) onHover(data);
   };
 
+  const handleScrollStateChange = (state:IHorizontalScrollState)=>{
+    if(state.endLeft !== scrollState.endLeft || state.endRight !== scrollState.endRight){
+      setScrollState(state);
+    }
+  }
+
   return (
-    <Box {...rest}>
-      <Box pt={2}>
+      <Box {...rest} pt={2}>
         {!movieData ? (
           renderSkeletons()
         ) : (
-          <HScroll>
+          <HScroll onScrollStateChange={handleScrollStateChange}>
             {() => {
               return movieData.map((data, i) => {
                 return {
@@ -88,8 +101,23 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
             }}
           </HScroll>
         )}
+        {scrollState.endLeft? 
+            null
+            :
+            <Box position='absolute' display='flex' flexDirection='column' justifyContent='center' 
+            left={0} top={0} bottom={0} bgcolor={fade(theme.palette.primary.light, 0.9)}>
+              {scrollLeft}
+            </Box>
+        }
+        {scrollState.endRight? 
+            null
+            :
+            <Box position='absolute' display='flex' flexDirection='column' justifyContent='center' 
+            right={0} top={0} bottom={0} bgcolor={fade(theme.palette.primary.light, 0.9)}>
+              {scrollRight}
+            </Box>
+        }
       </Box>
-    </Box>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Box, fade, LinearProgress, useTheme } from "@material-ui/core";
+import { Box, fade, LinearProgress, SvgIcon, useTheme } from "@material-ui/core";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
@@ -6,6 +6,8 @@ import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import LeftArrowIcon from '../../../assets/icons/left-arrow.inline.svg';
+import RightArrowIcon from '../../../assets/icons/right-arrow.inline.svg';
 
 type PopualrProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];
@@ -67,6 +69,16 @@ const Popular: React.FC<PopualrProps> = (props: PopualrProps) => {
         <MovieCollection
           movieData={popularMovies}
           onHover={handlePopularMovieHover}
+          scrollLeft={
+            <SvgIcon fontSize='large'>
+              <LeftArrowIcon />
+            </SvgIcon>
+          }
+          scrollRight={
+            <SvgIcon fontSize='large'>
+              <RightArrowIcon />
+            </SvgIcon>
+          }
         />
       </BackgroundImage>
     </Box>
