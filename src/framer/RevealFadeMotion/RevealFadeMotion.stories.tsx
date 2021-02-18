@@ -247,3 +247,69 @@ export const DiffMotion = ()=>{
         </React.Fragment>
     )
 }
+
+export const Characters = ()=>{
+    const [show, setShow] = React.useState<boolean>(true);
+
+    console.log(springTransition(null, null, 1));
+
+    const motionTexts = [
+        <RevealFadeMotion key='1'
+        inlineBlock 
+        initSize={{width:0, height:'fit-content'}}
+        enterSize={{width:'fit-content', height:'fit-content'}}
+        exitSize={{width:0, height:'fit-content'}}
+        enterTransition={springTransition(300, 55, 0)}
+        exitTransition={springTransition(300, 55, 1)}
+        >
+            <Typography variant='h4' component='div' noWrap>
+                <Box fontSize='3rem'>
+                    This trip
+                </Box>
+            </Typography>
+        </RevealFadeMotion>,
+        <RevealFadeMotion key='2'
+        inlineBlock 
+        initSize={{width:0, height:'fit-content'}}
+        enterSize={{width:'fit-content', height:'fit-content'}}
+        exitSize={{width:0, height:'fit-content'}}
+        enterTransition={springTransition(300, 55, 1)}
+        exitTransition={springTransition(300, 55, 0)}
+        >
+            <Typography variant='h4' component='div' noWrap>
+                <Box fontSize='3rem'>
+                    few days ago
+                </Box>
+            </Typography>
+        </RevealFadeMotion>,
+        <RevealFadeMotion key='3' 
+        inlineBlock
+        initSize={{width:0, height:'fit-content'}}
+        enterSize={{width:'fit-content', height:'fit-content'}}
+        exitSize={{width:0, height:'fit-content'}}
+        enterTransition={springTransition(300, 55, 0.4)}
+        exitTransition={springTransition(300, 55, 0.4)}
+        >
+            <Typography variant='h4' component='div' noWrap>
+                <Box fontSize='3rem'>
+                    is so awesome
+                </Box>
+            </Typography>
+        </RevealFadeMotion>
+    ]
+    return (
+        <React.Fragment>
+        <button onClick={()=>setShow(state=>!state)}>toggle</button>
+        <AnimateSharedLayout>
+            <AnimatePresence exitBeforeEnter>
+                {show?
+                    motionTexts.map(value=>{
+                        return value;
+                    })    
+                    :null
+                }
+            </AnimatePresence>
+        </AnimateSharedLayout>
+        </React.Fragment>
+    )
+}

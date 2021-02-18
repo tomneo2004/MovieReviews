@@ -4,6 +4,8 @@ import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import MovieCollection from "../MovieCollection/MovieCollection";
+import PhantomText from "../PhantomText/PhantomText";
+import SectionHeader from "../SectionHeader/SectionHeader";
 
 type PopualrProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];
@@ -19,6 +21,30 @@ const Popular: React.FC<PopualrProps> = (props: PopualrProps) => {
   };
   return (
     <Box {...rest}>
+      <SectionHeader 
+      px={2}
+      bgcolor={theme.palette.primary.main}
+      header={
+        <PhantomText height='100%' bgcolor={theme.palette.primary.light} px={1}
+        text={`what's popular`} 
+        charDelayDefs={{
+          5:{enter:1, exit:0},
+          7:{enter:1, exit:0},
+          4:{enter:1.3, exit:0},
+          8:{enter:1.3, exit:0},
+          3:{enter:1.6, exit:0},
+          9:{enter:1.6, exit:0},
+          2:{enter:1.9, exit:0},
+          10:{enter:1.9, exit:0},
+          1:{enter:2.2, exit:0},
+          11:{enter:2.2, exit:0},
+          0:{enter:2.5, exit:0},
+          12:{enter:2.5, exit:0},
+          13:{enter:2.8, exit:0},
+        }}
+        />
+      }
+      />
       <BackgroundImage
         imageSrc={popularBg}
         backdropColor={fade(theme.palette.primary.light, 0.6)}
@@ -39,7 +65,7 @@ const Popular: React.FC<PopualrProps> = (props: PopualrProps) => {
         }
       >
         <MovieCollection
-          header={`What's popular`}
+          // header={`What's popular`}
           movieData={popularMovies}
           onHover={handlePopularMovieHover}
         />

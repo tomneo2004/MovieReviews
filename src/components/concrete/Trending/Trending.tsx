@@ -7,6 +7,8 @@ import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import FancyTab from "../FancyTab/FancyTab";
 import MovieCollection from "../MovieCollection/MovieCollection";
+import PhantomText from "../PhantomText/PhantomText";
+import SectionHeader from "../SectionHeader/SectionHeader";
 
 let timerHandler: NodeJS.Timeout;
 
@@ -44,6 +46,29 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
 
   return (
     <Box {...rest}>
+      <SectionHeader
+      px={2}
+      bgcolor={theme.palette.primary.main}
+      header={
+          <PhantomText height='100%' bgcolor={theme.palette.primary.light} px={1}
+          text='Trending' 
+          charDelayDefs={{
+            3:{enter:1, exit:0},
+            4:{enter:1, exit:0},
+            2:{enter:1.3, exit:0},
+            5:{enter:1.3, exit:0},
+            1:{enter:1.6, exit:0},
+            6:{enter:1.6, exit:0},
+            0:{enter:1.9, exit:0},
+            7:{enter:1.9, exit:0},
+          }}
+          />
+      }
+      items={[
+        <FancyTab key='tab' px={1} bgcolor={theme.palette.primary.light} 
+        tabData={tabData} onChange={handleWindowChange} />,
+      ]}
+      />
       <BackgroundImage
         imageSrc={trendingBg}
         backdropColor={fade(theme.palette.primary.light, 0.6)}
@@ -65,12 +90,12 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
       >
         <MovieCollection
           {...rest}
-          header={
-            <Box display="flex" flexWrap="wrap" alignItems="center">
-              <Box pr={2}>{`Trending`}</Box>
-              <FancyTab tabData={tabData} onChange={handleWindowChange} />
-            </Box>
-          }
+          // header={
+          //   <Box display="flex" flexWrap="wrap" alignItems="center">
+          //     <Box pr={2}>{`Trending`}</Box>
+          //     <FancyTab tabData={tabData} onChange={handleWindowChange} />
+          //   </Box>
+          // }
           movieData={movieData}
           onHover={handleTrendingMovieHover}
         />

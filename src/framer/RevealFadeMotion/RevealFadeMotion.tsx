@@ -15,6 +15,7 @@ type RevealFadeMotionProps = AnimationProps &
     initSize?:RFMSize;
     enterSize?:RFMSize;
     exitSize?:RFMSize;
+    inlineBlock?:boolean;
 };
 
 /**
@@ -24,6 +25,8 @@ type RevealFadeMotionProps = AnimationProps &
  * 
  * Width and Height motion, give `fit-content` to size for width and height if you
  * don't know the size of content
+ * 
+ * addtional support inline-block
  * 
  * @param {RevealFadeMotionProps} props 
  */
@@ -37,7 +40,8 @@ const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotio
         exitOpacity = 0,
         initSize = {width:'fit-content', height:0},
         enterSize = {width:'fit-content', height:'fit-content'},
-        exitSize = {width:'fit-content', height:0}
+        exitSize = {width:'fit-content', height:0},
+        inlineBlock = false
     } = props;
 
     const vars: Variants = {
@@ -46,13 +50,15 @@ const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotio
         exit: {width: exitSize.width, height: exitSize.height, opacity: exitOpacity, transition: exitTransition},
     };
 
+    const display = inlineBlock? 'inline-block' : 'block';
+
     return (
         <motion.div
         variants={vars}
         initial='init'
         animate='enter'
         exit='exit'
-        style={{overflow:'hidden'}}
+        style={{overflow:'hidden', display:display}}
         layout='position'
         >
         {children}

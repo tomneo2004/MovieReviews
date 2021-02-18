@@ -203,11 +203,12 @@ const LandingPage = (pageProps: IPageProps) => {
           <React.Fragment>
             {/* Pouplar Collection */}
             <Box id="popular">
-              <Popular popularMovies={popularMovies} />
+              <Popular mt={2} popularMovies={popularMovies} />
             </Box>
             {/* Trending Collection */}
             <Box id="trending">
               <Trending
+                mt={2}
                 byDay={trendingMovies.day}
                 byWeek={trendingMovies.week}
               />
