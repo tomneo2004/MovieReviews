@@ -78,23 +78,24 @@ const prepareCarousel = ()=>{
   const option1: RFCMotionOptions = {
     axis:'y',
     opacity:{from:0, to:1},
-    enterTranistion: springTransition(300, 55, 0.1),
-    exitTranistion: springTransition(300, 55, 1)
+    enterTranistion: springTransition(300, 25, 0.1),
+    exitTranistion: springTransition(300, 105, 1)
   }
 
   const option2: RFCMotionOptions = {
     ...option1,
-    axis:'both',
+    axis:'x',
     indent:2,
-    enterTranistion: springTransition(355, 30, 1.5),
-    exitTranistion: springTransition(300, 105, 0.1)
+    enterTranistion: springTransition(600, 35, 0.5),
+    exitTranistion: springTransition(300, 105, 0.5)
   }
 
   const option3: RFCMotionOptions = {
     ...option1,
+    axis:'x',
     indent:4,
-    enterTranistion: springTransition(300, 55, 0.5),
-    exitTranistion: springTransition(300, 55, 0.5)
+    enterTranistion: springTransition(600, 35, 1),
+    exitTranistion: springTransition(300, 105, 0.1)
   }
 
   const set = [

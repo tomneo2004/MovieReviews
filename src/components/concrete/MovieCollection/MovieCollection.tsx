@@ -1,6 +1,5 @@
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 import MoviePoster from "../MoviePoster/MoviePoster";
 import HScroll, {
@@ -15,7 +14,6 @@ import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import ScaleFadeFlow from "../../../framer/ScaleFadeMotion";
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
-  header?: React.ReactNode;
   movieData: IMovieData[] | null | undefined;
   onHover?: (data: IMovieData) => void | null | undefined;
 };
@@ -47,7 +45,7 @@ const renderSkeletons = () => {
 const MovieCollection: React.FC<MovieCollectionProps> = (
   props: MovieCollectionProps
 ) => {
-  const { header = null, movieData = null, onHover = null, ...rest } = props;
+  const {movieData = null, onHover = null, ...rest } = props;
 
   const handleMouseOver = (data: IMovieData) => {
     if (onHover) onHover(data);
@@ -55,13 +53,6 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
 
   return (
     <Box {...rest}>
-      {header ? (
-        <Typography component="div" variant="h4">
-          <Box pl={2} fontWeight={600}>
-            {header}
-          </Box>
-        </Typography>
-      ) : null}
       <Box pt={2}>
         {!movieData ? (
           renderSkeletons()
