@@ -90,12 +90,6 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
       >
         <MovieCollection
           {...rest}
-          // header={
-          //   <Box display="flex" flexWrap="wrap" alignItems="center">
-          //     <Box pr={2}>{`Trending`}</Box>
-          //     <FancyTab tabData={tabData} onChange={handleWindowChange} />
-          //   </Box>
-          // }
           movieData={movieData}
           onHover={handleTrendingMovieHover}
         />

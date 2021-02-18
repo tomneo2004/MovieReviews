@@ -65,7 +65,6 @@ const Popular: React.FC<PopualrProps> = (props: PopualrProps) => {
         }
       >
         <MovieCollection
-          // header={`What's popular`}
           movieData={popularMovies}
           onHover={handlePopularMovieHover}
         />
