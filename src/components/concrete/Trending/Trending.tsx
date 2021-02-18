@@ -91,7 +91,7 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
         }
       >
         <MovieCollection
-          {...rest}
+
           movieData={movieData}
           onHover={handleTrendingMovieHover}
           scrollLeft={
