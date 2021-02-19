@@ -43,21 +43,6 @@ type RFCarouselProps = React.ComponentProps<typeof Box> & {
     interval?: number;
 
     /**
-     * An transition time between last group to next group
-     * 
-     * This transition will be added to interval except at beginning
-     * 
-     * Should account for animation out and in time
-     * 
-     * [Group A animate out] + [Group B animate in] = transition
-     * 
-     * number in ms
-     * 
-     * default 3000 ms
-     */
-    transition?: number;
-
-    /**
      * Index of group will be presented at beginning
      * 
      * default 0
@@ -85,30 +70,52 @@ let timer: NodeJS.Timeout;
 const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
     const {
         interval = 5000,
-        transition = 3000,
         defaultGroupIndex = 0,
         textSet = [],
         ...rest
     } = props;
-
-    const [index, setIndex] = React.useState<number>(defaultGroupIndex);
+    const [groupState, setGroupState] = React.useState<{
+        index:number, 
+        isLeaving:boolean
+    }>({index:defaultGroupIndex, isLeaving:false});
 
     React.useEffect(()=>{
-        timer = setTimeout(()=>{
-            setIndex(index=>index+1);
-        }, interval + (index?transition:0));
+
+        if(!groupState.isLeaving)
+            //set timer for new group
+            timer = setTimeout(()=>{
+                //leave this group / play exit animate but not
+                //moving to next group yet
+                setGroupState(state=>{
+                    return {
+                        ...state,
+                        isLeaving:!state.isLeaving
+                    }
+                })
+            }, interval);
 
         return ()=>{
             if(timer) clearTimeout(timer);
         }
-    }, [index])
+    }, [groupState])
 
-    const textGroup = textSet[index % textSet.length];
+    const handleExistComplete = ()=>{
+        //this group has finished exit animation
+        //move to next group
+        setGroupState(state=>{
+            return {
+                index:state.index+1,
+                isLeaving:false
+            }
+        })
+    }
+
+    const textGroup = textSet[groupState.index % textSet.length];
 
     return (
         <Box {...rest}>
-        <AnimatePresence exitBeforeEnter>
-        {
+        <AnimatePresence onExitComplete={handleExistComplete}>
+        {groupState.isLeaving?null:
             textGroup.map(value=>{
                 let option = value.motionOptions;
                 if(!option){

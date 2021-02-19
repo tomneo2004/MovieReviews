@@ -14,7 +14,7 @@ export const Default = ()=>{
         <React.Fragment>
             <button onClick={()=>setShow(state=>!state)}>toggle</button>
             <AnimateSharedLayout>
-                <AnimatePresence exitBeforeEnter>
+                <AnimatePresence>
                     {show?
                         <PhantomText text='This is a text' />   
                         :null
@@ -32,7 +32,7 @@ export const NoDelay = ()=>{
         <React.Fragment>
             <button onClick={()=>setShow(state=>!state)}>toggle</button>
             <AnimateSharedLayout>
-                <AnimatePresence exitBeforeEnter>
+                <AnimatePresence>
                     {show?
                         <PhantomText charDefaultDelay={0} text='This is a text' />   
                         :null
@@ -50,7 +50,7 @@ export const ControlDelay = ()=>{
         <React.Fragment>
             <button onClick={()=>setShow(state=>!state)}>toggle</button>
             <AnimateSharedLayout>
-                <AnimatePresence exitBeforeEnter>
+                <AnimatePresence>
                     {show?
                         <PhantomText charDefaultDelay={0.1} text='This is a text' 
                         charDelayDefs={{

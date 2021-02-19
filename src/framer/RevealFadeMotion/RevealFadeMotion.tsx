@@ -1,7 +1,6 @@
 import { motion, Variants } from 'framer-motion';
 import React from 'react';
 import BaseMotionProps from '../BaseMotionProps/BaseMotionProps';
-import FadeMotion from '../FadeMotion/FadeMotion';
 import { springTransition } from '../Transition';
 
 export type RFMSize = {width:string | number, height:string | number};
@@ -45,9 +44,9 @@ const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotio
     } = props;
 
     const revealVars: Variants = {
-        init: {width: initSize.width, height: initSize.height},
-        enter: {width: enterSize.width, height: enterSize.height, transition: enterTransition},
-        exit: {width: exitSize.width, height: exitSize.height, transition: exitTransition},
+        init: {width: initSize.width, height: initSize.height, opacity:initOpacity},
+        enter: {width: enterSize.width, height: enterSize.height, opacity: enterOpacity, transition: enterTransition},
+        exit: {width: exitSize.width, height: exitSize.height, opacity:exitOpacity, transition: exitTransition},
     };
 
     const display = inlineBlock? 'inline-block' : 'block';
@@ -61,15 +60,7 @@ const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotio
         style={{overflow:'hidden', display:display}}
         {...rest}
         >
-            <FadeMotion
-            isChildrenMotion={true}
-            initOpacity={initOpacity}
-            enterOpacity={enterOpacity}
-            exitOpacity={exitOpacity}
-            {...rest}
-            >
-            {children}
-            </FadeMotion>
+        {children}
         </motion.div>
     );
 };

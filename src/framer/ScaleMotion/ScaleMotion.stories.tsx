@@ -14,7 +14,7 @@ export const Default = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
                         <Typography variant='h4' component='div'>
                             <Box fontSize='8rem'>

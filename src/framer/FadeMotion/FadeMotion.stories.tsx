@@ -14,13 +14,15 @@ export const Default = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
-                        <Typography variant='h4' component='div'>
-                            <Box fontSize='8rem'>
-                            <FadeMotion key='fade'>This is text</FadeMotion>
-                            </Box>
-                        </Typography>
+                        <FadeMotion key='fade'>
+                            <Typography variant='h4' component='div'>
+                                <Box fontSize='8rem'>
+                                This is text
+                                </Box>
+                            </Typography>
+                        </FadeMotion>
                     :null
                 }
             </AnimatePresence>

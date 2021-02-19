@@ -14,13 +14,15 @@ export const Default = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
+                    <RevealFadeMotion key='rf'>
                         <Typography variant='h4' component='div'>
                             <Box fontSize='8rem'>
-                                <RevealFadeMotion>Text</RevealFadeMotion>
+                                Text
                             </Box>
                         </Typography>
+                    </RevealFadeMotion>
                     :null
                 }
             </AnimatePresence>
@@ -35,20 +37,20 @@ export const Width = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
+                    <RevealFadeMotion
+                    key='rf'
+                    initSize={{width:0, height:'fit-content'}}
+                    enterSize={{width:'fit-content', height:'fit-content'}}
+                    exitSize={{width:0, height:'fit-content'}}
+                    >
                         <Typography variant='h4' component='div'>
                             <Box fontSize='8rem'>
-                                <RevealFadeMotion
-                                key='rf'
-                                initSize={{width:0, height:'fit-content'}}
-                                enterSize={{width:'fit-content', height:'fit-content'}}
-                                exitSize={{width:0, height:'fit-content'}}
-                                >
-                                    Text
-                                </RevealFadeMotion>
+                                Text
                             </Box>
                         </Typography>
+                    </RevealFadeMotion>
                     :null
                 }
             </AnimatePresence>
@@ -63,20 +65,20 @@ export const WidthHeight = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
+                    <RevealFadeMotion
+                    key='rf'
+                    initSize={{width:0, height:0}}
+                    enterSize={{width:'fit-content', height:'fit-content'}}
+                    exitSize={{width:0, height:0}}
+                    >
                         <Typography variant='h4' component='div'>
                             <Box fontSize='8rem'>
-                                <RevealFadeMotion
-                                key='rf'
-                                initSize={{width:0, height:0}}
-                                enterSize={{width:'fit-content', height:'fit-content'}}
-                                exitSize={{width:0, height:0}}
-                                >
-                                    Text
-                                </RevealFadeMotion>
+                                Text
                             </Box>
                         </Typography>
+                    </RevealFadeMotion>
                     :null
                 }
             </AnimatePresence>
@@ -126,7 +128,7 @@ export const Multiple = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
                     motionTexts.map(value=>{
                         return value;
@@ -180,7 +182,7 @@ export const Random = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
                     motionTexts.map(value=>{
                         return value;
@@ -237,7 +239,7 @@ export const DiffMotion = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
                     motionTexts.map(value=>{
                         return value;
@@ -303,7 +305,7 @@ export const Characters = ()=>{
         <React.Fragment>
         <button onClick={()=>setShow(state=>!state)}>toggle</button>
         <AnimateSharedLayout>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
                 {show?
                     motionTexts.map(value=>{
                         return value;

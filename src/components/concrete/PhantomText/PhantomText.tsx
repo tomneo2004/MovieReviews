@@ -81,7 +81,7 @@ const PhantomText: React.FC<PhantomTextProps> = (props:PhantomTextProps) => {
                 const defDelay = charDelayDefs[i];
 
                 return(
-                    <RevealFadeMotion key={`${shortid.generate()}`} 
+                    <RevealFadeMotion key={`${shortid.generate()}`}
                     inlineBlock
                     initSize={{width:0, height:'fit-content'}}
                     enterSize={{width:'fit-content', height:'fit-content'}}
