@@ -12,33 +12,32 @@ export type SearchFieldProps = React.ComponentProps<typeof InputBase> & {
    */
   icon?: React.ReactElement;
 
-  /**
-   * On input field focus callback
-   */
-  onFocus?: () => void;
+  // /**
+  //  * On input field focus callback
+  //  */
+  // onFocus?: () => void;
 };
 
-const Search: React.FC<SearchFieldProps> = (props: SearchFieldProps) => {
+const SearchField: React.FC<SearchFieldProps> = React.forwardRef((props: SearchFieldProps, ref) => {
   const theme = useTheme();
   const {
     bgColor = theme.palette.common.white,
     opacity = 0.15,
     opacityHover = 0.25,
     icon = <SearchSharp />,
-    onFocus = null,
+    // onFocus,
     endAdornment,
     id,
     ...restInput
   } = props;
-  const inputRef = React.useRef<HTMLInputElement>();
+  // const inputRef = React.useRef<HTMLInputElement>();
 
-  React.useEffect(() => {
-    inputRef.current.onfocus = onFocus;
-
-    return () => {
-      inputRef.current.onfocus = null;
-    };
-  }, []);
+  // React.useEffect(() => {
+  //   inputRef.current.onfocus = onFocus;
+  //   return () => {
+  //     inputRef.current.onfocus = null;
+  //   };
+  // }, []);
 
   const classes = makeStyles(style)({
     theme,
@@ -54,7 +53,8 @@ const Search: React.FC<SearchFieldProps> = (props: SearchFieldProps) => {
       </Box>
       <Box flex={1} display="flex" justifyContent="center" alignItems="center">
         <InputBase
-          inputRef={inputRef}
+          ref={ref}
+          // inputRef={inputRef}
           // className={classes.input}
           {...restInput}
         />
@@ -64,6 +64,6 @@ const Search: React.FC<SearchFieldProps> = (props: SearchFieldProps) => {
       </Box>
     </Box>
   );
-};
+});
 
-export default Search;
+export default SearchField;

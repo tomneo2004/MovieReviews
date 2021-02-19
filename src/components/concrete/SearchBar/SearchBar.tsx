@@ -27,6 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
   const theme = useTheme();
   const [search, setSearch] = React.useState<string>("");
   const [width, setWidth] = React.useState<string>(inputWidth);
+  const inputRef = React.useRef<HTMLInputElement>();
 
   const classes = makeStyles(style)({
     theme,
@@ -42,6 +43,8 @@ const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
 
   const handlSearchKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter" && search && onEnter) {
+      console.log(inputRef.current);
+      if(inputRef.current) inputRef.current.blur();
       onEnter(search);
     }
   };
@@ -58,6 +61,7 @@ const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
     <Box id={id} className={classes.root}>
       <SearchField
         {...rest}
+        ref={inputRef}
         value={search}
         opacity={0.5}
         opacityHover={0.7}
