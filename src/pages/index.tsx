@@ -1,7 +1,7 @@
 import PageLayout from "../layouts/pageLayout";
 import LandingLayout from "../layouts/landing/landingLayout";
 import HeroLayout from "../layouts/landing/heroLayout";
-import { Box, fade, Typography, useTheme } from "@material-ui/core";
+import { Box, fade, makeStyles, Typography, useTheme } from "@material-ui/core";
 import React from "react";
 import Trending from "../components/concrete/Trending/Trending";
 import Popular from "../components/concrete/Popular/Popular";
@@ -16,6 +16,7 @@ import { buildImageQuery, getPouplarMoviesQuery, getTopRatedMovieQuery, getTrend
 
 
 interface IPageProps {
+  heroTitle: string;
   heroBackdrop: string;
   carousel:RFCTextGroup[];
   popularMovies: IMovieData[];
@@ -123,6 +124,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
   const heroBackdropDefault = "https://images.unsplash.com/photo-1485095329183-d0797cdc5676?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
   const revalidate = 86400;
   const carousel = prepareCarousel();
+  const heroTitle = 'Start Explore';
 
   const topRatedMovies = await fetchTopRatedMovies();
   let heroBackdrop = heroBackdropDefault;
@@ -143,6 +145,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
 
     return {
       props: {
+        heroTitle,
         heroBackdrop,
         carousel,
         popularMovies: popular,
@@ -158,6 +161,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
     console.log(e);
     return {
       props: {
+        heroTitle,
         heroBackdrop,
         carousel,
         popularMovies: null,
@@ -170,8 +174,16 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
 };
 
 const LandingPage = (pageProps: IPageProps) => {
-  const { heroBackdrop, carousel, popularMovies, trendingMovies, error } = pageProps;
+  const { heroTitle, heroBackdrop, carousel, popularMovies, trendingMovies, error } = pageProps;
   const theme = useTheme();
+
+  const classes = makeStyles({
+    shadowText:{
+      color:'transparent',
+      textShadow:`1px 2px 1px ${fade(theme.palette.common.white, 0.8)}, 
+      0 0 0 ${fade(theme.palette.common.black, 0.8)}`
+    }
+  })();
 
   return (
     <PageLayout>
@@ -179,18 +191,20 @@ const LandingPage = (pageProps: IPageProps) => {
         <HeroLayout
           background={
             <ProgressiveImage
-              backdropColor={fade(theme.palette.primary.light, 0.3)}
+              backdropColor={fade(theme.palette.common.black, 0.4)}
               imageSrc={heroBackdrop}
               bgPosition="center center"
             />
           }
           title={
-            <Typography id="hero-title" component="div" variant="h1">
-              <Box fontWeight={500}>Start Explore</Box>
+            <Typography className={classes.shadowText} id="hero-title" component="div" variant="h1">
+              <Box fontWeight={500}>{heroTitle}</Box>
             </Typography>
           }
           carousel={
-            <RFCarousel height='12rem' textSet={carousel} interval={7000} />
+            <Typography className={classes.shadowText} component='div'>
+              <RFCarousel height='12rem' variant='h3' textSet={carousel} interval={7000} />
+            </Typography>
           }
           search={<HeroSearchBar />}
         />

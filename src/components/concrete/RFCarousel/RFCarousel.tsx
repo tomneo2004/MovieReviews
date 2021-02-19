@@ -43,6 +43,13 @@ type RFCarouselProps = React.ComponentProps<typeof Box> & {
     interval?: number;
 
     /**
+     * delay start carousel looping 
+     * 
+     * default 4000 ms
+     */
+    startDelay?: number;
+
+    /**
      * Index of group will be presented at beginning
      * 
      * default 0
@@ -54,6 +61,7 @@ type RFCarouselProps = React.ComponentProps<typeof Box> & {
      * with a motion 
      */
     textSet: RFCTextGroup[];
+    variant?: "button" | "caption" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "inherit" | "subtitle1" | "subtitle2" | "body1" | "body2" | "overline" | "srOnly";
 }
 
 let timer: NodeJS.Timeout;
@@ -70,18 +78,29 @@ let timer: NodeJS.Timeout;
 const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
     const {
         interval = 5000,
+        startDelay = 4000,
         defaultGroupIndex = 0,
         textSet = [],
+        variant = 'h4',
         ...rest
     } = props;
     const [groupState, setGroupState] = React.useState<{
         index:number, 
         isLeaving:boolean
-    }>({index:defaultGroupIndex, isLeaving:false});
+    }>({index:-1, isLeaving:false});
+
+    React.useEffect(()=>{
+        timer = setTimeout(()=>{
+            setGroupState({
+                index:defaultGroupIndex,
+                isLeaving:false,
+            })
+        }, startDelay);
+    },[])
 
     React.useEffect(()=>{
 
-        if(!groupState.isLeaving)
+        if(!groupState.isLeaving && groupState.index >= 0)
             //set timer for new group
             timer = setTimeout(()=>{
                 //leave this group / play exit animate but not
@@ -115,7 +134,7 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
     return (
         <Box {...rest}>
         <AnimatePresence onExitComplete={handleExistComplete}>
-        {groupState.isLeaving?null:
+        {groupState.isLeaving || groupState.index < 0?null:
             textGroup.map(value=>{
                 let option = value.motionOptions;
                 if(!option){
@@ -154,8 +173,8 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
                     enterSize={enterSize}
                     exitSize={exitSize}
                     >
-                        <Typography key={`${shortid.generate()}`} variant='h1' component='div' noWrap={option.axis!=='y'}>
-                            <Box pl={option.indent} fontSize='3rem'>
+                        <Typography variant={variant} component='div' noWrap={option.axis!=='y'}>
+                            <Box pl={option.indent}>
                                 {value.text}
                             </Box>
                         </Typography>
