@@ -17,6 +17,7 @@ type PhantomTextProps = React.ComponentProps<typeof Box> & {
      * default `""`
      */
     separateBy?:string;
+
     /**
      * If no defined delay for character
      * then this value will be used
@@ -24,6 +25,7 @@ type PhantomTextProps = React.ComponentProps<typeof Box> & {
      * default 0.1
      */
     charDefaultDelay?:number;
+
     /**
      * An object define character you
      * want to control its delay
@@ -36,8 +38,11 @@ type PhantomTextProps = React.ComponentProps<typeof Box> & {
             exit:number
         }
     };
+    
     /**
      * Text variant will pass to Material-UI Typography
+     * 
+     * default h4
      */
     variant?:"button" | "caption" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "inherit" | "subtitle1" | "subtitle2" | "body1" | "body2" | "overline" | "srOnly";
 }

@@ -40,6 +40,7 @@ export const Width = ()=>{
                         <Typography variant='h4' component='div'>
                             <Box fontSize='8rem'>
                                 <RevealFadeMotion
+                                key='rf'
                                 initSize={{width:0, height:'fit-content'}}
                                 enterSize={{width:'fit-content', height:'fit-content'}}
                                 exitSize={{width:0, height:'fit-content'}}
@@ -67,6 +68,7 @@ export const WidthHeight = ()=>{
                         <Typography variant='h4' component='div'>
                             <Box fontSize='8rem'>
                                 <RevealFadeMotion
+                                key='rf'
                                 initSize={{width:0, height:0}}
                                 enterSize={{width:'fit-content', height:'fit-content'}}
                                 exitSize={{width:0, height:0}}

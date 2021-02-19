@@ -1,14 +1,12 @@
-import { AnimationProps, LayoutProps, motion, Transition, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import React from 'react';
+import BaseMotionProps from '../BaseMotionProps/BaseMotionProps';
+import FadeMotion from '../FadeMotion/FadeMotion';
 import { springTransition } from '../Transition';
 
 export type RFMSize = {width:string | number, height:string | number};
 
-type RevealFadeMotionProps = AnimationProps &
-  LayoutProps & {
-    children: React.ReactNode;
-    enterTransition?: Transition;
-    exitTransition?: Transition;
+type RevealFadeMotionProps = BaseMotionProps & {
     initOpacity?:number;
     enterOpacity?:number;
     exitOpacity?:number;
@@ -32,6 +30,7 @@ type RevealFadeMotionProps = AnimationProps &
  */
 const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotionProps) => {
     const {
+        isChildrenMotion = false,
         children,
         enterTransition = springTransition(350,55),
         exitTransition = springTransition(350,55),
@@ -41,27 +40,36 @@ const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotio
         initSize = {width:'fit-content', height:0},
         enterSize = {width:'fit-content', height:'fit-content'},
         exitSize = {width:'fit-content', height:0},
-        inlineBlock = false
+        inlineBlock = false,
+        ...rest
     } = props;
 
-    const vars: Variants = {
-        init: {width: initSize.width, height: initSize.height, opacity: initOpacity},
-        enter: {width: enterSize.width, height: enterSize.height, opacity: enterOpacity, transition: enterTransition},
-        exit: {width: exitSize.width, height: exitSize.height, opacity: exitOpacity, transition: exitTransition},
+    const revealVars: Variants = {
+        init: {width: initSize.width, height: initSize.height},
+        enter: {width: enterSize.width, height: enterSize.height, transition: enterTransition},
+        exit: {width: exitSize.width, height: exitSize.height, transition: exitTransition},
     };
 
     const display = inlineBlock? 'inline-block' : 'block';
 
     return (
         <motion.div
-        variants={vars}
-        initial='init'
-        animate='enter'
-        exit='exit'
+        variants={revealVars}
+        initial={isChildrenMotion?'':'init'}
+        animate={isChildrenMotion?'':'enter'}
+        exit={isChildrenMotion?'':'exit'}
         style={{overflow:'hidden', display:display}}
-        layout='position'
+        {...rest}
         >
-        {children}
+            <FadeMotion
+            isChildrenMotion={true}
+            initOpacity={initOpacity}
+            enterOpacity={enterOpacity}
+            exitOpacity={exitOpacity}
+            {...rest}
+            >
+            {children}
+            </FadeMotion>
         </motion.div>
     );
 };

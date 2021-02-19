@@ -13,11 +13,19 @@ import getMovieRating from "../../../utils/movieRating";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import ScaleFadeFlow from "../../../framer/ScaleFadeMotion";
 import { fade, useTheme } from "@material-ui/core";
+import ScrollIndicator from "./ScrollIndicator";
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
   movieData: IMovieData[] | null | undefined;
   onHover?: (data: IMovieData) => void | null | undefined;
+  /**
+   * scroll left indicator 
+   */
   scrollLeft?: React.ReactNode;
+
+  /**
+   * scroll right indicator
+   */
   scrollRight?: React.ReactNode;
 };
 
@@ -51,8 +59,8 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
   const {movieData = null, onHover = null, scrollLeft = null, scrollRight = null, ...rest } = props;
   const theme = useTheme();
   const [scrollState, setScrollState] = React.useState<IHorizontalScrollState>({
-    endLeft: false,
-    endRight: false
+    endLeft: true,
+    endRight: true
   });
 
   const handleMouseOver = (data: IMovieData) => {
@@ -60,9 +68,10 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
   };
 
   const handleScrollStateChange = (state:IHorizontalScrollState)=>{
-    if(state.endLeft !== scrollState.endLeft || state.endRight !== scrollState.endRight){
-      setScrollState(state);
-    }
+    // if(state.endLeft !== scrollState.endLeft || state.endRight !== scrollState.endRight){
+    //   setScrollState(state);
+    // }
+    setScrollState(state);
   }
 
   return (
@@ -101,21 +110,23 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
             }}
           </HScroll>
         )}
-        {scrollState.endLeft? 
-            null
-            :
-            <Box position='absolute' display='flex' flexDirection='column' justifyContent='center' 
-            left={0} top={0} bottom={0} bgcolor={fade(theme.palette.primary.light, 0.9)}>
-              {scrollLeft}
+        {scrollState.endLeft? null :
+          <ScrollIndicator direction='left'>
+            <Box display='flex' flexDirection='column' borderRadius={50} 
+            justifyContent='center' alignItems='center' width={44} height={44}
+            bgcolor={fade(theme.palette.primary.light, 0.9)}>
+                {scrollLeft}
             </Box>
+          </ScrollIndicator>
         }
-        {scrollState.endRight? 
-            null
-            :
-            <Box position='absolute' display='flex' flexDirection='column' justifyContent='center' 
-            right={0} top={0} bottom={0} bgcolor={fade(theme.palette.primary.light, 0.9)}>
-              {scrollRight}
+        {scrollState.endRight? null :
+          <ScrollIndicator direction='right'>
+            <Box display='flex' flexDirection='column' borderRadius={50}
+            justifyContent='center' alignItems='center' width={44} height={44}
+            bgcolor={fade(theme.palette.primary.light, 0.9)}>
+                {scrollRight}
             </Box>
+          </ScrollIndicator>
         }
       </Box>
   );

@@ -103,9 +103,8 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = (
     setScrollState((oldState) => {
       if (!isSameState(oldState, newState)) {
         return newState;
-      } else {
-        return oldState;
       }
+      return oldState;
     });
   };
 
