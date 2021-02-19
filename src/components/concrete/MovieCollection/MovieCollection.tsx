@@ -110,24 +110,20 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
             }}
           </HScroll>
         )}
-        {scrollState.endLeft? null :
-          <ScrollIndicator direction='left'>
+        <ScrollIndicator direction='left' enabled={!scrollState.endLeft}>
             <Box display='flex' flexDirection='column' borderRadius={50} 
             justifyContent='center' alignItems='center' width={44} height={44}
             bgcolor={fade(theme.palette.primary.light, 0.9)}>
                 {scrollLeft}
             </Box>
-          </ScrollIndicator>
-        }
-        {scrollState.endRight? null :
-          <ScrollIndicator direction='right'>
+        </ScrollIndicator>
+        <ScrollIndicator direction='right' enabled={!scrollState.endRight}>
             <Box display='flex' flexDirection='column' borderRadius={50}
             justifyContent='center' alignItems='center' width={44} height={44}
             bgcolor={fade(theme.palette.primary.light, 0.9)}>
                 {scrollRight}
             </Box>
-          </ScrollIndicator>
-        }
+        </ScrollIndicator>
       </Box>
   );
 };
