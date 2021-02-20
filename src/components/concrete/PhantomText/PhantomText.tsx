@@ -1,6 +1,8 @@
-import { Typography } from '@material-ui/core';
+import { RootRef, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import { useAnimation } from 'framer-motion';
 import React from 'react';
+import { useInView } from 'react-intersection-observer';
 import shortid from 'shortid';
 import RevealFadeMotion from '../../../framer/RevealFadeMotion/RevealFadeMotion';
 import { springTransition } from '../../../framer/Transition';
@@ -66,12 +68,25 @@ const PhantomText: React.FC<PhantomTextProps> = (props:PhantomTextProps) => {
         ...rest
     } = props;
 
+    const {ref, inView} = useInView({triggerOnce:true});
+    const motionControl = useAnimation();
+
+    React.useEffect(()=>{
+        return ()=>motionControl.stop();
+    },[]);
+    React.useEffect(()=>{
+        if(inView){
+            motionControl.start('enter');
+        }
+    }, [inView]);
+
     if(!text) return null;
 
     const chars = text.split(separateBy);
     if(!chars.length) return null;
 
     return (
+        <RootRef rootRef={ref}>
         <Box {...rest}>
         {
             chars.map((value, i)=>{
@@ -83,6 +98,7 @@ const PhantomText: React.FC<PhantomTextProps> = (props:PhantomTextProps) => {
                 return(
                     <RevealFadeMotion key={`${shortid.generate()}`}
                     inlineBlock
+                    motionControl={motionControl}
                     initSize={{width:0, height:'fit-content'}}
                     enterSize={{width:'fit-content', height:'fit-content'}}
                     exitSize={{width:0, height:'fit-content'}}
@@ -95,6 +111,7 @@ const PhantomText: React.FC<PhantomTextProps> = (props:PhantomTextProps) => {
             })
         }
         </Box>
+        </RootRef>
     );
 };
 

@@ -55,14 +55,14 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
           <PhantomText height='100%' bgcolor={theme.palette.primary.light} px={1}
           text='Trending' 
           charDelayDefs={{
-            3:{enter:1, exit:0},
-            4:{enter:1, exit:0},
-            2:{enter:1.3, exit:0},
-            5:{enter:1.3, exit:0},
-            1:{enter:1.6, exit:0},
-            6:{enter:1.6, exit:0},
-            0:{enter:1.9, exit:0},
-            7:{enter:1.9, exit:0},
+            0:{enter:1, exit:0},
+            1:{enter:1.3, exit:0},
+            2:{enter:1.6, exit:0},
+            3:{enter:1.9, exit:0},
+            4:{enter:2.2, exit:0},
+            5:{enter:2.5, exit:0},
+            6:{enter:2.8, exit:0},
+            7:{enter:3.1, exit:0},
           }}
           />
       }
