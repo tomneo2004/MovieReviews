@@ -12,6 +12,7 @@ type FadeMotionProps = BaseMotionProps & {
 const FadeMotion:React.FC<FadeMotionProps> = (props:FadeMotionProps) => {
     const {
         isChildrenMotion = false,
+        motionControl,
         children,
         enterTransition = springTransition(350,55),
         exitTransition = springTransition(350,55),
@@ -31,7 +32,7 @@ const FadeMotion:React.FC<FadeMotionProps> = (props:FadeMotionProps) => {
         <motion.div
         variants={vars}
         initial={isChildrenMotion?'':'init'}
-        animate={isChildrenMotion?'':'enter'}
+        animate={isChildrenMotion?'': motionControl? motionControl : 'enter'}
         exit={isChildrenMotion?'':'exit'}
         {...rest}
         >

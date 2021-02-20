@@ -1,6 +1,6 @@
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { AnimatePresence, Transition } from 'framer-motion';
+import { AnimatePresence, Transition, useAnimation } from 'framer-motion';
 import React from 'react';
 import shortid from 'shortid';
 import RevealFadeMotion, { RFMSize } from '../../../framer/RevealFadeMotion/RevealFadeMotion';
@@ -84,23 +84,25 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
         variant = 'h4',
         ...rest
     } = props;
+
     const [groupState, setGroupState] = React.useState<{
         index:number, 
         isLeaving:boolean
-    }>({index:-1, isLeaving:false});
+    }>({index:defaultGroupIndex, isLeaving:false});
+
+    const motionControl = useAnimation();
 
     React.useEffect(()=>{
-        timer = setTimeout(()=>{
-            setGroupState({
-                index:defaultGroupIndex,
-                isLeaving:false,
-            })
-        }, startDelay);
+        //make sure we stop all animation when this
+        //component unmounted
+        return ()=>{
+            motionControl.stop();
+        }
     },[])
 
     React.useEffect(()=>{
 
-        if(!groupState.isLeaving && groupState.index >= 0)
+        if(!groupState.isLeaving){
             //set timer for new group
             timer = setTimeout(()=>{
                 //leave this group / play exit animate but not
@@ -112,6 +114,9 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
                     }
                 })
             }, interval);
+            //controled animation need to start manually
+            motionControl.start('enter');
+        }
 
         return ()=>{
             if(timer) clearTimeout(timer);
@@ -133,8 +138,8 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
 
     return (
         <Box {...rest}>
-        <AnimatePresence onExitComplete={handleExistComplete}>
-        {groupState.isLeaving || groupState.index < 0?null:
+        <AnimatePresence initial={false} onExitComplete={handleExistComplete}>
+        {groupState.isLeaving?null:
             textGroup.map(value=>{
                 let option = value.motionOptions;
                 if(!option){
@@ -164,6 +169,7 @@ const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
                 return (
                     <RevealFadeMotion 
                     key={`${shortid.generate()}`}
+                    motionControl={motionControl}
                     enterTransition={option.enterTranistion}
                     exitTransition={option.exitTranistion}
                     initOpacity={option.opacity.from}

@@ -1,5 +1,5 @@
 import { Box, Typography } from "@material-ui/core";
-import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { AnimatePresence, AnimateSharedLayout, useAnimation } from "framer-motion";
 import React from "react";
 import { springTransition } from "../Transition";
 import RevealFadeMotion from './RevealFadeMotion';
@@ -311,6 +311,59 @@ export const Characters = ()=>{
                         return value;
                     })    
                     :null
+                }
+            </AnimatePresence>
+        </AnimateSharedLayout>
+        </React.Fragment>
+    )
+}
+
+export const Stopable = ()=>{
+    const [stop, setStop] = React.useState<boolean>(false);
+    const control = useAnimation();
+
+    React.useEffect(()=>{
+        if(stop){
+            console.log('stop animation')
+            control.stop();
+        }
+        else{
+            console.log('start animation')
+            control.start('enter');
+        }
+    }, [stop]);
+
+    const motionTexts = [];
+    const total = 10;
+    for(let i=0; i<total; i++){
+        motionTexts.push(
+            <RevealFadeMotion key={i}
+            motionControl={control}
+            inlineBlock 
+            initSize={{width:0, height:'fit-content'}}
+            enterSize={{width:'fit-content', height:'fit-content'}}
+            exitSize={{width:0, height:'fit-content'}}
+            enterTransition={springTransition(300, 55, i)}
+            exitTransition={springTransition(300, 55, total-i)}
+            >
+                <Typography variant='h4' component='div' noWrap>
+                    <Box fontSize='3rem'>
+                        A text used to test
+                    </Box>
+                </Typography>
+            </RevealFadeMotion>
+        )
+    }
+
+    return (
+        <React.Fragment>
+        <button onClick={()=>setStop(state=>!state)}>toggle</button>
+        <AnimateSharedLayout>
+            <AnimatePresence>
+                {
+                    motionTexts.map(value=>{
+                        return value;
+                    })
                 }
             </AnimatePresence>
         </AnimateSharedLayout>

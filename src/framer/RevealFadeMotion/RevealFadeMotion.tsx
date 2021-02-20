@@ -30,6 +30,7 @@ type RevealFadeMotionProps = BaseMotionProps & {
 const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotionProps) => {
     const {
         isChildrenMotion = false,
+        motionControl,
         children,
         enterTransition = springTransition(350,55),
         exitTransition = springTransition(350,55),
@@ -55,7 +56,7 @@ const RevealFadeMotion:React.FC<RevealFadeMotionProps>  = (props:RevealFadeMotio
         <motion.div
         variants={revealVars}
         initial={isChildrenMotion?'':'init'}
-        animate={isChildrenMotion?'':'enter'}
+        animate={isChildrenMotion?'': motionControl? motionControl : 'enter'}
         exit={isChildrenMotion?'':'exit'}
         style={{overflow:'hidden', display:display}}
         {...rest}

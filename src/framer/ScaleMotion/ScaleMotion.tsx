@@ -12,6 +12,7 @@ type ScaleMotionProps = BaseMotionProps & {
 const ScaleMotion:React.FC<ScaleMotionProps> = (props:ScaleMotionProps) => {
     const {
         isChildrenMotion = false,
+        motionControl,
         children,
         enterTransition = springTransition(350,55),
         exitTransition = springTransition(350,55),
@@ -31,7 +32,7 @@ const ScaleMotion:React.FC<ScaleMotionProps> = (props:ScaleMotionProps) => {
         <motion.div
         variants={vars}
         initial={isChildrenMotion?'':'init'}
-        animate={isChildrenMotion?'':'enter'}
+        animate={isChildrenMotion?'': motionControl? motionControl : 'enter'}
         exit={isChildrenMotion?'':'exit'}
         {...rest}
         >
