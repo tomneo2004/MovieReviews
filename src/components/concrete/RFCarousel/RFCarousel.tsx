@@ -43,13 +43,6 @@ type RFCarouselProps = React.ComponentProps<typeof Box> & {
     interval?: number;
 
     /**
-     * delay start carousel looping 
-     * 
-     * default 4000 ms
-     */
-    startDelay?: number;
-
-    /**
      * Index of group will be presented at beginning
      * 
      * default 0
@@ -78,7 +71,6 @@ let timer: NodeJS.Timeout;
 const RFCarousel:React.FC<RFCarouselProps> = (props:RFCarouselProps) => {
     const {
         interval = 5000,
-        startDelay = 4000,
         defaultGroupIndex = 0,
         textSet = [],
         variant = 'h4',
