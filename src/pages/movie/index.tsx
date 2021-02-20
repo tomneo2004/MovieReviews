@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PageLayout from "../../layouts/pageLayout";
 import MovieLayout from "../../layouts/movie/movieLayout";
 import PosterImage from "../../components/unit/PosterImage/PosterImage";
@@ -81,6 +81,10 @@ const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, error } = pageProps;
   const router = useRouter(); 
   const reviews = useMovieReviews(Number(movieId));
+  const backdropPath = useMemo(
+    ()=>buildImageQuery(movieDetail.backdrop_path, 'original'),
+    [movieDetail.backdrop_path]
+  );
 
   useBottomScrollListener(() => {
     if (
@@ -104,8 +108,15 @@ const MoviePage = (pageProps: IPageProps) => {
 
   return (
     <PageLayout
+      backgroundURL={backdropPath}
+      banner={
+        !backdropPath? 
+          null 
+          :
+          <Box width='inherit' height='400px' />
+      }
       navigation={
-          <SearchNavigation onSearch={handleSearch} />
+          <SearchNavigation elevation={8} onSearch={handleSearch} />
       }
     >
       {error ? (

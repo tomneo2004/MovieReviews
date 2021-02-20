@@ -5,7 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
-import ScaleFadeFlow from "../../../framer/ScaleFadeMotion";
+import ScaleFadeFlow from "../../../framer/ScaleFadeMotion/ScaleFadeMotion";
+import { springTransition } from "../../../framer/Transition";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
@@ -100,7 +101,10 @@ const SearchResults: React.FC<SearchResultsProps> = (
               alignItems="center"
               p={2}
             >
-              <ScaleFadeFlow enterDelay={i * 0.08} exitDelay={i * 0.04}>
+              <ScaleFadeFlow
+              enterTransition={springTransition(300, 25, i * 0.08)}
+              exitTransition={springTransition(300, 25, i * 0.04)}
+              >
                   <MoviePoster
                     linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
                     imageURL={buildImageQuery(movie.poster_path, "w185")}

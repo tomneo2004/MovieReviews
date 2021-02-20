@@ -23,9 +23,9 @@ const ScaleMotion:React.FC<ScaleMotionProps> = (props:ScaleMotionProps) => {
     } = props;
 
     const vars: Variants = {
-        init: {transform: `scale(${initScale})`},
-        enter: {transform: `scale(${enterScale})`, transition: enterTransition},
-        exit: {transform: `scale(${exitScale})`, transition: exitTransition},
+        init: {transform: `scale(${initScale}, ${initScale})`},
+        enter: {transform: `scale(${enterScale}, ${enterScale})`, transition: enterTransition},
+        exit: {transform: `scale(${exitScale}, ${exitScale})`, transition: exitTransition},
     };
 
     return (

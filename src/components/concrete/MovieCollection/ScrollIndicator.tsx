@@ -34,7 +34,7 @@ const ScrollIndicator:React.FC<ScrollIndicatorProps> = (props:ScrollIndicatorPro
             {children}
             </ScaleMotion>
         }
-        </AnimatePresence>    
+        </AnimatePresence>
     );
 };
 

@@ -11,9 +11,10 @@ import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
 // import Link from "next/link";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
-import ScaleFadeFlow from "../../../framer/ScaleFadeMotion";
 import { fade, useTheme } from "@material-ui/core";
 import ScrollIndicator from "./ScrollIndicator";
+import { springTransition } from "../../../framer/Transition";
+import FadeMotion from "../../../framer/FadeMotion/FadeMotion";
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
   movieData: IMovieData[] | null | undefined;
@@ -85,10 +86,11 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
                 return {
                   id: data.id,
                   element: (
-                    <ScaleFadeFlow
-                      enterDelay={i * 0.08}
-                      exitDelay={i * 0.08}
-                      layout
+                    <FadeMotion
+                      key={`${data.id}`}
+                      enterTransition={springTransition(600, 55, i * 0.08)}
+                      exitTransition={springTransition(600, 55, i * 0.08)}
+                      layout='position'
                     >
                       <MoviePoster
                         linkTo={getRoute(RouteType.movie, {id: data.id.toString(),})}
@@ -103,7 +105,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
                         )}
                         onMouseOver={() => handleMouseOver(data)}
                       />
-                    </ScaleFadeFlow>
+                    </FadeMotion>
                   ),
                 };
               });
