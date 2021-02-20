@@ -11,7 +11,7 @@ import getMovieRating from "../../../utils/movieRating";
 import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 
 type MovieInfoProps = React.ComponentProps<typeof Box> & {
-  movieDetailData: IMovieDetailData;
+  movieDetail: IMovieDetailData;
 };
 
 const renderSkeletons = () => {
@@ -51,30 +51,30 @@ const renderGenre = (genre: IGenreData[]) => {
 };
 
 const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
-  const { movieDetailData, ...rest } = props;
+  const { movieDetail, ...rest } = props;
 
-  if (!movieDetailData) return renderSkeletons();
+  if (!movieDetail) return renderSkeletons();
 
   const userScore = getMovieRating(
-    movieDetailData.vote_count,
-    movieDetailData.vote_average
+    movieDetail.vote_count,
+    movieDetail.vote_average
   );
 
   return (
     <Box {...rest} display="flex" flexDirection="column" p={2}>
       {/* title */}
       <Typography component="div" variant="h3">
-        <Box fontWeight={600}>{movieDetailData.title}</Box>
+        <Box fontWeight={600}>{movieDetail.title}</Box>
       </Typography>
       <Box pb={2} display="flex" flexWrap="wrap" alignItems="center">
         {/* release date */}
         <Typography component="div" variant="h5">
-          <Box fontWeight={400}>{movieDetailData.release_date}</Box>
+          <Box fontWeight={400}>{movieDetail.release_date}</Box>
         </Typography>
         {/* film length */}
         <Typography component="div" variant="h5">
           <Box pl={2} fontWeight={400}>
-            {convertFilmLength(movieDetailData.runtime)}
+            {convertFilmLength(movieDetail.runtime)}
           </Box>
         </Typography>
         <Box pl={2}>{getCircularRating(userScore)}</Box>
@@ -87,13 +87,13 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
           </Box>
         </Typography>
         <Box display="flex" flexWrap="wrap">
-          {renderGenre(movieDetailData.genres)}
+          {renderGenre(movieDetail.genres)}
         </Box>
       </Box>
       {/* tageline */}
       <Typography component="div" variant="h5">
         <Box pb={2} fontStyle="italic">
-          {movieDetailData.tagline}
+          {movieDetail.tagline}
         </Box>
       </Typography>
       {/* overview */}
@@ -104,7 +104,7 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
           </Box>
         </Typography>
         <Typography component="div" variant="h6">
-          <Box>{movieDetailData.overview}</Box>
+          <Box>{movieDetail.overview}</Box>
         </Typography>
       </Box>
     </Box>

@@ -137,7 +137,7 @@ const MoviePage = (pageProps: IPageProps) => {
           }
           info={
             <motion.div layout='position'>
-              <MovieInfo movieDetailData={movieDetail} />
+              <MovieInfo movieDetail={movieDetail} />
             </motion.div>
           }
         >
