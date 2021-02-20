@@ -24,7 +24,7 @@ type SearchNavigationProps = React.ComponentProps<typeof Navigation> & {
  * 
  * Compose Navigation and SearchBar components
  * 
- * Always have SearchBar on right side
+ * Always have SearchBar on right side and you can add more buttons to it
  * 
  * Always sticky
  * 

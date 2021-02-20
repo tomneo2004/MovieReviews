@@ -6,11 +6,12 @@ import useIsomorphicEffect from "../../../effects/isomorphic/isomorphicEffect";
 
 type NavigationProps = React.ComponentProps<typeof AppBar> & {
   brand?: React.ReactElement;
+  middleButtons?: React.ReactElement[];
   rightButtons?: React.ReactElement[];
   elevateThreshold?: number;
 };
 
-const renderRightButtons = (buttons: React.ReactNode[]) => {
+const renderButtons = (buttons: React.ReactNode[]) => {
   if (!buttons) return null;
   return buttons.map((btn, i) => {
     return (
@@ -33,6 +34,7 @@ const renderRightButtons = (buttons: React.ReactNode[]) => {
 const Navigation: React.FC<NavigationProps> = (props: NavigationProps) => {
   const { 
     brand = null, 
+    middleButtons = null,
     rightButtons = null, 
     elevation = 4,
     elevateThreshold = 0,
@@ -74,8 +76,11 @@ const Navigation: React.FC<NavigationProps> = (props: NavigationProps) => {
     <AppBar ref={appbarRef} {...rest} elevation={elevate?elevation:0}>
       <Toolbar>
         <Box flex="1">{brand ? brand : null}</Box>
+        <Box flex="1" display="flex" justifyContent="center">
+          {renderButtons(middleButtons)}
+        </Box>
         <Box flex="1" display="flex" justifyContent="flex-end">
-          {renderRightButtons(rightButtons)}
+          {renderButtons(rightButtons)}
         </Box>
       </Toolbar>
     </AppBar>
