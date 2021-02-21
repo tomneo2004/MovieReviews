@@ -3,31 +3,33 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
-import { IVideoData } from '../../../utils/api/model/apiModelTypes';
+import { IMoviePosterData, IVideoData } from '../../../utils/api/model/apiModelTypes';
+import PosterCollection from '../PosterCollection/PosterCollection';
 import VideoCollection from '../VideoCollection/VideoCollection';
 
 enum MediaTypes {
     'video' = 'video',
-    'gallery' = 'gallery'
+    'poster' = 'poster'
 }
 
-type DataMap = {[key:string]: any}
+type DataMap = {
+    [MediaTypes.video]: IVideoData[];
+    [MediaTypes.poster]: IMoviePosterData[]; 
+}
 
 type MediaProps = React.ComponentProps<typeof Box> & {
     defaultTab?:MediaTypes;
     trailers:IVideoData[];
-    gallery:[];
+    posters:IMoviePosterData[];
 }
 
 const renderMedia = (media:MediaTypes, mediaData:DataMap)=>{
-    const data = mediaData[media];
-    if(!data) return null;
 
     switch(media){
         case MediaTypes.video:
-            return <VideoCollection trailersData={data} />;
-        case MediaTypes.gallery:
-            return <Box>Under development</Box>;
+            return <VideoCollection trailersData={mediaData[media]} />;
+        case MediaTypes.poster:
+            return <PosterCollection posters={mediaData[media]} />;
         default:
             return(
                 <Typography variant='h4' component='div'>
@@ -41,7 +43,7 @@ const Media:React.FC<MediaProps> = (props:MediaProps) => {
     const {
         defaultTab = MediaTypes.video,
         trailers,
-        gallery,
+        posters,
         ...rest
     } = props;
 
@@ -51,10 +53,13 @@ const Media:React.FC<MediaProps> = (props:MediaProps) => {
         setValue(value);
     }
 
+    //preset 10 data
+    posters.splice(9, posters.length);
+    trailers.splice(9, trailers.length);
     const mediaTypeToData = React.useMemo<DataMap>(()=>{
         return {
             [MediaTypes.video]: trailers,
-            [MediaTypes.gallery]: gallery
+            [MediaTypes.poster]: posters,
         }
     }, []);
 
@@ -68,7 +73,7 @@ const Media:React.FC<MediaProps> = (props:MediaProps) => {
             centered
             >
                 <Tab value={MediaTypes.video} label="Video" />
-                <Tab value={MediaTypes.gallery} label="Gallery" />
+                <Tab value={MediaTypes.poster} label="Posters" />
             </Tabs>
             <Box pt={1}>
                 {renderMedia(value, mediaTypeToData)}

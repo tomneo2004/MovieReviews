@@ -107,7 +107,7 @@ export function getMovieDetailQuery(
   id: string,
   params: IParams = defaultParams
 ) {
-  const queryString = `/movie/${id}?append_to_response=credits,videos`;
+  const queryString = `/movie/${id}?append_to_response=credits,videos,images`;
   const builtQuery = buildAPIQuery(
     queryString,
     movieAPI,

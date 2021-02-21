@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { Hidden, makeStyles, Tab, Tabs, Theme, useTheme } from "@material-ui/core";
 import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { ICastData, IMovieDetailData, IVideoData } from "../../utils/api/model/apiModelTypes";
+import { ICastData, IMovieDetailData, IMoviePosterData, IVideoData } from "../../utils/api/model/apiModelTypes";
 import SearchNavigation from "../../components/concrete/SearchNavigation/SearchNavigation";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import { useRouter } from "next/router";
@@ -14,8 +14,6 @@ import Overview from "../../components/concrete/Overview/Overview";
 import Media from "../../components/concrete/Media/Media";
 import Casts from "../../components/concrete/Casts/Casts";
 import Reviews from "../../components/concrete/Reviews/Reviews";
-import PhantomText from "../../components/concrete/PhantomText/PhantomText";
-import SectionHeader from "../../components/concrete/SectionHeader/SectionHeader";
 
 interface IPageProps {
   movieId: string;
@@ -77,16 +75,18 @@ export const getServerSideProps: GetServerSideProps = async (
 enum SectionTypes {
   'overview' = 'overview',
   'media' = 'media',
-  'casts' = 'casts'
+  'casts' = 'casts',
+  'reviews' = 'reviews',
 }
 
 type SectionMapToData = {
   [SectionTypes.overview]: IMovieDetailData,
   [SectionTypes.media]: {
     trailers: IVideoData[],
-    gallery: []
+    poster: IMoviePosterData[],
   }
   [SectionTypes.casts]: ICastData[],
+  [SectionTypes.reviews]: number,
 }
 
 const renderSection = (section:SectionTypes, data:SectionMapToData)=>{
@@ -96,9 +96,11 @@ const renderSection = (section:SectionTypes, data:SectionMapToData)=>{
     case SectionTypes.media:
       return (<Media 
               trailers={data[section].trailers} 
-              gallery={data[section].gallery} />);
+              posters={data[section].poster} />);
     case SectionTypes.casts:
       return <Casts casts={data[section]} />;
+    case SectionTypes.reviews:
+      return <Reviews movieId={data[section]} />
   }
 }
 
@@ -123,6 +125,7 @@ const renderTabs = (section:SectionTypes,
           <Tab value={SectionTypes.overview} label="Overview" />
           <Tab value={SectionTypes.media} label="Media" />
           <Tab value={SectionTypes.casts} label="Casts" />
+          <Tab value={SectionTypes.reviews} label="Reviews" />
       </Tabs>
   )
 }
@@ -139,8 +142,9 @@ const MoviePage = (pageProps: IPageProps) => {
   const sectionToData = React.useMemo<SectionMapToData>(()=>{
     return {
       overview: movieDetail,
-      media: {trailers: movieDetail.videos.results, gallery:[]},
-      casts: movieDetail.credits.cast
+      media: {trailers: movieDetail.videos.results, poster:movieDetail.images.posters},
+      casts: movieDetail.credits.cast,
+      reviews: Number(movieId)
     }
   }, []);
 
@@ -186,27 +190,6 @@ const MoviePage = (pageProps: IPageProps) => {
             </Hidden>
             <Box p={2}>
                 {renderSection(section, sectionToData)}
-            </Box>
-            <Box px={2}>
-            <SectionHeader 
-              px={2}
-              bgcolor={theme.palette.primary.main}
-              header={
-                <PhantomText height='100%' bgcolor={theme.palette.primary.light} px={1}
-                text='Reviews' 
-                charDelayDefs={{
-                  0:{enter:1, exit:0},
-                  1:{enter:1.3, exit:0},
-                  2:{enter:1.6, exit:0},
-                  3:{enter:1.9, exit:0},
-                  4:{enter:2.2, exit:0},
-                  5:{enter:2.5, exit:0},
-                  6:{enter:2.8, exit:0},
-                }}
-                />
-              }
-            />
-            <Reviews movieId={Number(movieId)} />
             </Box>
         </Box>
       )}

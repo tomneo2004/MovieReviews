@@ -1,7 +1,5 @@
 import { Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import makeStyles from "@material-ui/styles/makeStyles";
-import style from "./MoviePosterStyle";
 import React from "react";
 import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 import PosterImage from "../../unit/PosterImage/PosterImage";
@@ -53,8 +51,6 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     ...rest
   } = props;
 
-  const classes = makeStyles(style)();
-
   return (
     <Box
       {...rest}
@@ -67,9 +63,9 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
         <PosterImage
           imageURL={imageURL}
           elevation={4}
-          className={classes.hoverPointer}
           onMouseOver={onMouseOver}
           imageWidth={imageWidth}
+          hoverCursor='pointer'
         />
       </Link>
       <Typography component="div" variant="h6">

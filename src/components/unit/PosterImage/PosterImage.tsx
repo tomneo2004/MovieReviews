@@ -47,7 +47,52 @@ type PosterImageProps = React.ComponentProps<typeof Card> & {
    * default as same as aspectRatio
    */
   enlargeAspectRatio?: number;
+
+  /**
+   * Custom layoutId for AnimateSharedLayout
+   * 
+   * https://www.framer.com/api/motion/animate-shared-layout/
+   * 
+   * If PosterImage is in a collection among with other PosterImage
+   * you nust give an unique layout id from the others otherwise behaviour
+   * might be not expected
+   * 
+   * default to system's PosterImage's layout id
+   */
+  layoutId?:string;
+
+  hoverCursor?:string;
 };
+
+const renderCardMedia = (imageURL:string, imageWidth:number, 
+  aspectRatio:number, placeholder:string, cardMediaStyle:string, alt:string)=>{
+
+    return (
+      <CardMedia
+        className={cardMediaStyle}
+        component="img"
+        alt={alt}
+        width={imageWidth}
+        height={imageWidth * aspectRatio}
+        src={imageURL ? imageURL : placeholder}
+      />
+    )
+}
+
+const renderEnlargeCardMedia = (imageURL:string, elargeWidth:number, 
+  elargeAspectRatio:number, placeholder:string, cardMediaStyle:string, alt:string)=>{
+
+    return (
+      <CardMedia
+        className={cardMediaStyle}
+        component="img"
+        alt={alt}
+        width={elargeWidth}
+        height={elargeWidth * elargeAspectRatio}
+        src={imageURL ? imageURL : placeholder}
+      />
+    )
+}
 
 /**
  * Component PosterImage
@@ -66,16 +111,15 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterI
     aspectRatio = 1.5,
     enlargeWidth = null,
     enlargeAspectRatio = aspectRatio,
+    layoutId = LayoutIdTypes.moviePosterImage,
+    hoverCursor = 'auto',
     ...rest
   } = props;
   const [enlarge, setEnlarge] = React.useState<boolean>(false);
-  const classes = makeStyles(style)();
-
-  const motionDivStyle = {
-    width: "fit-content",
-    height: "fit-content",
-    outline: "none",
-  };
+  const classes = makeStyles(style)({
+    enlarge: enlargeWidth?true:false,
+    cursor: hoverCursor,
+  });
 
   const toggleEnlarge = () => setEnlarge((state) => !state);
 
@@ -83,14 +127,8 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterI
     return (
       <Box position="relative" minWidth={imageWidth} maxWidth={imageWidth}>
         <Card {...rest}>
-          <CardMedia
-            className={classes.cardMedia}
-            component="img"
-            alt={alt}
-            width={imageWidth}
-            height={imageWidth * aspectRatio}
-            src={imageURL ? imageURL : imagePlacehoder}
-          />
+          {renderCardMedia(imageURL, imageWidth, 
+            aspectRatio, imagePlacehoder, classes.cardMedia, alt)}
         </Card>
       </Box>
     )
@@ -104,19 +142,13 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterI
         onClose={toggleEnlarge}
       >
         <motion.div
-          layoutId={LayoutIdTypes.moviePosterImage}
-          style={motionDivStyle}
+          layoutId={layoutId}
+          style={{width:enlargeWidth, height:'fit-content', outline:'none'}}
           transition={springTransition()}
         >
           <Card {...rest} onClick={toggleEnlarge}>
-            <CardMedia
-              className={classes.cardMedia}
-              component="img"
-              alt={alt}
-              width={enlargeWidth}
-              height={enlargeWidth * enlargeAspectRatio}
-              src={imageURL ? imageURL : imagePlacehoder}
-            />
+            {renderEnlargeCardMedia(imageURL, enlargeWidth, enlargeAspectRatio, 
+              imagePlacehoder, classes.cardMedia, alt)}
           </Card>
         </motion.div>
       </Modal>
@@ -126,19 +158,13 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterI
   return (
     <Box position="relative" minWidth={imageWidth} maxWidth={imageWidth}>
       <motion.div
-          layoutId={LayoutIdTypes.moviePosterImage}
-          style={motionDivStyle}
+          layoutId={layoutId}
+          style={{width:imageWidth, height:'fit-content', outline:'none'}}
           transition={springTransition()}
       >
       <Card {...rest} onClick={toggleEnlarge}>
-        <CardMedia
-          className={classes.cardMedia}
-          component="img"
-          alt={alt}
-          width={imageWidth}
-          height={imageWidth * aspectRatio}
-          src={imageURL ? imageURL : imagePlacehoder}
-        />
+      {renderCardMedia(imageURL, imageWidth, 
+            aspectRatio, imagePlacehoder, classes.cardMedia, alt)}
       </Card>
       </motion.div>
     </Box>
