@@ -1,4 +1,5 @@
 import { Transition } from "framer-motion";
+import { Easing } from "framer-motion/types/types";
 
 type OrchestrationOptions = {
   delayChildren: number,
@@ -51,5 +52,23 @@ export const springTransition = (
     ...orchestrateOptions
   };
 };
+
+export const tweenTransition = (
+  duration: number = 0.3,
+  ease: Easing | Easing[] = 'linear',
+  from: number | string = 0,
+  times: number[] = [],
+  orchestrateOptions:OrchestrationOptions = orchestrate()
+):Transition => {
+
+  return {
+    type: 'tween',
+    duration,
+    ease,
+    from,
+    times,
+    ...orchestrateOptions
+  }
+}
 
 export default {};

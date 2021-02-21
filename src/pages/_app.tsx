@@ -59,9 +59,9 @@ export default function MovieReviewApp(props: AppProps) {
             <motion.div
               key={router.route}
               variants={{
-                init: { opacity: 0.5 },
+                init: { opacity: 0.8 },
                 enter: { opacity: 1, transition: { when: "beforeChildren" } },
-                exit: { opacity: 0.5, transition: { when: "afterChildren" } },
+                exit: { opacity: 0.8, transition: { when: "afterChildren" } },
               }}
               initial="init"
               animate="enter"

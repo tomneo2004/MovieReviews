@@ -6,6 +6,10 @@ import PosterImage from "../../unit/PosterImage/PosterImage";
 import Link from "next/link";
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
+  /**
+   * this will be passed to PosterImage
+   */
+  layoutId?: string;
   linkTo?: string;
   imageURL?: string;
   imageWidth?: number;
@@ -37,6 +41,7 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
 
 const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
+    layoutId,
     linkTo = '#', 
     imageURL = "",
     imageWidth = 150,
@@ -61,6 +66,7 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     >
       <Link href={linkTo}>
         <PosterImage
+          layoutId={layoutId}
           imageURL={imageURL}
           elevation={4}
           onMouseOver={onMouseOver}

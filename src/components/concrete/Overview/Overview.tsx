@@ -17,16 +17,15 @@ const Overview:React.FC<OverviewProps> = (props:OverviewProps) => {
 
     return (
         <Grid  {...rest} container>
-            {!movieDetail.poster_path? null : 
-                (<Grid md={4} item container justify="center">
-                    <PosterImage
-                    imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
-                    imageWidth={342}
-                    enlargeWidth={542}
-                    hoverCursor='pointer'
-                    />
-                </Grid>)
-            }
+            <Grid md={4} item container justify="center">
+                <PosterImage
+                layoutId={movieDetail.id.toString()}
+                imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
+                imageWidth={342}
+                enlargeWidth={542}
+                hoverCursor='pointer'
+                />
+            </Grid>
             <Grid md={8} item container justify="center">
                 <MovieInfo movieDetail={movieDetail} />
             </Grid>

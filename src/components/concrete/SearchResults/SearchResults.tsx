@@ -5,8 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
-import ScaleFadeFlow from "../../../framer/ScaleFadeMotion/ScaleFadeMotion";
-import { springTransition } from "../../../framer/Transition";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
@@ -92,7 +90,7 @@ const SearchResults: React.FC<SearchResultsProps> = (
 
   return (
     <Grid id={id} {...rest} container>
-      {data.map((movie, i) => {
+      {data.map(movie => {
         return (
           <Grid key={movie.id} item xs>
             <Box
@@ -101,13 +99,10 @@ const SearchResults: React.FC<SearchResultsProps> = (
               alignItems="center"
               p={2}
             >
-              <ScaleFadeFlow
-              enterTransition={springTransition(300, 25, i * 0.08)}
-              exitTransition={springTransition(300, 25, i * 0.04)}
-              >
                   <MoviePoster
+                    layoutId={movie.id.toString()}
                     linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
-                    imageURL={buildImageQuery(movie.poster_path, "w185")}
+                    imageURL={buildImageQuery(movie.poster_path, "w342")}
                     imageWidth={185}
                     minWidth={200}
                     maxWidth={200}
@@ -120,7 +115,6 @@ const SearchResults: React.FC<SearchResultsProps> = (
                     ratingOffsetX={-8}
                     ratingOffsetY={-8}
                   />
-              </ScaleFadeFlow>
             </Box>
           </Grid>
         );

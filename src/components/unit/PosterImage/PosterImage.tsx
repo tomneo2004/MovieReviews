@@ -7,7 +7,6 @@ import style from "./PosterImageStyle";
 import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import Box from "@material-ui/core/Box/Box";
 import { motion } from "framer-motion";
-import { LayoutIdTypes } from "../../../framer/LayoutIdTypes";
 import { springTransition } from "../../../framer/Transition";
 
 type PosterImageProps = React.ComponentProps<typeof Card> & {
@@ -57,7 +56,7 @@ type PosterImageProps = React.ComponentProps<typeof Card> & {
    * you nust give an unique layout id from the others otherwise behaviour
    * might be not expected
    * 
-   * default to system's PosterImage's layout id
+   * default to null
    */
   layoutId?:string;
 
@@ -111,7 +110,7 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterI
     aspectRatio = 1.5,
     enlargeWidth = null,
     enlargeAspectRatio = aspectRatio,
-    layoutId = LayoutIdTypes.moviePosterImage,
+    layoutId = null,
     hoverCursor = 'auto',
     ...rest
   } = props;
@@ -126,10 +125,15 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterI
   if(!enlargeWidth){
     return (
       <Box position="relative" minWidth={imageWidth} maxWidth={imageWidth}>
+      <motion.div
+        layoutId={layoutId}
+        style={{outline:'none'}}
+      >
         <Card {...rest}>
           {renderCardMedia(imageURL, imageWidth, 
             aspectRatio, imagePlacehoder, classes.cardMedia, alt)}
         </Card>
+        </motion.div>
       </Box>
     )
   }
