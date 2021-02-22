@@ -2,6 +2,7 @@ import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
+import Link from 'next/link';
 import React from 'react';
 import { IMoviePosterData, IVideoData } from '../../../utils/api/model/apiModelTypes';
 import PosterCollection from '../PosterCollection/PosterCollection';
@@ -13,23 +14,47 @@ enum MediaTypes {
 }
 
 type DataMap = {
-    [MediaTypes.video]: IVideoData[];
-    [MediaTypes.poster]: IMoviePosterData[]; 
+    [MediaTypes.video]: {data:IVideoData[], link:string};
+    [MediaTypes.poster]: {data:IMoviePosterData[], link:string}; 
 }
 
 type MediaProps = React.ComponentProps<typeof Box> & {
     defaultTab?:MediaTypes;
-    trailers:IVideoData[];
-    posters:IMoviePosterData[];
+    trailers:{snippetData: IVideoData[], routeToPage:string};
+    posters:{snippetData: IMoviePosterData[], routeToPage:string};
+}
+
+const showLink = (title:string, url:string)=>{
+    return(
+            <Typography variant='body1' component='div'>
+                <Link href={url}>
+                    <a>{title}</a>        
+                </Link>
+            </Typography>
+    )
 }
 
 const renderMedia = (media:MediaTypes, mediaData:DataMap)=>{
 
     switch(media){
         case MediaTypes.video:
-            return <VideoCollection trailersData={mediaData[media]} />;
+            const videoData = mediaData[media].data as IVideoData[];
+            const videoLink = mediaData[media].link as string;
+            return (
+                <React.Fragment> 
+                    <Box pl={2}>{showLink(`See all videos`, videoLink)}</Box>
+                    <VideoCollection trailersData={videoData} />
+                </React.Fragment>
+            );
         case MediaTypes.poster:
-            return <PosterCollection posters={mediaData[media]} />;
+            const posterData = mediaData[media].data as IMoviePosterData[];
+            const posterLink = mediaData[media].link as string; 
+            return (
+                <React.Fragment> 
+                    <Box pl={2}>{showLink(`See all posters`, posterLink)}</Box>
+                    <PosterCollection posters={posterData} />
+                </React.Fragment>
+            );
         default:
             return(
                 <Typography variant='h4' component='div'>
@@ -54,12 +79,12 @@ const Media:React.FC<MediaProps> = (props:MediaProps) => {
     }
 
     //preset 10 data
-    posters.splice(9, posters.length);
-    trailers.splice(9, trailers.length);
+    posters.snippetData.splice(9, posters.snippetData.length);
+    trailers.snippetData.splice(9, trailers.snippetData.length);
     const mediaTypeToData = React.useMemo<DataMap>(()=>{
         return {
-            [MediaTypes.video]: trailers,
-            [MediaTypes.poster]: posters,
+            [MediaTypes.video]: {data:trailers.snippetData, link:trailers.routeToPage},
+            [MediaTypes.poster]: {data:posters.snippetData, link:posters.routeToPage},
         }
     }, []);
 

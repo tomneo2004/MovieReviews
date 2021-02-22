@@ -1,7 +1,7 @@
 /**
  * Model defintion for Pouplar and Trending movies
  */
-export interface IMovieData {
+export type IMovieData = {
   poster_path: string | null;
   adult: boolean;
   overview: string;
@@ -18,36 +18,36 @@ export interface IMovieData {
   vote_average: number;
 }
 
-export interface ISearchMovieData {
+export type ISearchMovieData = {
   page: number;
   total_results: number;
   total_pages: number;
   results: IMovieData[];
 }
 
-export interface IGenreData {
+export type IGenreData = {
   id: number;
   name: string;
 }
 
-export interface IProductionCompanyData {
+export type IProductionCompanyData = {
   name: string;
   id: number;
   logo_path: string | null;
   origin_country: string;
 }
 
-export interface IProductionCountryData {
+export type IProductionCountryData = {
   iso_3166_1: string;
   name: string;
 }
 
-export interface ISpokenLanguageData {
+export type ISpokenLanguageData = {
   iso_639_1: string;
   name: string;
 }
 
-export interface ICastData {
+export type ICastData = {
   adult: boolean;
   gender: number | null;
   id: number;
@@ -62,7 +62,7 @@ export interface ICastData {
   order: number;
 }
 
-export interface ICrewData {
+export type ICrewData = {
   adult: boolean;
   gender: number | null;
   id: number;
@@ -76,12 +76,12 @@ export interface ICrewData {
   job: string;
 }
 
-interface ICreditsData {
+export type ICreditsData = {
   cast: ICastData[];
   crew: ICreditsData[];
 }
 
-export interface IVideoData {
+export type IVideoData = {
   id: string;
   iso_639_1: string;
   iso_3166_1: string;
@@ -92,12 +92,12 @@ export interface IVideoData {
   type: string;
 }
 
-interface IVideosData {
+export type IVideosData = {
   id: number;
   results: IVideoData[];
 }
 
-export interface IMovieBackdropData{
+export type IMovieBackdropData = {
   aspect_ratio: number;
   file_path: string;
   height: number;
@@ -107,15 +107,15 @@ export interface IMovieBackdropData{
   width: number;
 }
 
-export interface IMoviePosterData extends IMovieBackdropData {}
+export type IMoviePosterData = IMovieBackdropData;
 
-export interface IMovieImagesData{
+export type IMovieImagesData = {
   id: number;
   backdrops: IMovieBackdropData[];
   posters: IMoviePosterData[];
 }
 
-export interface IMovieDetailData {
+export type IMovieDetailData = {
   adult: boolean;
   backdrop_path: string | null;
   belongs_to_collection: null | { [key: string]: any };
@@ -146,14 +146,14 @@ export interface IMovieDetailData {
   images: IMovieImagesData;
 }
 
-export interface IAuthorDetailsData {
+export type IAuthorDetailsData = {
   name: string;
   username: string;
   avatar_path: string | null;
   rating: number | null;
 }
 
-export interface IReviewData {
+export type IReviewData = {
   author: string;
   author_details: IAuthorDetailsData;
   content: string;
@@ -163,7 +163,7 @@ export interface IReviewData {
   url: string;
 }
 
-export interface IMovieReviewsData {
+export type IMovieReviewsData = {
   id: number;
   page: number;
   results: IReviewData[];
@@ -171,7 +171,7 @@ export interface IMovieReviewsData {
   total_results: number;
 }
 
-export interface ILatestMovieData {
+export type ILatestMovieData = {
   adult: boolean
   backdrop_path: string | null
   belongs_to_collection: null
@@ -199,7 +199,7 @@ export interface ILatestMovieData {
   vote_count: number;
 }
 
-export interface ITopRatedMoviesData{
+export type ITopRatedMoviesData = {
   page: number;
   results: IMovieData[]
   total_results: number;

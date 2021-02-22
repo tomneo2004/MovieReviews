@@ -5,6 +5,7 @@ import {
   CardMedia,
   Dialog,
   makeStyles,
+  Typography,
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
@@ -14,6 +15,7 @@ import style from "./VideoPlayerStyle";
 
 type VideoPlayerProps = React.ComponentProps<typeof Card> & {
   videoSrc: string;
+  videoTitle?: string;
   onOpen?: () => void;
   onClose?: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
 };
@@ -29,7 +31,7 @@ const renderSkeletons = () => {
 let img: HTMLImageElement;
 
 const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
-  const { videoSrc, onOpen, onClose, ...rest } = props;
+  const { videoSrc, videoTitle, onOpen, onClose, ...rest } = props;
   const [open, setOpen] = React.useState<boolean>(false);
   const { data, error } = useNoembed(videoSrc);
   const [thumbReady, setThumbReady] = React.useState<boolean>(false);
@@ -73,15 +75,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
 
   return (
     <React.Fragment>
-      <Card {...rest} onClick={handleVideoClick}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            src={data.thumbnail_url}
-            component="img"
-          />
-        </CardActionArea>
-      </Card>
+      {/* thumbnail */}
+      <Box>
+        <Card {...rest} onClick={handleVideoClick}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              src={data.thumbnail_url}
+              component="img"
+            />
+          </CardActionArea>
+        </Card>
+        <Typography variant='subtitle2' component='div'>
+          <Box>{videoTitle}</Box>
+        </Typography>
+      </Box>
+
+      {/* video player */}
       <Dialog
         classes={{ paper: classes.paper }}
         fullWidth

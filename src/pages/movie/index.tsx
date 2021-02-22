@@ -89,14 +89,21 @@ type SectionMapToData = {
   [SectionTypes.reviews]: number,
 }
 
-const renderSection = (section:SectionTypes, data:SectionMapToData)=>{
+const renderSection = (section:SectionTypes, data:SectionMapToData, movieId:string)=>{
   switch(section){
     case SectionTypes.overview:
       return <Overview movieDetail={data[section]} />;
     case SectionTypes.media:
       return (<Media 
-              trailers={data[section].trailers} 
-              posters={data[section].poster} />);
+              trailers={{
+                snippetData: data[section].trailers,
+                routeToPage: getRoute(RouteType["movie video"], null, movieId)
+              }} 
+              posters={{
+                snippetData: data[section].poster,
+                routeToPage: '#'
+              }} 
+              />);
     case SectionTypes.casts:
       return <Casts casts={data[section]} />;
     case SectionTypes.reviews:
@@ -189,7 +196,7 @@ const MoviePage = (pageProps: IPageProps) => {
             {renderTabs(section, handleSectionChange)}
             </Hidden>
             <Box p={2}>
-                {renderSection(section, sectionToData)}
+                {renderSection(section, sectionToData, movieId)}
             </Box>
         </Box>
       )}

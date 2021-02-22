@@ -1,15 +1,15 @@
 import { Box, makeStyles, useTheme } from "@material-ui/core";
 import React from "react";
 
-export interface IProps {
+export type PageLayoutProps = React.ComponentProps<typeof Box> & {
   backgroundURL?: string;
   banner?: React.ReactNode;
   children: React.ReactNode;
   navigation?: React.ReactNode;
   footer?: React.ReactNode;
 }
-const PageLayout = (props: IProps) => {
-  const { children, navigation = null, footer = null, banner = null, backgroundURL='' } = props;
+const PageLayout:React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
+  const { children, navigation = null, footer = null, banner = null, backgroundURL='', ...rest} = props;
 
   const theme = useTheme();
 
@@ -22,6 +22,7 @@ const PageLayout = (props: IProps) => {
 
   return (
     <Box
+      {...rest}
       className={backgroundURL? classes.fixedBg:''}
       position="relative"
       flexDirection="column"
