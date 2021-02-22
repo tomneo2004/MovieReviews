@@ -93,6 +93,7 @@ export interface IVideoData {
 }
 
 interface IVideosData {
+  id: number;
   results: IVideoData[];
 }
 

@@ -169,3 +169,20 @@ export function getTopRatedMovieQuery(params:IParams = defaultParams){
   );
   return builtQuery;
 }
+
+/**
+ * Query for movie's videos
+ * @param id movie id
+ * @param params 
+ */
+export function getMovieVideosQuery(id:string, params:IParams = defaultParams){
+  const queryString = `/movie/${id}/videos`;
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
