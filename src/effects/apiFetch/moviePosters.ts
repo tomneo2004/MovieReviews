@@ -1,22 +1,22 @@
 import useSWR from "swr";
 import axios from "axios";
-import { IVideoData, IVideosData } from "../../utils/api/model/apiModelTypes";
+import { IMoviePosterData } from "../../utils/api/model/apiModelTypes";
 import { IFetchResponse } from "./fetchResponse";
 
 const apiRoute = `${
   process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
-}/api/detail/movies/videos`;
+}/api/detail/movies/posters`;
 
 const fetcher = async (url: string) => {
   const resp = await axios.get(url);
-  const data: IVideosData = resp.data;
-  return data.results;
+  const data: IMoviePosterData[] = resp.data;
+  return data;
 };
 
 /**
- * Side effect for fetching movie videos
+ * Side effect for fetching movie poster
  */
-export function useMovieVideos(id: string): IFetchResponse<IVideoData[]> {
+export function useMoviePosters(id: string): IFetchResponse<IMoviePosterData[]> {
   const { data, error } = useSWR(
     id ? () => `${apiRoute}?id=${id}` : null,
     fetcher
@@ -32,7 +32,7 @@ export function useMovieVideos(id: string): IFetchResponse<IVideoData[]> {
       isLoading,
     };
   }
-
+  
   return {
     data,
     error: null,

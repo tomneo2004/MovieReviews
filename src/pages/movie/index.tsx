@@ -101,7 +101,7 @@ const renderSection = (section:SectionTypes, data:SectionMapToData, movieId:stri
               }} 
               posters={{
                 snippetData: data[section].poster,
-                routeToPage: '#'
+                routeToPage: getRoute(RouteType["movie poster"], null, movieId)
               }} 
               />);
     case SectionTypes.casts:

@@ -48,6 +48,7 @@
     "next": "latest",
     "next-on-netlify": "^2.8.7",
     "nprogress": "^0.2.0",
+    "popmotion": "^9.1.0",
     "react": "^16.12.0",
     "react-bottom-scroll-listener": "^5.0.0",
     "react-dom": "^16.12.0",

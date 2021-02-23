@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-type reqHandlerResponseType = {[key:string]:any} | any;
+type reqHandlerResponseType = {[key:string]:any} | [{[key:string]:any}] | any;
 
 /**
  * A handler for handing next api request
@@ -18,7 +18,7 @@ type reqHandlerResponseType = {[key:string]:any} | any;
 export default async function nextRequestHandler(
     req:NextApiRequest,
     res:NextApiResponse,
-    reqHandler: <T = reqHandlerResponseType> (req:NextApiRequest)=>Promise<T>, 
+    reqHandler: <T extends reqHandlerResponseType> (req:NextApiRequest)=>Promise<T>, 
     errorHandler:(error:any, res:NextApiResponse)=>void = null
     ){
         try{

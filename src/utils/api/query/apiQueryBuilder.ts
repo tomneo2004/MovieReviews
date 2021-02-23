@@ -7,9 +7,12 @@ const movieAPIVersion = "3";
 const movieAPIKey = process.env.MOVIE_API_KEY;
 
 /**
- *
+ * Get image source from themoviedb
+ * 
  * @param imagePath image path
- * @param imageSize reference to https://developers.themoviedb.org/3/configuration/get-api-configuration
+ * @param imageSize reference to 
+ * 
+ * https://developers.themoviedb.org/3/configuration/get-api-configuration
  */
 export function buildImageQuery(imagePath: string, imageSize: string = "w200") {
   if (!imagePath) return "";
@@ -18,6 +21,51 @@ export function buildImageQuery(imagePath: string, imageSize: string = "w200") {
 
   return buildQuery;
 }
+
+export enum PosterSize {
+  "w92" = "w92",
+  "w154" = "w154",
+  "w185" = "w185",
+  "w342" = "w342",
+  "w500" = "w500",
+  "w780" = "w780",
+  "original" = "original"
+}
+
+/**
+ * Return query for poster image
+ * 
+ * @param imagePath image path relative to themoviedb
+ * @param {PosterSize} imageSize size of poster
+ * 
+ * https://developers.themoviedb.org/3/configuration/get-api-configuration
+ */
+export function getPosterImageQuery(imagePath: string, imageSize: PosterSize = PosterSize.original ) {
+  const buildQuery = buildImageQuery(imagePath , imageSize);
+
+  return buildQuery;
+}
+
+export enum BackdropSize {
+  "w300" = "w300",
+  "w780" = "w780",
+  "w1280" = "w1280",
+  "original" = "original"
+}
+
+/**
+ * Return query for backdrop image
+ * 
+ * @param imagePath image path relative to themoviedb
+ * @param {BackdropSize}imageSize size of backdrop
+ */
+export function getBackdropImageQuery(imagePath: string, imageSize: BackdropSize = BackdropSize.original ) {
+  const buildQuery = buildImageQuery(imagePath , imageSize);
+
+  return buildQuery;
+}
+
+
 
 /**
  * Get query for popular movie
@@ -186,3 +234,22 @@ export function getMovieVideosQuery(id:string, params:IParams = defaultParams){
   );
   return builtQuery;
 }
+
+/**
+ * Query for movie's images
+ * @param id movie id
+ * @param params 
+ */
+export function getMovieImagesQuery(id:string, params:IParams = defaultParams){
+  const queryString = `/movie/${id}/images`;
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
+
