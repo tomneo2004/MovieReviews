@@ -8,7 +8,6 @@ import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { ICastData, IMovieDetailData, IMoviePosterData, IVideoData } from "../../utils/api/model/apiModelTypes";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
-import { useRouter } from "next/router";
 import Overview from "../../components/concrete/Overview/Overview";
 import Media from "../../components/concrete/Media/Media";
 import Casts from "../../components/concrete/Casts/Casts";
