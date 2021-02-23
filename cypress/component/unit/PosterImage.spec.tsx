@@ -16,10 +16,22 @@ describe('PosterImage component', ()=>{
     })
   }})
 
+  describe('ImageURL', ()=>{
+    beforeEach(()=>{
+      mount(<PosterImage id='PosterImage' imageURL={imageSrc} imageWidth={300} aspectRatio={2} />).as('PosterImage');  
+    })
+
+    it('Correct url prop', ()=>{
+      cy.get('@PosterImage')
+      .its('props.imageURL')
+      .should('equal', imageSrc);
+    })
+  })
+
 
   describe('Fixed Size', ()=>{
     beforeEach(()=>{
-      mount(<PosterImage id='PosterImage' imageURL={imageSrc} imageWidth={300} aspectRatio={2} />);  
+      mount(<PosterImage imageURL={imageSrc} imageWidth={300} aspectRatio={2} />).as('PosterImage');  
     })
 
     it('Image width', ()=>{
