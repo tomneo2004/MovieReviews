@@ -36,13 +36,15 @@ const SectionHeader: React.FC<SectionHeaderProps> = (props:SectionHeaderProps) =
 
     return (
         <motion.div layout>
-        <Box {...rest} display='flex' flexDirection={flexDir} alignItems={alignItems} py={py}>
-            <Box flex='initial' order={headerOrder} pb={py} justifyContent='center' 
-            alignItems='center'>
-                {header}
-            </Box>
-            <Box flex='auto' order={itemsOrder} display='flex' justifyContent={itemsJC} px={1}>
-                {items}
+        <Box {...rest}>    
+            <Box display='flex' flexDirection={flexDir} alignItems={alignItems} py={py}>
+                <Box flex='initial' order={headerOrder} pb={py} justifyContent='center' 
+                alignItems='center'>
+                    {header}
+                </Box>
+                <Box flex='auto' order={itemsOrder} display='flex' justifyContent={itemsJC} px={1}>
+                    {items}
+                </Box>
             </Box>
         </Box>
         </motion.div>

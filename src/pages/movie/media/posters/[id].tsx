@@ -2,6 +2,7 @@ import { useTheme } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { useRouter } from 'next/router';
 import React from 'react';
+import CommonNavigation from '../../../../components/concrete/CommonNavigation/CommonNavigation';
 import GridPosterImage from '../../../../components/concrete/GridPosterImage/GridPosterImage';
 import MotionGallery from '../../../../components/concrete/MotionGallery/MotionGallery';
 import PhantomText from '../../../../components/concrete/PhantomText/PhantomText';
@@ -48,10 +49,16 @@ const PostersPage = ()=>{
     }
 
     return (
-        <PageLayout p={2}>
+        <PageLayout 
+        navigation={
+            <CommonNavigation />
+        }
+        >
         {isLoading? <LinearProgress /> :
             <React.Fragment>
             <SectionHeader
+             mt={2}
+             mx={2}
             headerAlign = 'center'
             bgcolor={theme.palette.primary.main}
             header={

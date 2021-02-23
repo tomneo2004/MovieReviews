@@ -7,13 +7,13 @@ import { Hidden, makeStyles, Tab, Tabs, Theme, useTheme } from "@material-ui/cor
 import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { ICastData, IMovieDetailData, IMoviePosterData, IVideoData } from "../../utils/api/model/apiModelTypes";
-import SearchNavigation from "../../components/concrete/SearchNavigation/SearchNavigation";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import { useRouter } from "next/router";
 import Overview from "../../components/concrete/Overview/Overview";
 import Media from "../../components/concrete/Media/Media";
 import Casts from "../../components/concrete/Casts/Casts";
 import Reviews from "../../components/concrete/Reviews/Reviews";
+import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
 
 interface IPageProps {
   movieId: string;
@@ -155,10 +155,6 @@ const MoviePage = (pageProps: IPageProps) => {
     }
   }, []);
 
-  const handleSearch = (value: string) => {
-    router.push(getRoute(RouteType.search, { query: value }));
-  };
-
   const handleSectionChange = (_evt:React.ChangeEvent<{}>, value:SectionTypes)=>{
     setSection(value);
   }
@@ -173,15 +169,17 @@ const MoviePage = (pageProps: IPageProps) => {
           <Box width='inherit' height='400px' />
       }
       navigation={
-          <SearchNavigation 
+          <CommonNavigation 
           elevation={8} 
-          onSearch={handleSearch} 
+          // onSearch={handleSearch} 
           middleButtons={[
             <Hidden smDown>
               {renderTabs(section, handleSectionChange)}
             </Hidden>
           ]}
           />
+
+
       }
     >
       {error ? (

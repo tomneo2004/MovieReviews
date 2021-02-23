@@ -10,7 +10,7 @@ import { ISearchMovieData } from "../../utils/api/model/apiModelTypes";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import SearchNavigation from "../../components/concrete/SearchNavigation/SearchNavigation";
+import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
 
 interface IPageProps {
   query: string;
@@ -66,14 +66,10 @@ const SearchPage = (pageProps: IPageProps) => {
     );
   };
 
-  const handleSearch = (value: string) => {
-    router.push(getRoute(RouteType.search, { query: value }));
-  };
-
   return (
     <PageLayout
       navigation={
-        <SearchNavigation onSearch={handleSearch} />
+       <CommonNavigation />
       }
     >
       <SearchLayout>

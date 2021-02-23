@@ -1,6 +1,7 @@
 import { LinearProgress, useTheme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React from 'react';
+import CommonNavigation from '../../../../components/concrete/CommonNavigation/CommonNavigation';
 import GridVideoPlayer from '../../../../components/concrete/GridVideoPlayer/GridVideoPlayer';
 import PhantomText from '../../../../components/concrete/PhantomText/PhantomText';
 import SectionHeader from '../../../../components/concrete/SectionHeader/SectionHeader';
@@ -14,10 +15,16 @@ const VideosPage = ()=>{
     const {data, error, isLoading} = useMovieVideos(id as string);
 
     return (
-        <PageLayout p={2}>
+        <PageLayout 
+        navigation={
+            <CommonNavigation />
+        }
+        >
         {isLoading? <LinearProgress /> :
             <React.Fragment>
             <SectionHeader
+            mt={2}
+            mx={2}
             headerAlign = 'center'
             bgcolor={theme.palette.primary.main}
             header={
