@@ -1,8 +1,16 @@
-import { AnimationControls, AnimationProps, LayoutProps, MotionProps, Transition } from 'framer-motion';
-import React from 'react';
+import {
+  AnimationControls,
+  AnimationProps,
+  LayoutProps,
+  MotionProps,
+  Transition,
+} from "framer-motion";
+import React from "react";
 
-type BaseMotionProps = React.ComponentProps<typeof React.Component> & AnimationProps &
-  LayoutProps & MotionProps & {
+type BaseMotionProps = React.ComponentProps<typeof React.Component> &
+  AnimationProps &
+  LayoutProps &
+  MotionProps & {
     /**
      * children you want to animate on
      */
@@ -21,16 +29,16 @@ type BaseMotionProps = React.ComponentProps<typeof React.Component> & AnimationP
     /**
      * can be orchestrated if this is true
      */
-    isChildrenMotion?:boolean;
+    isChildrenMotion?: boolean;
 
     /**
      * control your animated component
-     * 
+     *
      * such as start, stop
-     * 
+     *
      * https://www.framer.com/api/motion/animation/#component-animation-controls
      */
     motionControl?: AnimationControls;
-};
+  };
 
 export default BaseMotionProps;

@@ -35,7 +35,7 @@ const theme = createMuiTheme({
     MuiCssBaseline: {
       "@global": {
         html: { height: "100vh" },
-        body: { height: "100%", backgroundColor:primaryLight },
+        body: { height: "100%", backgroundColor: primaryLight },
       },
     },
     MuiDivider: {

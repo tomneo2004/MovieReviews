@@ -90,7 +90,7 @@ const SearchResults: React.FC<SearchResultsProps> = (
 
   return (
     <Grid id={id} {...rest} container>
-      {data.map(movie => {
+      {data.map((movie) => {
         return (
           <Grid key={movie.id} item xs>
             <Box
@@ -99,22 +99,22 @@ const SearchResults: React.FC<SearchResultsProps> = (
               alignItems="center"
               p={2}
             >
-                  <MoviePoster
-                    layoutId={movie.id.toString()}
-                    linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
-                    imageURL={buildImageQuery(movie.poster_path, "w342")}
-                    imageWidth={185}
-                    minWidth={200}
-                    maxWidth={200}
-                    title={movie.title}
-                    releaseDate={movie.release_date}
-                    ratingScore={getMovieRating(
-                      movie.vote_count,
-                      movie.vote_average
-                    )}
-                    ratingOffsetX={-8}
-                    ratingOffsetY={-8}
-                  />
+              <MoviePoster
+                layoutId={movie.id.toString()}
+                linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
+                imageURL={buildImageQuery(movie.poster_path, "w342")}
+                imageWidth={185}
+                minWidth={200}
+                maxWidth={200}
+                title={movie.title}
+                releaseDate={movie.release_date}
+                ratingScore={getMovieRating(
+                  movie.vote_count,
+                  movie.vote_average
+                )}
+                ratingOffsetX={-8}
+                ratingOffsetY={-8}
+              />
             </Box>
           </Grid>
         );

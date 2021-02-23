@@ -44,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
   const handlSearchKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === "Enter" && search && onEnter) {
       console.log(inputRef.current);
-      if(inputRef.current) inputRef.current.blur();
+      if (inputRef.current) inputRef.current.blur();
       onEnter(search);
     }
   };

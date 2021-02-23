@@ -24,56 +24,54 @@ const renderButtons = (buttons: React.ReactNode[]) => {
 
 /**
  * Component Navigation
- * 
+ *
  * Wrapped Material-UI AppBar
- * 
+ *
  * Component include brand on left and buttons on right
- * 
- * @param {NavigationProps} props 
+ *
+ * @param {NavigationProps} props
  */
 const Navigation: React.FC<NavigationProps> = (props: NavigationProps) => {
-  const { 
-    brand = null, 
+  const {
+    brand = null,
     middleButtons = null,
-    rightButtons = null, 
+    rightButtons = null,
     elevation = 4,
     elevateThreshold = 0,
-    ...rest 
+    ...rest
   } = props;
 
   const appbarRef = React.useRef<HTMLDivElement>();
   const [elevate, setElevate] = React.useState<boolean>(false);
   const [boundaryY, setBoundaryY] = React.useState<number>(0);
 
-  useIsomorphicEffect(()=>{
+  useIsomorphicEffect(() => {
     const top = appbarRef.current.getBoundingClientRect().top;
-    setBoundaryY(top+elevateThreshold);
+    setBoundaryY(top + elevateThreshold);
   }, []);
 
-  React.useEffect(()=>{
-
-    const handleWindowScroll = ()=>{
-      if(window.scrollY>boundaryY){
+  React.useEffect(() => {
+    const handleWindowScroll = () => {
+      if (window.scrollY > boundaryY) {
         setElevate(true);
-      }
-      else{
+      } else {
         setElevate(false);
       }
+    };
+
+    if (window) {
+      window.addEventListener("scroll", handleWindowScroll);
     }
 
-    if(window){
-      window.addEventListener('scroll', handleWindowScroll);
-    }
-
-    return ()=>{
-      if(window){
-         window.removeEventListener('scroll', handleWindowScroll);
+    return () => {
+      if (window) {
+        window.removeEventListener("scroll", handleWindowScroll);
       }
-    }
-  }, [boundaryY])
+    };
+  }, [boundaryY]);
 
   return (
-    <AppBar ref={appbarRef} {...rest} elevation={elevate?elevation:0}>
+    <AppBar ref={appbarRef} {...rest} elevation={elevate ? elevation : 0}>
       <Toolbar>
         <Box flex="1">{brand ? brand : null}</Box>
         <Box flex="1" display="flex" justifyContent="center">
@@ -84,7 +82,7 @@ const Navigation: React.FC<NavigationProps> = (props: NavigationProps) => {
         </Box>
       </Toolbar>
     </AppBar>
-  )
+  );
 };
 
 export default Navigation;

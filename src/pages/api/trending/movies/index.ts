@@ -7,8 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-
-  await nextRequestHandler(req, res, async (req)=>{
+  await nextRequestHandler(req, res, async (req) => {
     const { language, page, region } = req.query as { [key: string]: string };
     const { mediaType, timeWindow } = req.query as { [key: string]: string };
     const query = getTrendingQuery(mediaType, timeWindow, {

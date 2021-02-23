@@ -33,146 +33,173 @@ type PosterImageProps = React.ComponentProps<typeof Card> & {
 
   /**
    * Width of image when enlarge
-   * 
+   *
    * Given a number to enable enlarge otherwise null
-   * 
+   *
    * default null
    */
   enlargeWidth?: number;
 
   /**
    * Aspect ratio for enlarged image
-   * 
+   *
    * default as same as aspectRatio
    */
   enlargeAspectRatio?: number;
 
   /**
    * Custom layoutId for AnimateSharedLayout
-   * 
+   *
    * https://www.framer.com/api/motion/animate-shared-layout/
-   * 
+   *
    * If PosterImage is in a collection among with other PosterImage
    * you nust give an unique layout id from the others otherwise behaviour
    * might be not expected
-   * 
+   *
    * default to null
    */
-  layoutId?:string;
+  layoutId?: string;
 
-  hoverCursor?:string;
+  hoverCursor?: string;
 };
 
-const renderCardMedia = (imageURL:string, imageWidth:number, 
-  aspectRatio:number, placeholder:string, cardMediaStyle:string, alt:string)=>{
+const renderCardMedia = (
+  imageURL: string,
+  imageWidth: number,
+  aspectRatio: number,
+  placeholder: string,
+  cardMediaStyle: string,
+  alt: string
+) => {
+  return (
+    <CardMedia
+      className={cardMediaStyle}
+      component="img"
+      alt={alt}
+      width={imageWidth}
+      height={imageWidth * aspectRatio}
+      src={imageURL ? imageURL : placeholder}
+    />
+  );
+};
 
-    return (
-      <CardMedia
-        className={cardMediaStyle}
-        component="img"
-        alt={alt}
-        width={imageWidth}
-        height={imageWidth * aspectRatio}
-        src={imageURL ? imageURL : placeholder}
-      />
-    )
-}
-
-const renderEnlargeCardMedia = (imageURL:string, elargeWidth:number, 
-  elargeAspectRatio:number, placeholder:string, cardMediaStyle:string, alt:string)=>{
-
-    return (
-      <CardMedia
-        className={cardMediaStyle}
-        component="img"
-        alt={alt}
-        width={elargeWidth}
-        height={elargeWidth * elargeAspectRatio}
-        src={imageURL ? imageURL : placeholder}
-      />
-    )
-}
+const renderEnlargeCardMedia = (
+  imageURL: string,
+  elargeWidth: number,
+  elargeAspectRatio: number,
+  placeholder: string,
+  cardMediaStyle: string,
+  alt: string
+) => {
+  return (
+    <CardMedia
+      className={cardMediaStyle}
+      component="img"
+      alt={alt}
+      width={elargeWidth}
+      height={elargeWidth * elargeAspectRatio}
+      src={imageURL ? imageURL : placeholder}
+    />
+  );
+};
 
 /**
  * Component PosterImage
  *
  * Display image with Material-UI Card
- * 
+ *
  * Image can be enlarged when clicked
  *
  * @param {PosterImageProps} props
  */
-const PosterImage: React.FC<PosterImageProps> = React.forwardRef((props: PosterImageProps, _ref) => {
-  const {
-    alt = "image",
-    imageURL = "",
-    imageWidth,
-    aspectRatio = 1.5,
-    enlargeWidth = null,
-    enlargeAspectRatio = aspectRatio,
-    layoutId = null,
-    hoverCursor = 'auto',
-    ...rest
-  } = props;
-  const [enlarge, setEnlarge] = React.useState<boolean>(false);
-  const classes = makeStyles(style)({
-    enlarge: enlargeWidth?true:false,
-    cursor: hoverCursor,
-  });
+const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
+  (props: PosterImageProps, _ref) => {
+    const {
+      alt = "image",
+      imageURL = "",
+      imageWidth,
+      aspectRatio = 1.5,
+      enlargeWidth = null,
+      enlargeAspectRatio = aspectRatio,
+      layoutId = null,
+      hoverCursor = "auto",
+      ...rest
+    } = props;
+    const [enlarge, setEnlarge] = React.useState<boolean>(false);
+    const classes = makeStyles(style)({
+      enlarge: enlargeWidth ? true : false,
+      cursor: hoverCursor,
+    });
 
-  const toggleEnlarge = () => setEnlarge((state) => !state);
+    const toggleEnlarge = () => setEnlarge((state) => !state);
 
-  if(!enlargeWidth){
+    if (!enlargeWidth) {
+      return (
+        <Box position="relative" minWidth={imageWidth} maxWidth={imageWidth}>
+          <motion.div layoutId={layoutId} style={{ outline: "none" }}>
+            <Card {...rest}>
+              {renderCardMedia(
+                imageURL,
+                imageWidth,
+                aspectRatio,
+                imagePlacehoder,
+                classes.cardMedia,
+                alt
+              )}
+            </Card>
+          </motion.div>
+        </Box>
+      );
+    }
+
+    if (enlarge) {
+      return (
+        <Modal className={classes.modal} open={enlarge} onClose={toggleEnlarge}>
+          <motion.div
+            layoutId={layoutId}
+            style={{
+              width: enlargeWidth,
+              height: "fit-content",
+              outline: "none",
+            }}
+            transition={springTransition()}
+          >
+            <Card {...rest} onClick={toggleEnlarge}>
+              {renderEnlargeCardMedia(
+                imageURL,
+                enlargeWidth,
+                enlargeAspectRatio,
+                imagePlacehoder,
+                classes.cardMedia,
+                alt
+              )}
+            </Card>
+          </motion.div>
+        </Modal>
+      );
+    }
+
     return (
       <Box position="relative" minWidth={imageWidth} maxWidth={imageWidth}>
-      <motion.div
-        layoutId={layoutId}
-        style={{outline:'none'}}
-      >
-        <Card {...rest}>
-          {renderCardMedia(imageURL, imageWidth, 
-            aspectRatio, imagePlacehoder, classes.cardMedia, alt)}
-        </Card>
-        </motion.div>
-      </Box>
-    )
-  }
-
-  if(enlarge){
-    return (
-      <Modal
-        className={classes.modal}
-        open={enlarge}
-        onClose={toggleEnlarge}
-      >
         <motion.div
           layoutId={layoutId}
-          style={{width:enlargeWidth, height:'fit-content', outline:'none'}}
+          style={{ width: imageWidth, height: "fit-content", outline: "none" }}
           transition={springTransition()}
         >
           <Card {...rest} onClick={toggleEnlarge}>
-            {renderEnlargeCardMedia(imageURL, enlargeWidth, enlargeAspectRatio, 
-              imagePlacehoder, classes.cardMedia, alt)}
+            {renderCardMedia(
+              imageURL,
+              imageWidth,
+              aspectRatio,
+              imagePlacehoder,
+              classes.cardMedia,
+              alt
+            )}
           </Card>
         </motion.div>
-      </Modal>
-    )
+      </Box>
+    );
   }
-
-  return (
-    <Box position="relative" minWidth={imageWidth} maxWidth={imageWidth}>
-      <motion.div
-          layoutId={layoutId}
-          style={{width:imageWidth, height:'fit-content', outline:'none'}}
-          transition={springTransition()}
-      >
-      <Card {...rest} onClick={toggleEnlarge}>
-      {renderCardMedia(imageURL, imageWidth, 
-            aspectRatio, imagePlacehoder, classes.cardMedia, alt)}
-      </Card>
-      </motion.div>
-    </Box>
-  );
-});
+);
 
 export default PosterImage;

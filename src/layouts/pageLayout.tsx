@@ -7,23 +7,30 @@ export type PageLayoutProps = React.ComponentProps<typeof Box> & {
   children: React.ReactNode;
   navigation?: React.ReactNode;
   footer?: React.ReactNode;
-}
-const PageLayout:React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
-  const { children, navigation = null, footer = null, banner = null, backgroundURL='', ...rest} = props;
+};
+const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
+  const {
+    children,
+    navigation = null,
+    footer = null,
+    banner = null,
+    backgroundURL = "",
+    ...rest
+  } = props;
 
   const theme = useTheme();
 
   const classes = makeStyles({
-    fixedBg:{
+    fixedBg: {
       backgroundColor: theme.palette.primary.light,
-      background: `url(${backgroundURL}) no-repeat fixed center 20%`
-    }
+      background: `url(${backgroundURL}) no-repeat fixed center 20%`,
+    },
   })();
 
   return (
     <Box
       {...rest}
-      className={backgroundURL? classes.fixedBg:''}
+      className={backgroundURL ? classes.fixedBg : ""}
       position="relative"
       flexDirection="column"
       justifyContent="flex-start"

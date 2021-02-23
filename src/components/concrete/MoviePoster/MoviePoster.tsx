@@ -42,7 +42,7 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
 const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
     layoutId,
-    linkTo = '#', 
+    linkTo = "#",
     imageURL = "",
     imageWidth = 150,
     minWidth = imageWidth,
@@ -71,16 +71,14 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
           elevation={4}
           onMouseOver={onMouseOver}
           imageWidth={imageWidth}
-          hoverCursor='pointer'
+          hoverCursor="pointer"
         />
       </Link>
       <Typography component="div" variant="h6">
-        <Box pt={1}>
-          {title}
-        </Box>
+        <Box pt={1}>{title}</Box>
       </Typography>
       <Typography component="div" variant="subtitle1">
-        <Box display="flex" fontWeight='600' alignItems="center">
+        <Box display="flex" fontWeight="600" alignItems="center">
           {releaseDate}
         </Box>
       </Typography>

@@ -7,12 +7,12 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-    await nextRequestHandler(req, res, async (req) => {
-      const { language, page, region } = req.query as { [key: string]: string };
-      const { id } = req.query as { [key: string]: string };
-      const buildQuery = getMovieImagesQuery(id, { language, page, region });
-      console.log("request:", buildQuery);
-      const resp = await axios.get(buildQuery);
-      return resp.data.posters;
-    });
+  await nextRequestHandler(req, res, async (req) => {
+    const { language, page, region } = req.query as { [key: string]: string };
+    const { id } = req.query as { [key: string]: string };
+    const buildQuery = getMovieImagesQuery(id, { language, page, region });
+    console.log("request:", buildQuery);
+    const resp = await axios.get(buildQuery);
+    return resp.data.posters;
+  });
 }

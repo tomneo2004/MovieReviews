@@ -2,11 +2,11 @@ import { Transition } from "framer-motion";
 import { Easing } from "framer-motion/types/types";
 
 type OrchestrationOptions = {
-  delayChildren: number,
-  staggerChildren: number,
-  staggerDirection: number,
-  when: false | "beforeChildren" | "afterChildren" | string
-}
+  delayChildren: number;
+  staggerChildren: number;
+  staggerDirection: number;
+  when: false | "beforeChildren" | "afterChildren" | string;
+};
 
 export const orchestrate = (
   delayChildren: number = 0,
@@ -18,9 +18,9 @@ export const orchestrate = (
     delayChildren,
     staggerChildren,
     staggerDirection,
-    when
-  }
-}
+    when,
+  };
+};
 /**
  * Get a spring transition
  * @param stiffness Stiffness of the spring. Higher values will create more sudden movement default 300
@@ -49,26 +49,25 @@ export const springTransition = (
     mass,
     bounce,
     duration,
-    ...orchestrateOptions
+    ...orchestrateOptions,
   };
 };
 
 export const tweenTransition = (
   duration: number = 0.3,
-  ease: Easing | Easing[] = 'linear',
+  ease: Easing | Easing[] = "linear",
   from: number | string = 0,
   times: number[] = [],
-  orchestrateOptions:OrchestrationOptions = orchestrate()
-):Transition => {
-
+  orchestrateOptions: OrchestrationOptions = orchestrate()
+): Transition => {
   return {
-    type: 'tween',
+    type: "tween",
     duration,
     ease,
     from,
     times,
-    ...orchestrateOptions
-  }
-}
+    ...orchestrateOptions,
+  };
+};
 
 export default {};

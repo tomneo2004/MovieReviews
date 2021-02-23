@@ -9,8 +9,8 @@ import FancyTab from "../FancyTab/FancyTab";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
-import LeftArrowIcon from '../../../assets/icons/left-arrow.inline.svg';
-import RightArrowIcon from '../../../assets/icons/right-arrow.inline.svg';
+import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
+import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 
 let timerHandler: NodeJS.Timeout;
 
@@ -49,27 +49,35 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
   return (
     <Box {...rest}>
       <SectionHeader
-      px={2}
-      bgcolor={theme.palette.primary.main}
-      header={
-          <PhantomText height='100%' bgcolor={theme.palette.primary.light} px={1}
-          text='Trending' 
-          charDelayDefs={{
-            0:{enter:1, exit:0},
-            1:{enter:1.3, exit:0},
-            2:{enter:1.6, exit:0},
-            3:{enter:1.9, exit:0},
-            4:{enter:2.2, exit:0},
-            5:{enter:2.5, exit:0},
-            6:{enter:2.8, exit:0},
-            7:{enter:3.1, exit:0},
-          }}
+        px={2}
+        bgcolor={theme.palette.primary.main}
+        header={
+          <PhantomText
+            height="100%"
+            bgcolor={theme.palette.primary.light}
+            px={1}
+            text="Trending"
+            charDelayDefs={{
+              0: { enter: 1, exit: 0 },
+              1: { enter: 1.3, exit: 0 },
+              2: { enter: 1.6, exit: 0 },
+              3: { enter: 1.9, exit: 0 },
+              4: { enter: 2.2, exit: 0 },
+              5: { enter: 2.5, exit: 0 },
+              6: { enter: 2.8, exit: 0 },
+              7: { enter: 3.1, exit: 0 },
+            }}
           />
-      }
-      items={[
-        <FancyTab key='tab' px={1} bgcolor={theme.palette.primary.light} 
-        tabData={tabData} onChange={handleWindowChange} />,
-      ]}
+        }
+        items={[
+          <FancyTab
+            key="tab"
+            px={1}
+            bgcolor={theme.palette.primary.light}
+            tabData={tabData}
+            onChange={handleWindowChange}
+          />,
+        ]}
       />
       <BackgroundImage
         imageSrc={trendingBg}
@@ -94,12 +102,12 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
           movieData={movieData}
           onHover={handleTrendingMovieHover}
           scrollLeft={
-            <SvgIcon fontSize='large'>
+            <SvgIcon fontSize="large">
               <LeftArrowIcon />
             </SvgIcon>
           }
           scrollRight={
-            <SvgIcon fontSize='large'>
+            <SvgIcon fontSize="large">
               <RightArrowIcon />
             </SvgIcon>
           }

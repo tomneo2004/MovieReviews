@@ -16,7 +16,9 @@ const fetcher = async (url: string) => {
 /**
  * Side effect for fetching movie poster
  */
-export function useMoviePosters(id: string): IFetchResponse<IMoviePosterData[]> {
+export function useMoviePosters(
+  id: string
+): IFetchResponse<IMoviePosterData[]> {
   const { data, error } = useSWR(
     id ? () => `${apiRoute}?id=${id}` : null,
     fetcher
@@ -32,7 +34,7 @@ export function useMoviePosters(id: string): IFetchResponse<IMoviePosterData[]> 
       isLoading,
     };
   }
-  
+
   return {
     data,
     error: null,

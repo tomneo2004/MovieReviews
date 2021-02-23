@@ -16,36 +16,36 @@ export type IMovieData = {
   vote_count: number;
   video: boolean;
   vote_average: number;
-}
+};
 
 export type ISearchMovieData = {
   page: number;
   total_results: number;
   total_pages: number;
   results: IMovieData[];
-}
+};
 
 export type IGenreData = {
   id: number;
   name: string;
-}
+};
 
 export type IProductionCompanyData = {
   name: string;
   id: number;
   logo_path: string | null;
   origin_country: string;
-}
+};
 
 export type IProductionCountryData = {
   iso_3166_1: string;
   name: string;
-}
+};
 
 export type ISpokenLanguageData = {
   iso_639_1: string;
   name: string;
-}
+};
 
 export type ICastData = {
   adult: boolean;
@@ -60,7 +60,7 @@ export type ICastData = {
   character: string;
   credit_id: string;
   order: number;
-}
+};
 
 export type ICrewData = {
   adult: boolean;
@@ -74,12 +74,12 @@ export type ICrewData = {
   cast_id: number;
   department: string;
   job: string;
-}
+};
 
 export type ICreditsData = {
   cast: ICastData[];
   crew: ICreditsData[];
-}
+};
 
 export type IVideoData = {
   id: string;
@@ -90,12 +90,12 @@ export type IVideoData = {
   site: string;
   size: number;
   type: string;
-}
+};
 
 export type IVideosData = {
   id: number;
   results: IVideoData[];
-}
+};
 
 export type IMovieBackdropData = {
   aspect_ratio: number;
@@ -105,7 +105,7 @@ export type IMovieBackdropData = {
   vote_average: number;
   vote_count: number;
   width: number;
-}
+};
 
 export type IMoviePosterData = {
   aspect_ratio: number;
@@ -115,13 +115,13 @@ export type IMoviePosterData = {
   vote_average: number;
   vote_count: number;
   width: number;
-}
+};
 
 export type IMovieImagesData = {
   id: number;
   backdrops: IMovieBackdropData[];
   posters: IMoviePosterData[];
-}
+};
 
 export type IMovieDetailData = {
   adult: boolean;
@@ -152,14 +152,14 @@ export type IMovieDetailData = {
   credits: ICreditsData;
   videos: IVideosData;
   images: IMovieImagesData;
-}
+};
 
 export type IAuthorDetailsData = {
   name: string;
   username: string;
   avatar_path: string | null;
   rating: number | null;
-}
+};
 
 export type IReviewData = {
   author: string;
@@ -169,7 +169,7 @@ export type IReviewData = {
   id: string;
   update_at: string;
   url: string;
-}
+};
 
 export type IMovieReviewsData = {
   id: number;
@@ -177,12 +177,12 @@ export type IMovieReviewsData = {
   results: IReviewData[];
   total_pages: number;
   total_results: number;
-}
+};
 
 export type ILatestMovieData = {
-  adult: boolean
-  backdrop_path: string | null
-  belongs_to_collection: null
+  adult: boolean;
+  backdrop_path: string | null;
+  belongs_to_collection: null;
   budget: number;
   genres: IGenreData[];
   homepage: string;
@@ -195,21 +195,21 @@ export type ILatestMovieData = {
   poster_path: string | null;
   production_companies: IProductionCompanyData[];
   production_countries: IProductionCountryData[];
-  release_date: string; 
+  release_date: string;
   revenue: number;
   runtime: number;
-  spoken_languages: {[key:string]:any}[];
+  spoken_languages: { [key: string]: any }[];
   status: string;
   tagline: string;
   title: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
+};
 
 export type ITopRatedMoviesData = {
   page: number;
-  results: IMovieData[]
+  results: IMovieData[];
   total_results: number;
   total_pages: number;
-}
+};

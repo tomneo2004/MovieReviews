@@ -1,43 +1,40 @@
-import Box from '@material-ui/core/Box';
-import React from 'react';
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
-import { useMovieReviews } from '../../../effects/apiFetch/movieReviews';
-import ReviewCollection from '../ReviewCollection/ReviewCollection';
+import Box from "@material-ui/core/Box";
+import React from "react";
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
+import { useMovieReviews } from "../../../effects/apiFetch/movieReviews";
+import ReviewCollection from "../ReviewCollection/ReviewCollection";
 
 type ReviewsProps = React.ComponentProps<typeof Box> & {
-    movieId:number;
-}
+  movieId: number;
+};
 
-const Reviews:React.FC<ReviewsProps> = (props:ReviewsProps) => {
-    const {
-        movieId,
-        ...rest
-    } = props;
+const Reviews: React.FC<ReviewsProps> = (props: ReviewsProps) => {
+  const { movieId, ...rest } = props;
 
-    const reviews = useMovieReviews(movieId);
+  const reviews = useMovieReviews(movieId);
 
-    useBottomScrollListener(() => {
-        if (
-            reviews.data &&
-            reviews.data.page < reviews.data.total_pages &&
-            !reviews.isLoading
-        ) {
-            reviews.setSize(reviews.size + 1);
-        }
-    });
+  useBottomScrollListener(() => {
+    if (
+      reviews.data &&
+      reviews.data.page < reviews.data.total_pages &&
+      !reviews.isLoading
+    ) {
+      reviews.setSize(reviews.size + 1);
+    }
+  });
 
-    return (
-        <Box {...rest} pt={2} pb={2}>
-            {reviews.data ? (
-            <ReviewCollection
-                reviewData={reviews.data}
-                isLoadingMore={reviews.isLoading}
-            />
-            ) : (
-            <ReviewCollection reviewData={null} />
-            )}
-        </Box>
-    );
+  return (
+    <Box {...rest} pt={2} pb={2}>
+      {reviews.data ? (
+        <ReviewCollection
+          reviewData={reviews.data}
+          isLoadingMore={reviews.isLoading}
+        />
+      ) : (
+        <ReviewCollection reviewData={null} />
+      )}
+    </Box>
+  );
 };
 
 export default Reviews;

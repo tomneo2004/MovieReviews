@@ -67,11 +67,7 @@ const SearchPage = (pageProps: IPageProps) => {
   };
 
   return (
-    <PageLayout
-      navigation={
-       <CommonNavigation />
-      }
-    >
+    <PageLayout navigation={<CommonNavigation />}>
       <SearchLayout>
         {error ? (
           <Typography variant="h4" component="div">

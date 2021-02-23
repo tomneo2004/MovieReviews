@@ -8,10 +8,10 @@ const movieAPIKey = process.env.MOVIE_API_KEY;
 
 /**
  * Get image source from themoviedb
- * 
+ *
  * @param imagePath image path
- * @param imageSize reference to 
- * 
+ * @param imageSize reference to
+ *
  * https://developers.themoviedb.org/3/configuration/get-api-configuration
  */
 export function buildImageQuery(imagePath: string, imageSize: string = "w200") {
@@ -29,19 +29,22 @@ export enum PosterSize {
   "w342" = "w342",
   "w500" = "w500",
   "w780" = "w780",
-  "original" = "original"
+  "original" = "original",
 }
 
 /**
  * Return query for poster image
- * 
+ *
  * @param imagePath image path relative to themoviedb
  * @param {PosterSize} imageSize size of poster
- * 
+ *
  * https://developers.themoviedb.org/3/configuration/get-api-configuration
  */
-export function getPosterImageQuery(imagePath: string, imageSize: PosterSize = PosterSize.original ) {
-  const buildQuery = buildImageQuery(imagePath , imageSize);
+export function getPosterImageQuery(
+  imagePath: string,
+  imageSize: PosterSize = PosterSize.original
+) {
+  const buildQuery = buildImageQuery(imagePath, imageSize);
 
   return buildQuery;
 }
@@ -50,22 +53,23 @@ export enum BackdropSize {
   "w300" = "w300",
   "w780" = "w780",
   "w1280" = "w1280",
-  "original" = "original"
+  "original" = "original",
 }
 
 /**
  * Return query for backdrop image
- * 
+ *
  * @param imagePath image path relative to themoviedb
  * @param {BackdropSize}imageSize size of backdrop
  */
-export function getBackdropImageQuery(imagePath: string, imageSize: BackdropSize = BackdropSize.original ) {
-  const buildQuery = buildImageQuery(imagePath , imageSize);
+export function getBackdropImageQuery(
+  imagePath: string,
+  imageSize: BackdropSize = BackdropSize.original
+) {
+  const buildQuery = buildImageQuery(imagePath, imageSize);
 
   return buildQuery;
 }
-
-
 
 /**
  * Get query for popular movie
@@ -169,7 +173,7 @@ export function getMovieDetailQuery(
 /**
  * Query for specific movie's reviews
  * @param id id of movie
- * @param params 
+ * @param params
  */
 export function getMovieReviewQuery(
   id: string,
@@ -188,9 +192,9 @@ export function getMovieReviewQuery(
 
 /**
  * Query for latest movie
- * @param params 
+ * @param params
  */
-export function getLatestMovieQuery(params:IParams = defaultParams){
+export function getLatestMovieQuery(params: IParams = defaultParams) {
   const queryString = `/movie/latest`;
   const builtQuery = buildAPIQuery(
     queryString,
@@ -204,9 +208,9 @@ export function getLatestMovieQuery(params:IParams = defaultParams){
 
 /**
  * Query for top rated movie
- * @param params 
+ * @param params
  */
-export function getTopRatedMovieQuery(params:IParams = defaultParams){
+export function getTopRatedMovieQuery(params: IParams = defaultParams) {
   const queryString = `/movie/top_rated`;
   const builtQuery = buildAPIQuery(
     queryString,
@@ -221,9 +225,12 @@ export function getTopRatedMovieQuery(params:IParams = defaultParams){
 /**
  * Query for movie's videos
  * @param id movie id
- * @param params 
+ * @param params
  */
-export function getMovieVideosQuery(id:string, params:IParams = defaultParams){
+export function getMovieVideosQuery(
+  id: string,
+  params: IParams = defaultParams
+) {
   const queryString = `/movie/${id}/videos`;
   const builtQuery = buildAPIQuery(
     queryString,
@@ -238,9 +245,12 @@ export function getMovieVideosQuery(id:string, params:IParams = defaultParams){
 /**
  * Query for movie's images
  * @param id movie id
- * @param params 
+ * @param params
  */
-export function getMovieImagesQuery(id:string, params:IParams = defaultParams){
+export function getMovieImagesQuery(
+  id: string,
+  params: IParams = defaultParams
+) {
   const queryString = `/movie/${id}/images`;
   const builtQuery = buildAPIQuery(
     queryString,
@@ -251,5 +261,3 @@ export function getMovieImagesQuery(id:string, params:IParams = defaultParams){
   );
   return builtQuery;
 }
-
-

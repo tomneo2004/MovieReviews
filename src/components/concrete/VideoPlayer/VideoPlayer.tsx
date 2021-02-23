@@ -86,7 +86,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
             />
           </CardActionArea>
         </Card>
-        <Typography variant='subtitle2' component='div'>
+        <Typography variant="subtitle2" component="div">
           <Box>{videoTitle}</Box>
         </Typography>
       </Box>

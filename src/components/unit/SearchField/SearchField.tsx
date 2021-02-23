@@ -18,52 +18,59 @@ export type SearchFieldProps = React.ComponentProps<typeof InputBase> & {
   // onFocus?: () => void;
 };
 
-const SearchField: React.FC<SearchFieldProps> = React.forwardRef((props: SearchFieldProps, ref) => {
-  const theme = useTheme();
-  const {
-    bgColor = theme.palette.common.white,
-    opacity = 0.15,
-    opacityHover = 0.25,
-    icon = <SearchSharp />,
-    // onFocus,
-    endAdornment,
-    id,
-    ...restInput
-  } = props;
-  // const inputRef = React.useRef<HTMLInputElement>();
+const SearchField: React.FC<SearchFieldProps> = React.forwardRef(
+  (props: SearchFieldProps, ref) => {
+    const theme = useTheme();
+    const {
+      bgColor = theme.palette.common.white,
+      opacity = 0.15,
+      opacityHover = 0.25,
+      icon = <SearchSharp />,
+      // onFocus,
+      endAdornment,
+      id,
+      ...restInput
+    } = props;
+    // const inputRef = React.useRef<HTMLInputElement>();
 
-  // React.useEffect(() => {
-  //   inputRef.current.onfocus = onFocus;
-  //   return () => {
-  //     inputRef.current.onfocus = null;
-  //   };
-  // }, []);
+    // React.useEffect(() => {
+    //   inputRef.current.onfocus = onFocus;
+    //   return () => {
+    //     inputRef.current.onfocus = null;
+    //   };
+    // }, []);
 
-  const classes = makeStyles(style)({
-    theme,
-    bgColor,
-    opacity,
-    opacityHover,
-  });
+    const classes = makeStyles(style)({
+      theme,
+      bgColor,
+      opacity,
+      opacityHover,
+    });
 
-  return (
-    <Box id={id} className={classes.root} display="flex">
-      <Box display="flex" justifyContent="center" alignItems="center" px={1}>
-        {icon}
+    return (
+      <Box id={id} className={classes.root} display="flex">
+        <Box display="flex" justifyContent="center" alignItems="center" px={1}>
+          {icon}
+        </Box>
+        <Box
+          flex={1}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <InputBase
+            ref={ref}
+            // inputRef={inputRef}
+            // className={classes.input}
+            {...restInput}
+          />
+        </Box>
+        <Box display="flex" justifyContent="center" alignItems="center">
+          {endAdornment}
+        </Box>
       </Box>
-      <Box flex={1} display="flex" justifyContent="center" alignItems="center">
-        <InputBase
-          ref={ref}
-          // inputRef={inputRef}
-          // className={classes.input}
-          {...restInput}
-        />
-      </Box>
-      <Box display="flex" justifyContent="center" alignItems="center">
-        {endAdornment}
-      </Box>
-    </Box>
-  );
-});
+    );
+  }
+);
 
 export default SearchField;

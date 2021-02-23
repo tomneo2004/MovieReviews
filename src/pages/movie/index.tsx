@@ -3,10 +3,22 @@ import PageLayout from "../../layouts/pageLayout";
 import { buildImageQuery } from "../../utils/api/query/apiQueryBuilder";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import { Hidden, makeStyles, Tab, Tabs, Theme, useTheme } from "@material-ui/core";
+import {
+  Hidden,
+  makeStyles,
+  Tab,
+  Tabs,
+  Theme,
+  useTheme,
+} from "@material-ui/core";
 import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { ICastData, IMovieDetailData, IMoviePosterData, IVideoData } from "../../utils/api/model/apiModelTypes";
+import {
+  ICastData,
+  IMovieDetailData,
+  IMoviePosterData,
+  IVideoData,
+} from "../../utils/api/model/apiModelTypes";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import Overview from "../../components/concrete/Overview/Overview";
 import Media from "../../components/concrete/Media/Media";
@@ -72,112 +84,121 @@ export const getServerSideProps: GetServerSideProps = async (
 };
 
 enum SectionTypes {
-  'overview' = 'overview',
-  'media' = 'media',
-  'casts' = 'casts',
-  'reviews' = 'reviews',
+  "overview" = "overview",
+  "media" = "media",
+  "casts" = "casts",
+  "reviews" = "reviews",
 }
 
 type SectionMapToData = {
-  [SectionTypes.overview]: IMovieDetailData,
+  [SectionTypes.overview]: IMovieDetailData;
   [SectionTypes.media]: {
-    trailers: IVideoData[],
-    poster: IMoviePosterData[],
-  }
-  [SectionTypes.casts]: ICastData[],
-  [SectionTypes.reviews]: number,
-}
+    trailers: IVideoData[];
+    poster: IMoviePosterData[];
+  };
+  [SectionTypes.casts]: ICastData[];
+  [SectionTypes.reviews]: number;
+};
 
-const renderSection = (section:SectionTypes, data:SectionMapToData, movieId:string)=>{
-  switch(section){
+const renderSection = (
+  section: SectionTypes,
+  data: SectionMapToData,
+  movieId: string
+) => {
+  switch (section) {
     case SectionTypes.overview:
       return <Overview movieDetail={data[section]} />;
     case SectionTypes.media:
-      return (<Media 
-              trailers={{
-                snippetData: data[section].trailers,
-                routeToPage: getRoute(RouteType["movie video"], null, movieId)
-              }} 
-              posters={{
-                snippetData: data[section].poster,
-                routeToPage: getRoute(RouteType["movie poster"], null, movieId)
-              }} 
-              />);
+      return (
+        <Media
+          trailers={{
+            snippetData: data[section].trailers,
+            routeToPage: getRoute(RouteType["movie video"], null, movieId),
+          }}
+          posters={{
+            snippetData: data[section].poster,
+            routeToPage: getRoute(RouteType["movie poster"], null, movieId),
+          }}
+        />
+      );
     case SectionTypes.casts:
       return <Casts casts={data[section]} />;
     case SectionTypes.reviews:
-      return <Reviews movieId={data[section]} />
+      return <Reviews movieId={data[section]} />;
   }
-}
+};
 
-const renderTabs = (section:SectionTypes, 
-  sectionChangeHandler:(_evt:React.ChangeEvent<{}>, value:SectionTypes)=>void)=>{
-
-  const theme = useTheme();  
+const renderTabs = (
+  section: SectionTypes,
+  sectionChangeHandler: (
+    _evt: React.ChangeEvent<{}>,
+    value: SectionTypes
+  ) => void
+) => {
+  const theme = useTheme();
   const classes = makeStyles({
-    indicator:(theme:Theme)=>({
-      backgroundColor:theme.palette.primary.dark,
-      height:'6px',
-      borderRadius:'4px'
-    })
+    indicator: (theme: Theme) => ({
+      backgroundColor: theme.palette.primary.dark,
+      height: "6px",
+      borderRadius: "4px",
+    }),
   })(theme);
-  return ( 
-      <Tabs
-      classes={{indicator:classes.indicator}}
+  return (
+    <Tabs
+      classes={{ indicator: classes.indicator }}
       value={section}
       onChange={sectionChangeHandler}
       centered
-      >
-          <Tab value={SectionTypes.overview} label="Overview" />
-          <Tab value={SectionTypes.media} label="Media" />
-          <Tab value={SectionTypes.casts} label="Casts" />
-          <Tab value={SectionTypes.reviews} label="Reviews" />
-      </Tabs>
-  )
-}
+    >
+      <Tab value={SectionTypes.overview} label="Overview" />
+      <Tab value={SectionTypes.media} label="Media" />
+      <Tab value={SectionTypes.casts} label="Casts" />
+      <Tab value={SectionTypes.reviews} label="Reviews" />
+    </Tabs>
+  );
+};
 
 const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, error } = pageProps;
   const theme = useTheme();
   const backdropPath = useMemo(
-    ()=>buildImageQuery(movieDetail.backdrop_path, 'original'),
+    () => buildImageQuery(movieDetail.backdrop_path, "original"),
     [movieDetail.backdrop_path]
   );
-  const [section, setSection] = React.useState<SectionTypes>(SectionTypes.overview);
-  const sectionToData = React.useMemo<SectionMapToData>(()=>{
+  const [section, setSection] = React.useState<SectionTypes>(
+    SectionTypes.overview
+  );
+  const sectionToData = React.useMemo<SectionMapToData>(() => {
     return {
       overview: movieDetail,
-      media: {trailers: movieDetail.videos.results, poster:movieDetail.images.posters},
+      media: {
+        trailers: movieDetail.videos.results,
+        poster: movieDetail.images.posters,
+      },
       casts: movieDetail.credits.cast,
-      reviews: Number(movieId)
-    }
+      reviews: Number(movieId),
+    };
   }, []);
 
-  const handleSectionChange = (_evt:React.ChangeEvent<{}>, value:SectionTypes)=>{
+  const handleSectionChange = (
+    _evt: React.ChangeEvent<{}>,
+    value: SectionTypes
+  ) => {
     setSection(value);
-  }
+  };
 
   return (
     <PageLayout
       backgroundURL={backdropPath}
-      banner={
-        !backdropPath? 
-          null 
-          :
-          <Box width='inherit' height='400px' />
-      }
+      banner={!backdropPath ? null : <Box width="inherit" height="400px" />}
       navigation={
-          <CommonNavigation 
-          elevation={8} 
-          // onSearch={handleSearch} 
+        <CommonNavigation
+          elevation={8}
+          // onSearch={handleSearch}
           middleButtons={[
-            <Hidden smDown>
-              {renderTabs(section, handleSectionChange)}
-            </Hidden>
+            <Hidden smDown>{renderTabs(section, handleSectionChange)}</Hidden>,
           ]}
-          />
-
-
+        />
       }
     >
       {error ? (
@@ -188,12 +209,8 @@ const MoviePage = (pageProps: IPageProps) => {
         </Typography>
       ) : (
         <Box bgcolor={theme.palette.primary.light}>
-            <Hidden mdUp>
-            {renderTabs(section, handleSectionChange)}
-            </Hidden>
-            <Box p={2}>
-                {renderSection(section, sectionToData, movieId)}
-            </Box>
+          <Hidden mdUp>{renderTabs(section, handleSectionChange)}</Hidden>
+          <Box p={2}>{renderSection(section, sectionToData, movieId)}</Box>
         </Box>
       )}
     </PageLayout>
