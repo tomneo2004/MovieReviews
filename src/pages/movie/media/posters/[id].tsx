@@ -15,7 +15,7 @@ const PostersPage = ()=>{
     const theme = useTheme();
     const router = useRouter();
     const {id} = router.query;
-    const {data, error, isLoading} = useMoviePosters(id as string);
+    const {data, isLoading} = useMoviePosters(id as string);
     const [galleryState, setGalleryState] = React.useState<{
         open:boolean,
         index:number

@@ -12,7 +12,7 @@ const VideosPage = ()=>{
     const theme = useTheme();
     const router = useRouter();
     const {id} = router.query;
-    const {data, error, isLoading} = useMovieVideos(id as string);
+    const {data, isLoading} = useMovieVideos(id as string);
 
     return (
         <PageLayout 
