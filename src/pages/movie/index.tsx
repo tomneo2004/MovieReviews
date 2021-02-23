@@ -139,7 +139,6 @@ const renderTabs = (section:SectionTypes,
 
 const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, error } = pageProps;
-  const router = useRouter(); 
   const theme = useTheme();
   const backdropPath = useMemo(
     ()=>buildImageQuery(movieDetail.backdrop_path, 'original'),
