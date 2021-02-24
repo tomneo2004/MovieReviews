@@ -15,7 +15,7 @@ import React from "react";
 import ReactPlayer from "react-player";
 import { useNoembed } from "../../../effects/apiFetch/noembed";
 import style from "./VideoPlayerStyle";
-import CloseIcon from '@material-ui/icons/CloseSharp';
+import CloseIcon from "@material-ui/icons/CloseSharp";
 
 type VideoPlayerProps = React.ComponentProps<typeof Card> & {
   videoSrc: string;
@@ -37,7 +37,7 @@ let img: HTMLImageElement;
 const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
   const { videoSrc, videoTitle, onOpen, onClose, ...rest } = props;
   const theme = useTheme();
-  const compact = useMediaQuery(theme.breakpoints.down('sm'));
+  const compact = useMediaQuery(theme.breakpoints.down("sm"));
   const [open, setOpen] = React.useState<boolean>(false);
   const { data, error } = useNoembed(videoSrc);
   const [thumbReady, setThumbReady] = React.useState<boolean>(false);
@@ -98,9 +98,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
       {/* video player */}
       <Dialog
         classes={{ paper: classes.paper }}
-        fullScreen={compact?true:false}
+        fullScreen={compact ? true : false}
         fullWidth
-        maxWidth='lg'
+        maxWidth="lg"
         open={open}
         onClose={handleVideoClose}
       >
@@ -108,11 +108,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          p={compact?0:1}
+          p={compact ? 0 : 1}
           height="100%"
         >
-          <Fab classes={{root:classes.fab}} size='small' color='primary'
-          onClick={handleVideoClose}
+          <Fab
+            classes={{ root: classes.fab }}
+            size="small"
+            color="primary"
+            onClick={handleVideoClose}
           >
             <CloseIcon />
           </Fab>

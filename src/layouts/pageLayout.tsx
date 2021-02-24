@@ -24,10 +24,10 @@ const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
     fixedBg: {
       backgroundColor: theme.palette.primary.light,
       background: `url(${backgroundURL})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundAttachment:'fixed',
-      backgroundPosition: 'center 20%',
-      backgroundOrigin:'border-box'
+      backgroundRepeat: "no-repeat",
+      backgroundAttachment: "fixed",
+      backgroundPosition: "center 20%",
+      backgroundOrigin: "border-box",
     },
   })();
 
