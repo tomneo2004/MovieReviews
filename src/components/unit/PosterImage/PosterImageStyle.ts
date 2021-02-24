@@ -7,7 +7,7 @@ interface IPosterImageStyle {
 
 export default createStyles({
   cardMedia: (props: IPosterImageStyle) => ({
-    objectFit: "fill",
+    objectFit: "contain",
     cursor: props.cursor,
   }),
   modal: {

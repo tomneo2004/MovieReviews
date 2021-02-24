@@ -4,20 +4,24 @@ import {
   CardActionArea,
   CardMedia,
   Dialog,
+  Fab,
   makeStyles,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import ReactPlayer from "react-player";
 import { useNoembed } from "../../../effects/apiFetch/noembed";
 import style from "./VideoPlayerStyle";
+import CloseIcon from '@material-ui/icons/CloseSharp';
 
 type VideoPlayerProps = React.ComponentProps<typeof Card> & {
   videoSrc: string;
   videoTitle?: string;
   onOpen?: () => void;
-  onClose?: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
+  onClose?: () => void;
 };
 
 const renderSkeletons = () => {
@@ -32,10 +36,13 @@ let img: HTMLImageElement;
 
 const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
   const { videoSrc, videoTitle, onOpen, onClose, ...rest } = props;
+  const theme = useTheme();
+  const compact = useMediaQuery(theme.breakpoints.down('sm'));
   const [open, setOpen] = React.useState<boolean>(false);
   const { data, error } = useNoembed(videoSrc);
   const [thumbReady, setThumbReady] = React.useState<boolean>(false);
   const classes = makeStyles(style)({
+    compact,
     thumbWidth: data ? data.thumbnail_width : 0,
     thumbHeight: data ? data.thumbnail_height : 0,
   });
@@ -63,12 +70,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
     if (onOpen) onOpen();
   };
 
-  const handleVideoClose = (
-    event: {},
-    reason: "backdropClick" | "escapeKeyDown"
-  ) => {
+  const handleVideoClose = () => {
     setOpen(false);
-    if (onClose) onClose(event, reason);
+    if (onClose) onClose();
   };
 
   if (!thumbReady || error || !data) return renderSkeletons();
@@ -94,8 +98,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
       {/* video player */}
       <Dialog
         classes={{ paper: classes.paper }}
+        fullScreen={compact?true:false}
         fullWidth
-        maxWidth="lg"
+        maxWidth='lg'
         open={open}
         onClose={handleVideoClose}
       >
@@ -103,9 +108,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          p={1}
+          p={compact?0:1}
           height="100%"
         >
+          <Fab classes={{root:classes.fab}} size='small' color='primary'
+          onClick={handleVideoClose}
+          >
+            <CloseIcon />
+          </Fab>
           <ReactPlayer
             url={videoSrc}
             width="100%"

@@ -17,7 +17,7 @@ const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
         <PosterImage
           layoutId={movieDetail.id.toString()}
           imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
-          imageWidth={342}
+          imageWidth={300}
           enlargeWidth={542}
           hoverCursor="pointer"
         />
