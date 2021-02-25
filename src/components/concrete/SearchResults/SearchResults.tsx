@@ -92,7 +92,7 @@ const SearchResults: React.FC<SearchResultsProps> = (
     <Grid id={id} {...rest} container>
       {data.map((movie) => {
         return (
-          <Grid key={movie.id} item sm>
+          <Grid key={movie.id} item xs>
             <Box
               display="flex"
               justifyContent="center"

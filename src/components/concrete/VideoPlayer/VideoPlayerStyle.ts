@@ -1,9 +1,6 @@
 import { createStyles, Theme } from "@material-ui/core";
 
 interface IStyleProps {
-<<<<<<< HEAD
-  compact: boolean;
-=======
   theme:Theme;
   thumbSMDown:number;
   thumbSMUp:number;
@@ -11,7 +8,6 @@ interface IStyleProps {
   thumbLGUp:number;
   thumbXLUp:number;
   compact:boolean;
->>>>>>> Fix
   thumbWidth: number;
   thumbHeight: number;
 }
@@ -25,13 +21,6 @@ export default createStyles({
     width: props.thumbWidth,
     height: props.thumbHeight,
   }),
-<<<<<<< HEAD
-  fab: (props: IStyleProps) => ({
-    position: "absolute",
-    right: props.compact ? 0 : "-5px",
-    top: props.compact ? 0 : "-5px",
-  }),
-=======
   fab:(props:IStyleProps)=>({
     position:'absolute',
     right:props.compact?0:'-5px',
@@ -54,5 +43,4 @@ export default createStyles({
       width:props.thumbXLUp,
     },
   })
->>>>>>> Fix
 });
