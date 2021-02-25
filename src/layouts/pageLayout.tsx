@@ -27,7 +27,8 @@ const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
       backgroundRepeat: 'no-repeat',
       backgroundAttachment:'fixed',
       backgroundPosition: 'center 20%',
-      backgroundOrigin:'border-box'
+      backgroundOrigin:'border-box',
+      backgroundSize:'cover'
     },
   })();
 

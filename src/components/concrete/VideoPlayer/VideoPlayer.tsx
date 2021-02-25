@@ -22,6 +22,11 @@ type VideoPlayerProps = React.ComponentProps<typeof Card> & {
   videoTitle?: string;
   onOpen?: () => void;
   onClose?: () => void;
+  thumbSMDown?:number;
+  thumbSMUp?:number;
+  thumbMDUp?:number;
+  thumbLGUp?:number;
+  thumbXLUp?:number;
 };
 
 const renderSkeletons = () => {
@@ -35,13 +40,25 @@ const renderSkeletons = () => {
 let img: HTMLImageElement;
 
 const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
-  const { videoSrc, videoTitle, onOpen, onClose, ...rest } = props;
+  const { videoSrc, videoTitle, onOpen, onClose,
+    thumbSMDown = 300,
+    thumbSMUp = 320,
+    thumbMDUp = 350,
+    thumbLGUp = 400,
+    thumbXLUp = 450,
+    ...rest } = props;
   const theme = useTheme();
   const compact = useMediaQuery(theme.breakpoints.down('sm'));
   const [open, setOpen] = React.useState<boolean>(false);
   const { data, error } = useNoembed(videoSrc);
   const [thumbReady, setThumbReady] = React.useState<boolean>(false);
   const classes = makeStyles(style)({
+    theme,
+    thumbSMDown,
+    thumbSMUp,
+    thumbMDUp,
+    thumbLGUp,
+    thumbXLUp,
     compact,
     thumbWidth: data ? data.thumbnail_width : 0,
     thumbHeight: data ? data.thumbnail_height : 0,
@@ -81,7 +98,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
     <React.Fragment>
       {/* thumbnail */}
       <Box>
-        <Card {...rest} onClick={handleVideoClick}>
+        <Card {...rest} className={classes.card} onClick={handleVideoClick}>
           <CardActionArea>
             <CardMedia
               className={classes.media}

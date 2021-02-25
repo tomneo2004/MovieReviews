@@ -5,7 +5,7 @@ import {
   getPosterImageQuery,
   PosterSize,
 } from "../../../utils/api/query/apiQueryBuilder";
-import PosterImage from "../../unit/PosterImage/PosterImage";
+import PosterImage from "../PosterImage/PosterImage";
 
 type GridPosterImageProps = React.ComponentProps<typeof Grid> & {
   posterData: IMoviePosterData[];
@@ -22,7 +22,6 @@ const GridPosterImage: React.FC<GridPosterImageProps> = (
     onPosterClick,
     ...rest
   } = props;
-
   const handlePosterClick = (i: number) => {
     if (onPosterClick) onPosterClick(i);
   };
@@ -33,15 +32,15 @@ const GridPosterImage: React.FC<GridPosterImageProps> = (
         return (
           <Grid key={poster.file_path} item xs>
             <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              p={2}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            p={2}
             >
               <PosterImage
                 imageURL={getPosterImageQuery(poster.file_path, posterSize)}
                 elevation={4}
-                imageWidth={400}
+                aspectRatio={1.4}
                 onClick={() => handlePosterClick(i)}
                 hoverCursor="pointer"
               />

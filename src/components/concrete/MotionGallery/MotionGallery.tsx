@@ -5,6 +5,7 @@ import React from "react";
 import LeftArrowIcon from "@material-ui/icons/ArrowLeftSharp";
 import RigthArrowIcon from "@material-ui/icons/ArrowRightSharp";
 import style from "./MotionGalleryStyle";
+import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 
 type MotionGalleryProps = React.ComponentProps<typeof React.Component> & {
   open: boolean;
@@ -99,15 +100,14 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
     >
       <React.Fragment>
         <AnimatePresence initial={false} custom={direction}>
-          <motion.img
+          <motion.div
             key={page}
-            src={images[imageIndex]}
             custom={direction}
             variants={variants}
             initial="init"
             animate="enter"
             exit="exit"
-            style={{ position: "absolute", height: "100%" }}
+            style={{ position: "absolute", width:'100%', height: "100%" }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
@@ -120,7 +120,16 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
                 paginate(-1);
               }
             }}
-          />
+          >
+            <ImageContainer
+            width='inherit'
+            height='inherit' 
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            src={images[imageIndex]}
+            />
+          </motion.div>
         </AnimatePresence>
         <motion.div
           style={{ position: "absolute", left: "1%", top: "50%", zIndex: 2 }}

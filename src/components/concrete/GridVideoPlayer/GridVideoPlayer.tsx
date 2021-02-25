@@ -25,7 +25,14 @@ const GridPosterImage: React.FC<GridPosterImageProps> = (
               alignItems="center"
               p={2}
             >
-              <VideoPlayer videoSrc={videoURL} videoTitle={video.name} />
+              <VideoPlayer 
+              thumbSMDown={300}
+              thumbSMUp={350}
+              thumbMDUp={400}
+              thumbLGUp={400}
+              thumbXLUp={400}
+              videoSrc={videoURL} 
+              videoTitle={video.name} />
             </Box>
           </Grid>
         );

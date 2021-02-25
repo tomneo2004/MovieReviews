@@ -37,22 +37,22 @@ const Popular: React.FC<PopualrProps> = (props: PopualrProps) => {
             height="100%"
             bgcolor={theme.palette.primary.light}
             px={1}
-            text={`what's popular`}
+            text={`What's popular`}
             charDelayDefs={{
               0: { enter: 1, exit: 0 },
-              1: { enter: 1.3, exit: 0 },
-              2: { enter: 1.6, exit: 0 },
-              3: { enter: 1.9, exit: 0 },
-              4: { enter: 2.2, exit: 0 },
-              5: { enter: 2.5, exit: 0 },
-              6: { enter: 2.8, exit: 0 },
-              7: { enter: 3.1, exit: 0 },
-              8: { enter: 3.4, exit: 0 },
-              9: { enter: 3.7, exit: 0 },
-              10: { enter: 4, exit: 0 },
-              11: { enter: 4.3, exit: 0 },
-              12: { enter: 4.6, exit: 0 },
-              13: { enter: 4.9, exit: 0 },
+              1: { enter: 1.2, exit: 0 },
+              2: { enter: 1.4, exit: 0 },
+              3: { enter: 1.6, exit: 0 },
+              4: { enter: 1.8, exit: 0 },
+              5: { enter: 2, exit: 0 },
+              6: { enter: 2.2, exit: 0 },
+              7: { enter: 2.4, exit: 0 },
+              8: { enter: 2.6, exit: 0 },
+              9: { enter: 2.8, exit: 0 },
+              10: { enter: 3, exit: 0 },
+              11: { enter: 3.4, exit: 0 },
+              12: { enter: 3.6, exit: 0 },
+              13: { enter: 3.8, exit: 0 },
             }}
           />
         }

@@ -1,9 +1,10 @@
-import { Typography } from "@material-ui/core";
+import { makeStyles, Typography, useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import React from "react";
 import { getCircularRating } from "../../unit/CircularRating/CircularRating";
-import PosterImage from "../../unit/PosterImage/PosterImage";
+import PosterImage from "../PosterImage/PosterImage";
 import Link from "next/link";
+import style from './MoviePosterStyle';
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
   /**
@@ -12,9 +13,6 @@ type MoviePosterProps = React.ComponentProps<typeof Box> & {
   layoutId?: string;
   linkTo?: string;
   imageURL?: string;
-  imageWidth?: number;
-  minWidth?: number;
-  maxWidth?: number;
   title: string;
   releaseDate: string;
   /**
@@ -44,9 +42,6 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     layoutId,
     linkTo = "#",
     imageURL = "",
-    imageWidth = 150,
-    minWidth = imageWidth,
-    maxWidth,
     title,
     releaseDate,
     ratingScore = null,
@@ -55,13 +50,24 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     onMouseOver = null,
     ...rest
   } = props;
+  const theme = useTheme();
+  const classes = makeStyles(style)({
+    theme,
+    titleSMDown:185,
+    titleSMUp:185,
+    titleMDUp:250,
+    titleLGUp:300,
+    titleXLUp:300,
+  })
 
   return (
     <Box
       {...rest}
       position="relative"
-      minWidth={minWidth}
-      maxWidth={maxWidth ? maxWidth : "inherit"}
+
+      display='flex'
+      flexDirection='column'
+      alignItems='center'
       p={1}
     >
       <Link href={linkTo}>
@@ -70,15 +76,21 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
           imageURL={imageURL}
           elevation={4}
           onMouseOver={onMouseOver}
-          imageWidth={imageWidth}
           hoverCursor="pointer"
+          smDown={185}
+          smUp={185}
+          mdUp={250}
+          lgUp={300}
+          xlUp={300}
         />
       </Link>
       <Typography component="div" variant="h6">
-        <Box pt={1}>{title}</Box>
+        <Box className={classes.title} pt={1} textAlign='center'>
+          {title}
+        </Box>
       </Typography>
       <Typography component="div" variant="subtitle1">
-        <Box display="flex" fontWeight="600" alignItems="center">
+        <Box fontWeight="600">
           {releaseDate}
         </Box>
       </Typography>
