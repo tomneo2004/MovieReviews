@@ -1,4 +1,4 @@
-import {makeStyles, Modal, useTheme } from "@material-ui/core";
+import { makeStyles, Modal, useTheme } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import React from "react";
@@ -15,27 +15,27 @@ type PosterImageProps = React.ComponentProps<typeof Card> & {
   /**
    * Image width at sm size and below
    */
-  smDown?:number;
+  smDown?: number;
 
   /**
    * Image width at sm size up
    */
-  smUp?:number;
+  smUp?: number;
 
   /**
    * Image width at md size and up
    */
-  mdUp?:number;
+  mdUp?: number;
 
   /**
    * Image width at lg size and up
    */
-  lgUp?:number;
+  lgUp?: number;
 
   /**
    * Image width at xl size and up
    */
-  xlUp?:number;
+  xlUp?: number;
 
   /**
    * Ratio between image width and height
@@ -67,7 +67,6 @@ type PosterImageProps = React.ComponentProps<typeof Card> & {
   hoverCursor?: string;
 
   enlargeEnabled?: boolean;
-
 };
 
 const renderCardMedia = (
@@ -85,12 +84,11 @@ const renderCardMedia = (
       alt={alt}
       // width={imageWidth}
       // height={imageWidth * aspectRatio}
-      height='100%'
+      height="100%"
       src={imageURL ? imageURL : placeholder}
     />
   );
 };
-
 
 /**
  * Component PosterImage
@@ -137,22 +135,23 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
       return (
         <Modal className={classes.modal} open={true} onClose={toggleEnlarge}>
           <ImageContainer
-            width='100%'
-            height='100%'
-            display='flex'
-            justifyContent='center'
-            alignItems='center'
+            width="100%"
+            height="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             src={imageURL}
             alt={alt}
             onClick={toggleEnlarge}
-            postProcess={
-              (node)=>(
-                <motion.div layoutId={layoutId} layout
-                transition={springTransition()}>
-                  {node}
-                </motion.div>
-              )
-            }
+            postProcess={(node) => (
+              <motion.div
+                layoutId={layoutId}
+                layout
+                transition={springTransition()}
+              >
+                {node}
+              </motion.div>
+            )}
           />
         </Modal>
       );
@@ -164,21 +163,19 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
         layout
         transition={springTransition()}
         style={{
-          position:'relative',
+          position: "relative",
           // width:'fit-content',
           // height:'fit-content'
-          
         }}
       >
-          <Card {...rest} classes={{root:classes.card}} onClick={enlargeEnabled?toggleEnlarge:onClick}>
-            {renderCardMedia(
-              imageURL,
-              imagePlacehoder,
-              classes.cardMedia,
-              alt
-            )}
-          </Card>
-        </motion.div>
+        <Card
+          {...rest}
+          classes={{ root: classes.card }}
+          onClick={enlargeEnabled ? toggleEnlarge : onClick}
+        >
+          {renderCardMedia(imageURL, imagePlacehoder, classes.cardMedia, alt)}
+        </Card>
+      </motion.div>
     );
   }
 );

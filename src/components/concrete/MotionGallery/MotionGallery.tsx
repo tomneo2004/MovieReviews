@@ -107,7 +107,7 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
             initial="init"
             animate="enter"
             exit="exit"
-            style={{ position: "absolute", width:'100%', height: "100%" }}
+            style={{ position: "absolute", width: "100%", height: "100%" }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={1}
@@ -122,12 +122,12 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
             }}
           >
             <ImageContainer
-            width='inherit'
-            height='inherit' 
-            display='flex'
-            justifyContent='center'
-            alignItems='center'
-            src={images[imageIndex]}
+              width="inherit"
+              height="inherit"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              src={images[imageIndex]}
             />
           </motion.div>
         </AnimatePresence>

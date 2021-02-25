@@ -22,11 +22,11 @@ type VideoPlayerProps = React.ComponentProps<typeof Card> & {
   videoTitle?: string;
   onOpen?: () => void;
   onClose?: () => void;
-  thumbSMDown?:number;
-  thumbSMUp?:number;
-  thumbMDUp?:number;
-  thumbLGUp?:number;
-  thumbXLUp?:number;
+  thumbSMDown?: number;
+  thumbSMUp?: number;
+  thumbMDUp?: number;
+  thumbLGUp?: number;
+  thumbXLUp?: number;
 };
 
 const renderSkeletons = () => {
@@ -40,13 +40,18 @@ const renderSkeletons = () => {
 let img: HTMLImageElement;
 
 const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
-  const { videoSrc, videoTitle, onOpen, onClose,
+  const {
+    videoSrc,
+    videoTitle,
+    onOpen,
+    onClose,
     thumbSMDown = 300,
     thumbSMUp = 320,
     thumbMDUp = 350,
     thumbLGUp = 400,
     thumbXLUp = 450,
-    ...rest } = props;
+    ...rest
+  } = props;
   const theme = useTheme();
   const compact = useMediaQuery(theme.breakpoints.down("sm"));
   const [open, setOpen] = React.useState<boolean>(false);

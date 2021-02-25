@@ -10,10 +10,10 @@ declare module "@material-ui/core/styles/createPalette" {
     // trendingBackdrop: PaletteOptions['primary'];
   }
 }
-declare module '@material-ui/core/styles/createMuiTheme' { 
-    // interface ThemeOptions {     
-    //   posters: {
-    //     posterSize: ()=>number,
-    //   }   
-    // } 
+declare module "@material-ui/core/styles/createMuiTheme" {
+  // interface ThemeOptions {
+  //   posters: {
+  //     posterSize: ()=>number,
+  //   }
+  // }
 }

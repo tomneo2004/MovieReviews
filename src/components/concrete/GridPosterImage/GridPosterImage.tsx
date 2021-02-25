@@ -32,10 +32,10 @@ const GridPosterImage: React.FC<GridPosterImageProps> = (
         return (
           <Grid key={poster.file_path} item xs>
             <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            p={2}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              p={2}
             >
               <PosterImage
                 imageURL={getPosterImageQuery(poster.file_path, posterSize)}

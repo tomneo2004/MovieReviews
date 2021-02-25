@@ -42,5 +42,5 @@ export const AspectRatio = () => {
 };
 
 export const Placeholder = () => {
-  return <PosterImage  />;
+  return <PosterImage />;
 };

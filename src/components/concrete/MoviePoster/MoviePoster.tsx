@@ -4,7 +4,7 @@ import React from "react";
 import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 import PosterImage from "../PosterImage/PosterImage";
 import Link from "next/link";
-import style from './MoviePosterStyle';
+import style from "./MoviePosterStyle";
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
   /**
@@ -53,21 +53,20 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const theme = useTheme();
   const classes = makeStyles(style)({
     theme,
-    titleSMDown:185,
-    titleSMUp:185,
-    titleMDUp:250,
-    titleLGUp:300,
-    titleXLUp:300,
-  })
+    titleSMDown: 185,
+    titleSMUp: 185,
+    titleMDUp: 250,
+    titleLGUp: 300,
+    titleXLUp: 300,
+  });
 
   return (
     <Box
       {...rest}
       position="relative"
-
-      display='flex'
-      flexDirection='column'
-      alignItems='center'
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
       p={1}
     >
       <Link href={linkTo}>
@@ -85,14 +84,12 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
         />
       </Link>
       <Typography component="div" variant="h6">
-        <Box className={classes.title} pt={1} textAlign='center'>
+        <Box className={classes.title} pt={1} textAlign="center">
           {title}
         </Box>
       </Typography>
       <Typography component="div" variant="subtitle1">
-        <Box fontWeight="600">
-          {releaseDate}
-        </Box>
+        <Box fontWeight="600">{releaseDate}</Box>
       </Typography>
       {renderRating(ratingScore, ratingOffsetX, ratingOffsetY)}
     </Box>
