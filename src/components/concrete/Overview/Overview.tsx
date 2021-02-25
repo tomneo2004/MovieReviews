@@ -2,7 +2,7 @@ import { Grid } from "@material-ui/core";
 import React from "react";
 import { IMovieDetailData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
-import PosterImage from "../../unit/PosterImage/PosterImage";
+import PosterImage from "../PosterImage/PosterImage";
 import MovieInfo from "../MovieInfo/MovieInfo";
 type OverviewProps = React.ComponentProps<typeof Grid> & {
   movieDetail: IMovieDetailData;
@@ -17,9 +17,13 @@ const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
         <PosterImage
           layoutId={movieDetail.id.toString()}
           imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
-          imageWidth={300}
-          enlargeWidth={542}
+          enlargeEnabled
           hoverCursor="pointer"
+          smDown={250}
+          smUp={250}
+          mdUp={300}
+          lgUp={400}
+          xlUp={400}
         />
       </Grid>
       <Grid md={8} item container justify="center">

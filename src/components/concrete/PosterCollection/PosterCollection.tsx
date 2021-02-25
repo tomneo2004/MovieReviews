@@ -4,7 +4,7 @@ import React from "react";
 import { IMoviePosterData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
-import PosterImage from "../../unit/PosterImage/PosterImage";
+import PosterImage from "../PosterImage/PosterImage";
 
 type PosterCollectionProps = React.ComponentProps<typeof Box> & {
   posters: IMoviePosterData[];
@@ -32,16 +32,20 @@ const PosterCollection: React.FC<PosterCollectionProps> = (
       <HScroll>
         {() => {
           return posters.map((poster) => {
-            const posterURL = buildImageQuery(poster.file_path, "w300");
+            const posterURL = buildImageQuery(poster.file_path, "w500");
             return {
               id: poster.file_path,
               element: (
                 <PosterImage
                   imageURL={posterURL}
-                  imageWidth={342}
-                  enlargeWidth={542}
+                  enlargeEnabled
                   layoutId={poster.file_path}
                   hoverCursor="pointer"
+                  smDown={200}
+                  smUp={250}
+                  mdUp={250}
+                  lgUp={300}
+                  xlUp={300}
                 />
               ),
             };

@@ -104,8 +104,6 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
                         id: data.id.toString(),
                       })}
                       imageURL={buildImageQuery(data.poster_path, "w185")}
-                      imageWidth={185}
-                      minWidth={200}
                       title={data.title}
                       releaseDate={data.release_date}
                       ratingScore={getMovieRating(
