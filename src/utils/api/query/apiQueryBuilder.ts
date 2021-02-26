@@ -121,6 +121,42 @@ export function getNowPlayingMoviesQuery(params: IParams = defaultParams) {
   return builtQuery;
 }
 
+/**
+ * Get query for similar movies
+ * 
+ * @param refMovieId reference movide id
+ * @param params 
+ */
+export function getSimilarMoviesQuery(refMovieId:string, params: IParams = defaultParams) {
+  const queryString = `/movie/${refMovieId}/similar`;
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
+/**
+ * Get query for recommended movies
+ * 
+ * @param refMovieId reference movide id
+ * @param params 
+ */
+export function getRecommendationMoviesQuery(refMovieId:string, params: IParams = defaultParams) {
+  const queryString = `/movie/${refMovieId}/recommendations`;
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
 const trendingMediaType: { [key: string]: boolean } = {
   all: true,
   movie: true,

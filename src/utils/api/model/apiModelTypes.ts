@@ -223,5 +223,7 @@ export type INowPlayingMoviesData = IGenericMoviesData & {
     minimum: string;
   };
 };
+export type ISimilarMoviesData = IGenericMoviesData;
+export type IRecommendationMoviesData = IGenericMoviesData;
 
 
