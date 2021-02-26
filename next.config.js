@@ -1,4 +1,9 @@
-module.exports = {
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer({
     target: "serverless",
     webpack : (config, options) => {
         config.module.rules.push(
@@ -20,7 +25,8 @@ module.exports = {
                 ]
             },
         )
+        
 
-        return config
+        return config;
     }
-}
+})
