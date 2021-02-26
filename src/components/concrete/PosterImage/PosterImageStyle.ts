@@ -1,11 +1,7 @@
 import { createStyles, Theme } from "@material-ui/core/styles";
+import { ScreenWidthProps } from "../../../props/ScreenProps";
 
-interface IPosterImageStyle {
-  smDown: number;
-  smUp: number;
-  mdUp: number;
-  lgUp: number;
-  xlUp: number;
+type IPosterImageStyle = ScreenWidthProps & {
   aspectRatio: number;
   theme: Theme;
   cursor: string;
@@ -14,24 +10,24 @@ interface IPosterImageStyle {
 export default createStyles({
   card: (props: IPosterImageStyle) => ({
     [props.theme.breakpoints.down("xs")]: {
-      width: props.smDown,
-      height: props.smDown * props.aspectRatio,
+      width: props.widthAtSMDown,
+      height: props.widthAtSMDown * props.aspectRatio,
     },
     [props.theme.breakpoints.up("sm")]: {
-      width: props.smUp,
-      height: props.smUp * props.aspectRatio,
+      width: props.widthAtSMUp,
+      height: props.widthAtSMUp * props.aspectRatio,
     },
     [props.theme.breakpoints.up("md")]: {
-      width: props.mdUp,
-      height: props.mdUp * props.aspectRatio,
+      width: props.widthAtMDUp,
+      height: props.widthAtMDUp * props.aspectRatio,
     },
     [props.theme.breakpoints.up("lg")]: {
-      width: props.lgUp,
-      height: props.lgUp * props.aspectRatio,
+      width: props.widthAtLGUp,
+      height: props.widthAtLGUp * props.aspectRatio,
     },
     [props.theme.breakpoints.up("xl")]: {
-      width: props.xlUp,
-      height: props.xlUp * props.aspectRatio,
+      width: props.widthAtXLUp,
+      height: props.widthAtXLUp * props.aspectRatio,
     },
   }),
   cardMedia: (props: IPosterImageStyle) => ({

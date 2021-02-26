@@ -8,34 +8,10 @@ import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import { motion } from "framer-motion";
 import { springTransition } from "../../../framer/Transition";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
+import { ScreenWidthProps } from "../../../props/ScreenProps";
 
-type PosterImageProps = React.ComponentProps<typeof Card> & {
+type PosterImageProps = React.ComponentProps<typeof Card> & ScreenWidthProps & {
   alt?: string;
-
-  /**
-   * Image width at sm size and below
-   */
-  smDown?: number;
-
-  /**
-   * Image width at sm size up
-   */
-  smUp?: number;
-
-  /**
-   * Image width at md size and up
-   */
-  mdUp?: number;
-
-  /**
-   * Image width at lg size and up
-   */
-  lgUp?: number;
-
-  /**
-   * Image width at xl size and up
-   */
-  xlUp?: number;
 
   /**
    * Ratio between image width and height
@@ -104,11 +80,11 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
     const {
       alt = "image",
       imageURL = "",
-      smDown = 300,
-      smUp = 320,
-      mdUp = 350,
-      lgUp = 400,
-      xlUp = 450,
+      widthAtSMDown = 300,
+      widthAtSMUp = 320,
+      widthAtMDUp = 350,
+      widthAtLGUp = 400,
+      widthAtXLUp = 450,
       aspectRatio = 1.5,
       layoutId = null,
       hoverCursor = "auto",
@@ -119,11 +95,11 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
     const theme = useTheme();
     const [isEnlarge, setIsEnlarge] = React.useState<boolean>(false);
     const classes = makeStyles(style)({
-      smDown,
-      smUp,
-      mdUp,
-      lgUp,
-      xlUp,
+      widthAtSMDown,
+      widthAtSMUp,
+      widthAtMDUp,
+      widthAtLGUp,
+      widthAtXLUp,
       theme,
       aspectRatio,
       cursor: hoverCursor,

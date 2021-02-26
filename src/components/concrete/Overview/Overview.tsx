@@ -19,11 +19,11 @@ const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
           imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
           enlargeEnabled
           hoverCursor="pointer"
-          smDown={250}
-          smUp={250}
-          mdUp={300}
-          lgUp={400}
-          xlUp={400}
+          widthAtSMDown={250}
+          widthAtSMUp={250}
+          widthAtMDUp={300}
+          widthAtLGUp={400}
+          widthAtXLUp={400}
         />
       </Grid>
       <Grid md={8} item container justify="center">

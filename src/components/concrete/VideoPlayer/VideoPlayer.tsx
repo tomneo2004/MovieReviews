@@ -16,17 +16,13 @@ import ReactPlayer from "react-player";
 import { useNoembed } from "../../../effects/apiFetch/noembed";
 import style from "./VideoPlayerStyle";
 import CloseIcon from "@material-ui/icons/CloseSharp";
+import { ScreenWidthProps } from "../../../props/ScreenProps";
 
-type VideoPlayerProps = React.ComponentProps<typeof Card> & {
+type VideoPlayerProps = React.ComponentProps<typeof Card> & ScreenWidthProps & {
   videoSrc: string;
   videoTitle?: string;
   onOpen?: () => void;
   onClose?: () => void;
-  thumbSMDown?: number;
-  thumbSMUp?: number;
-  thumbMDUp?: number;
-  thumbLGUp?: number;
-  thumbXLUp?: number;
 };
 
 const renderSkeletons = () => {
@@ -45,11 +41,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
     videoTitle,
     onOpen,
     onClose,
-    thumbSMDown = 300,
-    thumbSMUp = 320,
-    thumbMDUp = 350,
-    thumbLGUp = 400,
-    thumbXLUp = 450,
+    widthAtSMDown = 300,
+    widthAtSMUp = 320,
+    widthAtMDUp = 350,
+    widthAtLGUp = 400,
+    widthAtXLUp = 450,
     ...rest
   } = props;
   const theme = useTheme();
@@ -59,11 +55,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = (props: VideoPlayerProps) => {
   const [thumbReady, setThumbReady] = React.useState<boolean>(false);
   const classes = makeStyles(style)({
     theme,
-    thumbSMDown,
-    thumbSMUp,
-    thumbMDUp,
-    thumbLGUp,
-    thumbXLUp,
+    widthAtSMDown,
+    widthAtSMUp,
+    widthAtMDUp,
+    widthAtLGUp,
+    widthAtXLUp,
     compact,
     thumbWidth: data ? data.thumbnail_width : 0,
     thumbHeight: data ? data.thumbnail_height : 0,

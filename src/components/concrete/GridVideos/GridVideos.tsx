@@ -27,11 +27,11 @@ const GridVideos: React.FC<GridVideosProps> = (
               p={2}
             >
               <VideoPlayer
-                thumbSMDown={300}
-                thumbSMUp={350}
-                thumbMDUp={400}
-                thumbLGUp={400}
-                thumbXLUp={400}
+                widthAtSMDown={300}
+                widthAtSMUp={350}
+                widthAtMDUp={400}
+                widthAtLGUp={400}
+                widthAtXLUp={400}
                 videoSrc={videoURL}
                 videoTitle={video.name}
               />

@@ -1,12 +1,8 @@
 import { createStyles, Theme } from "@material-ui/core";
+import { ScreenWidthProps } from "../../../props/ScreenProps";
 
-interface IStyleProps {
+type IStyleProps = ScreenWidthProps & {
   theme: Theme;
-  thumbSMDown: number;
-  thumbSMUp: number;
-  thumbMDUp: number;
-  thumbLGUp: number;
-  thumbXLUp: number;
   compact: boolean;
   thumbWidth: number;
   thumbHeight: number;
@@ -28,19 +24,19 @@ export default createStyles({
   }),
   card: (props: IStyleProps) => ({
     [props.theme.breakpoints.down("xs")]: {
-      width: props.thumbSMDown,
+      width: props.widthAtSMDown,
     },
     [props.theme.breakpoints.up("sm")]: {
-      width: props.thumbSMUp,
+      width: props.widthAtSMUp,
     },
     [props.theme.breakpoints.up("md")]: {
-      width: props.thumbMDUp,
+      width: props.widthAtMDUp,
     },
     [props.theme.breakpoints.up("lg")]: {
-      width: props.thumbLGUp,
+      width: props.widthAtLGUp,
     },
     [props.theme.breakpoints.up("xl")]: {
-      width: props.thumbXLUp,
+      width: props.widthAtXLUp,
     },
   }),
 });
