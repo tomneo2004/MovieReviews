@@ -15,14 +15,12 @@ type GridPostersProps = React.ComponentProps<typeof Box> & {
 
 /**
  * Component GridPosters
- * 
+ *
  * Present all posters in as grid layout
- * 
- * @param props 
+ *
+ * @param props
  */
-const GridPosters: React.FC<GridPostersProps> = (
-  props: GridPostersProps
-) => {
+const GridPosters: React.FC<GridPostersProps> = (props: GridPostersProps) => {
   const {
     posterData,
     posterSize = PosterSize.original,
@@ -35,28 +33,28 @@ const GridPosters: React.FC<GridPostersProps> = (
 
   return (
     <Box {...rest}>
-    <Grid container>
-      {posterData.map((poster, i) => {
-        return (
-          <Grid key={poster.file_path} item xs>
-            <Box
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              p={2}
-            >
-              <PosterImage
-                imageURL={getPosterImageQuery(poster.file_path, posterSize)}
-                elevation={4}
-                aspectRatio={1.4}
-                onClick={() => handlePosterClick(i)}
-                hoverCursor="pointer"
-              />
-            </Box>
-          </Grid>
-        );
-      })}
-    </Grid>
+      <Grid container>
+        {posterData.map((poster, i) => {
+          return (
+            <Grid key={poster.file_path} item xs>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                p={2}
+              >
+                <PosterImage
+                  imageURL={getPosterImageQuery(poster.file_path, posterSize)}
+                  elevation={4}
+                  aspectRatio={1.4}
+                  onClick={() => handlePosterClick(i)}
+                  hoverCursor="pointer"
+                />
+              </Box>
+            </Grid>
+          );
+        })}
+      </Grid>
     </Box>
   );
 };

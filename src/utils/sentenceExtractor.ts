@@ -13,4 +13,4 @@ export function partialSentenceFrom(paragraph: string, amount: number = 1) {
   };
 }
 
-export default {}
+export default {};

@@ -5,7 +5,7 @@ type IPosterImageStyle = ScreenWidthProps & {
   aspectRatio: number;
   theme: Theme;
   cursor: string;
-}
+};
 
 export default createStyles({
   card: (props: IPosterImageStyle) => ({

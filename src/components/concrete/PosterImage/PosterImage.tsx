@@ -10,40 +10,41 @@ import { springTransition } from "../../../framer/Transition";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/ScreenProps";
 
-type PosterImageProps = React.ComponentProps<typeof Card> & ScreenWidthProps & {
-  alt?: string;
+type PosterImageProps = React.ComponentProps<typeof Card> &
+  ScreenWidthProps & {
+    alt?: string;
 
-  /**
-   * Ratio between image width and height
-   *
-   * e.g width=150, aspectRatio=1.5, height=width * aspectRatio
-   *
-   * default is 1.5
-   */
-  aspectRatio?: number;
+    /**
+     * Ratio between image width and height
+     *
+     * e.g width=150, aspectRatio=1.5, height=width * aspectRatio
+     *
+     * default is 1.5
+     */
+    aspectRatio?: number;
 
-  /**
-   * Image source URL
-   */
-  imageURL?: string;
+    /**
+     * Image source URL
+     */
+    imageURL?: string;
 
-  /**
-   * Custom layoutId for AnimateSharedLayout
-   *
-   * https://www.framer.com/api/motion/animate-shared-layout/
-   *
-   * If PosterImage is in a collection among with other PosterImage
-   * you nust give an unique layout id from the others otherwise behaviour
-   * might be not expected
-   *
-   * default to null
-   */
-  layoutId?: string;
+    /**
+     * Custom layoutId for AnimateSharedLayout
+     *
+     * https://www.framer.com/api/motion/animate-shared-layout/
+     *
+     * If PosterImage is in a collection among with other PosterImage
+     * you nust give an unique layout id from the others otherwise behaviour
+     * might be not expected
+     *
+     * default to null
+     */
+    layoutId?: string;
 
-  hoverCursor?: string;
+    hoverCursor?: string;
 
-  enlargeEnabled?: boolean;
-};
+    enlargeEnabled?: boolean;
+  };
 
 const renderCardMedia = (
   imageURL: string,

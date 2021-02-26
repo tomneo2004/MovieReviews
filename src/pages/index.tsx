@@ -228,7 +228,7 @@ const LandingPage = (pageProps: IPageProps) => {
     },
   })();
 
-  if(error) throw error;
+  if (error) throw error;
 
   return (
     <PageLayout>
@@ -264,28 +264,28 @@ const LandingPage = (pageProps: IPageProps) => {
           search={<HeroSearchBar />}
         />
         <React.Fragment>
-            {/* Pouplar Collection */}
-            <Box id="popular">
-              <SnippetPopular mt={2} popularMovies={popularMovies} />
-            </Box>
-            {/* Trending Collection */}
-            <Box id="trending">
-              <SnippetTrending
-                mt={2}
-                byDay={trendingMovies.day}
-                byWeek={trendingMovies.week}
-              />
-            </Box>
+          {/* Pouplar Collection */}
+          <Box id="popular">
+            <SnippetPopular mt={2} popularMovies={popularMovies} />
+          </Box>
+          {/* Trending Collection */}
+          <Box id="trending">
+            <SnippetTrending
+              mt={2}
+              byDay={trendingMovies.day}
+              byWeek={trendingMovies.week}
+            />
+          </Box>
 
-            {/* Top rated Collection */}
-            <Box id="top-rated">
-              <SnippetTopRated mt={2} topRatedMovies={topRatedMovies} />
-            </Box>
+          {/* Top rated Collection */}
+          <Box id="top-rated">
+            <SnippetTopRated mt={2} topRatedMovies={topRatedMovies} />
+          </Box>
 
-            {/* Now playing */}
-            <Box id="now-playing">
-              <SnippetNowPlaying mt={2} nowPlayingMovies={nowPlayingMovies} />
-            </Box>
+          {/* Now playing */}
+          <Box id="now-playing">
+            <SnippetNowPlaying mt={2} nowPlayingMovies={nowPlayingMovies} />
+          </Box>
         </React.Fragment>
       </LandingLayout>
     </PageLayout>

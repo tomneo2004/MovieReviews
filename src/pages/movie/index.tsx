@@ -112,7 +112,7 @@ const renderSection = (
       const trailers = data[section].trailers.splice(0, 9);
       //10 posters
       const posters = data[section].posters.splice(0, 9);
-      
+
       return (
         <SnippetMedia
           trailers={{
@@ -184,7 +184,7 @@ const MoviePage = (pageProps: IPageProps) => {
     };
   }, []);
 
-  if(error) throw error;
+  if (error) throw error;
 
   const handleSectionChange = (
     _evt: React.ChangeEvent<{}>,

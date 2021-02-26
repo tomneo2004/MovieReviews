@@ -3,7 +3,7 @@ import { ScreenWidthProps } from "../../../props/ScreenProps";
 
 type IStyleProps = ScreenWidthProps & {
   theme: Theme;
-}
+};
 
 export default createStyles({
   title: (props: IStyleProps) => ({

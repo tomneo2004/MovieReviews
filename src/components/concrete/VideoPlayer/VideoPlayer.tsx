@@ -18,12 +18,13 @@ import style from "./VideoPlayerStyle";
 import CloseIcon from "@material-ui/icons/CloseSharp";
 import { ScreenWidthProps } from "../../../props/ScreenProps";
 
-type VideoPlayerProps = React.ComponentProps<typeof Card> & ScreenWidthProps & {
-  videoSrc: string;
-  videoTitle?: string;
-  onOpen?: () => void;
-  onClose?: () => void;
-};
+type VideoPlayerProps = React.ComponentProps<typeof Card> &
+  ScreenWidthProps & {
+    videoSrc: string;
+    videoTitle?: string;
+    onOpen?: () => void;
+    onClose?: () => void;
+  };
 
 const renderSkeletons = () => {
   return (

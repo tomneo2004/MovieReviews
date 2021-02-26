@@ -19,15 +19,15 @@ export type IMovieData = {
 };
 
 export type INowPlayingData = {
-  page:number;
-  results:IMovieData[];
-  dates:{
+  page: number;
+  results: IMovieData[];
+  dates: {
     maximum: string;
     minimum: string;
-  },
+  };
   total_pages: number;
   total_results: number;
-}
+};
 
 export type ISearchMovieData = {
   page: number;

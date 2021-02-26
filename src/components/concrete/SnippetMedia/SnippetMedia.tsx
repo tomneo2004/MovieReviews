@@ -35,7 +35,7 @@ const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
       return (
         <React.Fragment>
           <Box pl={2}>
-            <LinkTo text='See all videos' linkTo={videoLink} />
+            <LinkTo text="See all videos" linkTo={videoLink} />
           </Box>
           <VideoCollection trailersData={videoData} />
         </React.Fragment>
@@ -46,7 +46,7 @@ const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
       return (
         <React.Fragment>
           <Box pl={2}>
-            <LinkTo text='See all posters' linkTo={posterLink} />
+            <LinkTo text="See all posters" linkTo={posterLink} />
           </Box>
           <PosterCollection posters={posterData} />
         </React.Fragment>
@@ -60,7 +60,9 @@ const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
   }
 };
 
-const SnippetMedia: React.FC<SnippetMediaProps> = (props: SnippetMediaProps) => {
+const SnippetMedia: React.FC<SnippetMediaProps> = (
+  props: SnippetMediaProps
+) => {
   const { defaultTab = MediaTypes.video, trailers, posters, ...rest } = props;
 
   const [value, setValue] = React.useState<MediaTypes>(defaultTab);

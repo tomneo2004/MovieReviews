@@ -55,7 +55,7 @@ const SearchPage = (pageProps: IPageProps) => {
   const { data, error, query } = pageProps;
   const router = useRouter();
 
-  if(error) throw error;
+  if (error) throw error;
 
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,

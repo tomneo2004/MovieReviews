@@ -38,13 +38,13 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
   );
 };
 
-const widthDef:ScreenWidthProps = {
+const widthDef: ScreenWidthProps = {
   widthAtSMDown: 185,
   widthAtSMUp: 185,
   widthAtMDUp: 250,
   widthAtLGUp: 300,
   widthAtXLUp: 300,
-}
+};
 
 const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
@@ -62,7 +62,7 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const theme = useTheme();
   const classes = makeStyles(style)({
     theme,
-    ...widthDef
+    ...widthDef,
   });
 
   return (

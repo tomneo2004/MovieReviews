@@ -90,7 +90,7 @@ export function getPouplarMoviesQuery(params: IParams = defaultParams) {
 
 /**
  * Get query for discover movie
- * @param {IParams} params 
+ * @param {IParams} params
  */
 export function getDiscoverMoviesQuery(params: IParams = defaultParams) {
   const queryString = "/discover/movie";
@@ -106,8 +106,8 @@ export function getDiscoverMoviesQuery(params: IParams = defaultParams) {
 
 /**
  * Get query for movie that is now playing
- * 
- * @param {IParams} params  
+ *
+ * @param {IParams} params
  */
 export function getNowPlayingMoviesQuery(params: IParams = defaultParams) {
   const queryString = "/movie/now_playing";

@@ -6,7 +6,7 @@ type IStyleProps = ScreenWidthProps & {
   compact: boolean;
   thumbWidth: number;
   thumbHeight: number;
-}
+};
 
 export default createStyles({
   paper: {

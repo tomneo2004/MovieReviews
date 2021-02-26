@@ -22,7 +22,7 @@ type SectionHeaderProps = React.ComponentProps<typeof Box> & {
 const SectionHeader: React.FC<SectionHeaderProps> = (
   props: SectionHeaderProps
 ) => {
-  const { header, headerAlign = "left", items=[], ...rest } = props;
+  const { header, headerAlign = "left", items = [], ...rest } = props;
 
   const headerOrder =
     headerAlign === "left" || headerAlign === "center" ? 0 : 1;
@@ -62,12 +62,8 @@ const SectionHeader: React.FC<SectionHeaderProps> = (
             justifyContent={itemsJC}
             px={1}
           >
-            {items.map((item, i)=>{
-              return (
-                <React.Fragment key={i}>
-                  {item}
-                </React.Fragment>
-              )
+            {items.map((item, i) => {
+              return <React.Fragment key={i}>{item}</React.Fragment>;
             })}
           </Box>
         </Box>

@@ -15,13 +15,15 @@ import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
-import PopularIcon from '../../../assets/icons/heat.inline.svg';
+import PopularIcon from "../../../assets/icons/heat.inline.svg";
 
 type SnippetPopularProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];
 };
 
-const SnippetPopular: React.FC<SnippetPopularProps> = (props: SnippetPopularProps) => {
+const SnippetPopular: React.FC<SnippetPopularProps> = (
+  props: SnippetPopularProps
+) => {
   const { popularMovies, ...rest } = props;
   const theme = useTheme();
   const [popularBg, setPopularBg] = React.useState<string>("");
@@ -36,38 +38,43 @@ const SnippetPopular: React.FC<SnippetPopularProps> = (props: SnippetPopularProp
         bgcolor={theme.palette.primary.main}
         header={
           <React.Fragment>
-          <Hidden smDown>
-          <PhantomText
-            height="100%"
-            bgcolor={theme.palette.primary.light}
-            px={1}
-            text={`What's Popular`}
-            charDelayDefs={{
-              0: { enter: 1, exit: 0 },
-              1: { enter: 1.2, exit: 0 },
-              2: { enter: 1.4, exit: 0 },
-              3: { enter: 1.6, exit: 0 },
-              4: { enter: 1.8, exit: 0 },
-              5: { enter: 2, exit: 0 },
-              6: { enter: 2.2, exit: 0 },
-              7: { enter: 2.4, exit: 0 },
-              8: { enter: 2.6, exit: 0 },
-              9: { enter: 2.8, exit: 0 },
-              10: { enter: 3, exit: 0 },
-              11: { enter: 3.4, exit: 0 },
-              12: { enter: 3.6, exit: 0 },
-              13: { enter: 3.8, exit: 0 },
-            }}
-          />
-          </Hidden> 
-          <Hidden mdUp>
-                <Box bgcolor={theme.palette.primary.light} display='flex' p={1}
-                justifyContent='center' alignItems='center'>
-                <SvgIcon fontSize='large'>
-                    <PopularIcon />
+            <Hidden smDown>
+              <PhantomText
+                height="100%"
+                bgcolor={theme.palette.primary.light}
+                px={1}
+                text={`What's Popular`}
+                charDelayDefs={{
+                  0: { enter: 1, exit: 0 },
+                  1: { enter: 1.2, exit: 0 },
+                  2: { enter: 1.4, exit: 0 },
+                  3: { enter: 1.6, exit: 0 },
+                  4: { enter: 1.8, exit: 0 },
+                  5: { enter: 2, exit: 0 },
+                  6: { enter: 2.2, exit: 0 },
+                  7: { enter: 2.4, exit: 0 },
+                  8: { enter: 2.6, exit: 0 },
+                  9: { enter: 2.8, exit: 0 },
+                  10: { enter: 3, exit: 0 },
+                  11: { enter: 3.4, exit: 0 },
+                  12: { enter: 3.6, exit: 0 },
+                  13: { enter: 3.8, exit: 0 },
+                }}
+              />
+            </Hidden>
+            <Hidden mdUp>
+              <Box
+                bgcolor={theme.palette.primary.light}
+                display="flex"
+                p={1}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <SvgIcon fontSize="large">
+                  <PopularIcon />
                 </SvgIcon>
-                </Box>
-            </Hidden> 
+              </Box>
+            </Hidden>
           </React.Fragment>
         }
       />

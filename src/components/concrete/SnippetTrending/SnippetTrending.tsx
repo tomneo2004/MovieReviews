@@ -11,7 +11,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
-import TrendingIcon from '../../../assets/icons/trend.inline.svg';
+import TrendingIcon from "../../../assets/icons/trend.inline.svg";
 
 let timerHandler: NodeJS.Timeout;
 
@@ -25,7 +25,9 @@ type SnippetTrendingProps = React.ComponentProps<typeof Box> & {
   byWeek: IMovieData[];
 };
 
-const SnippetTrending: React.FC<SnippetTrendingProps> = (props: SnippetTrendingProps) => {
+const SnippetTrending: React.FC<SnippetTrendingProps> = (
+  props: SnippetTrendingProps
+) => {
   const { byDay, byWeek, ...rest } = props;
 
   const theme = useTheme();
@@ -54,32 +56,37 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (props: SnippetTrendingP
         bgcolor={theme.palette.primary.main}
         header={
           <React.Fragment>
-          <Hidden smDown>
-          <PhantomText
-            height="100%"
-            bgcolor={theme.palette.primary.light}
-            px={1}
-            text="Trending"
-            charDelayDefs={{
-              0: { enter: 1, exit: 0 },
-              1: { enter: 1.3, exit: 0 },
-              2: { enter: 1.6, exit: 0 },
-              3: { enter: 1.9, exit: 0 },
-              4: { enter: 2.2, exit: 0 },
-              5: { enter: 2.5, exit: 0 },
-              6: { enter: 2.8, exit: 0 },
-              7: { enter: 3.1, exit: 0 },
-            }}
-          />
-          </Hidden>  
-          <Hidden mdUp>
-                <Box bgcolor={theme.palette.primary.light} display='flex' p={1}
-                justifyContent='center' alignItems='center'>
-                <SvgIcon fontSize='large'>
-                    <TrendingIcon />
+            <Hidden smDown>
+              <PhantomText
+                height="100%"
+                bgcolor={theme.palette.primary.light}
+                px={1}
+                text="Trending"
+                charDelayDefs={{
+                  0: { enter: 1, exit: 0 },
+                  1: { enter: 1.3, exit: 0 },
+                  2: { enter: 1.6, exit: 0 },
+                  3: { enter: 1.9, exit: 0 },
+                  4: { enter: 2.2, exit: 0 },
+                  5: { enter: 2.5, exit: 0 },
+                  6: { enter: 2.8, exit: 0 },
+                  7: { enter: 3.1, exit: 0 },
+                }}
+              />
+            </Hidden>
+            <Hidden mdUp>
+              <Box
+                bgcolor={theme.palette.primary.light}
+                display="flex"
+                p={1}
+                justifyContent="center"
+                alignItems="center"
+              >
+                <SvgIcon fontSize="large">
+                  <TrendingIcon />
                 </SvgIcon>
-                </Box>
-          </Hidden>
+              </Box>
+            </Hidden>
           </React.Fragment>
         }
         items={[

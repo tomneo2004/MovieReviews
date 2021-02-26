@@ -53,38 +53,48 @@ export default function MovieReviewApp(props: AppProps) {
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
 
-      <ErrorBoundary fallback={
-        <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-          <Typography variant='h2'>
-            Oooops ! Looks like somthing is not right
-          </Typography>
-          <LinkTo text='Back to home' linkTo={getRoute(RouteType.home, null)} />
-        </Box>
-      }>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <CssBaseline />
-        {/* use for page transition, layoutId is needed for components */}
-        <AnimateSharedLayout>
-          {/* use for exit animation key is needed for tracking components */}
-          <AnimatePresence exitBeforeEnter>
-            {/* wrap page component so we can play exit animatoin */}
-            <motion.div
-              key={router.route}
-              variants={{
-                init: { opacity: 0.8 },
-                enter: { opacity: 1, transition: { when: "beforeChildren" } },
-                exit: { opacity: 0.8, transition: { when: "afterChildren" } },
-              }}
-              initial="init"
-              animate="enter"
-              exit="exit"
-            >
-              <Component {...pageProps} />
-            </motion.div>
-          </AnimatePresence>
-        </AnimateSharedLayout>
-      </ThemeProvider>
+      <ErrorBoundary
+        fallback={
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Typography variant="h2">
+              Oooops ! Looks like somthing is not right
+            </Typography>
+            <LinkTo
+              text="Back to home"
+              linkTo={getRoute(RouteType.home, null)}
+            />
+          </Box>
+        }
+      >
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          {/* use for page transition, layoutId is needed for components */}
+          <AnimateSharedLayout>
+            {/* use for exit animation key is needed for tracking components */}
+            <AnimatePresence exitBeforeEnter>
+              {/* wrap page component so we can play exit animatoin */}
+              <motion.div
+                key={router.route}
+                variants={{
+                  init: { opacity: 0.8 },
+                  enter: { opacity: 1, transition: { when: "beforeChildren" } },
+                  exit: { opacity: 0.8, transition: { when: "afterChildren" } },
+                }}
+                initial="init"
+                animate="enter"
+                exit="exit"
+              >
+                <Component {...pageProps} />
+              </motion.div>
+            </AnimatePresence>
+          </AnimateSharedLayout>
+        </ThemeProvider>
       </ErrorBoundary>
     </React.Fragment>
   );

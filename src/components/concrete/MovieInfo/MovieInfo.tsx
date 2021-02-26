@@ -119,13 +119,13 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
       </Box>
 
       {/* tageline */}
-      {!movieDetail.tagline? null:
-          <Typography component="div" variant="h5">
-            <Box pt={2} fontStyle="italic">
-              {movieDetail.tagline}
-            </Box>
-          </Typography>
-      }
+      {!movieDetail.tagline ? null : (
+        <Typography component="div" variant="h5">
+          <Box pt={2} fontStyle="italic">
+            {movieDetail.tagline}
+          </Box>
+        </Typography>
+      )}
 
       {/* overview */}
       <Box display="flex" flexDirection="column" pt={2}>
@@ -140,11 +140,11 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
       </Box>
 
       {/* offical website */}
-      {!movieDetail.homepage?null:
-          <Box pt={2}>
-          <LinkTo text='Offical website' linkTo={movieDetail.homepage} />
-          </Box>
-      }
+      {!movieDetail.homepage ? null : (
+        <Box pt={2}>
+          <LinkTo text="Offical website" linkTo={movieDetail.homepage} />
+        </Box>
+      )}
     </Box>
   );
 };
