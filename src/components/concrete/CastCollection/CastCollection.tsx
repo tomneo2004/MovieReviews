@@ -8,9 +8,7 @@ import HScroll, {
   HScrollChildProp,
 } from "../../unit/HorizontalScroll/HorizontalScroll";
 
-const CastPoster = dynamic(
-  ()=>import("../CastPoster/CastPoster"),
-)
+const CastPoster = dynamic(() => import("../CastPoster/CastPoster"));
 
 type CastCollectionProps = React.ComponentProps<typeof Box> & {
   castData: ICastData[];

@@ -23,20 +23,18 @@ import CommonNavigation from "../../components/concrete/CommonNavigation/CommonN
 import dynamic from "next/dynamic";
 
 const Overview = dynamic(
-  ()=>import("../../components/concrete/Overview/Overview"),
-)
+  () => import("../../components/concrete/Overview/Overview")
+);
 
 const SnippetMedia = dynamic(
-  ()=>import("../../components/concrete/SnippetMedia/SnippetMedia"),
-)
+  () => import("../../components/concrete/SnippetMedia/SnippetMedia")
+);
 
-const Casts = dynamic(
-  ()=>import("../../components/concrete/Casts/Casts"),
-)
+const Casts = dynamic(() => import("../../components/concrete/Casts/Casts"));
 
 const Reviews = dynamic(
-  ()=>import("../../components/concrete/Reviews/Reviews"),
-)
+  () => import("../../components/concrete/Reviews/Reviews")
+);
 
 interface IPageProps {
   movieId: string;

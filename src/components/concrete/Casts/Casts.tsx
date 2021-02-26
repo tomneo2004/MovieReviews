@@ -4,8 +4,8 @@ import React from "react";
 import { ICastData } from "../../../utils/api/model/apiModelTypes";
 
 const CastCollection = dynamic(
-  ()=>import("../CastCollection/CastCollection"),
-)
+  () => import("../CastCollection/CastCollection")
+);
 
 type CastsProps = React.ComponentProps<typeof Box> & {
   casts?: ICastData[];

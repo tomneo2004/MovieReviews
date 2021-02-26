@@ -12,20 +12,20 @@ import {
 } from "../../../../utils/api/query/apiQueryBuilder";
 
 const GridPosters = dynamic(
-  ()=>import("../../../../components/concrete/GridPosters/GridPosters"),
-)
+  () => import("../../../../components/concrete/GridPosters/GridPosters")
+);
 
 const MotionGallery = dynamic(
-  ()=>import("../../../../components/concrete/MotionGallery/MotionGallery"),
-)
+  () => import("../../../../components/concrete/MotionGallery/MotionGallery")
+);
 
 const SectionHeader = dynamic(
-  ()=>import("../../../../components/concrete/SectionHeader/SectionHeader"),
-)
+  () => import("../../../../components/concrete/SectionHeader/SectionHeader")
+);
 
 const PhantomText = dynamic(
-  ()=>import("../../../../components/concrete/PhantomText/PhantomText"),
-)
+  () => import("../../../../components/concrete/PhantomText/PhantomText")
+);
 
 const PostersPage = () => {
   const theme = useTheme();

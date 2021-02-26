@@ -22,25 +22,23 @@ import PlayingIcon from "../../../assets/icons/cinema.inline.svg";
 import dynamic from "next/dynamic";
 
 const MovieCollection = dynamic(
-  ()=>import("../MovieCollection/MovieCollection"),
+  () => import("../MovieCollection/MovieCollection"),
   {
-    loading: ()=>(
+    loading: () => (
       <Box p={2}>
         <LinearProgress />
       </Box>
-    )
+    ),
   }
-)
+);
 
-const SectionHeader = dynamic(
-  ()=>import("../SectionHeader/SectionHeader"),
-)
+const SectionHeader = dynamic(() => import("../SectionHeader/SectionHeader"));
 
 type SnippetNowPlayingProps = React.ComponentProps<typeof Box> & {
   nowPlayingMovies: INowPlayingData;
 };
 
-const SnippetNowPlaying:React.FC<SnippetNowPlayingProps> = (
+const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (
   props: SnippetNowPlayingProps
 ) => {
   const { nowPlayingMovies, ...rest } = props;

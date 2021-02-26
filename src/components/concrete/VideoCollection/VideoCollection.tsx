@@ -6,9 +6,7 @@ import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
 import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 
-const VideoPlayer = dynamic(
-  ()=>import("../VideoPlayer/VideoPlayer"),
-)
+const VideoPlayer = dynamic(() => import("../VideoPlayer/VideoPlayer"));
 
 type VideoCollectionProps = React.ComponentProps<typeof Box> & {
   trailersData: IVideoData[];

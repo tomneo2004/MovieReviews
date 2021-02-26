@@ -8,8 +8,8 @@ import style from "./MotionGalleryStyle";
 import dynamic from "next/dynamic";
 
 const ImageContainer = dynamic(
-  ()=>import("../../unit/ImageContainer/ImageContainer"),
-)
+  () => import("../../unit/ImageContainer/ImageContainer")
+);
 
 type MotionGalleryProps = React.ComponentProps<typeof React.Component> & {
   open: boolean;

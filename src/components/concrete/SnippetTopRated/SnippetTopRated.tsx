@@ -17,19 +17,17 @@ import ThumbUpIcon from "../../../assets/icons/thumb-up.inline.svg";
 import dynamic from "next/dynamic";
 
 const MovieCollection = dynamic(
-  ()=>import("../MovieCollection/MovieCollection"),
+  () => import("../MovieCollection/MovieCollection"),
   {
-    loading: ()=>(
+    loading: () => (
       <Box p={2}>
         <LinearProgress />
       </Box>
-    )
+    ),
   }
-)
+);
 
-const SectionHeader = dynamic(
-  ()=>import("../SectionHeader/SectionHeader"),
-)
+const SectionHeader = dynamic(() => import("../SectionHeader/SectionHeader"));
 
 type SnippetTopRatedProps = React.ComponentProps<typeof Box> & {
   topRatedMovies: IMovieData[];

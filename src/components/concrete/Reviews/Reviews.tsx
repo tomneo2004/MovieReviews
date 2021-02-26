@@ -5,8 +5,8 @@ import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import { useMovieReviews } from "../../../effects/apiFetch/movieReviews";
 
 const ReviewCollection = dynamic(
-  ()=>import("../ReviewCollection/ReviewCollection"),
-)
+  () => import("../ReviewCollection/ReviewCollection")
+);
 
 type ReviewsProps = React.ComponentProps<typeof Box> & {
   movieId: number;

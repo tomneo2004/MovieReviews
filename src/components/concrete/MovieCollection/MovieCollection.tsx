@@ -15,17 +15,13 @@ import { springTransition } from "../../../framer/Transition";
 import FadeMotion from "../../../framer/FadeMotion/FadeMotion";
 import dynamic from "next/dynamic";
 
-const MoviePoster = dynamic(
-  ()=>import("../MoviePoster/MoviePoster"),
-)
+const MoviePoster = dynamic(() => import("../MoviePoster/MoviePoster"));
 
 const HScroll = dynamic(
-  ()=>import("../../unit/HorizontalScroll/HorizontalScroll"),
-) 
+  () => import("../../unit/HorizontalScroll/HorizontalScroll")
+);
 
-const ScrollIndicator = dynamic(
-  ()=>import("./ScrollIndicator"),
-) 
+const ScrollIndicator = dynamic(() => import("./ScrollIndicator"));
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
   movieData: IMovieData[] | null | undefined;

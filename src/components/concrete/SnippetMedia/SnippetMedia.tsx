@@ -11,12 +11,12 @@ import {
 import LinkTo from "../LinkTo/LinkTo";
 
 const PosterCollection = dynamic(
-  ()=>import("../PosterCollection/PosterCollection"),
-)
+  () => import("../PosterCollection/PosterCollection")
+);
 
 const VideoCollection = dynamic(
-  ()=>import("../VideoCollection/VideoCollection"),
-)
+  () => import("../VideoCollection/VideoCollection")
+);
 
 enum MediaTypes {
   "video" = "video",

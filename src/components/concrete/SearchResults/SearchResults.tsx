@@ -11,9 +11,7 @@ import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
 
-const MoviePoster = dynamic(
-  ()=>import("../MoviePoster/MoviePoster"),
-)
+const MoviePoster = dynamic(() => import("../MoviePoster/MoviePoster"));
 
 type SearchResultsProps = React.ComponentProps<typeof Grid> & {
   /**

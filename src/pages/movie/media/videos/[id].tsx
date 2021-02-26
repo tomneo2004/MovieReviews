@@ -7,16 +7,16 @@ import { useMovieVideos } from "../../../../effects/apiFetch/movieVideos";
 import PageLayout from "../../../../layouts/pageLayout";
 
 const GridVideos = dynamic(
-  ()=>import("../../../../components/concrete/GridVideos/GridVideos"),
-)
+  () => import("../../../../components/concrete/GridVideos/GridVideos")
+);
 
 const SectionHeader = dynamic(
-  ()=>import("../../../../components/concrete/SectionHeader/SectionHeader"),
-)
+  () => import("../../../../components/concrete/SectionHeader/SectionHeader")
+);
 
 const PhantomText = dynamic(
-  ()=>import("../../../../components/concrete/PhantomText/PhantomText"),
-)
+  () => import("../../../../components/concrete/PhantomText/PhantomText")
+);
 
 const VideosPage = () => {
   const theme = useTheme();

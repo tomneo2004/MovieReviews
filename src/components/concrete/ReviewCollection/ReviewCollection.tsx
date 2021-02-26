@@ -13,9 +13,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
-const ReviewCard = dynamic(
-  ()=>import("../ReviewCard/ReviewCard"),
-)
+const ReviewCard = dynamic(() => import("../ReviewCard/ReviewCard"));
 
 type ReviewCollectionProps = React.ComponentProps<typeof Box> & {
   reviewData: IMovieReviewsData;

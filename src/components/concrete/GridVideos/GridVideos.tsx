@@ -4,9 +4,7 @@ import React from "react";
 import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
 
-const VideoPlayer = dynamic(
-  ()=>import("../VideoPlayer/VideoPlayer"),
-)
+const VideoPlayer = dynamic(() => import("../VideoPlayer/VideoPlayer"));
 
 type GridVideosProps = React.ComponentProps<typeof Box> & {
   videoData: IVideoData[];

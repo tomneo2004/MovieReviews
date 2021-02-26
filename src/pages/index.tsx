@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import PageLayout from "../layouts/pageLayout";
 import LandingLayout from "../layouts/landing/landingLayout";
 import HeroLayout from "../layouts/landing/heroLayout";
@@ -8,28 +8,32 @@ import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import RFCarousel from "../components/concrete/RFCarousel/RFCarousel";
+import { buildImageQuery } from "../utils/api/query/apiQueryBuilder";
 import {
-  buildImageQuery,
-} from "../utils/api/query/apiQueryBuilder";
-import { fetchNowPlayingMovies, fetchPopularMovies, fetchTopRatedMovies, fetchTrendingMoviesByDay, fetchTrendingMoviesByWeek, IPageProps, prepareCarousel } from '../pageUtils/landing';
+  fetchNowPlayingMovies,
+  fetchPopularMovies,
+  fetchTopRatedMovies,
+  fetchTrendingMoviesByDay,
+  fetchTrendingMoviesByWeek,
+  IPageProps,
+  prepareCarousel,
+} from "../pageUtils/landing";
 
 const SnippetPopular = dynamic(
-  ()=>import("../components/concrete/SnippetPopular/SnippetPopular"),
-)
+  () => import("../components/concrete/SnippetPopular/SnippetPopular")
+);
 
 const SnippetTrending = dynamic(
-  ()=>import("../components/concrete/SnippetTrending/SnippetTrending"),
-)
+  () => import("../components/concrete/SnippetTrending/SnippetTrending")
+);
 
 const SnippetTopRated = dynamic(
-  ()=>import("../components/concrete/SnippetTopRated/SnippetTopRated"),
-)
+  () => import("../components/concrete/SnippetTopRated/SnippetTopRated")
+);
 
 const SnippetNowPlaying = dynamic(
-  ()=>import("../components/concrete/SnippetNowPlaying/SnippetNowPlaying"),
-)
-
-
+  () => import("../components/concrete/SnippetNowPlaying/SnippetNowPlaying")
+);
 
 export const getStaticProps: GetStaticProps<IPageProps> = async () => {
   const heroBackdropDefault =
@@ -169,7 +173,7 @@ const LandingPage = (pageProps: IPageProps) => {
 
           {/* Now playing */}
           <Box id="now-playing">
-              <SnippetNowPlaying mt={2} nowPlayingMovies={nowPlayingMovies} />
+            <SnippetNowPlaying mt={2} nowPlayingMovies={nowPlayingMovies} />
           </Box>
         </React.Fragment>
       </LandingLayout>

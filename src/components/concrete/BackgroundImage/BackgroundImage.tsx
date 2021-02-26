@@ -1,13 +1,11 @@
 import Box from "@material-ui/core/Box";
 import dynamic from "next/dynamic";
 import React from "react";
-import {
-  ProgressiveImageProps,
-} from "../../unit/ProgressiveImage/ProgressiveImage";
+import { ProgressiveImageProps } from "../../unit/ProgressiveImage/ProgressiveImage";
 
 const ProgressiveImage = dynamic(
-  ()=>import("../../unit/ProgressiveImage/ProgressiveImage"),
-)
+  () => import("../../unit/ProgressiveImage/ProgressiveImage")
+);
 
 type BackgroundImageProps = ProgressiveImageProps;
 

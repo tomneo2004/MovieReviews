@@ -4,13 +4,9 @@ import { IMovieDetailData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import dynamic from "next/dynamic";
 
-const PosterImage = dynamic(
-  ()=>import("../PosterImage/PosterImage"),
-)
+const PosterImage = dynamic(() => import("../PosterImage/PosterImage"));
 
-const MovieInfo = dynamic(
-  ()=>import("../MovieInfo/MovieInfo"),
-)
+const MovieInfo = dynamic(() => import("../MovieInfo/MovieInfo"));
 
 type OverviewProps = React.ComponentProps<typeof Grid> & {
   movieDetail: IMovieDetailData;

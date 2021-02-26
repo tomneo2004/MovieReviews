@@ -7,9 +7,7 @@ import {
   PosterSize,
 } from "../../../utils/api/query/apiQueryBuilder";
 
-const PosterImage = dynamic(
-  ()=>import("../PosterImage/PosterImage"),
-)
+const PosterImage = dynamic(() => import("../PosterImage/PosterImage"));
 
 type GridPostersProps = React.ComponentProps<typeof Box> & {
   posterData: IMoviePosterData[];

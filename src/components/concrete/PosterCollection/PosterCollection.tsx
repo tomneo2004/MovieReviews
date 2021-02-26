@@ -6,9 +6,7 @@ import { IMoviePosterData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 
-const PosterImage = dynamic(
-  ()=>import("../PosterImage/PosterImage"),
-)
+const PosterImage = dynamic(() => import("../PosterImage/PosterImage"));
 
 type PosterCollectionProps = React.ComponentProps<typeof Box> & {
   posters: IMoviePosterData[];

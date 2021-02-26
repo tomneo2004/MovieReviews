@@ -14,22 +14,20 @@ import PhantomText from "../PhantomText/PhantomText";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import PopularIcon from "../../../assets/icons/heat.inline.svg";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 const MovieCollection = dynamic(
-  ()=>import("../MovieCollection/MovieCollection"),
+  () => import("../MovieCollection/MovieCollection"),
   {
-    loading: ()=>(
+    loading: () => (
       <Box p={2}>
         <LinearProgress />
       </Box>
-    )
+    ),
   }
-)
+);
 
-const SectionHeader = dynamic(
-  ()=>import("../SectionHeader/SectionHeader"),
-)
+const SectionHeader = dynamic(() => import("../SectionHeader/SectionHeader"));
 
 type SnippetPopularProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];

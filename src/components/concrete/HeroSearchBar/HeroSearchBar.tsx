@@ -5,9 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 
-const SearchBar = dynamic(
-  ()=>import("../SearchBar/SearchBar"),
-)
+const SearchBar = dynamic(() => import("../SearchBar/SearchBar"));
 
 type HeroSearchBarProps = React.ComponentProps<typeof Box>;
 

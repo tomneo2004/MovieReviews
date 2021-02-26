@@ -10,12 +10,12 @@ import CommonNavigation from "../../components/concrete/CommonNavigation/CommonN
 import dynamic from "next/dynamic";
 
 const Pagination = dynamic(
-  ()=>import("@material-ui/lab/Pagination/Pagination"),
-)
+  () => import("@material-ui/lab/Pagination/Pagination")
+);
 
 const SearchResults = dynamic(
-  ()=>import("../../components/concrete/SearchResults/SearchResults"),
-)
+  () => import("../../components/concrete/SearchResults/SearchResults")
+);
 
 interface IPageProps {
   query: string;
