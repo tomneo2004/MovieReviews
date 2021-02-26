@@ -3,7 +3,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import { useRouter } from "next/router";
 import React from "react";
 import CommonNavigation from "../../../../components/concrete/CommonNavigation/CommonNavigation";
-import GridPosterImage from "../../../../components/concrete/GridPosterImage/GridPosterImage";
+import GridPosters from "../../../../components/concrete/GridPosters/GridPosters";
 import MotionGallery from "../../../../components/concrete/MotionGallery/MotionGallery";
 import PhantomText from "../../../../components/concrete/PhantomText/PhantomText";
 import SectionHeader from "../../../../components/concrete/SectionHeader/SectionHeader";
@@ -80,7 +80,7 @@ const PostersPage = () => {
               />
             }
           />
-          <GridPosterImage posterData={data} onPosterClick={openGallery} />
+          <GridPosters posterData={data} onPosterClick={openGallery} />
           <MotionGallery
             open={galleryState.open}
             onClose={closeGallery}

@@ -2,7 +2,7 @@ import { LinearProgress, useTheme } from "@material-ui/core";
 import { useRouter } from "next/router";
 import React from "react";
 import CommonNavigation from "../../../../components/concrete/CommonNavigation/CommonNavigation";
-import GridVideoPlayer from "../../../../components/concrete/GridVideoPlayer/GridVideoPlayer";
+import GridVideos from "../../../../components/concrete/GridVideos/GridVideos";
 import PhantomText from "../../../../components/concrete/PhantomText/PhantomText";
 import SectionHeader from "../../../../components/concrete/SectionHeader/SectionHeader";
 import { useMovieVideos } from "../../../../effects/apiFetch/movieVideos";
@@ -42,7 +42,7 @@ const VideosPage = () => {
               />
             }
           />
-          <GridVideoPlayer videoData={data} />
+          <GridVideos videoData={data} />
         </React.Fragment>
       )}
     </PageLayout>

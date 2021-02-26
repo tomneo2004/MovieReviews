@@ -7,14 +7,21 @@ import {
 } from "../../../utils/api/query/apiQueryBuilder";
 import PosterImage from "../PosterImage/PosterImage";
 
-type GridPosterImageProps = React.ComponentProps<typeof Grid> & {
+type GridPostersProps = React.ComponentProps<typeof Box> & {
   posterData: IMoviePosterData[];
   posterSize?: PosterSize;
   onPosterClick?: (i: number) => void;
 };
 
-const GridPosterImage: React.FC<GridPosterImageProps> = (
-  props: GridPosterImageProps
+/**
+ * Component GridPosters
+ * 
+ * Present all posters in as grid layout
+ * 
+ * @param props 
+ */
+const GridPosters: React.FC<GridPostersProps> = (
+  props: GridPostersProps
 ) => {
   const {
     posterData,
@@ -27,7 +34,8 @@ const GridPosterImage: React.FC<GridPosterImageProps> = (
   };
 
   return (
-    <Grid container {...rest}>
+    <Box {...rest}>
+    <Grid container>
       {posterData.map((poster, i) => {
         return (
           <Grid key={poster.file_path} item xs>
@@ -49,10 +57,11 @@ const GridPosterImage: React.FC<GridPosterImageProps> = (
         );
       })}
     </Grid>
+    </Box>
   );
 };
 
-export default React.memo(GridPosterImage, (pre, next) => {
+export default React.memo(GridPosters, (pre, next) => {
   return (
     pre.posterData === next.posterData && pre.posterSize === next.posterSize
   );

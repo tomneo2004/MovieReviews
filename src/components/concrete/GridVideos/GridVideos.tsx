@@ -4,17 +4,18 @@ import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
-type GridPosterImageProps = React.ComponentProps<typeof Grid> & {
+type GridVideosProps = React.ComponentProps<typeof Box> & {
   videoData: IVideoData[];
 };
 
-const GridPosterImage: React.FC<GridPosterImageProps> = (
-  props: GridPosterImageProps
+const GridVideos: React.FC<GridVideosProps> = (
+  props: GridVideosProps
 ) => {
   const { videoData, ...rest } = props;
 
   return (
-    <Grid container {...rest}>
+    <Box {...rest}>
+    <Grid container>
       {videoData.map((video) => {
         const videoURL = getVideoURL(video.key, video.site);
         return (
@@ -39,9 +40,10 @@ const GridPosterImage: React.FC<GridPosterImageProps> = (
         );
       })}
     </Grid>
+    </Box>
   );
 };
 
-export default React.memo(GridPosterImage, (pre, next) => {
+export default React.memo(GridVideos, (pre, next) => {
   return pre.videoData === next.videoData;
 });
