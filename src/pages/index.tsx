@@ -21,22 +21,22 @@ import {
 
 const SnippetPopular = dynamic(
   () => import("../components/concrete/SnippetPopular/SnippetPopular"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SnippetTrending = dynamic(
   () => import("../components/concrete/SnippetTrending/SnippetTrending"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SnippetTopRated = dynamic(
   () => import("../components/concrete/SnippetTopRated/SnippetTopRated"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SnippetNowPlaying = dynamic(
   () => import("../components/concrete/SnippetNowPlaying/SnippetNowPlaying"),
-  {ssr:false}
+  { ssr: false }
 );
 
 export const getStaticProps: GetStaticProps<IPageProps> = async () => {
