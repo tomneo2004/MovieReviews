@@ -41,11 +41,11 @@ const PosterCollection: React.FC<PosterCollectionProps> = (
                   enlargeEnabled
                   layoutId={poster.file_path}
                   hoverCursor="pointer"
-                  smDown={200}
-                  smUp={250}
-                  mdUp={250}
-                  lgUp={300}
-                  xlUp={300}
+                  widthAtSMDown={200}
+                  widthAtSMUp={250}
+                  widthAtMDUp={250}
+                  widthAtLGUp={300}
+                  widthAtXLUp={300}
                 />
               ),
             };
