@@ -203,6 +203,8 @@ const LandingPage = (pageProps: IPageProps) => {
     },
   })();
 
+  if(error) throw error;
+
   return (
     <PageLayout>
       <LandingLayout>
@@ -236,14 +238,7 @@ const LandingPage = (pageProps: IPageProps) => {
           }
           search={<HeroSearchBar />}
         />
-        {error ? (
-          <Typography variant="h4" component="div">
-            <Box display="flex" justifyContent="center">
-              {"Ooops, somthing is not right"}
-            </Box>
-          </Typography>
-        ) : (
-          <React.Fragment>
+        <React.Fragment>
             {/* Pouplar Collection */}
             <Box id="popular">
               <SnippetPopular mt={2} popularMovies={popularMovies} />
@@ -256,8 +251,7 @@ const LandingPage = (pageProps: IPageProps) => {
                 byWeek={trendingMovies.week}
               />
             </Box>
-          </React.Fragment>
-        )}
+        </React.Fragment>
       </LandingLayout>
     </PageLayout>
   );

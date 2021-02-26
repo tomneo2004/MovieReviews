@@ -5,6 +5,7 @@ import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 import PosterImage from "../PosterImage/PosterImage";
 import Link from "next/link";
 import style from "./MoviePosterStyle";
+import { ScreenWidthProps } from "../../../props/ScreenProps";
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
   /**
@@ -37,6 +38,14 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
   );
 };
 
+const widthDef:ScreenWidthProps = {
+  widthAtSMDown: 185,
+  widthAtSMUp: 185,
+  widthAtMDUp: 250,
+  widthAtLGUp: 300,
+  widthAtXLUp: 300,
+}
+
 const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
     layoutId,
@@ -53,11 +62,7 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const theme = useTheme();
   const classes = makeStyles(style)({
     theme,
-    titleSMDown: 185,
-    titleSMUp: 185,
-    titleMDUp: 250,
-    titleLGUp: 300,
-    titleXLUp: 300,
+    ...widthDef
   });
 
   return (
@@ -76,11 +81,11 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
           elevation={4}
           onMouseOver={onMouseOver}
           hoverCursor="pointer"
-          smDown={185}
-          smUp={185}
-          mdUp={250}
-          lgUp={300}
-          xlUp={300}
+          widthAtSMDown={widthDef.widthAtSMDown}
+          widthAtSMUp={widthDef.widthAtSMUp}
+          widthAtMDUp={widthDef.widthAtMDUp}
+          widthAtLGUp={widthDef.widthAtLGUp}
+          widthAtXLUp={widthDef.widthAtXLUp}
         />
       </Link>
       <Typography component="div" variant="h6">

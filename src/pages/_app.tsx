@@ -7,6 +7,11 @@ import type { AppProps /*, AppContext */ } from "next/app";
 import NProgress from "nprogress";
 import Router from "next/router";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import ErrorBoundary from "../components/concrete/ErrorBoundary/ErrorBoundary";
+import Box from "@material-ui/core/Box";
+import { Typography } from "@material-ui/core";
+import LinkTo from "../components/concrete/LinkTo/LinkTo";
+import { getRoute, RouteType } from "../routes/routesGenerator";
 
 NProgress.configure({ showSpinner: false });
 Router.events.on("routeChangeStart", (url) => {
@@ -48,6 +53,14 @@ export default function MovieReviewApp(props: AppProps) {
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
 
+      <ErrorBoundary fallback={
+        <Box>
+          <Typography variant='h2'>
+            Oooops ! Looks like somthing is not right
+          </Typography>
+          <LinkTo text='Back to home' linkTo={getRoute(RouteType.home, null)} />
+        </Box>
+      }>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
@@ -72,6 +85,7 @@ export default function MovieReviewApp(props: AppProps) {
           </AnimatePresence>
         </AnimateSharedLayout>
       </ThemeProvider>
+      </ErrorBoundary>
     </React.Fragment>
   );
 }

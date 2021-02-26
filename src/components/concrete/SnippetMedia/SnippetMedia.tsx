@@ -54,7 +54,7 @@ const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
     default:
       return (
         <Typography variant="h4" component="div">
-          <Box>Oooops no media found</Box>
+          <Box>No media found</Box>
         </Typography>
       );
   }

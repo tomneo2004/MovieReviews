@@ -103,7 +103,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
                       linkTo={getRoute(RouteType.movie, {
                         id: data.id.toString(),
                       })}
-                      imageURL={buildImageQuery(data.poster_path, "w185")}
+                      imageURL={buildImageQuery(data.poster_path, "w342")}
                       title={data.title}
                       releaseDate={data.release_date}
                       ratingScore={getMovieRating(

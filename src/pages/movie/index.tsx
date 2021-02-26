@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import PageLayout from "../../layouts/pageLayout";
 import { buildImageQuery } from "../../utils/api/query/apiQueryBuilder";
 import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import {
   Hidden,
   makeStyles,
@@ -185,6 +184,8 @@ const MoviePage = (pageProps: IPageProps) => {
     };
   }, []);
 
+  if(error) throw error;
+
   const handleSectionChange = (
     _evt: React.ChangeEvent<{}>,
     value: SectionTypes
@@ -206,18 +207,10 @@ const MoviePage = (pageProps: IPageProps) => {
         />
       }
     >
-      {error ? (
-        <Typography variant="h4" component="div">
-          <Box display="flex" justifyContent="center">
-            {"Ooops, somthing is not right"}
-          </Box>
-        </Typography>
-      ) : (
-        <Box bgcolor={theme.palette.primary.light}>
-          <Hidden mdUp>{renderTabs(section, handleSectionChange)}</Hidden>
-          <Box p={2}>{renderSection(section, sectionToData, movieId)}</Box>
-        </Box>
-      )}
+      <Box bgcolor={theme.palette.primary.light}>
+        <Hidden mdUp>{renderTabs(section, handleSectionChange)}</Hidden>
+        <Box p={2}>{renderSection(section, sectionToData, movieId)}</Box>
+      </Box>
     </PageLayout>
   );
 };

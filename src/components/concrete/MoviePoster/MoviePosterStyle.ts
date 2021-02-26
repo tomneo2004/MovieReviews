@@ -1,30 +1,26 @@
 import { createStyles, Theme } from "@material-ui/core";
+import { ScreenWidthProps } from "../../../props/ScreenProps";
 
-interface IStyleProps {
+type IStyleProps = ScreenWidthProps & {
   theme: Theme;
-  titleSMDown: number;
-  titleSMUp: number;
-  titleMDUp: number;
-  titleLGUp: number;
-  titleXLUp: number;
 }
 
 export default createStyles({
   title: (props: IStyleProps) => ({
     [props.theme.breakpoints.down("xs")]: {
-      width: props.titleSMDown,
+      width: props.widthAtSMDown,
     },
     [props.theme.breakpoints.up("sm")]: {
-      width: props.titleSMUp,
+      width: props.widthAtSMUp,
     },
     [props.theme.breakpoints.up("md")]: {
-      width: props.titleMDUp,
+      width: props.widthAtMDUp,
     },
     [props.theme.breakpoints.up("lg")]: {
-      width: props.titleLGUp,
+      width: props.widthAtLGUp,
     },
     [props.theme.breakpoints.up("xl")]: {
-      width: props.titleXLUp,
+      width: props.widthAtXLUp,
     },
   }),
 });

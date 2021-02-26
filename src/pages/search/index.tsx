@@ -8,8 +8,6 @@ import SearchResults from "../../components/concrete/SearchResults/SearchResults
 import { GetServerSideProps } from "next";
 import { ISearchMovieData } from "../../utils/api/model/apiModelTypes";
 import axios from "axios";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
 
 interface IPageProps {
@@ -57,6 +55,8 @@ const SearchPage = (pageProps: IPageProps) => {
   const { data, error, query } = pageProps;
   const router = useRouter();
 
+  if(error) throw error;
+
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
     page: number
@@ -69,25 +69,17 @@ const SearchPage = (pageProps: IPageProps) => {
   return (
     <PageLayout navigation={<CommonNavigation />}>
       <SearchLayout>
-        {error ? (
-          <Typography variant="h4" component="div">
-            <Box display="flex" justifyContent="center">
-              {"Ooops, somthing is not right"}
-            </Box>
-          </Typography>
-        ) : (
-          <React.Fragment>
-            <SearchResults data={data.results} keywords={query} />
-            <Pagination
-              id="paging"
-              count={data.total_pages}
-              page={data.page}
-              onChange={handlePageChange}
-              showFirstButton
-              showLastButton
-            />
-          </React.Fragment>
-        )}
+        <React.Fragment>
+          <SearchResults data={data.results} keywords={query} />
+          <Pagination
+            id="paging"
+            count={data.total_pages}
+            page={data.page}
+            onChange={handlePageChange}
+            showFirstButton
+            showLastButton
+          />
+        </React.Fragment>
       </SearchLayout>
     </PageLayout>
   );
