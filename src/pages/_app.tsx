@@ -44,7 +44,7 @@ export default function MovieReviewApp(props: AppProps) {
   return (
     <React.Fragment>
       <Head>
-        <title>MovieReviews</title>
+        <title>{process.env.NEXT_PUBLIC_WEBSITE_NAME}</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
