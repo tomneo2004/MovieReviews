@@ -78,7 +78,7 @@ export type ICrewData = {
 
 export type ICreditsData = {
   cast: ICastData[];
-  crew: ICreditsData[];
+  crew: ICrewData[];
 };
 
 export type IVideoData = {

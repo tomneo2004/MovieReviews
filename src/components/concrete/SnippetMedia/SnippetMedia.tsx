@@ -2,12 +2,12 @@ import Box from "@material-ui/core/Box";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
-import Link from "next/link";
 import React from "react";
 import {
   IMoviePosterData,
   IVideoData,
 } from "../../../utils/api/model/apiModelTypes";
+import LinkTo from "../LinkTo/LinkTo";
 import PosterCollection from "../PosterCollection/PosterCollection";
 import VideoCollection from "../VideoCollection/VideoCollection";
 
@@ -27,16 +27,6 @@ type SnippetMediaProps = React.ComponentProps<typeof Box> & {
   posters: { snippetData: IMoviePosterData[]; routeToPage: string };
 };
 
-const showLink = (title: string, url: string) => {
-  return (
-    <Typography variant="body1" component="div">
-      <Link href={url}>
-        <a>{title}</a>
-      </Link>
-    </Typography>
-  );
-};
-
 const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
   switch (media) {
     case MediaTypes.video:
@@ -44,7 +34,9 @@ const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
       const videoLink = mediaData[media].link as string;
       return (
         <React.Fragment>
-          <Box pl={2}>{showLink(`See all videos`, videoLink)}</Box>
+          <Box pl={2}>
+            <LinkTo text='See all videos' linkTo={videoLink} />
+          </Box>
           <VideoCollection trailersData={videoData} />
         </React.Fragment>
       );
@@ -53,7 +45,9 @@ const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
       const posterLink = mediaData[media].link as string;
       return (
         <React.Fragment>
-          <Box pl={2}>{showLink(`See all posters`, posterLink)}</Box>
+          <Box pl={2}>
+            <LinkTo text='See all posters' linkTo={posterLink} />
+          </Box>
           <PosterCollection posters={posterData} />
         </React.Fragment>
       );
