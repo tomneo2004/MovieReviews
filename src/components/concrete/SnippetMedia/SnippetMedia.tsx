@@ -21,7 +21,7 @@ type DataMap = {
   [MediaTypes.poster]: { data: IMoviePosterData[]; link: string };
 };
 
-type MediaProps = React.ComponentProps<typeof Box> & {
+type SnippetMediaProps = React.ComponentProps<typeof Box> & {
   defaultTab?: MediaTypes;
   trailers: { snippetData: IVideoData[]; routeToPage: string };
   posters: { snippetData: IMoviePosterData[]; routeToPage: string };
@@ -66,7 +66,7 @@ const renderMedia = (media: MediaTypes, mediaData: DataMap) => {
   }
 };
 
-const Media: React.FC<MediaProps> = (props: MediaProps) => {
+const SnippetMedia: React.FC<SnippetMediaProps> = (props: SnippetMediaProps) => {
   const { defaultTab = MediaTypes.video, trailers, posters, ...rest } = props;
 
   const [value, setValue] = React.useState<MediaTypes>(defaultTab);
@@ -75,9 +75,6 @@ const Media: React.FC<MediaProps> = (props: MediaProps) => {
     setValue(value);
   };
 
-  //preset 10 data
-  posters.snippetData.splice(9, posters.snippetData.length);
-  trailers.snippetData.splice(9, trailers.snippetData.length);
   const mediaTypeToData = React.useMemo<DataMap>(() => {
     return {
       [MediaTypes.video]: {
@@ -108,4 +105,4 @@ const Media: React.FC<MediaProps> = (props: MediaProps) => {
   );
 };
 
-export default Media;
+export default SnippetMedia;

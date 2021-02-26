@@ -21,7 +21,7 @@ import {
 } from "../../utils/api/model/apiModelTypes";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import Overview from "../../components/concrete/Overview/Overview";
-import Media from "../../components/concrete/Media/Media";
+import SnippetMedia from "../../components/concrete/SnippetMedia/SnippetMedia";
 import Casts from "../../components/concrete/Casts/Casts";
 import Reviews from "../../components/concrete/Reviews/Reviews";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
@@ -94,7 +94,7 @@ type SectionMapToData = {
   [SectionTypes.overview]: IMovieDetailData;
   [SectionTypes.media]: {
     trailers: IVideoData[];
-    poster: IMoviePosterData[];
+    posters: IMoviePosterData[];
   };
   [SectionTypes.casts]: ICastData[];
   [SectionTypes.reviews]: number;
@@ -109,14 +109,19 @@ const renderSection = (
     case SectionTypes.overview:
       return <Overview movieDetail={data[section]} />;
     case SectionTypes.media:
+      //10 trailers
+      const trailers = data[section].trailers.splice(0, 9);
+      //10 posters
+      const posters = data[section].posters.splice(0, 9);
+      
       return (
-        <Media
+        <SnippetMedia
           trailers={{
-            snippetData: data[section].trailers,
+            snippetData: trailers,
             routeToPage: getRoute(RouteType["movie video"], null, movieId),
           }}
           posters={{
-            snippetData: data[section].poster,
+            snippetData: posters,
             routeToPage: getRoute(RouteType["movie poster"], null, movieId),
           }}
         />
@@ -173,7 +178,7 @@ const MoviePage = (pageProps: IPageProps) => {
       overview: movieDetail,
       media: {
         trailers: movieDetail.videos.results,
-        poster: movieDetail.images.posters,
+        posters: movieDetail.images.posters,
       },
       casts: movieDetail.credits.cast,
       reviews: Number(movieId),
