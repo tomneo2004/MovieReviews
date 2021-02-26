@@ -5,7 +5,11 @@ import React from "react";
 import LeftArrowIcon from "@material-ui/icons/ArrowLeftSharp";
 import RigthArrowIcon from "@material-ui/icons/ArrowRightSharp";
 import style from "./MotionGalleryStyle";
-import ImageContainer from "../../unit/ImageContainer/ImageContainer";
+import dynamic from "next/dynamic";
+
+const ImageContainer = dynamic(
+  ()=>import("../../unit/ImageContainer/ImageContainer"),
+)
 
 type MotionGalleryProps = React.ComponentProps<typeof React.Component> & {
   open: boolean;

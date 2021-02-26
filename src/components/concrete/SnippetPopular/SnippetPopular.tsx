@@ -10,12 +10,26 @@ import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
-import MovieCollection from "../MovieCollection/MovieCollection";
 import PhantomText from "../PhantomText/PhantomText";
-import SectionHeader from "../SectionHeader/SectionHeader";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import PopularIcon from "../../../assets/icons/heat.inline.svg";
+import dynamic from 'next/dynamic';
+
+const MovieCollection = dynamic(
+  ()=>import("../MovieCollection/MovieCollection"),
+  {
+    loading: ()=>(
+      <Box p={2}>
+        <LinearProgress />
+      </Box>
+    )
+  }
+)
+
+const SectionHeader = dynamic(
+  ()=>import("../SectionHeader/SectionHeader"),
+)
 
 type SnippetPopularProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];

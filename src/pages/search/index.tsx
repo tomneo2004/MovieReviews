@@ -1,14 +1,21 @@
 import React from "react";
 import { useRouter } from "next/router";
 import PageLayout from "../../layouts/pageLayout";
-import Pagination from "@material-ui/lab/Pagination/Pagination";
 import SearchLayout from "../../layouts/search/searchLayout";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
-import SearchResults from "../../components/concrete/SearchResults/SearchResults";
 import { GetServerSideProps } from "next";
 import { ISearchMovieData } from "../../utils/api/model/apiModelTypes";
 import axios from "axios";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
+import dynamic from "next/dynamic";
+
+const Pagination = dynamic(
+  ()=>import("@material-ui/lab/Pagination/Pagination"),
+)
+
+const SearchResults = dynamic(
+  ()=>import("../../components/concrete/SearchResults/SearchResults"),
+)
 
 interface IPageProps {
   query: string;

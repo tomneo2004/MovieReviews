@@ -1,12 +1,22 @@
 import { LinearProgress, useTheme } from "@material-ui/core";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
 import CommonNavigation from "../../../../components/concrete/CommonNavigation/CommonNavigation";
-import GridVideos from "../../../../components/concrete/GridVideos/GridVideos";
-import PhantomText from "../../../../components/concrete/PhantomText/PhantomText";
-import SectionHeader from "../../../../components/concrete/SectionHeader/SectionHeader";
 import { useMovieVideos } from "../../../../effects/apiFetch/movieVideos";
 import PageLayout from "../../../../layouts/pageLayout";
+
+const GridVideos = dynamic(
+  ()=>import("../../../../components/concrete/GridVideos/GridVideos"),
+)
+
+const SectionHeader = dynamic(
+  ()=>import("../../../../components/concrete/SectionHeader/SectionHeader"),
+)
+
+const PhantomText = dynamic(
+  ()=>import("../../../../components/concrete/PhantomText/PhantomText"),
+)
 
 const VideosPage = () => {
   const theme = useTheme();

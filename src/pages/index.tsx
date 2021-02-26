@@ -1,151 +1,35 @@
+import dynamic from 'next/dynamic';
 import PageLayout from "../layouts/pageLayout";
 import LandingLayout from "../layouts/landing/landingLayout";
 import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, fade, makeStyles, Typography, useTheme } from "@material-ui/core";
 import React from "react";
-import SnippetTrending from "../components/concrete/SnippetTrending/SnippetTrending";
-import SnippetPopular from "../components/concrete/SnippetPopular/SnippetPopular";
 import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
-import axios from "axios";
-import {
-  IMovieData,
-  INowPlayingData,
-  ITopRatedMoviesData,
-} from "../utils/api/model/apiModelTypes";
-import RFCarousel, {
-  RFCMotionOptions,
-  RFCTextGroup,
-} from "../components/concrete/RFCarousel/RFCarousel";
-import { springTransition } from "../framer/Transition";
+import RFCarousel from "../components/concrete/RFCarousel/RFCarousel";
 import {
   buildImageQuery,
-  getNowPlayingMoviesQuery,
-  getPouplarMoviesQuery,
-  getTopRatedMovieQuery,
-  getTrendingQuery,
 } from "../utils/api/query/apiQueryBuilder";
-import SnippetTopRated from "../components/concrete/SnippetTopRated/SnippetTopRated";
-import SnippetNowPlaying from "../components/concrete/SnippetNowPlaying/SnippetNowPlaying";
+import { fetchNowPlayingMovies, fetchPopularMovies, fetchTopRatedMovies, fetchTrendingMoviesByDay, fetchTrendingMoviesByWeek, IPageProps, prepareCarousel } from '../pageUtils/landing';
 
-interface IPageProps {
-  heroTitle: string;
-  heroBackdrop: string;
-  carousel: RFCTextGroup[];
-  popularMovies: IMovieData[];
-  topRatedMovies: IMovieData[];
-  nowPlayingMovies: INowPlayingData;
-  trendingMovies: {
-    day: IMovieData[];
-    week: IMovieData[];
-  };
-  error: any;
-}
+const SnippetPopular = dynamic(
+  ()=>import("../components/concrete/SnippetPopular/SnippetPopular"),
+)
 
-const apiPopularRoute = getPouplarMoviesQuery();
-const apiDayTrendingRoute = getTrendingQuery("movie", "day");
-const apiWeekTrendingRoute = getTrendingQuery("movie", "week");
-const apiTopRatedRoute = getTopRatedMovieQuery();
-const apiNowPlayingRoute = getNowPlayingMoviesQuery();
+const SnippetTrending = dynamic(
+  ()=>import("../components/concrete/SnippetTrending/SnippetTrending"),
+)
 
-//https://developers.themoviedb.org/3/movies/get-popular-movies
-const fetchPopularMovies = async () => {
-  try {
-    const resp = await axios.get(apiPopularRoute);
-    const data: IMovieData[] = resp.data.results;
-    return data;
-  } catch (e) {
-    return Promise.reject(e);
-  }
-};
+const SnippetTopRated = dynamic(
+  ()=>import("../components/concrete/SnippetTopRated/SnippetTopRated"),
+)
 
-//https://developers.themoviedb.org/3/trending/get-trending
-const fetchTrendingMoviesByDay = async () => {
-  try {
-    const resp = await axios.get(apiDayTrendingRoute);
-    const data: IMovieData[] = resp.data.results;
-    return data;
-  } catch (e) {
-    return Promise.reject(e);
-  }
-};
+const SnippetNowPlaying = dynamic(
+  ()=>import("../components/concrete/SnippetNowPlaying/SnippetNowPlaying"),
+)
 
-//https://developers.themoviedb.org/3/trending/get-trending
-const fetchTrendingMoviesByWeek = async () => {
-  try {
-    const resp = await axios.get(apiWeekTrendingRoute);
-    const data: IMovieData[] = resp.data.results;
-    return data;
-  } catch (e) {
-    return Promise.reject(e);
-  }
-};
 
-const fetchTopRatedMovies = async () => {
-  try {
-    const resp = await axios.get(apiTopRatedRoute);
-    const data: ITopRatedMoviesData = resp.data;
-    return data;
-  } catch (e) {
-    return Promise.reject(e);
-  }
-};
-
-const fetchNowPlayingMovies = async () => {
-  try {
-    const resp = await axios.get(apiNowPlayingRoute);
-    const data: INowPlayingData = resp.data;
-    return data;
-  } catch (e) {
-    return Promise.reject(e);
-  }
-};
-
-const prepareCarousel = () => {
-  const option1: RFCMotionOptions = {
-    axis: "y",
-    opacity: { from: 0, to: 1 },
-    enterTranistion: springTransition(300, 25, 0.1),
-    exitTranistion: springTransition(300, 105, 1),
-  };
-
-  const option2: RFCMotionOptions = {
-    ...option1,
-    axis: "x",
-    indent: 2,
-    enterTranistion: springTransition(600, 35, 0.5),
-    exitTranistion: springTransition(300, 105, 0.5),
-  };
-
-  const option3: RFCMotionOptions = {
-    ...option1,
-    axis: "x",
-    indent: 4,
-    enterTranistion: springTransition(600, 35, 1),
-    exitTranistion: springTransition(300, 105, 0.1),
-  };
-
-  const set = [
-    [
-      { text: "See", motionOptions: option1 },
-      { text: "what movies are", motionOptions: option2 },
-      { text: "popular", motionOptions: option3 },
-    ],
-    [
-      { text: "Search", motionOptions: option1 },
-      { text: "favorite movies", motionOptions: option2 },
-      { text: "with title", motionOptions: option3 },
-    ],
-    [
-      { text: "Explore", motionOptions: option1 },
-      { text: "all movies", motionOptions: option2 },
-      { text: "and see what others say", motionOptions: option3 },
-    ],
-  ];
-
-  return set;
-};
 
 export const getStaticProps: GetStaticProps<IPageProps> = async () => {
   const heroBackdropDefault =
@@ -268,6 +152,7 @@ const LandingPage = (pageProps: IPageProps) => {
           <Box id="popular">
             <SnippetPopular mt={2} popularMovies={popularMovies} />
           </Box>
+
           {/* Trending Collection */}
           <Box id="trending">
             <SnippetTrending
@@ -284,7 +169,7 @@ const LandingPage = (pageProps: IPageProps) => {
 
           {/* Now playing */}
           <Box id="now-playing">
-            <SnippetNowPlaying mt={2} nowPlayingMovies={nowPlayingMovies} />
+              <SnippetNowPlaying mt={2} nowPlayingMovies={nowPlayingMovies} />
           </Box>
         </React.Fragment>
       </LandingLayout>

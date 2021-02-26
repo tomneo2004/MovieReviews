@@ -19,11 +19,24 @@ import {
   IVideoData,
 } from "../../utils/api/model/apiModelTypes";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
-import Overview from "../../components/concrete/Overview/Overview";
-import SnippetMedia from "../../components/concrete/SnippetMedia/SnippetMedia";
-import Casts from "../../components/concrete/Casts/Casts";
-import Reviews from "../../components/concrete/Reviews/Reviews";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
+import dynamic from "next/dynamic";
+
+const Overview = dynamic(
+  ()=>import("../../components/concrete/Overview/Overview"),
+)
+
+const SnippetMedia = dynamic(
+  ()=>import("../../components/concrete/SnippetMedia/SnippetMedia"),
+)
+
+const Casts = dynamic(
+  ()=>import("../../components/concrete/Casts/Casts"),
+)
+
+const Reviews = dynamic(
+  ()=>import("../../components/concrete/Reviews/Reviews"),
+)
 
 interface IPageProps {
   movieId: string;

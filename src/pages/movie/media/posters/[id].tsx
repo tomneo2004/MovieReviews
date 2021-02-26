@@ -1,18 +1,31 @@
 import { useTheme } from "@material-ui/core";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
 import CommonNavigation from "../../../../components/concrete/CommonNavigation/CommonNavigation";
-import GridPosters from "../../../../components/concrete/GridPosters/GridPosters";
-import MotionGallery from "../../../../components/concrete/MotionGallery/MotionGallery";
-import PhantomText from "../../../../components/concrete/PhantomText/PhantomText";
-import SectionHeader from "../../../../components/concrete/SectionHeader/SectionHeader";
 import { useMoviePosters } from "../../../../effects/apiFetch/moviePosters";
 import PageLayout from "../../../../layouts/pageLayout";
 import {
   getPosterImageQuery,
   PosterSize,
 } from "../../../../utils/api/query/apiQueryBuilder";
+
+const GridPosters = dynamic(
+  ()=>import("../../../../components/concrete/GridPosters/GridPosters"),
+)
+
+const MotionGallery = dynamic(
+  ()=>import("../../../../components/concrete/MotionGallery/MotionGallery"),
+)
+
+const SectionHeader = dynamic(
+  ()=>import("../../../../components/concrete/SectionHeader/SectionHeader"),
+)
+
+const PhantomText = dynamic(
+  ()=>import("../../../../components/concrete/PhantomText/PhantomText"),
+)
 
 const PostersPage = () => {
   const theme = useTheme();

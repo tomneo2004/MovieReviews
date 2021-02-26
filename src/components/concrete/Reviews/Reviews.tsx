@@ -1,8 +1,12 @@
 import Box from "@material-ui/core/Box";
+import dynamic from "next/dynamic";
 import React from "react";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import { useMovieReviews } from "../../../effects/apiFetch/movieReviews";
-import ReviewCollection from "../ReviewCollection/ReviewCollection";
+
+const ReviewCollection = dynamic(
+  ()=>import("../ReviewCollection/ReviewCollection"),
+)
 
 type ReviewsProps = React.ComponentProps<typeof Box> & {
   movieId: number;

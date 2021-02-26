@@ -8,10 +8,14 @@ import ReactMarkdown from "react-markdown";
 import { IMovieReviewsData } from "../../../utils/api/model/apiModelTypes";
 import { partialSentenceFrom } from "../../../utils/sentenceExtractor";
 import gfm from "remark-gfm";
-import ReviewCard from "../ReviewCard/ReviewCard";
 import { dateFromUTC } from "../../../utils/timeConverter";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const ReviewCard = dynamic(
+  ()=>import("../ReviewCard/ReviewCard"),
+)
 
 type ReviewCollectionProps = React.ComponentProps<typeof Box> & {
   reviewData: IMovieReviewsData;

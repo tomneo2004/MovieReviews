@@ -6,12 +6,26 @@ import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import FancyTab from "../FancyTab/FancyTab";
-import MovieCollection from "../MovieCollection/MovieCollection";
 import PhantomText from "../PhantomText/PhantomText";
-import SectionHeader from "../SectionHeader/SectionHeader";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import TrendingIcon from "../../../assets/icons/trend.inline.svg";
+import dynamic from "next/dynamic";
+
+const MovieCollection = dynamic(
+  ()=>import("../MovieCollection/MovieCollection"),
+  {
+    loading: ()=>(
+      <Box p={2}>
+        <LinearProgress />
+      </Box>
+    )
+  }
+)
+
+const SectionHeader = dynamic(
+  ()=>import("../SectionHeader/SectionHeader"),
+)
 
 let timerHandler: NodeJS.Timeout;
 

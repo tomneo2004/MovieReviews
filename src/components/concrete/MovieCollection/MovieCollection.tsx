@@ -1,8 +1,7 @@
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Skeleton from "@material-ui/lab/Skeleton";
-import MoviePoster from "../MoviePoster/MoviePoster";
-import HScroll, {
+import {
   HScrollChildProp,
   IHorizontalScrollState,
 } from "../../unit/HorizontalScroll/HorizontalScroll";
@@ -10,12 +9,23 @@ import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
-// import Link from "next/link";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { fade, useTheme } from "@material-ui/core";
-import ScrollIndicator from "./ScrollIndicator";
 import { springTransition } from "../../../framer/Transition";
 import FadeMotion from "../../../framer/FadeMotion/FadeMotion";
+import dynamic from "next/dynamic";
+
+const MoviePoster = dynamic(
+  ()=>import("../MoviePoster/MoviePoster"),
+)
+
+const HScroll = dynamic(
+  ()=>import("../../unit/HorizontalScroll/HorizontalScroll"),
+) 
+
+const ScrollIndicator = dynamic(
+  ()=>import("./ScrollIndicator"),
+) 
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
   movieData: IMovieData[] | null | undefined;

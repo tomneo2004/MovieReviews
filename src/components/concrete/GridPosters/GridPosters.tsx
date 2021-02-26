@@ -1,11 +1,15 @@
 import { Box, Grid } from "@material-ui/core";
+import dynamic from "next/dynamic";
 import React from "react";
 import { IMoviePosterData } from "../../../utils/api/model/apiModelTypes";
 import {
   getPosterImageQuery,
   PosterSize,
 } from "../../../utils/api/query/apiQueryBuilder";
-import PosterImage from "../PosterImage/PosterImage";
+
+const PosterImage = dynamic(
+  ()=>import("../PosterImage/PosterImage"),
+)
 
 type GridPostersProps = React.ComponentProps<typeof Box> & {
   posterData: IMoviePosterData[];
