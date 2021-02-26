@@ -15,11 +15,11 @@ import SectionHeader from "../SectionHeader/SectionHeader";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 
-type PopualrProps = React.ComponentProps<typeof Box> & {
+type SnippetPopularProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];
 };
 
-const Popular: React.FC<PopualrProps> = (props: PopualrProps) => {
+const SnippetPopular: React.FC<SnippetPopularProps> = (props: SnippetPopularProps) => {
   const { popularMovies, ...rest } = props;
   const theme = useTheme();
   const [popularBg, setPopularBg] = React.useState<string>("");
@@ -95,4 +95,4 @@ const Popular: React.FC<PopualrProps> = (props: PopualrProps) => {
   );
 };
 
-export default Popular;
+export default SnippetPopular;

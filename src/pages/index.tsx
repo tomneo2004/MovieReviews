@@ -3,8 +3,8 @@ import LandingLayout from "../layouts/landing/landingLayout";
 import HeroLayout from "../layouts/landing/heroLayout";
 import { Box, fade, makeStyles, Typography, useTheme } from "@material-ui/core";
 import React from "react";
-import Trending from "../components/concrete/Trending/Trending";
-import Popular from "../components/concrete/Popular/Popular";
+import SnippetTrending from "../components/concrete/SnippetTrending/SnippetTrending";
+import SnippetPopular from "../components/concrete/SnippetPopular/SnippetPopular";
 import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
@@ -246,11 +246,11 @@ const LandingPage = (pageProps: IPageProps) => {
           <React.Fragment>
             {/* Pouplar Collection */}
             <Box id="popular">
-              <Popular mt={2} popularMovies={popularMovies} />
+              <SnippetPopular mt={2} popularMovies={popularMovies} />
             </Box>
             {/* Trending Collection */}
             <Box id="trending">
-              <Trending
+              <SnippetTrending
                 mt={2}
                 byDay={trendingMovies.day}
                 byWeek={trendingMovies.week}

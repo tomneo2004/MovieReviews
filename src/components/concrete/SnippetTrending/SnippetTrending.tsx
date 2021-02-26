@@ -19,12 +19,12 @@ const tabData = [
   { id: "week", value: "week", label: "This week" },
 ];
 
-type TrendingProps = React.ComponentProps<typeof Box> & {
+type SnippetTrendingProps = React.ComponentProps<typeof Box> & {
   byDay: IMovieData[];
   byWeek: IMovieData[];
 };
 
-const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
+const SnippetTrending: React.FC<SnippetTrendingProps> = (props: SnippetTrendingProps) => {
   const { byDay, byWeek, ...rest } = props;
 
   const theme = useTheme();
@@ -117,4 +117,4 @@ const Trending: React.FC<TrendingProps> = (props: TrendingProps) => {
   );
 };
 
-export default Trending;
+export default SnippetTrending;
