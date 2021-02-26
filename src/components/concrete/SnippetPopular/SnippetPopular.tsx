@@ -1,6 +1,7 @@
 import {
   Box,
   fade,
+  Hidden,
   LinearProgress,
   SvgIcon,
   useTheme,
@@ -14,6 +15,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
+import PopularIcon from '../../../assets/icons/heat.inline.svg';
 
 type SnippetPopularProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];
@@ -33,6 +35,8 @@ const SnippetPopular: React.FC<SnippetPopularProps> = (props: SnippetPopularProp
         px={2}
         bgcolor={theme.palette.primary.main}
         header={
+          <React.Fragment>
+          <Hidden smDown>
           <PhantomText
             height="100%"
             bgcolor={theme.palette.primary.light}
@@ -55,6 +59,16 @@ const SnippetPopular: React.FC<SnippetPopularProps> = (props: SnippetPopularProp
               13: { enter: 3.8, exit: 0 },
             }}
           />
+          </Hidden> 
+          <Hidden mdUp>
+                <Box bgcolor={theme.palette.primary.light} display='flex' p={1}
+                justifyContent='center' alignItems='center'>
+                <SvgIcon fontSize='large'>
+                    <PopularIcon />
+                </SvgIcon>
+                </Box>
+            </Hidden> 
+          </React.Fragment>
         }
       />
       <BackgroundImage

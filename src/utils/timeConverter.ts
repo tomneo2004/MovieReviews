@@ -12,3 +12,16 @@ export function dateFromUTC(
   const date = moment(utcDateTime);
   return date.format(format);
 }
+
+/**
+ * format a datetime
+ * 
+ * @param datetime date time
+ * @param format format
+ */
+export function formatDateTime(datetime:string, format:string = "YYYY-MM-DD"){
+  const data = moment(datetime);
+  return data.format(format);
+}
+
+export default {}

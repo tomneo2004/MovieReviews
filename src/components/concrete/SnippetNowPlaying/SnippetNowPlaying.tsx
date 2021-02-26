@@ -4,10 +4,11 @@ import {
     Hidden,
     LinearProgress,
     SvgIcon,
+    Typography,
     useTheme,
   } from "@material-ui/core";
   import React from "react";
-  import { IMovieData } from "../../../utils/api/model/apiModelTypes";
+  import {IMovieData, INowPlayingData } from "../../../utils/api/model/apiModelTypes";
   import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
   import BackgroundImage from "../BackgroundImage/BackgroundImage";
   import MovieCollection from "../MovieCollection/MovieCollection";
@@ -15,14 +16,15 @@ import {
   import SectionHeader from "../SectionHeader/SectionHeader";
   import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
   import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
-  import ThumbUpIcon from '../../../assets/icons/thumb-up.inline.svg';
+import { formatDateTime } from "../../../utils/timeConverter";
+import PlayingIcon from '../../../assets/icons/cinema.inline.svg';
   
-  type SnippetTopRatedProps = React.ComponentProps<typeof Box> & {
-    topRatedMovies: IMovieData[];
+  type SnippetNowPlayingProps = React.ComponentProps<typeof Box> & {
+    nowPlayingMovies: INowPlayingData;
   };
   
-  const SnippetTopRated: React.FC<SnippetTopRatedProps> = (props: SnippetTopRatedProps) => {
-    const { topRatedMovies, ...rest } = props;
+  const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (props: SnippetNowPlayingProps) => {
+    const { nowPlayingMovies, ...rest } = props;
     const theme = useTheme();
     const [popularBg, setPopularBg] = React.useState<string>("");
   
@@ -41,7 +43,7 @@ import {
               height="100%"
               bgcolor={theme.palette.primary.light}
               px={1}
-              text={`Top Rated`}
+              text={`Now Playing`}
               charDelayDefs={{
                 0: { enter: 1, exit: 0 },
                 1: { enter: 1.2, exit: 0 },
@@ -52,6 +54,8 @@ import {
                 6: { enter: 2.2, exit: 0 },
                 7: { enter: 2.4, exit: 0 },
                 8: { enter: 2.6, exit: 0 },
+                9: { enter: 2.8, exit: 0 },
+                10: { enter: 3, exit: 0 },
               }}
             />
             </Hidden>
@@ -59,23 +63,35 @@ import {
                 <Box bgcolor={theme.palette.primary.light} display='flex' p={1}
                 justifyContent='center' alignItems='center'>
                 <SvgIcon fontSize='large'>
-                    <ThumbUpIcon />
+                    <PlayingIcon />
                 </SvgIcon>
                 </Box>
             </Hidden>
             </React.Fragment>  
           }
+          items={[
+                <Box bgcolor={theme.palette.primary.light} display='flex' 
+                justifyContent='center' alignItems='center' px={2}>
+                    <Typography variant='h6'>
+                    {`
+                    ${formatDateTime(nowPlayingMovies.dates.minimum)} 
+                    ~ 
+                    ${formatDateTime(nowPlayingMovies.dates.maximum)}
+                    `}
+                    </Typography>
+                </Box>
+          ]}
         />
         <BackgroundImage
           imageSrc={popularBg}
           backdropColor={fade(theme.palette.primary.light, 0.6)}
           keyframesAnimIn={{
-            "0%": { opacity:0 },
-            "100%": { opacity:1 },
+            "0%": { transform: "translateY(-100%)" },
+            "100%": { transform: "translateY(0%)" },
           }}
           keyframesAnimOut={{
-            "0%": { opacity:1 },
-            "100%": { opacity:0 },
+            "0%": { transform: "translateY(0%)" },
+            "100%": { transform: "translateY(100%)" },
           }}
           animOutTimeFun="ease"
           animInTimeFun="ease"
@@ -86,7 +102,7 @@ import {
           }
         >
           <MovieCollection
-            movieData={topRatedMovies}
+            movieData={nowPlayingMovies.results}
             onHover={handlePopularMovieHover}
             scrollLeft={
               <SvgIcon fontSize="large">
@@ -104,5 +120,5 @@ import {
     );
   };
   
-  export default SnippetTopRated;
+  export default SnippetNowPlaying;
   

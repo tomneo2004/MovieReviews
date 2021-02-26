@@ -12,3 +12,5 @@ export function partialSentenceFrom(paragraph: string, amount: number = 1) {
     fullyExtracted: amount >= numSents,
   };
 }
+
+export default {}

@@ -104,6 +104,23 @@ export function getDiscoverMoviesQuery(params: IParams = defaultParams) {
   return builtQuery;
 }
 
+/**
+ * Get query for movie that is now playing
+ * 
+ * @param {IParams} params  
+ */
+export function getNowPlayingMoviesQuery(params: IParams = defaultParams) {
+  const queryString = "/movie/now_playing";
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
 const trendingMediaType: { [key: string]: boolean } = {
   all: true,
   movie: true,

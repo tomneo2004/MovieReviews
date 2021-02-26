@@ -11,6 +11,7 @@ import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveIma
 import axios from "axios";
 import {
   IMovieData,
+  INowPlayingData,
   ITopRatedMoviesData,
 } from "../utils/api/model/apiModelTypes";
 import RFCarousel, {
@@ -20,11 +21,13 @@ import RFCarousel, {
 import { springTransition } from "../framer/Transition";
 import {
   buildImageQuery,
+  getNowPlayingMoviesQuery,
   getPouplarMoviesQuery,
   getTopRatedMovieQuery,
   getTrendingQuery,
 } from "../utils/api/query/apiQueryBuilder";
 import SnippetTopRated from "../components/concrete/SnippetTopRated/SnippetTopRated";
+import SnippetNowPlaying from "../components/concrete/SnippetNowPlaying/SnippetNowPlaying";
 
 interface IPageProps {
   heroTitle: string;
@@ -32,6 +35,7 @@ interface IPageProps {
   carousel: RFCTextGroup[];
   popularMovies: IMovieData[];
   topRatedMovies: IMovieData[];
+  nowPlayingMovies: INowPlayingData;
   trendingMovies: {
     day: IMovieData[];
     week: IMovieData[];
@@ -43,6 +47,7 @@ const apiPopularRoute = getPouplarMoviesQuery();
 const apiDayTrendingRoute = getTrendingQuery("movie", "day");
 const apiWeekTrendingRoute = getTrendingQuery("movie", "week");
 const apiTopRatedRoute = getTopRatedMovieQuery();
+const apiNowPlayingRoute = getNowPlayingMoviesQuery();
 
 //https://developers.themoviedb.org/3/movies/get-popular-movies
 const fetchPopularMovies = async () => {
@@ -81,6 +86,16 @@ const fetchTopRatedMovies = async () => {
   try {
     const resp = await axios.get(apiTopRatedRoute);
     const data: ITopRatedMoviesData = resp.data;
+    return data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+const fetchNowPlayingMovies = async () => {
+  try {
+    const resp = await axios.get(apiNowPlayingRoute);
+    const data: INowPlayingData = resp.data;
     return data;
   } catch (e) {
     return Promise.reject(e);
@@ -156,6 +171,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
     const trendingByDay = await fetchTrendingMoviesByDay();
     const trendingByWeek = await fetchTrendingMoviesByWeek();
     const topRated = topRatedMovies.results;
+    const nowPlaying = await fetchNowPlayingMovies();
 
     return {
       props: {
@@ -164,6 +180,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
         carousel,
         popularMovies: popular,
         topRatedMovies: topRated,
+        nowPlayingMovies: nowPlaying,
         trendingMovies: {
           day: trendingByDay,
           week: trendingByWeek,
@@ -182,6 +199,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
         popularMovies: null,
         topRatedMovies: null,
         trendingMovies: null,
+        nowPlayingMovies: null,
         error: e.message,
       },
       revalidate,
@@ -197,6 +215,7 @@ const LandingPage = (pageProps: IPageProps) => {
     popularMovies,
     topRatedMovies,
     trendingMovies,
+    nowPlayingMovies,
     error,
   } = pageProps;
   const theme = useTheme();
@@ -261,6 +280,11 @@ const LandingPage = (pageProps: IPageProps) => {
             {/* Top rated Collection */}
             <Box id="top-rated">
               <SnippetTopRated mt={2} topRatedMovies={topRatedMovies} />
+            </Box>
+
+            {/* Now playing */}
+            <Box id="now-playing">
+              <SnippetNowPlaying mt={2} nowPlayingMovies={nowPlayingMovies} />
             </Box>
         </React.Fragment>
       </LandingLayout>

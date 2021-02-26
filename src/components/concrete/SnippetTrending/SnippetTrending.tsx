@@ -1,4 +1,4 @@
-import { fade, SvgIcon, useTheme } from "@material-ui/core";
+import { fade, Hidden, SvgIcon, useTheme } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import React from "react";
@@ -11,6 +11,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
 import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
+import TrendingIcon from '../../../assets/icons/trend.inline.svg';
 
 let timerHandler: NodeJS.Timeout;
 
@@ -52,6 +53,8 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (props: SnippetTrendingP
         px={2}
         bgcolor={theme.palette.primary.main}
         header={
+          <React.Fragment>
+          <Hidden smDown>
           <PhantomText
             height="100%"
             bgcolor={theme.palette.primary.light}
@@ -68,6 +71,16 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (props: SnippetTrendingP
               7: { enter: 3.1, exit: 0 },
             }}
           />
+          </Hidden>  
+          <Hidden mdUp>
+                <Box bgcolor={theme.palette.primary.light} display='flex' p={1}
+                justifyContent='center' alignItems='center'>
+                <SvgIcon fontSize='large'>
+                    <TrendingIcon />
+                </SvgIcon>
+                </Box>
+          </Hidden>
+          </React.Fragment>
         }
         items={[
           <FancyTab
