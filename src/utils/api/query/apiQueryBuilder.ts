@@ -74,12 +74,26 @@ export function getBackdropImageQuery(
 /**
  * Get query for popular movie
  *
- * @param page default 1
- * @param lang  default en-US
- * @param region  default us
+ * @param {IParams} params
  */
 export function getPouplarMoviesQuery(params: IParams = defaultParams) {
   const queryString = "/movie/popular";
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
+/**
+ * Get query for discover movie
+ * @param {IParams} params 
+ */
+export function getDiscoverMoviesQuery(params: IParams = defaultParams) {
+  const queryString = "/discover/movie";
   const builtQuery = buildAPIQuery(
     queryString,
     movieAPI,
@@ -106,6 +120,7 @@ const trendingTimeWindow: { [key: string]: boolean } = {
  *
  * @param mediaType  all, movie, tv, person. default movie
  * @param timeWindow  day, week. deault day
+ * @param {IParams} params
  */
 export function getTrendingQuery(
   mediaType: string = "movie",

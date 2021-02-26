@@ -75,9 +75,10 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
       {...rest}
       display="flex"
       flexDirection="column"
-      justifyContent="space-between"
+      // justifyContent="space-between"
       p={2}
     >
+      {/* general info */}
       <Box display="flex">
         {/* user score */}
         <Box pr={2}>{getCircularRating(userScore)}</Box>
@@ -93,11 +94,11 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
         </Box>
       </Box>
 
-      <Box display="flex" alignItems="center">
+      {/* film length */}
+      <Box display="flex" alignItems="center" pt={2}>
         <SvgIcon fontSize="large">
           <TimerIcon />
         </SvgIcon>
-        {/* film length */}
         <Typography component="div" variant="h5">
           <Box pl={2} fontWeight={400}>
             {convertFilmLength(movieDetail.runtime)}
@@ -106,7 +107,7 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
       </Box>
 
       {/* Genre */}
-      <Box display="flex" flexDirection="column" pb={2}>
+      <Box display="flex" flexDirection="column" pt={2}>
         <Typography component="div" variant="h4">
           <Box pb={1} fontWeight={600}>
             {"Genres"}
@@ -118,14 +119,16 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
       </Box>
 
       {/* tageline */}
-      <Typography component="div" variant="h5">
-        <Box pb={2} fontStyle="italic">
-          {movieDetail.tagline}
-        </Box>
-      </Typography>
+      {!movieDetail.tagline? null:
+          <Typography component="div" variant="h5">
+            <Box pt={2} fontStyle="italic">
+              {movieDetail.tagline}
+            </Box>
+          </Typography>
+      }
 
       {/* overview */}
-      <Box display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column" pt={2}>
         <Typography component="div" variant="h4">
           <Box pb={1} fontWeight={600}>
             {"Overview"}
@@ -138,7 +141,9 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
 
       {/* offical website */}
       {!movieDetail.homepage?null:
+          <Box pt={2}>
           <LinkTo text='Offical website' linkTo={movieDetail.homepage} />
+          </Box>
       }
     </Box>
   );

@@ -37,7 +37,7 @@ const SnippetPopular: React.FC<SnippetPopularProps> = (props: SnippetPopularProp
             height="100%"
             bgcolor={theme.palette.primary.light}
             px={1}
-            text={`What's popular`}
+            text={`What's Popular`}
             charDelayDefs={{
               0: { enter: 1, exit: 0 },
               1: { enter: 1.2, exit: 0 },

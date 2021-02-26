@@ -24,12 +24,14 @@ import {
   getTopRatedMovieQuery,
   getTrendingQuery,
 } from "../utils/api/query/apiQueryBuilder";
+import SnippetTopRated from "../components/concrete/SnippetTopRated/SnippetTopRated";
 
 interface IPageProps {
   heroTitle: string;
   heroBackdrop: string;
   carousel: RFCTextGroup[];
   popularMovies: IMovieData[];
+  topRatedMovies: IMovieData[];
   trendingMovies: {
     day: IMovieData[];
     week: IMovieData[];
@@ -153,6 +155,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
     const popular = await fetchPopularMovies();
     const trendingByDay = await fetchTrendingMoviesByDay();
     const trendingByWeek = await fetchTrendingMoviesByWeek();
+    const topRated = topRatedMovies.results;
 
     return {
       props: {
@@ -160,6 +163,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
         heroBackdrop,
         carousel,
         popularMovies: popular,
+        topRatedMovies: topRated,
         trendingMovies: {
           day: trendingByDay,
           week: trendingByWeek,
@@ -176,6 +180,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
         heroBackdrop,
         carousel,
         popularMovies: null,
+        topRatedMovies: null,
         trendingMovies: null,
         error: e.message,
       },
@@ -190,6 +195,7 @@ const LandingPage = (pageProps: IPageProps) => {
     heroBackdrop,
     carousel,
     popularMovies,
+    topRatedMovies,
     trendingMovies,
     error,
   } = pageProps;
@@ -250,6 +256,11 @@ const LandingPage = (pageProps: IPageProps) => {
                 byDay={trendingMovies.day}
                 byWeek={trendingMovies.week}
               />
+            </Box>
+
+            {/* Top rated Collection */}
+            <Box id="top-rated">
+              <SnippetTopRated mt={2} topRatedMovies={topRatedMovies} />
             </Box>
         </React.Fragment>
       </LandingLayout>
