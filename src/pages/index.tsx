@@ -20,19 +20,23 @@ import {
 } from "../pageUtils/landing";
 
 const SnippetPopular = dynamic(
-  () => import("../components/concrete/SnippetPopular/SnippetPopular")
+  () => import("../components/concrete/SnippetPopular/SnippetPopular"),
+  {ssr:false}
 );
 
 const SnippetTrending = dynamic(
-  () => import("../components/concrete/SnippetTrending/SnippetTrending")
+  () => import("../components/concrete/SnippetTrending/SnippetTrending"),
+  {ssr:false}
 );
 
 const SnippetTopRated = dynamic(
-  () => import("../components/concrete/SnippetTopRated/SnippetTopRated")
+  () => import("../components/concrete/SnippetTopRated/SnippetTopRated"),
+  {ssr:false}
 );
 
 const SnippetNowPlaying = dynamic(
-  () => import("../components/concrete/SnippetNowPlaying/SnippetNowPlaying")
+  () => import("../components/concrete/SnippetNowPlaying/SnippetNowPlaying"),
+  {ssr:false}
 );
 
 export const getStaticProps: GetStaticProps<IPageProps> = async () => {
