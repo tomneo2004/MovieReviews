@@ -54,7 +54,7 @@ export default function MovieReviewApp(props: AppProps) {
       </Head>
 
       <ErrorBoundary fallback={
-        <Box>
+        <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
           <Typography variant='h2'>
             Oooops ! Looks like somthing is not right
           </Typography>
