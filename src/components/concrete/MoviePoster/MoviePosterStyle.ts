@@ -1,5 +1,5 @@
 import { createStyles, Theme } from "@material-ui/core";
-import { ScreenWidthProps } from "../../../props/ScreenProps";
+import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
 type IStyleProps = ScreenWidthProps & {
   theme: Theme;

@@ -16,7 +16,7 @@ import ReactPlayer from "react-player";
 import { useNoembed } from "../../../effects/apiFetch/noembed";
 import style from "./VideoPlayerStyle";
 import CloseIcon from "@material-ui/icons/CloseSharp";
-import { ScreenWidthProps } from "../../../props/ScreenProps";
+import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
 type VideoPlayerProps = React.ComponentProps<typeof Card> &
   ScreenWidthProps & {

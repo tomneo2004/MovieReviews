@@ -8,7 +8,7 @@ import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import { motion } from "framer-motion";
 import { springTransition } from "../../../framer/Transition";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
-import { ScreenWidthProps } from "../../../props/ScreenProps";
+import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
 type PosterImageProps = React.ComponentProps<typeof Card> &
   ScreenWidthProps & {
