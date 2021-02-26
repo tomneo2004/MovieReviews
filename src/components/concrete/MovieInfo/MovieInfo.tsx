@@ -12,6 +12,7 @@ import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 import TimerIcon from "../../../assets/icons/stopwatch.inline.svg";
 import { springTransition } from "../../../framer/Transition";
 import ScaleFadeMotion from "../../../framer/ScaleFadeMotion/ScaleFadeMotion";
+import LinkTo from "../LinkTo/LinkTo";
 
 type MovieInfoProps = React.ComponentProps<typeof Box> & {
   movieDetail: IMovieDetailData;
@@ -134,6 +135,11 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
           <Box>{movieDetail.overview}</Box>
         </Typography>
       </Box>
+
+      {/* offical website */}
+      {!movieDetail.homepage?null:
+          <LinkTo text='Offical website' linkTo={movieDetail.homepage} />
+      }
     </Box>
   );
 };
