@@ -62,7 +62,6 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
     const popular = await fetchPopularMovies();
     const trendingByDay = await fetchTrendingMoviesByDay();
     const trendingByWeek = await fetchTrendingMoviesByWeek();
-    const topRated = topRatedMovies.results;
     const nowPlaying = await fetchNowPlayingMovies();
 
     return {
@@ -71,7 +70,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
         heroBackdrop,
         carousel,
         popularMovies: popular,
-        topRatedMovies: topRated,
+        topRatedMovies: topRatedMovies,
         nowPlayingMovies: nowPlaying,
         trendingMovies: {
           day: trendingByDay,
@@ -158,21 +157,21 @@ const LandingPage = (pageProps: IPageProps) => {
         <React.Fragment>
           {/* Pouplar Collection */}
           <Box id="popular">
-            <SnippetPopular mt={2} popularMovies={popularMovies} />
+            <SnippetPopular mt={2} popularMovies={popularMovies.results} />
           </Box>
 
           {/* Trending Collection */}
           <Box id="trending">
             <SnippetTrending
               mt={2}
-              byDay={trendingMovies.day}
-              byWeek={trendingMovies.week}
+              byDay={trendingMovies.day.results}
+              byWeek={trendingMovies.week.results}
             />
           </Box>
 
           {/* Top rated Collection */}
           <Box id="top-rated">
-            <SnippetTopRated mt={2} topRatedMovies={topRatedMovies} />
+            <SnippetTopRated mt={2} topRatedMovies={topRatedMovies.results} />
           </Box>
 
           {/* Now playing */}

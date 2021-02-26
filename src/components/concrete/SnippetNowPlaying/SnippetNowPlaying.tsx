@@ -10,7 +10,7 @@ import {
 import React from "react";
 import {
   IMovieData,
-  INowPlayingData,
+  INowPlayingMoviesData,
 } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
@@ -35,7 +35,7 @@ const MovieCollection = dynamic(
 const SectionHeader = dynamic(() => import("../SectionHeader/SectionHeader"));
 
 type SnippetNowPlayingProps = React.ComponentProps<typeof Box> & {
-  nowPlayingMovies: INowPlayingData;
+  nowPlayingMovies: INowPlayingMoviesData;
 };
 
 const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (

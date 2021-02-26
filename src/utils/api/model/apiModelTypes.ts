@@ -18,17 +18,6 @@ export type IMovieData = {
   vote_average: number;
 };
 
-export type INowPlayingData = {
-  page: number;
-  results: IMovieData[];
-  dates: {
-    maximum: string;
-    minimum: string;
-  };
-  total_pages: number;
-  total_results: number;
-};
-
 export type ISearchMovieData = {
   page: number;
   total_results: number;
@@ -218,9 +207,21 @@ export type ILatestMovieData = {
   vote_count: number;
 };
 
-export type ITopRatedMoviesData = {
+export type IGenericMoviesData = {
   page: number;
   results: IMovieData[];
   total_results: number;
   total_pages: number;
+}
+
+export type ITopRatedMoviesData = IGenericMoviesData;
+export type IPopularMoviesData = IGenericMoviesData;
+export type ITrendingMoviesData = IGenericMoviesData;
+export type INowPlayingMoviesData = IGenericMoviesData & {
+  dates: {
+    maximum: string;
+    minimum: string;
+  };
 };
+
+

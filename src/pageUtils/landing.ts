@@ -5,9 +5,10 @@ import {
 } from "../components/concrete/RFCarousel/RFCarousel";
 import { springTransition } from "../framer/Transition";
 import {
-  IMovieData,
-  INowPlayingData,
+  INowPlayingMoviesData,
+  IPopularMoviesData,
   ITopRatedMoviesData,
+  ITrendingMoviesData,
 } from "../utils/api/model/apiModelTypes";
 import {
   getNowPlayingMoviesQuery,
@@ -20,12 +21,12 @@ export interface IPageProps {
   heroTitle: string;
   heroBackdrop: string;
   carousel: RFCTextGroup[];
-  popularMovies: IMovieData[];
-  topRatedMovies: IMovieData[];
-  nowPlayingMovies: INowPlayingData;
+  popularMovies: IPopularMoviesData;
+  topRatedMovies: ITopRatedMoviesData;
+  nowPlayingMovies: INowPlayingMoviesData;
   trendingMovies: {
-    day: IMovieData[];
-    week: IMovieData[];
+    day: ITrendingMoviesData;
+    week: ITrendingMoviesData;
   };
   error: any;
 }
@@ -37,10 +38,10 @@ const apiTopRatedRoute = getTopRatedMovieQuery();
 const apiNowPlayingRoute = getNowPlayingMoviesQuery();
 
 //https://developers.themoviedb.org/3/movies/get-popular-movies
-export const fetchPopularMovies = async () => {
+export const fetchPopularMovies = async ():Promise<IPopularMoviesData> => {
   try {
     const resp = await axios.get(apiPopularRoute);
-    const data: IMovieData[] = resp.data.results;
+    const data: IPopularMoviesData = resp.data;
     return data;
   } catch (e) {
     return Promise.reject(e);
@@ -48,10 +49,10 @@ export const fetchPopularMovies = async () => {
 };
 
 //https://developers.themoviedb.org/3/trending/get-trending
-export const fetchTrendingMoviesByDay = async () => {
+export const fetchTrendingMoviesByDay = async ():Promise<ITrendingMoviesData> => {
   try {
     const resp = await axios.get(apiDayTrendingRoute);
-    const data: IMovieData[] = resp.data.results;
+    const data: ITrendingMoviesData = resp.data;
     return data;
   } catch (e) {
     return Promise.reject(e);
@@ -59,17 +60,17 @@ export const fetchTrendingMoviesByDay = async () => {
 };
 
 //https://developers.themoviedb.org/3/trending/get-trending
-export const fetchTrendingMoviesByWeek = async () => {
+export const fetchTrendingMoviesByWeek = async ():Promise<ITrendingMoviesData> => {
   try {
     const resp = await axios.get(apiWeekTrendingRoute);
-    const data: IMovieData[] = resp.data.results;
+    const data: ITrendingMoviesData = resp.data;
     return data;
   } catch (e) {
     return Promise.reject(e);
   }
 };
 
-export const fetchTopRatedMovies = async () => {
+export const fetchTopRatedMovies = async ():Promise<ITopRatedMoviesData> => {
   try {
     const resp = await axios.get(apiTopRatedRoute);
     const data: ITopRatedMoviesData = resp.data;
@@ -79,10 +80,10 @@ export const fetchTopRatedMovies = async () => {
   }
 };
 
-export const fetchNowPlayingMovies = async () => {
+export const fetchNowPlayingMovies = async ():Promise<INowPlayingMoviesData> => {
   try {
     const resp = await axios.get(apiNowPlayingRoute);
-    const data: INowPlayingData = resp.data;
+    const data: INowPlayingMoviesData = resp.data;
     return data;
   } catch (e) {
     return Promise.reject(e);
