@@ -5,6 +5,7 @@ import React from "react";
 import {
   IGenreData,
   IMovieDetailData,
+  ISpokenLanguageData,
 } from "../../../utils/api/model/apiModelTypes";
 import convertFilmLength from "../../../utils/filmLengthConverter";
 import getMovieRating from "../../../utils/movieRating";
@@ -60,6 +61,24 @@ const renderGenre = (genre: IGenreData[]) => {
   });
 };
 
+const renderLangs = (langs: ISpokenLanguageData[]) => {
+  return langs.map((lang, i) => {
+    return (
+      <ScaleFadeMotion
+        key={lang.name}
+        enterTransition={springTransition(300, 55, i * 0.1)}
+        exitTransition={springTransition(300, 55, (langs.length - 1 - i) * 0.1)}
+      >
+        <Typography key={lang.iso_639_1} component="div" variant="h4">
+          <Box pl={i ? 2 : 0} fontWeight={500}>
+            <Chip variant="outlined" color="primary" label={lang.name} />
+          </Box>
+        </Typography>
+      </ScaleFadeMotion>
+    );
+  });
+};
+
 const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
   const { movieDetail, ...rest } = props;
 
@@ -104,6 +123,18 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
             {convertFilmLength(movieDetail.runtime)}
           </Box>
         </Typography>
+      </Box>
+
+      {/* languages */}
+      <Box display="flex" flexDirection="column" pt={2}>
+        <Typography component="div" variant="h4">
+          <Box pb={1} fontWeight={600}>
+            {"Languages"}
+          </Box>
+        </Typography>
+        <Box display="flex" flexWrap="wrap">
+          {renderLangs(movieDetail.spoken_languages)}
+        </Box>
       </Box>
 
       {/* Genre */}

@@ -20,4 +20,4 @@ const Casts: React.FC<CastsProps> = (props: CastsProps) => {
   );
 };
 
-export default Casts;
+export default Casts

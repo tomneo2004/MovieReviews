@@ -26,7 +26,7 @@ const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
       background: `url(${backgroundURL})`,
       backgroundRepeat: "no-repeat",
       backgroundAttachment: "fixed",
-      backgroundPosition: "center 20%",
+      backgroundPosition: "center top",
       backgroundOrigin: "border-box",
       backgroundSize: "cover",
     },

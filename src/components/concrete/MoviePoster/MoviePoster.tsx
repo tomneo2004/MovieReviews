@@ -76,7 +76,8 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
       alignItems="center"
       p={1}
     >
-      <Link href={linkTo}>
+      <Link href={linkTo} passHref>
+        <a>
         <PosterImage
           layoutId={layoutId}
           imageURL={imageURL}
@@ -89,6 +90,7 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
           widthAtLGUp={widthAtLGUp}
           widthAtXLUp={widthAtXLUp}
         />
+        </a>
       </Link>
       <Typography component="div" variant="h6">
         <Box className={classes.title} pt={1} textAlign="center">

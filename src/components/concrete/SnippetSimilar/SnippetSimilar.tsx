@@ -1,12 +1,12 @@
 import { Box, useTheme } from "@material-ui/core";
 import React from "react";
-import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import PhantomText from "../PhantomText/PhantomText";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 
 type SnippetSimilarProps = React.ComponentProps<typeof Box> & {
-  similars: IMovieData[];
+  similars:IMovieData[];
 };
 
 const SnippetSimilar: React.FC<SnippetSimilarProps> = (

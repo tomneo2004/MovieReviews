@@ -34,4 +34,4 @@ const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
   );
 };
 
-export default Overview;
+export default React.memo(Overview, (pre, next)=>pre.movieDetail.id === next.movieDetail.id);

@@ -27,7 +27,7 @@ export interface IFetchPageResponse extends IFetchResponse<IMovieReviewsData> {
 /**
  * Side effect for fetching reviews for movies
  */
-export function useMovieReviews(id: number): IFetchPageResponse {
+export function useMovieReviews(id: string): IFetchPageResponse {
   const response = useSWRInfinite(
     (pageIndex: number, previousData: IMovieReviewsData) => {
       if ((previousData && !previousData.results.length) || !id) return null;

@@ -21,45 +21,18 @@ import {
 } from "../../utils/api/model/apiModelTypes";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
-import dynamic from "next/dynamic";
 import {
   fetchMovieDetail,
   fetchRecommendations,
   fetchSimilars,
   IPageProps,
 } from "../../pageUtils/movie";
-
-const Overview = dynamic(
-  () => import("../../components/concrete/Overview/Overview"),
-  { ssr: false }
-);
-
-const SnippetMedia = dynamic(
-  () => import("../../components/concrete/SnippetMedia/SnippetMedia"),
-  { ssr: false }
-);
-
-const Casts = dynamic(() => import("../../components/concrete/Casts/Casts"), {
-  ssr: false,
-});
-
-const Reviews = dynamic(
-  () => import("../../components/concrete/Reviews/Reviews"),
-  { ssr: false }
-);
-
-const SnippetRecommendation = dynamic(
-  () =>
-    import(
-      "../../components/concrete/SnippetRecommendation/SnippetRecommendation"
-    ),
-  { ssr: false }
-);
-
-const SnippetSimilar = dynamic(
-  () => import("../../components/concrete/SnippetSimilar/SnippetSimilar"),
-  { ssr: false }
-);
+import Overview from "../../components/concrete/Overview/Overview";
+import SnippetMedia from "../../components/concrete/SnippetMedia/SnippetMedia";
+import Casts from "../../components/concrete/Casts/Casts";
+import Reviews from "../../components/concrete/Reviews/Reviews";
+import SnippetRecommendation from "../../components/concrete/SnippetRecommendation/SnippetRecommendation";
+import SnippetSimilar from "../../components/concrete/SnippetSimilar/SnippetSimilar";
 
 export const getServerSideProps: GetServerSideProps<IPageProps> = async (
   context: GetServerSidePropsContext
@@ -111,7 +84,6 @@ enum SectionTypes {
   "overview" = "overview",
   "media" = "media",
   "casts" = "casts",
-  "reviews" = "reviews",
 }
 
 type SectionMapToData = {
@@ -125,7 +97,6 @@ type SectionMapToData = {
     posters: IMoviePosterData[];
   };
   [SectionTypes.casts]: ICastData[];
-  [SectionTypes.reviews]: number;
 };
 
 /**
@@ -142,21 +113,20 @@ const renderSection = (
   switch (section) {
     case SectionTypes.overview:
       const movieDetails = data[section].movieDetails;
-      const recommendations = data[section].recommendations.results;
-      const similarMovies = data[section].similars.results;
 
       return (
         <React.Fragment>
           <Overview movieDetail={movieDetails} />
-          <SnippetRecommendation recommendations={recommendations} pt={2} />
-          <SnippetSimilar similars={similarMovies} pt={2} />
         </React.Fragment>
       );
     case SectionTypes.media:
       //10 trailers
-      const trailers = data[section].trailers.splice(0, 9);
+      const trailerSplice = [...data[section].trailers];
+      const trailers = trailerSplice.splice(0, 9);
+
       //10 posters
-      const posters = data[section].posters.splice(0, 9);
+      const posterSplice = [...data[section].posters];
+      const posters = posterSplice.splice(0, 9);
 
       return (
         <SnippetMedia
@@ -171,9 +141,7 @@ const renderSection = (
         />
       );
     case SectionTypes.casts:
-      return <Casts casts={data[section]} />;
-    case SectionTypes.reviews:
-      return <Reviews movieId={data[section]} />;
+      return <Casts key='casts' casts={data[section]} />;
   }
 };
 
@@ -202,7 +170,6 @@ const renderTabs = (
       <Tab value={SectionTypes.overview} label="Overview" />
       <Tab value={SectionTypes.media} label="Media" />
       <Tab value={SectionTypes.casts} label="Casts" />
-      <Tab value={SectionTypes.reviews} label="Reviews" />
     </Tabs>
   );
 };
@@ -229,9 +196,8 @@ const MoviePage = (pageProps: IPageProps) => {
         posters: movieDetail.images.posters,
       },
       casts: movieDetail.credits.cast,
-      reviews: Number(movieId),
     };
-  }, []);
+  }, [movieId]);
 
   if (error) throw error;
 
@@ -259,6 +225,13 @@ const MoviePage = (pageProps: IPageProps) => {
       <Box bgcolor={theme.palette.primary.light}>
         <Hidden mdUp>{renderTabs(section, handleSectionChange)}</Hidden>
         <Box p={2}>{renderSection(section, sectionToData, movieId)}</Box>
+        {recommendations.results.length === 0? null:
+            <SnippetRecommendation px={2} pt={2} recommendations={recommendations.results} />
+        }
+        {similars.results.length === 0? null:
+            <SnippetSimilar px={2} similars={similars.results} pt={2} />
+        }
+        <Reviews px={2} movieId={movieId} />
       </Box>
     </PageLayout>
   );

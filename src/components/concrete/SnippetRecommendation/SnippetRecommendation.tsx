@@ -1,12 +1,12 @@
 import { Box, useTheme } from "@material-ui/core";
 import React from "react";
-import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import PhantomText from "../PhantomText/PhantomText";
+import MovieCollection from "../MovieCollection/MovieCollection";
+import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 
 type SnippetRecommendationProps = React.ComponentProps<typeof Box> & {
-  recommendations: IMovieData[];
+  recommendations:IMovieData[];
 };
 
 const SnippetRecommendation: React.FC<SnippetRecommendationProps> = (
@@ -47,12 +47,12 @@ const SnippetRecommendation: React.FC<SnippetRecommendationProps> = (
         }
       />
       <MovieCollection
-        movieData={recommendations}
-        widthAtSMDown={125}
-        widthAtSMUp={125}
-        widthAtMDUp={150}
-        widthAtLGUp={150}
-        widthAtXLUp={150}
+          movieData={recommendations}
+          widthAtSMDown={125}
+          widthAtSMUp={125}
+          widthAtMDUp={150}
+          widthAtLGUp={150}
+          widthAtXLUp={150}
       />
     </Box>
   );

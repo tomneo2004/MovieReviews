@@ -7,17 +7,8 @@ import { GetServerSideProps } from "next";
 import { ISearchMovieData } from "../../utils/api/model/apiModelTypes";
 import axios from "axios";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
-import dynamic from "next/dynamic";
-
-const Pagination = dynamic(
-  () => import("@material-ui/lab/Pagination/Pagination"),
-  { ssr: false }
-);
-
-const SearchResults = dynamic(
-  () => import("../../components/concrete/SearchResults/SearchResults"),
-  { ssr: false }
-);
+import Pagination from "@material-ui/lab/Pagination/Pagination";
+import SearchResults from "../../components/concrete/SearchResults/SearchResults";
 
 interface IPageProps {
   query: string;

@@ -82,7 +82,7 @@ const SnippetMedia: React.FC<SnippetMediaProps> = (
         link: posters.routeToPage,
       },
     };
-  }, []);
+  }, [trailers, posters]);
 
   return (
     <Box {...rest}>
@@ -101,4 +101,4 @@ const SnippetMedia: React.FC<SnippetMediaProps> = (
   );
 };
 
-export default SnippetMedia;
+export default SnippetMedia
