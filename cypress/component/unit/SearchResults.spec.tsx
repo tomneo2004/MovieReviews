@@ -2,12 +2,34 @@ import mount from '@cypress/react/dist';
 import React from 'react';
 import SearchResults from '../../../src/components/concrete/SearchResults/SearchResults';
 import { IMovieData } from '../../../src/utils/api/model/apiModelTypes';
+import { RouterContext } from "next/dist/next-server/lib/router-context";
 
 describe('SearchResults component', ()=>{
   describe('Render successful', ()=>{
     before(()=>{
+      const router = {
+        pathname: "/",
+        route: "/",
+        query: {},
+        asPath: "/",
+        components: {},
+        isFallback: false,
+        basePath: "",
+        events: { emit: cy.spy(), off: cy.spy(), on: cy.spy() },
+        push: cy.spy(),
+        replace: cy.spy(),
+        reload: cy.spy(),
+        back: cy.spy(),
+        prefetch: cy.stub().resolves(),
+        beforePopState: cy.spy(),
+      };
+
       cy.fixture<IMovieData[]>('fakeMovieData').then((data)=>{
-        mount(<SearchResults id='results' data={data} />);
+        mount(
+          <RouterContext.Provider value={router}>  
+            <SearchResults id='results' data={data} />
+          </RouterContext.Provider>
+        );
       })
     })
   
