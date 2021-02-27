@@ -47,7 +47,7 @@ const SearchNavigation: React.FC<SearchNavigationProps> = (
     <Navigation
       {...rest}
       brand={
-        <Link href={brandLinkTo} prefetch={false}>
+        <Link href={brandLinkTo}>
           <SvgIcon className={classes.pointer} fontSize="large">
             <BrandIcon />
           </SvgIcon>

@@ -76,7 +76,7 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
       alignItems="center"
       p={1}
     >
-      <Link href={linkTo} prefetch={false}>
+      <Link href={linkTo}>
         <PosterImage
           layoutId={layoutId}
           imageURL={imageURL}

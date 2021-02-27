@@ -11,7 +11,7 @@ const LinkTo: React.FC<LinkToProps> = (props: LinkToProps) => {
   const { text, linkTo, ...rest } = props;
   return (
     <Typography {...rest}>
-      <Link href={linkTo} prefetch={false}>
+      <Link href={linkTo}>
         <a>{text}</a>
       </Link>
     </Typography>
