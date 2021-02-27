@@ -141,7 +141,7 @@ const renderSection = (
         />
       );
     case SectionTypes.casts:
-      return <Casts key='casts' casts={data[section]} />;
+      return <Casts key="casts" casts={data[section]} />;
   }
 };
 
@@ -225,12 +225,16 @@ const MoviePage = (pageProps: IPageProps) => {
       <Box bgcolor={theme.palette.primary.light}>
         <Hidden mdUp>{renderTabs(section, handleSectionChange)}</Hidden>
         <Box p={2}>{renderSection(section, sectionToData, movieId)}</Box>
-        {recommendations.results.length === 0? null:
-            <SnippetRecommendation px={2} pt={2} recommendations={recommendations.results} />
-        }
-        {similars.results.length === 0? null:
-            <SnippetSimilar px={2} similars={similars.results} pt={2} />
-        }
+        {recommendations.results.length === 0 ? null : (
+          <SnippetRecommendation
+            px={2}
+            pt={2}
+            recommendations={recommendations.results}
+          />
+        )}
+        {similars.results.length === 0 ? null : (
+          <SnippetSimilar px={2} similars={similars.results} pt={2} />
+        )}
         <Reviews px={2} movieId={movieId} />
       </Box>
     </PageLayout>

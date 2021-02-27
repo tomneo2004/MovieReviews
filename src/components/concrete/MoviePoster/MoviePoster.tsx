@@ -78,18 +78,18 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     >
       <Link href={linkTo} passHref>
         <a>
-        <PosterImage
-          layoutId={layoutId}
-          imageURL={imageURL}
-          elevation={4}
-          onMouseOver={onMouseOver}
-          hoverCursor="pointer"
-          widthAtSMDown={widthAtSMDown}
-          widthAtSMUp={widthAtSMUp}
-          widthAtMDUp={widthAtMDUp}
-          widthAtLGUp={widthAtLGUp}
-          widthAtXLUp={widthAtXLUp}
-        />
+          <PosterImage
+            layoutId={layoutId}
+            imageURL={imageURL}
+            elevation={4}
+            onMouseOver={onMouseOver}
+            hoverCursor="pointer"
+            widthAtSMDown={widthAtSMDown}
+            widthAtSMUp={widthAtSMUp}
+            widthAtMDUp={widthAtMDUp}
+            widthAtLGUp={widthAtLGUp}
+            widthAtXLUp={widthAtXLUp}
+          />
         </a>
       </Link>
       <Typography component="div" variant="h6">

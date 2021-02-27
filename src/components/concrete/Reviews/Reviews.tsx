@@ -57,10 +57,7 @@ const Reviews: React.FC<ReviewsProps> = (props: ReviewsProps) => {
           isLoadingMore={reviews.isLoading}
         />
       ) : (
-        <ReviewCollection 
-        py={2}
-        px={2}
-        reviewData={null} />
+        <ReviewCollection py={2} px={2} reviewData={null} />
       )}
     </Box>
   );

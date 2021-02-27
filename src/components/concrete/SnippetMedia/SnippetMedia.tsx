@@ -101,4 +101,4 @@ const SnippetMedia: React.FC<SnippetMediaProps> = (
   );
 };
 
-export default SnippetMedia
+export default SnippetMedia;

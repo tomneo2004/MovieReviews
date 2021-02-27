@@ -4,8 +4,8 @@ import { IRecommendationMoviesData } from "../../utils/api/model/apiModelTypes";
 import { IFetchResponse } from "./fetchResponse";
 
 const apiRoute = `${
-    process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
-  }/api/recommendation/movies`;
+  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
+}/api/recommendation/movies`;
 
 const fetcher = async (url: string) => {
   const resp = await axios.get(url);
@@ -18,7 +18,7 @@ const fetcher = async (url: string) => {
  * @param id reference movie id
  */
 export function useRecommendations(
-  id:string,
+  id: string
 ): IFetchResponse<IRecommendationMoviesData> {
   const { data, error } = useSWR(() => {
     if (!id) return null;

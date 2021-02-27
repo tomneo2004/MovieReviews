@@ -6,7 +6,7 @@ import SectionHeader from "../SectionHeader/SectionHeader";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 
 type SnippetSimilarProps = React.ComponentProps<typeof Box> & {
-  similars:IMovieData[];
+  similars: IMovieData[];
 };
 
 const SnippetSimilar: React.FC<SnippetSimilarProps> = (

@@ -138,7 +138,7 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
       <motion.div
         layoutId={layoutId}
         layout
-        initial={{visibility:'visible'}}
+        initial={{ visibility: "visible" }}
         transition={springTransition()}
         style={{
           position: "relative",
