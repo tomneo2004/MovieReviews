@@ -22,38 +22,44 @@ import {
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
 import dynamic from "next/dynamic";
-import { fetchMovieDetail, fetchRecommendations, fetchSimilars, IPageProps } from "../../pageUtils/movie";
+import {
+  fetchMovieDetail,
+  fetchRecommendations,
+  fetchSimilars,
+  IPageProps,
+} from "../../pageUtils/movie";
 
 const Overview = dynamic(
   () => import("../../components/concrete/Overview/Overview"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SnippetMedia = dynamic(
   () => import("../../components/concrete/SnippetMedia/SnippetMedia"),
-  {ssr:false}
+  { ssr: false }
 );
 
-const Casts = dynamic(
-  () => import("../../components/concrete/Casts/Casts"),
-  {ssr:false}
-);
+const Casts = dynamic(() => import("../../components/concrete/Casts/Casts"), {
+  ssr: false,
+});
 
 const Reviews = dynamic(
   () => import("../../components/concrete/Reviews/Reviews"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SnippetRecommendation = dynamic(
-  ()=>import("../../components/concrete/SnippetRecommendation/SnippetRecommendation"),
-  {ssr:false}
+  () =>
+    import(
+      "../../components/concrete/SnippetRecommendation/SnippetRecommendation"
+    ),
+  { ssr: false }
 );
 
 const SnippetSimilar = dynamic(
-  ()=>import("../../components/concrete/SnippetSimilar/SnippetSimilar"),
-  {ssr:false}
+  () => import("../../components/concrete/SnippetSimilar/SnippetSimilar"),
+  { ssr: false }
 );
-
 
 export const getServerSideProps: GetServerSideProps<IPageProps> = async (
   context: GetServerSidePropsContext
@@ -111,15 +117,15 @@ enum SectionTypes {
 type SectionMapToData = {
   [SectionTypes.overview]: {
     movieDetails: IMovieDetailData;
-    recommendations:IRecommendationMoviesData;
-    similars:ISimilarMoviesData;
-  },
+    recommendations: IRecommendationMoviesData;
+    similars: ISimilarMoviesData;
+  };
   [SectionTypes.media]: {
     trailers: IVideoData[];
     posters: IMoviePosterData[];
-  },
-  [SectionTypes.casts]: ICastData[],
-  [SectionTypes.reviews]: number,
+  };
+  [SectionTypes.casts]: ICastData[];
+  [SectionTypes.reviews]: number;
 };
 
 /**
@@ -145,7 +151,7 @@ const renderSection = (
           <SnippetRecommendation recommendations={recommendations} pt={2} />
           <SnippetSimilar similars={similarMovies} pt={2} />
         </React.Fragment>
-      )
+      );
     case SectionTypes.media:
       //10 trailers
       const trailers = data[section].trailers.splice(0, 9);

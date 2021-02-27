@@ -7,27 +7,28 @@ import Link from "next/link";
 import style from "./MoviePosterStyle";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
-type MoviePosterProps = React.ComponentProps<typeof Box> & ScreenWidthProps & {
-  /**
-   * this will be passed to PosterImage
-   */
-  layoutId?: string;
-  linkTo?: string;
-  imageURL?: string;
-  title: string;
-  releaseDate: string;
-  /**
-   * Rating score 0 ~ 100
-   *
-   * null to hide rating
-   *
-   * default null
-   */
-  ratingScore?: number;
-  ratingOffsetX?: number;
-  ratingOffsetY?: number;
-  onMouseOver?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-};
+type MoviePosterProps = React.ComponentProps<typeof Box> &
+  ScreenWidthProps & {
+    /**
+     * this will be passed to PosterImage
+     */
+    layoutId?: string;
+    linkTo?: string;
+    imageURL?: string;
+    title: string;
+    releaseDate: string;
+    /**
+     * Rating score 0 ~ 100
+     *
+     * null to hide rating
+     *
+     * default null
+     */
+    ratingScore?: number;
+    ratingOffsetX?: number;
+    ratingOffsetY?: number;
+    onMouseOver?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  };
 
 const renderRating = (rating: number, xOffset: number, yOffset: number) => {
   const ratingComp = getCircularRating(rating);

@@ -4,7 +4,6 @@ import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
-
 type GridVideosProps = React.ComponentProps<typeof Box> & {
   videoData: IVideoData[];
 };

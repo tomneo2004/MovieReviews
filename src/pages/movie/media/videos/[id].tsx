@@ -8,17 +8,17 @@ import PageLayout from "../../../../layouts/pageLayout";
 
 const GridVideos = dynamic(
   () => import("../../../../components/concrete/GridVideos/GridVideos"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SectionHeader = dynamic(
   () => import("../../../../components/concrete/SectionHeader/SectionHeader"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const PhantomText = dynamic(
   () => import("../../../../components/concrete/PhantomText/PhantomText"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const VideosPage = () => {

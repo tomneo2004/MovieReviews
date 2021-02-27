@@ -2,8 +2,8 @@ import { Grid } from "@material-ui/core";
 import React from "react";
 import { IMovieDetailData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
-import PosterImage from "../PosterImage/PosterImage"
-import MovieInfo from "../MovieInfo/MovieInfo"
+import PosterImage from "../PosterImage/PosterImage";
+import MovieInfo from "../MovieInfo/MovieInfo";
 
 type OverviewProps = React.ComponentProps<typeof Grid> & {
   movieDetail: IMovieDetailData;

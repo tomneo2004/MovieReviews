@@ -123,11 +123,14 @@ export function getNowPlayingMoviesQuery(params: IParams = defaultParams) {
 
 /**
  * Get query for similar movies
- * 
+ *
  * @param refMovieId reference movide id
- * @param params 
+ * @param params
  */
-export function getSimilarMoviesQuery(refMovieId:string, params: IParams = defaultParams) {
+export function getSimilarMoviesQuery(
+  refMovieId: string,
+  params: IParams = defaultParams
+) {
   const queryString = `/movie/${refMovieId}/similar`;
   const builtQuery = buildAPIQuery(
     queryString,
@@ -141,11 +144,14 @@ export function getSimilarMoviesQuery(refMovieId:string, params: IParams = defau
 
 /**
  * Get query for recommended movies
- * 
+ *
  * @param refMovieId reference movide id
- * @param params 
+ * @param params
  */
-export function getRecommendationMoviesQuery(refMovieId:string, params: IParams = defaultParams) {
+export function getRecommendationMoviesQuery(
+  refMovieId: string,
+  params: IParams = defaultParams
+) {
   const queryString = `/movie/${refMovieId}/recommendations`;
   const builtQuery = buildAPIQuery(
     queryString,

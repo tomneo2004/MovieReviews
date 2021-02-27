@@ -38,7 +38,7 @@ const apiTopRatedRoute = getTopRatedMovieQuery();
 const apiNowPlayingRoute = getNowPlayingMoviesQuery();
 
 //https://developers.themoviedb.org/3/movies/get-popular-movies
-export const fetchPopularMovies = async ():Promise<IPopularMoviesData> => {
+export const fetchPopularMovies = async (): Promise<IPopularMoviesData> => {
   try {
     const resp = await axios.get(apiPopularRoute);
     const data: IPopularMoviesData = resp.data;
@@ -49,7 +49,7 @@ export const fetchPopularMovies = async ():Promise<IPopularMoviesData> => {
 };
 
 //https://developers.themoviedb.org/3/trending/get-trending
-export const fetchTrendingMoviesByDay = async ():Promise<ITrendingMoviesData> => {
+export const fetchTrendingMoviesByDay = async (): Promise<ITrendingMoviesData> => {
   try {
     const resp = await axios.get(apiDayTrendingRoute);
     const data: ITrendingMoviesData = resp.data;
@@ -60,7 +60,7 @@ export const fetchTrendingMoviesByDay = async ():Promise<ITrendingMoviesData> =>
 };
 
 //https://developers.themoviedb.org/3/trending/get-trending
-export const fetchTrendingMoviesByWeek = async ():Promise<ITrendingMoviesData> => {
+export const fetchTrendingMoviesByWeek = async (): Promise<ITrendingMoviesData> => {
   try {
     const resp = await axios.get(apiWeekTrendingRoute);
     const data: ITrendingMoviesData = resp.data;
@@ -70,7 +70,7 @@ export const fetchTrendingMoviesByWeek = async ():Promise<ITrendingMoviesData> =
   }
 };
 
-export const fetchTopRatedMovies = async ():Promise<ITopRatedMoviesData> => {
+export const fetchTopRatedMovies = async (): Promise<ITopRatedMoviesData> => {
   try {
     const resp = await axios.get(apiTopRatedRoute);
     const data: ITopRatedMoviesData = resp.data;
@@ -80,7 +80,7 @@ export const fetchTopRatedMovies = async ():Promise<ITopRatedMoviesData> => {
   }
 };
 
-export const fetchNowPlayingMovies = async ():Promise<INowPlayingMoviesData> => {
+export const fetchNowPlayingMovies = async (): Promise<INowPlayingMoviesData> => {
   try {
     const resp = await axios.get(apiNowPlayingRoute);
     const data: INowPlayingMoviesData = resp.data;

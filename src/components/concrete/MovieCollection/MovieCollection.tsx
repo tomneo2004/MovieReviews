@@ -18,19 +18,20 @@ import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 import ScrollIndicator from "./ScrollIndicator";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
-type MovieCollectionProps = React.ComponentProps<typeof Box> & ScreenWidthProps & {
-  movieData: IMovieData[] | null | undefined;
-  onHover?: (data: IMovieData) => void | null | undefined;
-  /**
-   * scroll left indicator
-   */
-  scrollLeft?: React.ReactNode;
+type MovieCollectionProps = React.ComponentProps<typeof Box> &
+  ScreenWidthProps & {
+    movieData: IMovieData[] | null | undefined;
+    onHover?: (data: IMovieData) => void | null | undefined;
+    /**
+     * scroll left indicator
+     */
+    scrollLeft?: React.ReactNode;
 
-  /**
-   * scroll right indicator
-   */
-  scrollRight?: React.ReactNode;
-};
+    /**
+     * scroll right indicator
+     */
+    scrollRight?: React.ReactNode;
+  };
 
 const renderSkeletons = () => {
   const skeletons: HScrollChildProp[] = [];
@@ -130,8 +131,8 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
           }}
         </HScroll>
       )}
-      {!scrollLeft? null:
-          <ScrollIndicator direction="left" enabled={!scrollState.endLeft}>
+      {!scrollLeft ? null : (
+        <ScrollIndicator direction="left" enabled={!scrollState.endLeft}>
           <Box
             display="flex"
             flexDirection="column"
@@ -145,8 +146,8 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
             {scrollLeft}
           </Box>
         </ScrollIndicator>
-      }
-      {!scrollRight? null:
+      )}
+      {!scrollRight ? null : (
         <ScrollIndicator direction="right" enabled={!scrollState.endRight}>
           <Box
             display="flex"
@@ -161,7 +162,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
             {scrollRight}
           </Box>
         </ScrollIndicator>
-      }
+      )}
     </Box>
   );
 };

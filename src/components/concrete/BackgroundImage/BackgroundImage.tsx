@@ -1,6 +1,8 @@
 import Box from "@material-ui/core/Box";
 import React from "react";
-import ProgressiveImage, { ProgressiveImageProps } from "../../unit/ProgressiveImage/ProgressiveImage";
+import ProgressiveImage, {
+  ProgressiveImageProps,
+} from "../../unit/ProgressiveImage/ProgressiveImage";
 
 type BackgroundImageProps = ProgressiveImageProps;
 

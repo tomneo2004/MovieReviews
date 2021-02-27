@@ -11,12 +11,12 @@ import dynamic from "next/dynamic";
 
 const Pagination = dynamic(
   () => import("@material-ui/lab/Pagination/Pagination"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SearchResults = dynamic(
   () => import("../../components/concrete/SearchResults/SearchResults"),
-  {ssr:false}
+  { ssr: false }
 );
 
 interface IPageProps {

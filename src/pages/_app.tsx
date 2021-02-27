@@ -31,7 +31,7 @@ Router.events.on("routeChangeComplete", () => {
 Router.events.on("routeChangeError", () => NProgress.done());
 
 export function reportWebVitals(metric: any) {
-  console.log(metric)
+  console.log(metric);
 }
 
 export default function MovieReviewApp(props: AppProps) {

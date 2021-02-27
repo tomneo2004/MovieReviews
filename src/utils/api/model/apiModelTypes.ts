@@ -212,7 +212,7 @@ export type IGenericMoviesData = {
   results: IMovieData[];
   total_results: number;
   total_pages: number;
-}
+};
 
 export type ITopRatedMoviesData = IGenericMoviesData;
 export type IPopularMoviesData = IGenericMoviesData;
@@ -225,5 +225,3 @@ export type INowPlayingMoviesData = IGenericMoviesData & {
 };
 export type ISimilarMoviesData = IGenericMoviesData;
 export type IRecommendationMoviesData = IGenericMoviesData;
-
-

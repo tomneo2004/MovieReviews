@@ -13,22 +13,22 @@ import {
 
 const GridPosters = dynamic(
   () => import("../../../../components/concrete/GridPosters/GridPosters"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const MotionGallery = dynamic(
   () => import("../../../../components/concrete/MotionGallery/MotionGallery"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const SectionHeader = dynamic(
   () => import("../../../../components/concrete/SectionHeader/SectionHeader"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const PhantomText = dynamic(
   () => import("../../../../components/concrete/PhantomText/PhantomText"),
-  {ssr:false}
+  { ssr: false }
 );
 
 const PostersPage = () => {

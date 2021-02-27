@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getRecommendationMoviesQuery} from '../../../../utils/api/query/apiQueryBuilder';
+import { getRecommendationMoviesQuery } from "../../../../utils/api/query/apiQueryBuilder";
 import axios from "axios";
 import nextRequestHandler from "../../../../utils/api/nextReqHandler/nextReqHandler";
 
