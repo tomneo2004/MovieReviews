@@ -10,52 +10,52 @@ import {
   Theme,
   useTheme,
 } from "@material-ui/core";
-import axios from "axios";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import {
   ICastData,
   IMovieDetailData,
   IMoviePosterData,
+  IRecommendationMoviesData,
+  ISimilarMoviesData,
   IVideoData,
 } from "../../utils/api/model/apiModelTypes";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
 import dynamic from "next/dynamic";
+import { fetchMovieDetail, fetchRecommendations, fetchSimilars, IPageProps } from "../../pageUtils/movie";
 
 const Overview = dynamic(
-  () => import("../../components/concrete/Overview/Overview")
+  () => import("../../components/concrete/Overview/Overview"),
+  {ssr:false}
 );
 
 const SnippetMedia = dynamic(
-  () => import("../../components/concrete/SnippetMedia/SnippetMedia")
+  () => import("../../components/concrete/SnippetMedia/SnippetMedia"),
+  {ssr:false}
 );
 
-const Casts = dynamic(() => import("../../components/concrete/Casts/Casts"));
+const Casts = dynamic(
+  () => import("../../components/concrete/Casts/Casts"),
+  {ssr:false}
+);
 
 const Reviews = dynamic(
-  () => import("../../components/concrete/Reviews/Reviews")
+  () => import("../../components/concrete/Reviews/Reviews"),
+  {ssr:false}
 );
 
-interface IPageProps {
-  movieId: string;
-  movieDetail: IMovieDetailData;
-  error: any;
-}
-const apiMovieDetailRoute = `${
-  process.env.NEXT_PUBLIC_WEBSITE_ROUTE || ""
-}/api/detail/movies`;
+const SnippetRecommendation = dynamic(
+  ()=>import("../../components/concrete/SnippetRecommendation/SnippetRecommendation"),
+  {ssr:false}
+);
 
-const fetchMovieDetail = async (movieId: string) => {
-  try {
-    const resp = await axios.get(`${apiMovieDetailRoute}?id=${movieId}`);
-    const data: IMovieDetailData = resp.data;
-    return data;
-  } catch (e) {
-    return Promise.reject(e);
-  }
-};
+const SnippetSimilar = dynamic(
+  ()=>import("../../components/concrete/SnippetSimilar/SnippetSimilar"),
+  {ssr:false}
+);
 
-export const getServerSideProps: GetServerSideProps = async (
+
+export const getServerSideProps: GetServerSideProps<IPageProps> = async (
   context: GetServerSidePropsContext
 ) => {
   const { query } = context;
@@ -66,6 +66,8 @@ export const getServerSideProps: GetServerSideProps = async (
       props: {
         movieId: null,
         movieDetail: null,
+        recommendations: null,
+        similars: null,
         error: "Movie id was not given",
       },
     };
@@ -73,11 +75,15 @@ export const getServerSideProps: GetServerSideProps = async (
 
   try {
     const movieDetail = await fetchMovieDetail(id);
+    const recommendations = await fetchRecommendations(id);
+    const similars = await fetchSimilars(id);
 
     return {
       props: {
         movieId: id,
         movieDetail: movieDetail,
+        recommendations,
+        similars,
         error: null,
       },
     };
@@ -87,6 +93,8 @@ export const getServerSideProps: GetServerSideProps = async (
       props: {
         movieId: null,
         movieDetail: null,
+        recommendations: null,
+        similars: null,
         error: e.message,
       },
     };
@@ -101,15 +109,25 @@ enum SectionTypes {
 }
 
 type SectionMapToData = {
-  [SectionTypes.overview]: IMovieDetailData;
+  [SectionTypes.overview]: {
+    movieDetails: IMovieDetailData;
+    recommendations:IRecommendationMoviesData;
+    similars:ISimilarMoviesData;
+  },
   [SectionTypes.media]: {
     trailers: IVideoData[];
     posters: IMoviePosterData[];
-  };
-  [SectionTypes.casts]: ICastData[];
-  [SectionTypes.reviews]: number;
+  },
+  [SectionTypes.casts]: ICastData[],
+  [SectionTypes.reviews]: number,
 };
 
+/**
+ * Render each section by section type
+ * @param {SectionTypes} section section type
+ * @param {SectionMapToData} data data associate to each section
+ * @param movieId movie id
+ */
 const renderSection = (
   section: SectionTypes,
   data: SectionMapToData,
@@ -117,7 +135,17 @@ const renderSection = (
 ) => {
   switch (section) {
     case SectionTypes.overview:
-      return <Overview movieDetail={data[section]} />;
+      const movieDetails = data[section].movieDetails;
+      const recommendations = data[section].recommendations.results;
+      const similarMovies = data[section].similars.results;
+
+      return (
+        <React.Fragment>
+          <Overview movieDetail={movieDetails} />
+          <SnippetRecommendation recommendations={recommendations} pt={2} />
+          <SnippetSimilar similars={similarMovies} pt={2} />
+        </React.Fragment>
+      )
     case SectionTypes.media:
       //10 trailers
       const trailers = data[section].trailers.splice(0, 9);
@@ -174,7 +202,7 @@ const renderTabs = (
 };
 
 const MoviePage = (pageProps: IPageProps) => {
-  const { movieId, movieDetail, error } = pageProps;
+  const { movieId, movieDetail, recommendations, similars, error } = pageProps;
   const theme = useTheme();
   const backdropPath = useMemo(
     () => buildImageQuery(movieDetail.backdrop_path, "original"),
@@ -185,7 +213,11 @@ const MoviePage = (pageProps: IPageProps) => {
   );
   const sectionToData = React.useMemo<SectionMapToData>(() => {
     return {
-      overview: movieDetail,
+      overview: {
+        movieDetails: movieDetail,
+        recommendations,
+        similars,
+      },
       media: {
         trailers: movieDetail.videos.results,
         posters: movieDetail.images.posters,

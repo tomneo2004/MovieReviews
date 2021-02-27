@@ -11,9 +11,7 @@ import gfm from "remark-gfm";
 import { dateFromUTC } from "../../../utils/timeConverter";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-
-const ReviewCard = dynamic(() => import("../ReviewCard/ReviewCard"));
+import ReviewCard from "../ReviewCard/ReviewCard";
 
 type ReviewCollectionProps = React.ComponentProps<typeof Box> & {
   reviewData: IMovieReviewsData;

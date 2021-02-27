@@ -13,17 +13,12 @@ import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { fade, useTheme } from "@material-ui/core";
 import { springTransition } from "../../../framer/Transition";
 import FadeMotion from "../../../framer/FadeMotion/FadeMotion";
-import dynamic from "next/dynamic";
+import MoviePoster from "../MoviePoster/MoviePoster";
+import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
+import ScrollIndicator from "./ScrollIndicator";
+import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
-const MoviePoster = dynamic(() => import("../MoviePoster/MoviePoster"));
-
-const HScroll = dynamic(
-  () => import("../../unit/HorizontalScroll/HorizontalScroll")
-);
-
-const ScrollIndicator = dynamic(() => import("./ScrollIndicator"));
-
-type MovieCollectionProps = React.ComponentProps<typeof Box> & {
+type MovieCollectionProps = React.ComponentProps<typeof Box> & ScreenWidthProps & {
   movieData: IMovieData[] | null | undefined;
   onHover?: (data: IMovieData) => void | null | undefined;
   /**
@@ -69,6 +64,11 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
     onHover = null,
     scrollLeft = null,
     scrollRight = null,
+    widthAtSMDown,
+    widthAtSMUp,
+    widthAtMDUp,
+    widthAtLGUp,
+    widthAtXLUp,
     ...rest
   } = props;
   const theme = useTheme();
@@ -117,6 +117,11 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
                         data.vote_average
                       )}
                       onMouseOver={() => handleMouseOver(data)}
+                      widthAtSMDown={widthAtSMDown}
+                      widthAtSMUp={widthAtSMUp}
+                      widthAtMDUp={widthAtMDUp}
+                      widthAtLGUp={widthAtLGUp}
+                      widthAtXLUp={widthAtXLUp}
                     />
                   </FadeMotion>
                 ),
@@ -125,34 +130,38 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
           }}
         </HScroll>
       )}
-      <ScrollIndicator direction="left" enabled={!scrollState.endLeft}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          borderRadius={50}
-          justifyContent="center"
-          alignItems="center"
-          width={44}
-          height={44}
-          bgcolor={fade(theme.palette.primary.light, 0.9)}
-        >
-          {scrollLeft}
-        </Box>
-      </ScrollIndicator>
-      <ScrollIndicator direction="right" enabled={!scrollState.endRight}>
-        <Box
-          display="flex"
-          flexDirection="column"
-          borderRadius={50}
-          justifyContent="center"
-          alignItems="center"
-          width={44}
-          height={44}
-          bgcolor={fade(theme.palette.primary.light, 0.9)}
-        >
-          {scrollRight}
-        </Box>
-      </ScrollIndicator>
+      {!scrollLeft? null:
+          <ScrollIndicator direction="left" enabled={!scrollState.endLeft}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            borderRadius={50}
+            justifyContent="center"
+            alignItems="center"
+            width={44}
+            height={44}
+            bgcolor={fade(theme.palette.primary.light, 0.9)}
+          >
+            {scrollLeft}
+          </Box>
+        </ScrollIndicator>
+      }
+      {!scrollRight? null:
+        <ScrollIndicator direction="right" enabled={!scrollState.endRight}>
+          <Box
+            display="flex"
+            flexDirection="column"
+            borderRadius={50}
+            justifyContent="center"
+            alignItems="center"
+            width={44}
+            height={44}
+            bgcolor={fade(theme.palette.primary.light, 0.9)}
+          >
+            {scrollRight}
+          </Box>
+        </ScrollIndicator>
+      }
     </Box>
   );
 };

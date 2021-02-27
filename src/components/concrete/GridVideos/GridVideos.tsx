@@ -1,10 +1,9 @@
 import { Box, Grid } from "@material-ui/core";
-import dynamic from "next/dynamic";
 import React from "react";
 import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
-const VideoPlayer = dynamic(() => import("../VideoPlayer/VideoPlayer"));
 
 type GridVideosProps = React.ComponentProps<typeof Box> & {
   videoData: IVideoData[];

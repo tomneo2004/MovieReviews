@@ -1,11 +1,7 @@
 import Box from "@material-ui/core/Box";
-import dynamic from "next/dynamic";
 import React from "react";
 import { ICastData } from "../../../utils/api/model/apiModelTypes";
-
-const CastCollection = dynamic(
-  () => import("../CastCollection/CastCollection")
-);
+import CastCollection from "../CastCollection/CastCollection";
 
 type CastsProps = React.ComponentProps<typeof Box> & {
   casts?: ICastData[];

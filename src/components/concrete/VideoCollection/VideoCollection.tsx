@@ -1,12 +1,10 @@
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
-import dynamic from "next/dynamic";
 import React from "react";
 import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
 import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
-
-const VideoPlayer = dynamic(() => import("../VideoPlayer/VideoPlayer"));
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 type VideoCollectionProps = React.ComponentProps<typeof Box> & {
   trailersData: IVideoData[];

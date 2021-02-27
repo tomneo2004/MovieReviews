@@ -1,11 +1,9 @@
 import { Box, Paper } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
-
-const SearchBar = dynamic(() => import("../SearchBar/SearchBar"));
+import SearchBar from "../SearchBar/SearchBar";
 
 type HeroSearchBarProps = React.ComponentProps<typeof Box>;
 

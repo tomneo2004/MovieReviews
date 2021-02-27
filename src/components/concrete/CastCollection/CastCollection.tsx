@@ -1,14 +1,12 @@
 import { Box } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
-import dynamic from "next/dynamic";
 import React from "react";
 import { ICastData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import HScroll, {
   HScrollChildProp,
 } from "../../unit/HorizontalScroll/HorizontalScroll";
-
-const CastPoster = dynamic(() => import("../CastPoster/CastPoster"));
+import CastPoster from "../CastPoster/CastPoster";
 
 type CastCollectionProps = React.ComponentProps<typeof Box> & {
   castData: ICastData[];

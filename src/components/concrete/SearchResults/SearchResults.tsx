@@ -4,14 +4,12 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Skeleton from "@material-ui/lab/Skeleton";
-import dynamic from "next/dynamic";
 import React from "react";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
-
-const MoviePoster = dynamic(() => import("../MoviePoster/MoviePoster"));
+import MoviePoster from "../MoviePoster/MoviePoster";
 
 type SearchResultsProps = React.ComponentProps<typeof Grid> & {
   /**

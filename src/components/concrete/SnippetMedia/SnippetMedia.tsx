@@ -2,21 +2,14 @@ import Box from "@material-ui/core/Box";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
-import dynamic from "next/dynamic";
 import React from "react";
 import {
   IMoviePosterData,
   IVideoData,
 } from "../../../utils/api/model/apiModelTypes";
 import LinkTo from "../LinkTo/LinkTo";
-
-const PosterCollection = dynamic(
-  () => import("../PosterCollection/PosterCollection")
-);
-
-const VideoCollection = dynamic(
-  () => import("../VideoCollection/VideoCollection")
-);
+import PosterCollection from "../PosterCollection/PosterCollection";
+import VideoCollection from "../VideoCollection/VideoCollection";
 
 enum MediaTypes {
   "video" = "video",

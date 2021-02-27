@@ -7,7 +7,7 @@ import Link from "next/link";
 import style from "./MoviePosterStyle";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
-type MoviePosterProps = React.ComponentProps<typeof Box> & {
+type MoviePosterProps = React.ComponentProps<typeof Box> & ScreenWidthProps & {
   /**
    * this will be passed to PosterImage
    */
@@ -38,14 +38,6 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
   );
 };
 
-const widthDef: ScreenWidthProps = {
-  widthAtSMDown: 185,
-  widthAtSMUp: 185,
-  widthAtMDUp: 250,
-  widthAtLGUp: 300,
-  widthAtXLUp: 300,
-};
-
 const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
     layoutId,
@@ -57,12 +49,21 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     ratingOffsetX = 0,
     ratingOffsetY = 0,
     onMouseOver = null,
+    widthAtSMDown = 185,
+    widthAtSMUp = 185,
+    widthAtMDUp = 250,
+    widthAtLGUp = 300,
+    widthAtXLUp = 300,
     ...rest
   } = props;
   const theme = useTheme();
   const classes = makeStyles(style)({
     theme,
-    ...widthDef,
+    widthAtSMDown,
+    widthAtSMUp,
+    widthAtMDUp,
+    widthAtLGUp,
+    widthAtXLUp,
   });
 
   return (
@@ -74,18 +75,18 @@ const Poster: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
       alignItems="center"
       p={1}
     >
-      <Link href={linkTo}>
+      <Link href={linkTo} prefetch={false}>
         <PosterImage
           layoutId={layoutId}
           imageURL={imageURL}
           elevation={4}
           onMouseOver={onMouseOver}
           hoverCursor="pointer"
-          widthAtSMDown={widthDef.widthAtSMDown}
-          widthAtSMUp={widthDef.widthAtSMUp}
-          widthAtMDUp={widthDef.widthAtMDUp}
-          widthAtLGUp={widthDef.widthAtLGUp}
-          widthAtXLUp={widthDef.widthAtXLUp}
+          widthAtSMDown={widthAtSMDown}
+          widthAtSMUp={widthAtSMUp}
+          widthAtMDUp={widthAtMDUp}
+          widthAtLGUp={widthAtLGUp}
+          widthAtXLUp={widthAtXLUp}
         />
       </Link>
       <Typography component="div" variant="h6">

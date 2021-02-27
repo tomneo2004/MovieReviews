@@ -12,19 +12,23 @@ import {
 } from "../../../../utils/api/query/apiQueryBuilder";
 
 const GridPosters = dynamic(
-  () => import("../../../../components/concrete/GridPosters/GridPosters")
+  () => import("../../../../components/concrete/GridPosters/GridPosters"),
+  {ssr:false}
 );
 
 const MotionGallery = dynamic(
-  () => import("../../../../components/concrete/MotionGallery/MotionGallery")
+  () => import("../../../../components/concrete/MotionGallery/MotionGallery"),
+  {ssr:false}
 );
 
 const SectionHeader = dynamic(
-  () => import("../../../../components/concrete/SectionHeader/SectionHeader")
+  () => import("../../../../components/concrete/SectionHeader/SectionHeader"),
+  {ssr:false}
 );
 
 const PhantomText = dynamic(
-  () => import("../../../../components/concrete/PhantomText/PhantomText")
+  () => import("../../../../components/concrete/PhantomText/PhantomText"),
+  {ssr:false}
 );
 
 const PostersPage = () => {

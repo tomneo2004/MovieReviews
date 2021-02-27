@@ -7,15 +7,18 @@ import { useMovieVideos } from "../../../../effects/apiFetch/movieVideos";
 import PageLayout from "../../../../layouts/pageLayout";
 
 const GridVideos = dynamic(
-  () => import("../../../../components/concrete/GridVideos/GridVideos")
+  () => import("../../../../components/concrete/GridVideos/GridVideos"),
+  {ssr:false}
 );
 
 const SectionHeader = dynamic(
-  () => import("../../../../components/concrete/SectionHeader/SectionHeader")
+  () => import("../../../../components/concrete/SectionHeader/SectionHeader"),
+  {ssr:false}
 );
 
 const PhantomText = dynamic(
-  () => import("../../../../components/concrete/PhantomText/PhantomText")
+  () => import("../../../../components/concrete/PhantomText/PhantomText"),
+  {ssr:false}
 );
 
 const VideosPage = () => {
