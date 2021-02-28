@@ -22,11 +22,13 @@ describe('SearchResults component', ()=>{
         back: cy.spy(),
         prefetch: cy.stub().resolves(),
         beforePopState: cy.spy(),
+        isLocaleDomain: true,
+        isReady: true,
       };
 
       cy.fixture<IMovieData[]>('fakeMovieData').then((data)=>{
         mount(
-          <RouterContext.Provider value={router}>  
+          <RouterContext.Provider value={router} >  
             <SearchResults id='results' data={data} />
           </RouterContext.Provider>
         );

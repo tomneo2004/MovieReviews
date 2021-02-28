@@ -222,7 +222,7 @@ const CircularRating: React.FC<CircularRatingProps> = (
           className={classes.circleMask}
           size={progressSize}
           value={100}
-          variant="static"
+          variant="determinate"
         />
       </Box>
 
@@ -242,7 +242,7 @@ const CircularRating: React.FC<CircularRatingProps> = (
           className={classes.circleCap}
           size={progressSize}
           value={progressValue}
-          variant="static"
+          variant="determinate"
         />
       </Box>
 

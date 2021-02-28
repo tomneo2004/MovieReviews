@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { springTransition } from "../../../framer/Transition";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 type PosterImageProps = React.ComponentProps<typeof Card> &
   ScreenWidthProps & {
@@ -46,26 +47,26 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
     enlargeEnabled?: boolean;
   };
 
-const renderCardMedia = (
-  imageURL: string,
-  // imageWidth: number,
-  // aspectRatio: number,
-  placeholder: string,
-  cardMediaStyle: string,
-  alt: string
-) => {
-  return (
-    <CardMedia
-      className={cardMediaStyle}
-      component="img"
-      alt={alt}
-      // width={imageWidth}
-      // height={imageWidth * aspectRatio}
-      height="100%"
-      src={imageURL ? imageURL : placeholder}
-    />
-  );
-};
+// const renderCardMedia = (
+//   imageURL: string,
+//   // imageWidth: number,
+//   // aspectRatio: number,
+//   placeholder: string,
+//   cardMediaStyle: string,
+//   alt: string
+// ) => {
+//   return (
+//     <CardMedia
+//       className={cardMediaStyle}
+//       component="img"
+//       alt={alt}
+//       // width={imageWidth}
+//       // height={imageWidth * aspectRatio}
+//       height="100%"
+//       src={imageURL ? imageURL : placeholder}
+//     />
+//   );
+// };
 
 /**
  * Component PosterImage
@@ -149,7 +150,15 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
           classes={{ root: classes.card }}
           onClick={enlargeEnabled ? toggleEnlarge : onClick}
         >
-          {renderCardMedia(imageURL, imagePlacehoder, classes.cardMedia, alt)}
+          {/* {renderCardMedia(imageURL, imagePlacehoder, classes.cardMedia, alt)} */}
+          <LazyLoadImage
+          alt={alt}
+          src={imageURL}
+          effect='blur'
+          width='100%'
+          height='100%'
+          placeholderSrc={imagePlacehoder}
+          />
         </Card>
       </motion.div>
     );
