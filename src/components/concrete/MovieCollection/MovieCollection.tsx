@@ -58,7 +58,15 @@ const renderSkeletons = () => {
 };
 
 /**
- * Component wrap around horizontal scrol collection
+ * Component MovieCollection
+ * 
+ * Component allow you to display items horizontally
+ * and scroll between left and right
+ * 
+ * Component use `HorizontalGrid` which is able to 
+ * render virtualized UI and able to render thousands of components
+ * on screen without too much performance cost
+ * 
  */
 const MovieCollection: React.FC<MovieCollectionProps> = (
   props: MovieCollectionProps

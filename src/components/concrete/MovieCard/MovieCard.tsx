@@ -43,6 +43,17 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
   );
 };
 
+/**
+ * Component MovieCard
+ * 
+ * Component wrpped `PosterImage` for displaying movie poster
+ * 
+ * This component work best with `MovieCollection` component
+ * 
+ * You must give width of card
+ * 
+ * @param {MoviePosterProps} props 
+ */
 const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
     cardWidth,
