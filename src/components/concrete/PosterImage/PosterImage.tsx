@@ -16,6 +16,11 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
     alt?: string;
 
     /**
+     * Fixed width, otherwise give width for different size
+     */
+    fixedWidth?:number;
+
+    /**
      * Ratio between image width and height
      *
      * e.g width=150, aspectRatio=1.5, height=width * aspectRatio
@@ -27,7 +32,9 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
     /**
      * Image source URL
      */
-    imageURL?: string;
+    src?: string;
+
+    placeholderSrc?: string;
 
     /**
      * Custom layoutId for AnimateSharedLayout
@@ -45,10 +52,15 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
     hoverCursor?: string;
 
     enlargeEnabled?: boolean;
+
+    /**
+     * callback when image complete loaded
+     */
+    onImageLoaded?: ()=>void;
   };
 
 // const renderCardMedia = (
-//   imageURL: string,
+//   src: string,
 //   // imageWidth: number,
 //   // aspectRatio: number,
 //   placeholder: string,
@@ -63,7 +75,7 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
 //       // width={imageWidth}
 //       // height={imageWidth * aspectRatio}
 //       height="100%"
-//       src={imageURL ? imageURL : placeholder}
+//       src={src ? src : placeholder}
 //     />
 //   );
 // };
@@ -81,7 +93,9 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
   (props: PosterImageProps, _ref) => {
     const {
       alt = "image",
-      imageURL = "",
+      src = "",
+      placeholderSrc,
+      fixedWidth,
       widthAtSMDown = 300,
       widthAtSMUp = 320,
       widthAtMDUp = 350,
@@ -91,12 +105,14 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
       layoutId = null,
       hoverCursor = "auto",
       enlargeEnabled = false,
+      onImageLoaded,
       onClick,
       ...rest
     } = props;
     const theme = useTheme();
     const [isEnlarge, setIsEnlarge] = React.useState<boolean>(false);
     const classes = makeStyles(style)({
+      fixedWidth,
       widthAtSMDown,
       widthAtSMUp,
       widthAtMDUp,
@@ -118,7 +134,7 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
             display="flex"
             justifyContent="center"
             alignItems="center"
-            src={imageURL}
+            src={src}
             alt={alt}
             onClick={toggleEnlarge}
             postProcess={(node) => (
@@ -150,14 +166,15 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
           classes={{ root: classes.card }}
           onClick={enlargeEnabled ? toggleEnlarge : onClick}
         >
-          {/* {renderCardMedia(imageURL, imagePlacehoder, classes.cardMedia, alt)} */}
+          {/* {renderCardMedia(src, imagePlacehoder, classes.cardMedia, alt)} */}
           <LazyLoadImage
           alt={alt}
-          src={imageURL}
+          src={src}
           effect='blur'
           width='100%'
           height='100%'
-          placeholderSrc={imagePlacehoder}
+          placeholderSrc={placeholderSrc?placeholderSrc:imagePlacehoder}
+          afterLoad={onImageLoaded}
           />
         </Card>
       </motion.div>

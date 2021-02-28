@@ -44,7 +44,7 @@ const GridPosters: React.FC<GridPostersProps> = (props: GridPostersProps) => {
                 p={2}
               >
                 <PosterImage
-                  imageURL={getPosterImageQuery(poster.file_path, posterSize)}
+                  src={getPosterImageQuery(poster.file_path, posterSize)}
                   elevation={4}
                   aspectRatio={1.4}
                   onClick={() => handlePosterClick(i)}

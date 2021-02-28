@@ -47,12 +47,9 @@ const SnippetRecommendation: React.FC<SnippetRecommendationProps> = (
         }
       />
       <MovieCollection
+        collectionHeight={400}
+        itemWidth={200}
         movieData={recommendations}
-        widthAtSMDown={125}
-        widthAtSMUp={125}
-        widthAtMDUp={150}
-        widthAtLGUp={150}
-        widthAtXLUp={150}
       />
     </Box>
   );

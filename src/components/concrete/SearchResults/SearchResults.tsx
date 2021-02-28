@@ -9,7 +9,7 @@ import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
-import MoviePoster from "../MoviePoster/MoviePoster";
+import MoviePoster from "../MovieCard/MovieCard";
 
 type SearchResultsProps = React.ComponentProps<typeof Grid> & {
   /**
@@ -100,9 +100,10 @@ const SearchResults: React.FC<SearchResultsProps> = (
               p={2}
             >
               <MoviePoster
+                cardWidth={342}
                 layoutId={movie.id.toString()}
                 linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
-                imageURL={buildImageQuery(movie.poster_path, "w342")}
+                src={buildImageQuery(movie.poster_path, "w342")}
                 title={movie.title}
                 releaseDate={movie.release_date}
                 ratingScore={getMovieRating(

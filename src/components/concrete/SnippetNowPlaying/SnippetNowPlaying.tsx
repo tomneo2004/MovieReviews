@@ -9,14 +9,14 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import {
-  IMovieData,
+  // IMovieData,
   INowPlayingMoviesData,
 } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import PhantomText from "../PhantomText/PhantomText";
-import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
-import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
+// import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
+// import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import { formatDateTime } from "../../../utils/timeConverter";
 import PlayingIcon from "../../../assets/icons/cinema.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
@@ -33,7 +33,8 @@ const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (
   const theme = useTheme();
   const [popularBg, setPopularBg] = React.useState<string>("");
 
-  const handlePopularMovieHover = (data: IMovieData) => {
+  const handlePopularMovieHover = (index:number) => {
+    const data = nowPlayingMovies.results[index];
     setPopularBg(buildImageQuery(data.backdrop_path, "original"));
   };
   return (
@@ -117,18 +118,20 @@ const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (
         }
       >
         <MovieCollection
+          collectionHeight={400}
+          itemWidth={200}
           movieData={nowPlayingMovies.results}
           onHover={handlePopularMovieHover}
-          scrollLeft={
-            <SvgIcon fontSize="large">
-              <LeftArrowIcon />
-            </SvgIcon>
-          }
-          scrollRight={
-            <SvgIcon fontSize="large">
-              <RightArrowIcon />
-            </SvgIcon>
-          }
+          // scrollLeft={
+          //   <SvgIcon fontSize="large">
+          //     <LeftArrowIcon />
+          //   </SvgIcon>
+          // }
+          // scrollRight={
+          //   <SvgIcon fontSize="large">
+          //     <RightArrowIcon />
+          //   </SvgIcon>
+          // }
         />
       </BackgroundImage>
     </Box>

@@ -7,8 +7,8 @@ import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import FancyTab from "../FancyTab/FancyTab";
 import PhantomText from "../PhantomText/PhantomText";
-import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
-import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
+// import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
+// import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import TrendingIcon from "../../../assets/icons/trend.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
@@ -34,7 +34,8 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (
   const [trendingBg, setTrendingBg] = React.useState<string>("");
   const [movieData, setMovieData] = React.useState<IMovieData[]>(byDay);
 
-  const handleTrendingMovieHover = (data: IMovieData) => {
+  const handleTrendingMovieHover = (index:number) => {
+    const data = movieData[index]
     setTrendingBg(buildImageQuery(data.backdrop_path, "original"));
   };
 
@@ -119,18 +120,20 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (
         }
       >
         <MovieCollection
+          collectionHeight={400}
+          itemWidth={200}
           movieData={movieData}
           onHover={handleTrendingMovieHover}
-          scrollLeft={
-            <SvgIcon fontSize="large">
-              <LeftArrowIcon />
-            </SvgIcon>
-          }
-          scrollRight={
-            <SvgIcon fontSize="large">
-              <RightArrowIcon />
-            </SvgIcon>
-          }
+          // scrollLeft={
+          //   <SvgIcon fontSize="large">
+          //     <LeftArrowIcon />
+          //   </SvgIcon>
+          // }
+          // scrollRight={
+          //   <SvgIcon fontSize="large">
+          //     <RightArrowIcon />
+          //   </SvgIcon>
+          // }
         />
       </BackgroundImage>
     </Box>

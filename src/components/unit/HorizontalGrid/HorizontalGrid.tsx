@@ -59,6 +59,8 @@ const cellRenderer = (gridCellProps:GridCellProps, func:ChildrenFunc, cache:Cell
  * 
  * Component default width is 100% to it's parent unless you specify
  * 
+ * Component default height is 100% to it's parent unless you specify
+ * 
  * You must give item width
  * 
  * Item height is auto calculated, unless you specify

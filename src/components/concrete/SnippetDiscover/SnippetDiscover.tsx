@@ -2,7 +2,7 @@ import {
   Box,
   fade,
   LinearProgress,
-  SvgIcon,
+  // SvgIcon,
   useTheme,
 } from "@material-ui/core";
 import React from "react";
@@ -12,8 +12,8 @@ import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
-import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
-import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
+// import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
+// import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 
 type SnippetDiscoverProps = React.ComponentProps<typeof Box> & {
   discoverMovies: IMovieData[];
@@ -26,7 +26,8 @@ const SnippetDiscover: React.FC<SnippetDiscoverProps> = (
   const theme = useTheme();
   const [popularBg, setPopularBg] = React.useState<string>("");
 
-  const handlePopularMovieHover = (data: IMovieData) => {
+  const handlePopularMovieHover = (index:number) => {
+    const data = discoverMovies[index];
     setPopularBg(buildImageQuery(data.backdrop_path, "original"));
   };
   return (
@@ -73,18 +74,20 @@ const SnippetDiscover: React.FC<SnippetDiscoverProps> = (
         }
       >
         <MovieCollection
+          collectionHeight={400}
+          itemWidth={200}
           movieData={discoverMovies}
           onHover={handlePopularMovieHover}
-          scrollLeft={
-            <SvgIcon fontSize="large">
-              <LeftArrowIcon />
-            </SvgIcon>
-          }
-          scrollRight={
-            <SvgIcon fontSize="large">
-              <RightArrowIcon />
-            </SvgIcon>
-          }
+          // scrollLeft={
+          //   <SvgIcon fontSize="large">
+          //     <LeftArrowIcon />
+          //   </SvgIcon>
+          // }
+          // scrollRight={
+          //   <SvgIcon fontSize="large">
+          //     <RightArrowIcon />
+          //   </SvgIcon>
+          // }
         />
       </BackgroundImage>
     </Box>

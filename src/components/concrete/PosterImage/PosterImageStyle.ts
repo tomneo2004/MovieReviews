@@ -2,32 +2,36 @@ import { createStyles, Theme } from "@material-ui/core/styles";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
 type IPosterImageStyle = ScreenWidthProps & {
+  fixedWidth: number;
   aspectRatio: number;
   theme: Theme;
   cursor: string;
 };
 
+const getSize = (fixedWidth:number, width:number, ratio:number)=>{
+  const finalWidth = fixedWidth? fixedWidth : width;
+  return {
+    width: finalWidth,
+    height: finalWidth * ratio,
+  }
+}
+
 export default createStyles({
   card: (props: IPosterImageStyle) => ({
     [props.theme.breakpoints.down("xs")]: {
-      width: props.widthAtSMDown,
-      height: props.widthAtSMDown * props.aspectRatio,
+      ...getSize(props.fixedWidth, props.widthAtSMDown, props.aspectRatio)
     },
     [props.theme.breakpoints.up("sm")]: {
-      width: props.widthAtSMUp,
-      height: props.widthAtSMUp * props.aspectRatio,
+      ...getSize(props.fixedWidth, props.widthAtSMUp, props.aspectRatio)
     },
     [props.theme.breakpoints.up("md")]: {
-      width: props.widthAtMDUp,
-      height: props.widthAtMDUp * props.aspectRatio,
+      ...getSize(props.fixedWidth, props.widthAtMDUp, props.aspectRatio)
     },
     [props.theme.breakpoints.up("lg")]: {
-      width: props.widthAtLGUp,
-      height: props.widthAtLGUp * props.aspectRatio,
+      ...getSize(props.fixedWidth, props.widthAtLGUp, props.aspectRatio)
     },
     [props.theme.breakpoints.up("xl")]: {
-      width: props.widthAtXLUp,
-      height: props.widthAtXLUp * props.aspectRatio,
+      ...getSize(props.fixedWidth, props.widthAtXLUp, props.aspectRatio)
     },
   }),
   cardMedia: (props: IPosterImageStyle) => ({
