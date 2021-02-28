@@ -19,8 +19,6 @@ import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 // import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import HorizontalGrid from "../../unit/HorizontalGrid/HorizontalGrid";
 import { useTheme } from "@material-ui/core";
-import { AnimatePresence, motion } from "framer-motion";
-import { springTransition } from "../../../framer/Transition";
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
     movieData: IMovieData[];
@@ -92,7 +90,6 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
   if(!movieData || !movieData.length) return renderSkeletons();
 
   return (
-    <AnimatePresence>
     <Box {...rest}>
     <HorizontalGrid 
     height={collectionHeight} 
@@ -123,7 +120,6 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
       }}
     </HorizontalGrid>
     </Box>
-    </AnimatePresence>
   )
 
   // const handleScrollStateChange = (state: IHorizontalScrollState) => {
