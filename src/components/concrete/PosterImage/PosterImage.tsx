@@ -7,6 +7,7 @@ import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 type PosterImageProps = React.ComponentProps<typeof Card> &
   ScreenWidthProps & {

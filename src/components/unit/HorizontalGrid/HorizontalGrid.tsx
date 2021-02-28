@@ -14,6 +14,8 @@ type ChildrenProps = {
      * Perform the cell measurements
      */
     measure:() => void, 
+
+    style:React.CSSProperties,
 }
 
 type ChildrenFunc = (props:ChildrenProps)=>React.ReactNode;
@@ -45,7 +47,7 @@ const cellRenderer = (gridCellProps:GridCellProps, func:ChildrenFunc, cache:Cell
         >
         {({ measure, registerChild})=>(
             <div key={key} style={{...style, textAlign:'center'}} ref={registerChild}>
-            {func({index:columnIndex, measure})}
+            {func({index:columnIndex, measure, style})}
             </div>
         )}
         </CellMeasurer>
