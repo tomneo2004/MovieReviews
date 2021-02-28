@@ -14,6 +14,7 @@ import TimerIcon from "../../../assets/icons/stopwatch.inline.svg";
 import { springTransition } from "../../../framer/Transition";
 import ScaleFadeMotion from "../../../framer/ScaleFadeMotion/ScaleFadeMotion";
 import LinkTo from "../LinkTo/LinkTo";
+import { formatDateTime } from "../../../utils/timeConverter";
 
 type MovieInfoProps = React.ComponentProps<typeof Box> & {
   movieDetail: IMovieDetailData;
@@ -108,7 +109,7 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
           </Typography>
           {/* release date */}
           <Typography component="div" variant="h5">
-            <Box fontWeight={400}>{movieDetail.release_date}</Box>
+            <Box fontWeight={400}>{formatDateTime(movieDetail.release_date)}</Box>
           </Typography>
         </Box>
       </Box>

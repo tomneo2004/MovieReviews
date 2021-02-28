@@ -1,12 +1,9 @@
 import { makeStyles, Modal, useTheme } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
-// import CardMedia from "@material-ui/core/CardMedia";
 import React from "react";
 import style from "./PosterImageStyle";
 
 import imagePlacehoder from "../../../assets/placeholder/poster.svg";
-import { motion } from "framer-motion";
-import { springTransition } from "../../../framer/Transition";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -36,19 +33,6 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
 
     placeholderSrc?: string;
 
-    /**
-     * Custom layoutId for AnimateSharedLayout
-     *
-     * https://www.framer.com/api/motion/animate-shared-layout/
-     *
-     * If PosterImage is in a collection among with other PosterImage
-     * you nust give an unique layout id from the others otherwise behaviour
-     * might be not expected
-     *
-     * default to null
-     */
-    layoutId?: string;
-
     hoverCursor?: string;
 
     enlargeEnabled?: boolean;
@@ -58,27 +42,6 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
      */
     onImageLoaded?: ()=>void;
   };
-
-// const renderCardMedia = (
-//   src: string,
-//   // imageWidth: number,
-//   // aspectRatio: number,
-//   placeholder: string,
-//   cardMediaStyle: string,
-//   alt: string
-// ) => {
-//   return (
-//     <CardMedia
-//       className={cardMediaStyle}
-//       component="img"
-//       alt={alt}
-//       // width={imageWidth}
-//       // height={imageWidth * aspectRatio}
-//       height="100%"
-//       src={src ? src : placeholder}
-//     />
-//   );
-// };
 
 /**
  * Component PosterImage
@@ -102,7 +65,6 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
       widthAtLGUp = 400,
       widthAtXLUp = 450,
       aspectRatio = 1.5,
-      layoutId = null,
       hoverCursor = "auto",
       enlargeEnabled = false,
       onImageLoaded,
@@ -120,7 +82,7 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
       widthAtXLUp,
       theme,
       aspectRatio,
-      cursor: hoverCursor,
+      hoverCursor,
     });
 
     const toggleEnlarge = () => setIsEnlarge((state) => !state);
@@ -137,36 +99,18 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
             src={src}
             alt={alt}
             onClick={toggleEnlarge}
-            postProcess={(node) => (
-              <motion.div
-                layoutId={layoutId}
-                layout
-                transition={springTransition()}
-              >
-                {node}
-              </motion.div>
-            )}
+            postProcess={(node) => (node)}
           />
         </Modal>
       );
     }
 
     return (
-      <motion.div
-        layoutId={layoutId}
-        layout
-        initial={{ visibility: "visible" }}
-        transition={springTransition()}
-        style={{
-          position: "relative",
-        }}
-      >
         <Card
           {...rest}
           classes={{ root: classes.card }}
           onClick={enlargeEnabled ? toggleEnlarge : onClick}
         >
-          {/* {renderCardMedia(src, imagePlacehoder, classes.cardMedia, alt)} */}
           <LazyLoadImage
           alt={alt}
           src={src}
@@ -177,7 +121,6 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
           afterLoad={onImageLoaded}
           />
         </Card>
-      </motion.div>
     );
   }
 );

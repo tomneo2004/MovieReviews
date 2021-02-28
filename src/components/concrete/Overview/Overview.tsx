@@ -16,8 +16,7 @@ const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
     <Grid {...rest} container>
       <Grid md={4} item container justify="center">
         <PosterImage
-          layoutId={movieDetail.id.toString()}
-          imageURL={buildImageQuery(movieDetail.poster_path, "w342")}
+          src={buildImageQuery(movieDetail.poster_path, "w342")}
           enlargeEnabled
           hoverCursor="pointer"
           widthAtSMDown={250}

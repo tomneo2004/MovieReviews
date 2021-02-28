@@ -16,6 +16,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import PopularIcon from "../../../assets/icons/heat.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import config from '../../config';
 
 type SnippetPopularProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];
@@ -99,8 +100,8 @@ const SnippetPopular: React.FC<SnippetPopularProps> = (
         }
       >
         <MovieCollection
-          collectionHeight={300}
-          itemWidth={200}
+          collectionHeight={config.Collection_Height}
+          itemWidth={config.Collection_Item_Width}
           movieData={popularMovies}
           onHover={handlePopularMovieHover}
           // scrollLeft={

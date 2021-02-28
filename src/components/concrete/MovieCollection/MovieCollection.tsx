@@ -18,6 +18,7 @@ import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 // import ScrollIndicator from "./ScrollIndicator";
 // import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import HorizontalGrid from "../../unit/HorizontalGrid/HorizontalGrid";
+import { useTheme } from "@material-ui/core";
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
     movieData: IMovieData[];
@@ -81,7 +82,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
   //   endLeft: true,
   //   endRight: true,
   // });
-
+  const theme = useTheme();
   const handleMouseOver = (index:number) => {
     if (onHover) onHover(index);
   };
@@ -99,8 +100,9 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
         const data = movieData[index];
 
         return (
+          <Box width={itemWidth} p={2}>
             <MovieCard
-              cardWidth={itemWidth}
+              cardWidth={itemWidth - 2 * theme.spacing() * 2}
               linkTo={getRoute(RouteType.movie, {
                 id: data.id.toString(),
               })}
@@ -113,6 +115,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
               )}
               onMouseOver={() => handleMouseOver(index)}
             />
+          </Box>
         )
       }}
     </HorizontalGrid>

@@ -5,13 +5,13 @@ import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 import PosterImage from "../PosterImage/PosterImage";
 import Link from "next/link";
 import style from "./MovieCardStyle";
+import { formatDateTime } from "../../../utils/timeConverter";
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
     cardWidth:number;
     /**
      * this will be passed to PosterImage
      */
-    layoutId?: string;
     linkTo?: string;
     src?: string;
     placeholderSrc?: string;
@@ -46,7 +46,6 @@ const renderRating = (rating: number, xOffset: number, yOffset: number) => {
 const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
   const {
     cardWidth,
-    layoutId,
     linkTo = "#",
     src,
     placeholderSrc,
@@ -79,7 +78,6 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
       <Link href={linkTo} passHref>
         <a>
           <PosterImage
-            layoutId={layoutId}
             src={src}
             placeholderSrc={placeholderSrc}
             aspectRatio={imageRatio}
@@ -96,7 +94,7 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
             {title}
         </Typography>
         <Typography variant="subtitle1">
-          {releaseDate}
+          {formatDateTime(releaseDate)}
         </Typography>
       </Box>
       {renderRating(ratingScore, ratingOffsetX, ratingOffsetY)}

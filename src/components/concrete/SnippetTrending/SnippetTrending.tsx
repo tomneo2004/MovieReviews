@@ -12,6 +12,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import TrendingIcon from "../../../assets/icons/trend.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import config from '../../config';
 
 let timerHandler: NodeJS.Timeout;
 
@@ -120,8 +121,8 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (
         }
       >
         <MovieCollection
-          collectionHeight={400}
-          itemWidth={200}
+          collectionHeight={config.Collection_Height}
+          itemWidth={config.Collection_Item_Width}
           movieData={movieData}
           onHover={handleTrendingMovieHover}
           // scrollLeft={

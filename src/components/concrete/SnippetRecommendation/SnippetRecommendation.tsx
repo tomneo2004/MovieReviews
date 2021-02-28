@@ -4,6 +4,7 @@ import SectionHeader from "../SectionHeader/SectionHeader";
 import PhantomText from "../PhantomText/PhantomText";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
+import config from '../../config';
 
 type SnippetRecommendationProps = React.ComponentProps<typeof Box> & {
   recommendations: IMovieData[];
@@ -47,8 +48,8 @@ const SnippetRecommendation: React.FC<SnippetRecommendationProps> = (
         }
       />
       <MovieCollection
-        collectionHeight={400}
-        itemWidth={200}
+        collectionHeight={config.Collection_Height}
+        itemWidth={config.Collection_Item_Width}
         movieData={recommendations}
       />
     </Box>

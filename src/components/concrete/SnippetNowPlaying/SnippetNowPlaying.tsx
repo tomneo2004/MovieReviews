@@ -21,6 +21,7 @@ import { formatDateTime } from "../../../utils/timeConverter";
 import PlayingIcon from "../../../assets/icons/cinema.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import config from '../../config';
 
 type SnippetNowPlayingProps = React.ComponentProps<typeof Box> & {
   nowPlayingMovies: INowPlayingMoviesData;
@@ -118,8 +119,8 @@ const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (
         }
       >
         <MovieCollection
-          collectionHeight={400}
-          itemWidth={200}
+          collectionHeight={config.Collection_Height}
+          itemWidth={config.Collection_Item_Width}
           movieData={nowPlayingMovies.results}
           onHover={handlePopularMovieHover}
           // scrollLeft={

@@ -4,6 +4,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
+import config from '../../config';
 
 type SnippetSimilarProps = React.ComponentProps<typeof Box> & {
   similars: IMovieData[];
@@ -46,8 +47,8 @@ const SnippetSimilar: React.FC<SnippetSimilarProps> = (
         }
       />
       <MovieCollection
-        collectionHeight={400}
-        itemWidth={200}
+        collectionHeight={config.Collection_Height}
+        itemWidth={config.Collection_Item_Width}
         movieData={similars}
       />
     </Box>

@@ -21,7 +21,7 @@ export function dateFromUTC(
  */
 export function formatDateTime(
   datetime: string,
-  format: string = "YYYY-MM-DD"
+  format: string = "YYYY-MMM-DD"
 ) {
   const data = moment(datetime);
   return data.format(format);

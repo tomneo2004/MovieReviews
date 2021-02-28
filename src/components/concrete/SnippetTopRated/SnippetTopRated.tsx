@@ -16,6 +16,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import ThumbUpIcon from "../../../assets/icons/thumb-up.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
+import config from '../../config';
 
 type SnippetTopRatedProps = React.ComponentProps<typeof Box> & {
   topRatedMovies: IMovieData[];
@@ -94,8 +95,8 @@ const SnippetTopRated: React.FC<SnippetTopRatedProps> = (
         }
       >
         <MovieCollection
-          collectionHeight={400}
-          itemWidth={200}
+          collectionHeight={config.Collection_Height}
+          itemWidth={config.Collection_Item_Width}
           movieData={topRatedMovies}
           onHover={handlePopularMovieHover}
           // scrollLeft={

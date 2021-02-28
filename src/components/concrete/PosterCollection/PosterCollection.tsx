@@ -37,9 +37,8 @@ const PosterCollection: React.FC<PosterCollectionProps> = (
               id: poster.file_path,
               element: (
                 <PosterImage
-                  imageURL={posterURL}
+                  src={posterURL}
                   enlargeEnabled
-                  layoutId={poster.file_path}
                   hoverCursor="pointer"
                   widthAtSMDown={200}
                   widthAtSMUp={250}

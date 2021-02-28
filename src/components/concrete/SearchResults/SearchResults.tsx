@@ -101,7 +101,6 @@ const SearchResults: React.FC<SearchResultsProps> = (
             >
               <MoviePoster
                 cardWidth={342}
-                layoutId={movie.id.toString()}
                 linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
                 src={buildImageQuery(movie.poster_path, "w342")}
                 title={movie.title}

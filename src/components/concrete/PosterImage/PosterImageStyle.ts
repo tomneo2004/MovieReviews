@@ -5,7 +5,7 @@ type IPosterImageStyle = ScreenWidthProps & {
   fixedWidth: number;
   aspectRatio: number;
   theme: Theme;
-  cursor: string;
+  hoverCursor:string;
 };
 
 const getSize = (fixedWidth:number, width:number, ratio:number)=>{
@@ -33,10 +33,7 @@ export default createStyles({
     [props.theme.breakpoints.up("xl")]: {
       ...getSize(props.fixedWidth, props.widthAtXLUp, props.aspectRatio)
     },
-  }),
-  cardMedia: (props: IPosterImageStyle) => ({
-    objectFit: "fill",
-    cursor: props.cursor,
+    cursor:props.hoverCursor,
   }),
   modal: {
     display: "flex",

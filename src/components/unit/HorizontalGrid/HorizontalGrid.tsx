@@ -1,8 +1,8 @@
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import Grid, {GridCellProps} from 'react-virtualized/dist/es/Grid';
-import AutoSizer from 'react-virtualized/dist/es/AutoSizer';
-import CellMeasurer, {CellMeasurerCache} from 'react-virtualized/dist/es/CellMeasurer';
+import Grid, {GridCellProps} from 'react-virtualized/dist/commonjs/Grid';
+import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
+import CellMeasurer, {CellMeasurerCache} from 'react-virtualized/dist/commonjs/CellMeasurer';
 
 type ChildrenProps = {
     /**
@@ -80,8 +80,9 @@ const HorizontalGrid:React.FC<HorizontalGridProps> = (props:HorizontalGridProps)
 
     const cache = React.useMemo(()=>{
         return new CellMeasurerCache({
-            defaultWidth: itemWidth,
-            defaultHeight: itemHeight?itemHeight:0,
+            
+            defaultWidth: itemWidth?itemWidth:200,
+            defaultHeight: itemHeight?itemHeight:200,
             fixedWidth: true,
             fixedHeight: itemHeight?true:false,
         })
@@ -89,13 +90,13 @@ const HorizontalGrid:React.FC<HorizontalGridProps> = (props:HorizontalGridProps)
 
     return (
         <Box width={width} height={height} {...rest}>
-            <AutoSizer>
+            <AutoSizer defaultWidth={200} defaultHeight={200}>
             {({width, height})=>(
                 <Grid
                 rowCount={1} 
                 columnCount={itemCount}
-                width={width}
-                height={height}
+                width={width?width:200}
+                height={height?height:200}
                 columnWidth={cache.columnWidth}
                 rowHeight={cache.rowHeight}
                 cellRenderer={(props)=>cellRenderer(props, children, cache)}
