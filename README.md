@@ -5,6 +5,10 @@ Movie-Review
 
 [TOC]
 
+Online Document
+===
+[Document](https://hackmd.io/@svzAtIEhTNyi1iul4d1ZNA/ryNpiXv-u)
+
 Description
 ===
 
@@ -54,8 +58,16 @@ Run application
     - [node.js & NPM](https://www.npmjs.com/get-npm)
     - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
     - [github account](https://github.com/)
-    - [environment variable](https://trello.com/c/nOGAmDBW/36-envlocal) 
-        - Download **.env.local** to project **root folder** and make sure file name is **.env.local** **.env.local** is used by **Next.js**. **NOTE**: Don't abuse my api key to **themoviedb** thank you
+    - API KEY
+        1. Go to [themoviedb.org](https://www.themoviedb.org/)
+        2. Create a new account if you havn't
+        3. Login your account
+        4. Go to settings under your account
+        5. Select **API** section and generate new API key
+        6. Copy **API Key**
+        7. In project root create a file and name `.env.local`
+        8. In side the file write `MOVIE_API_KEY = [Your API Key]` and save
+        
 
 ## On local machine
 
