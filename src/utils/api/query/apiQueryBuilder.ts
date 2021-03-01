@@ -49,6 +49,30 @@ export function getPosterImageQuery(
   return buildQuery;
 }
 
+export enum ProfileSize {
+  "w45" = "w45",
+  "w185" = "w185",
+  "h632" = "h632",
+  "original" = "original",
+}
+
+/**
+ * Return query for profile image
+ *
+ * @param imagePath image path relative to themoviedb
+ * @param {ProfileSize} imageSize size of poster
+ *
+ * https://developers.themoviedb.org/3/configuration/get-api-configuration
+ */
+export function getProfileImageQuery(
+  imagePath: string,
+  imageSize: ProfileSize = ProfileSize.original
+) {
+  const buildQuery = buildImageQuery(imagePath, imageSize);
+
+  return buildQuery;
+}
+
 export enum BackdropSize {
   "w300" = "w300",
   "w780" = "w780",

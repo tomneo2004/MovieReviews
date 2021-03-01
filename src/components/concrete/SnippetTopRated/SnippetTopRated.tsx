@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import { BackdropSize, getBackdropImageQuery } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import PhantomText from "../PhantomText/PhantomText";
 // import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
@@ -16,7 +16,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import ThumbUpIcon from "../../../assets/icons/thumb-up.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
-import config from '../../config';
+import config from '../../../config/config';
 
 type SnippetTopRatedProps = React.ComponentProps<typeof Box> & {
   topRatedMovies: IMovieData[];
@@ -29,9 +29,9 @@ const SnippetTopRated: React.FC<SnippetTopRatedProps> = (
   const theme = useTheme();
   const [popularBg, setPopularBg] = React.useState<string>("");
 
-  const handlePopularMovieHover = (index:number) => {
+  const handleMovieHover = (index:number) => {
     const data = topRatedMovies[index];
-    setPopularBg(buildImageQuery(data.backdrop_path, "original"));
+    setPopularBg(getBackdropImageQuery(data.backdrop_path, BackdropSize.original));
   };
   return (
     <Box {...rest}>
@@ -97,8 +97,10 @@ const SnippetTopRated: React.FC<SnippetTopRatedProps> = (
         <MovieCollection
           collectionHeight={config.Movie_Collection_Height}
           itemWidth={config.Movie_Collection_Item_Width}
+          imageRatio={config.Movie_Collection_Image_Ratio}
+          posterSize={config.Movie_Collection_Poster_Size}
           movieData={topRatedMovies}
-          onHover={handlePopularMovieHover}
+          onHover={handleMovieHover}
           // scrollLeft={
           //   <SvgIcon fontSize="large">
           //     <LeftArrowIcon />

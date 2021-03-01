@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import PageLayout from "../../layouts/pageLayout";
-import { buildImageQuery } from "../../utils/api/query/apiQueryBuilder";
+import { BackdropSize, getBackdropImageQuery } from "../../utils/api/query/apiQueryBuilder";
 import Box from "@material-ui/core/Box";
 import {
   Hidden,
@@ -29,10 +29,12 @@ import {
 } from "../../pageUtils/movie";
 import Overview from "../../components/concrete/Overview/Overview";
 import SnippetMedia from "../../components/concrete/SnippetMedia/SnippetMedia";
-import Casts from "../../components/concrete/Casts/Casts";
+// import Casts from "../../components/concrete/Casts/Casts";
 import Reviews from "../../components/concrete/Reviews/Reviews";
 import SnippetRecommendation from "../../components/concrete/SnippetRecommendation/SnippetRecommendation";
 import SnippetSimilar from "../../components/concrete/SnippetSimilar/SnippetSimilar";
+import CastCollection from "../../components/concrete/CastCollection/CastCollection";
+import config from '../../config/config';
 
 export const getServerSideProps: GetServerSideProps<IPageProps> = async (
   context: GetServerSidePropsContext
@@ -141,7 +143,15 @@ const renderSection = (
         />
       );
     case SectionTypes.casts:
-      return <Casts key="casts" casts={data[section]} />;
+      return (
+        <CastCollection
+        collectionHeight={config.Cast_Collection_Height}
+        itemWidth={config.Cast_Collection_Item_Width}
+        imageRatio={config.Cast_Collection_Image_Ratio} 
+        profileSize={config.Cast_Collection_Image_Profile_Size}
+        castData={data[section]} 
+        />
+      );
   }
 };
 
@@ -178,7 +188,7 @@ const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, recommendations, similars, error } = pageProps;
   const theme = useTheme();
   const backdropPath = useMemo(
-    () => buildImageQuery(movieDetail.backdrop_path, "original"),
+    () => getBackdropImageQuery(movieDetail.backdrop_path, BackdropSize.original),
     [movieDetail.backdrop_path]
   );
   const [section, setSection] = React.useState<SectionTypes>(

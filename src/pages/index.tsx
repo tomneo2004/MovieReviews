@@ -12,7 +12,7 @@ import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import RFCarousel from "../components/concrete/RFCarousel/RFCarousel";
-import { buildImageQuery } from "../utils/api/query/apiQueryBuilder";
+import { BackdropSize, getBackdropImageQuery } from "../utils/api/query/apiQueryBuilder";
 import {
   fetchNowPlayingMovies,
   fetchPopularMovies,
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps<IPageProps> = async () => {
   for (let i = 0; i < topRatedMovies.results.length; i++) {
     const backdropPath = topRatedMovies.results[i].backdrop_path;
     if (backdropPath) {
-      heroBackdrop = buildImageQuery(backdropPath, "original");
+      heroBackdrop = getBackdropImageQuery(backdropPath, BackdropSize.original);
       break;
     }
   }

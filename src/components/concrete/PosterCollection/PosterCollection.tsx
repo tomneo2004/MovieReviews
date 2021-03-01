@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { IMoviePosterData } from "../../../utils/api/model/apiModelTypes";
-import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import {  getPosterImageQuery, PosterSize } from "../../../utils/api/query/apiQueryBuilder";
 import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 import PosterImage from "../PosterImage/PosterImage";
 
@@ -32,7 +32,7 @@ const PosterCollection: React.FC<PosterCollectionProps> = (
       <HScroll>
         {() => {
           return posters.map((poster) => {
-            const posterURL = buildImageQuery(poster.file_path, "w500");
+            const posterURL = getPosterImageQuery(poster.file_path, PosterSize.w500);
             return {
               id: poster.file_path,
               element: (

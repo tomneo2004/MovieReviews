@@ -7,7 +7,7 @@ import {
 } from "../../unit/HorizontalScroll/HorizontalScroll";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import { getPosterImageQuery, PosterSize } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 // import { fade, useTheme } from "@material-ui/core";
@@ -24,6 +24,8 @@ type MovieCollectionProps = React.ComponentProps<typeof Box> & {
     movieData: IMovieData[];
     collectionHeight:number;
     itemWidth:number;
+    posterSize:PosterSize;
+    imageRatio:number;
     onHover?: (index:number) => void;
     /**
      * scroll left indicator
@@ -75,6 +77,8 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
     movieData,
     collectionHeight,
     itemWidth,
+    imageRatio,
+    posterSize,
     onHover,
     // scrollLeft = null,
     // scrollRight = null,
@@ -114,7 +118,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
               linkTo={getRoute(RouteType.movie, {
                 id: data.id.toString(),
               })}
-              src={buildImageQuery(data.poster_path, "w342")}
+              src={getPosterImageQuery(data.poster_path, posterSize)}
               title={data.title}
               releaseDate={data.release_date}
               ratingScore={getMovieRating(
@@ -122,6 +126,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
                 data.vote_average
               )}
               onMouseOver={() => handleMouseOver(index)}
+              imageRatio={imageRatio}
             />
           </Box>
         )

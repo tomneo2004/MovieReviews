@@ -2,7 +2,7 @@ import { Box, useTheme } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import { ICastData } from "../../../utils/api/model/apiModelTypes";
-import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import { getProfileImageQuery, ProfileSize } from "../../../utils/api/query/apiQueryBuilder";
 import HorizontalGrid from "../../unit/HorizontalGrid/HorizontalGrid";
 import HScroll, {
   HScrollChildProp,
@@ -13,6 +13,8 @@ type CastCollectionProps = React.ComponentProps<typeof Box> & {
   castData: ICastData[];
   collectionHeight:number;
   itemWidth:number;
+  imageRatio:number;
+  profileSize:ProfileSize;
 };
 
 const renderSkeletons = () => {
@@ -37,7 +39,7 @@ const renderSkeletons = () => {
 const CastCollection: React.FC<CastCollectionProps> = (
   props: CastCollectionProps
 ) => {
-  const { castData, collectionHeight, itemWidth,  ...rest } = props;
+  const { castData, collectionHeight, itemWidth, imageRatio, profileSize,  ...rest } = props;
   const theme = useTheme();
 
   if (!castData) return renderSkeletons();
@@ -51,10 +53,7 @@ const CastCollection: React.FC<CastCollectionProps> = (
         >
           {({index})=>{
             const data = castData[index];
-            const imgQuery = buildImageQuery(
-              data.profile_path,
-              "w138_and_h175_face"
-            );
+            const imgQuery = getProfileImageQuery(data.profile_path, profileSize);
             return (
               <Box width={itemWidth} p={2}>
                 <CastPoster
@@ -62,6 +61,7 @@ const CastCollection: React.FC<CastCollectionProps> = (
                   name={data.name}
                   characterName={data.character}
                   cardWidth={itemWidth -  2 * theme.spacing() * 2}
+                  imageRatio={imageRatio}
                 />
               </Box>
             )

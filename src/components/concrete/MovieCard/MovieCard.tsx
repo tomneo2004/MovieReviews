@@ -6,6 +6,7 @@ import PosterImage from "../PosterImage/PosterImage";
 import Link from "next/link";
 import style from "./MovieCardStyle";
 import { formatDateTime } from "../../../utils/timeConverter";
+import MovieIconURL from '../../../assets/placeholder/movie.svg';
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
     cardWidth:number;
@@ -59,7 +60,7 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     cardWidth,
     linkTo = "#",
     src,
-    placeholderSrc,
+    placeholderSrc = MovieIconURL,
     imageRatio = 1.5,
     title,
     titleMaxHeight,
@@ -89,7 +90,7 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
       <Link href={linkTo} passHref>
         <a>
           <PosterImage
-            src={src}
+            src={src?src:MovieIconURL}
             placeholderSrc={placeholderSrc}
             aspectRatio={imageRatio}
             elevation={4}

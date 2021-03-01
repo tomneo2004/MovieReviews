@@ -7,7 +7,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import {getPosterImageQuery, PosterSize } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
 import MoviePoster from "../MovieCard/MovieCard";
 
@@ -102,7 +102,7 @@ const SearchResults: React.FC<SearchResultsProps> = (
               <MoviePoster
                 cardWidth={342}
                 linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
-                src={buildImageQuery(movie.poster_path, "w342")}
+                src={getPosterImageQuery(movie.poster_path, PosterSize.w342)}
                 title={movie.title}
                 releaseDate={movie.release_date}
                 ratingScore={getMovieRating(
