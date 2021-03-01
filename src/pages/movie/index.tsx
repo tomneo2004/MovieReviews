@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import React from "react";
 import PageLayout from "../../layouts/pageLayout";
-import {
-  BackdropSize,
-  getBackdropImageQuery,
-} from "../../utils/api/query/apiQueryBuilder";
+// import {
+//   BackdropSize,
+//   getBackdropImageQuery,
+// } from "../../utils/api/query/apiQueryBuilder";
 import Box from "@material-ui/core/Box";
 import {
   Hidden,
