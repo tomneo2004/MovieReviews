@@ -20,8 +20,35 @@ export const Default = ()=>{
     const items = getItems();
 
     return (
-        <VerticalList itemCount={items.length} width='100%' height='300px'>
+        <VerticalList itemCount={items.length}>
         {({index})=>{
+            return (<span>{items[index]}</span>);
+        }}
+        </VerticalList>
+    )
+}
+
+export const FixedWidth = ()=>{
+    const items = getItems();
+
+    return (
+        <VerticalList itemCount={items.length} width='300px'>
+        {({index})=>{
+            return (<span>{items[index]}</span>);
+        }}
+        </VerticalList>
+    )
+}
+
+export const Indicator = ()=>{
+    const items = getItems();
+
+    return (
+        <VerticalList itemCount={items.length}>
+        {({index, isVisible, isScrolling})=>{
+            if(isVisible && isScrolling)
+                return (<span>scrolling..............</span>)
+                
             return (<span>{items[index]}</span>);
         }}
         </VerticalList>

@@ -1,6 +1,7 @@
 import Box from '@material-ui/core/Box';
 import React from 'react';
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
+import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller';
+// import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
 import CellMeasurer, { CellMeasurerCache } from 'react-virtualized/dist/commonjs/CellMeasurer';
 import List, { ListRowProps } from 'react-virtualized/dist/commonjs/List';
 
@@ -77,17 +78,24 @@ const VerticalList:React.FC<VerticalListProps> = (props:VerticalListProps) => {
     
     return (
         <Box width={width} height={height} {...rest}>
-            <AutoSizer defaultWidth={200} defaultHeight={200}>
-            {({width, height})=>(
-                <List
-                width={width}
-                height={height}
-                rowCount={itemCount} 
-                rowHeight={cache.rowHeight}
-                rowRenderer={(props)=>rowRenderer(props, children, cache)}
-                />
+            <WindowScroller>
+            {({width, height, isScrolling, onChildScroll, scrollTop, registerChild})=>(
+                <div ref={registerChild}>
+                    <List
+                    autoWidth
+                    autoHeight
+                    width={width}
+                    height={height}
+                    isScrolling={isScrolling}
+                    onScroll={onChildScroll}
+                    scrollTop={scrollTop}
+                    rowCount={itemCount} 
+                    rowHeight={cache.rowHeight}
+                    rowRenderer={(props)=>rowRenderer(props, children, cache)}
+                    />
+                </div>
             )}
-            </AutoSizer>
+            </WindowScroller>
         </Box>
     );
 };
