@@ -27,7 +27,6 @@ const Overview: React.FC<OverviewProps> = (props: OverviewProps) => {
           widthAtMDUp={300}
           widthAtLGUp={400}
           widthAtXLUp={400}
-          layoutId={movieDetail.id.toString()}
         />
       </Grid>
       <Grid md={8} item container justify="center">

@@ -61,103 +61,101 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
  *
  * @param {PosterImageProps} props
  */
-const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
-  (props: PosterImageProps, _ref) => {
-    const {
-      alt = "image",
-      src = "",
-      placeholderSrc,
-      fixedWidth,
-      widthAtSMDown = 300,
-      widthAtSMUp = 320,
-      widthAtMDUp = 350,
-      widthAtLGUp = 400,
-      widthAtXLUp = 450,
-      aspectRatio = 1.5,
-      hoverCursor = "auto",
-      enlargeEnabled = false,
-      onImageLoaded,
-      layoutId = undefined,
-      onClick,
-      ...rest
-    } = props;
-    const theme = useTheme();
-    const [isEnlarge, setIsEnlarge] = React.useState<boolean>(false);
-    const [loaded, setLoaded] = React.useState<boolean>(false);
-    const classes = makeStyles(style)({
-      fixedWidth,
-      widthAtSMDown,
-      widthAtSMUp,
-      widthAtMDUp,
-      widthAtLGUp,
-      widthAtXLUp,
-      theme,
-      aspectRatio,
-      hoverCursor,
-    });
+const PosterImage: React.FC<PosterImageProps> = (props: PosterImageProps) => {
+  const {
+    alt = "image",
+    src = "",
+    placeholderSrc,
+    fixedWidth,
+    widthAtSMDown = 300,
+    widthAtSMUp = 320,
+    widthAtMDUp = 350,
+    widthAtLGUp = 400,
+    widthAtXLUp = 450,
+    aspectRatio = 1.5,
+    hoverCursor = "auto",
+    enlargeEnabled = false,
+    onImageLoaded,
+    layoutId = undefined,
+    onClick,
+    ...rest
+  } = props;
+  const theme = useTheme();
+  const [isEnlarge, setIsEnlarge] = React.useState<boolean>(false);
+  const [loaded, setLoaded] = React.useState<boolean>(false);
+  const classes = makeStyles(style)({
+    fixedWidth,
+    widthAtSMDown,
+    widthAtSMUp,
+    widthAtMDUp,
+    widthAtLGUp,
+    widthAtXLUp,
+    theme,
+    aspectRatio,
+    hoverCursor,
+  });
 
-    const toggleEnlarge = () => setIsEnlarge((state) => !state);
-    const handleAfterLoad = () => {
-      if (onImageLoaded) onImageLoaded();
-      setLoaded(true);
-    };
+  const toggleEnlarge = () => setIsEnlarge((state) => !state);
+  const handleAfterLoad = () => {
+    if (onImageLoaded) onImageLoaded();
+    setLoaded(true);
+  };
 
-    if (isEnlarge) {
-      return (
-        <Modal
-          className={classes.modal}
-          open={true}
-          onClose={toggleEnlarge}
-          disablePortal
-        >
-          <ImageContainer
-            width="100%"
-            height="100%"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            src={src}
-            alt={alt}
-            onClick={toggleEnlarge}
-            postProcess={(node) => (
-              <motion.div layoutId={layoutId}>{node}</motion.div>
-            )}
-          />
-        </Modal>
-      );
-    }
-
+  if (isEnlarge) {
     return (
-      <motion.div
-        layoutId={layoutId}
-        initial={{ zIndex: theme.zIndex.modal + 1 }}
-        animate={{ zIndex: 0 }}
-        transition={springTransition(660, 33, 0.1)}
+      <Modal
+        className={classes.modal}
+        open={true}
+        onClose={toggleEnlarge}
+        disablePortal
       >
-        <Card
-          {...rest}
-          classes={{ root: classes.card }}
-          onClick={enlargeEnabled ? toggleEnlarge : onClick}
-        >
-          <LazyLoadImage
-            alt={alt}
-            src={src}
-            effect="black-and-white"
-            width="100%"
-            height="100%"
-            placeholderSrc={
-              loaded
-                ? undefined
-                : placeholderSrc
-                ? placeholderSrc
-                : imagePlacehoder
-            }
-            afterLoad={handleAfterLoad}
-          />
-        </Card>
-      </motion.div>
+        <ImageContainer
+          width="100%"
+          height="100%"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          src={src}
+          alt={alt}
+          onClick={toggleEnlarge}
+          postProcess={(node) => (
+            <motion.div layoutId={layoutId}>{node}</motion.div>
+          )}
+        />
+      </Modal>
     );
   }
-);
+
+  return (
+    <motion.div
+      layoutId={layoutId}
+      initial={{ zIndex: theme.zIndex.modal + 1 }}
+      animate={{ zIndex: 0 }}
+      transition={springTransition(660, 33, 0.1)}
+    >
+      <Card
+        {...rest}
+        classes={{ root: classes.card }}
+        onClick={enlargeEnabled ? toggleEnlarge : onClick}
+      >
+        <LazyLoadImage
+          alt={alt}
+          src={src}
+          effect="black-and-white"
+          width="100%"
+          height="100%"
+          placeholderSrc={
+            loaded
+              ? undefined
+              : placeholderSrc
+              ? placeholderSrc
+              : imagePlacehoder
+          }
+          afterLoad={handleAfterLoad}
+        />
+      </Card>
+    </motion.div>
+  );
+};
 
 export default PosterImage;

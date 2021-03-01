@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/tomneo2004/MovieReviews"
   },
+  "main": "index.js",
   "release": {
     "plugins": [
       [
@@ -46,7 +47,7 @@
     "clsx": "^1.1.1",
     "framer-motion": "^3.3.0-beta.22",
     "moment": "^2.29.1",
-    "next": "^10.0.7",
+    "next": "latest",
     "next-on-netlify": "^2.8.7",
     "nprogress": "^0.2.0",
     "popmotion": "^9.1.0",
