@@ -1,4 +1,4 @@
-import { Button, makeStyles, Modal, useTheme } from "@material-ui/core";
+import { Box, Button, makeStyles, Modal, useTheme } from "@material-ui/core";
 import { AnimatePresence, motion } from "framer-motion";
 import { wrap } from "popmotion";
 import React from "react";
@@ -11,6 +11,7 @@ type MotionGalleryProps = React.ComponentProps<typeof React.Component> & {
   open: boolean;
   onClose?: () => void;
   images: string[];
+  imageInfos?: React.ReactNode[];
   defaultIndex?: number;
   previousIcon?: React.ReactNode;
   nextIcon?: React.ReactNode;
@@ -36,6 +37,7 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
     open,
     onClose,
     images,
+    imageInfos = [],
     defaultIndex = 0,
     previousIcon = <LeftArrowIcon />,
     nextIcon = <RigthArrowIcon />,
@@ -128,6 +130,16 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
               justifyContent="center"
               alignItems="center"
               src={images[imageIndex]}
+              postProcess={(node)=>{
+                const info = imageInfos[imageIndex];
+
+                return (
+                  <Box display='flex' justifyContent='center'>
+                    {node}
+                    {info}
+                  </Box>
+                )
+              }}
             />
           </motion.div>
         </AnimatePresence>

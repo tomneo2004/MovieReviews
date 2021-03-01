@@ -1,4 +1,4 @@
-import { Box, useTheme } from "@material-ui/core";
+import { Box, Typography, useTheme } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import { ICastData } from "../../../utils/api/model/apiModelTypes";
@@ -8,6 +8,8 @@ import HScroll, {
   HScrollChildProp,
 } from "../../unit/HorizontalScroll/HorizontalScroll";
 import CastPoster from "../CastCard/CastCard";
+import MotionGallery from "../MotionGallery/MotionGallery";
+import ProfileIconURL from '../../../assets/placeholder/profile.svg';
 
 type CastCollectionProps = React.ComponentProps<typeof Box> & {
   castData: ICastData[];
@@ -41,8 +43,57 @@ const CastCollection: React.FC<CastCollectionProps> = (
 ) => {
   const { castData, collectionHeight, itemWidth, imageRatio, profileSize,  ...rest } = props;
   const theme = useTheme();
+  const imageURLs = React.useMemo<string[]>(()=>{
+    const urls:string[] = [];
+
+    if (!castData) return urls;
+    for(let i=0; i<castData.length; i++){
+      const cast = castData[i];
+
+      if(cast.profile_path){
+        urls.push(getProfileImageQuery(cast.profile_path, ProfileSize.original));
+      }
+      else{
+        urls.push(ProfileIconURL);
+      }
+    }
+    return urls;
+
+  }, [castData]);
+  const imageInfos = React.useMemo<React.ReactNode[]>(()=>{
+    const infos:React.ReactNode[] = [];
+
+    if (!castData) return infos;
+    for(let i=0; i<castData.length; i++){
+      const cast = castData[i];
+      
+      infos.push(
+        <Box display='flex' flexDirection='column' justifyContent='center' alignItems='center' p={2} bgcolor='#fff' flexWrap='wrap'>
+          <Typography variant='h5'>{cast.name}</Typography>
+          <Typography variant='h6'>{cast.character}</Typography>
+        </Box>
+      )
+    }
+    return infos;
+  }, [castData]);
+
+  const [galleryState, setGalleryState] = React.useState<{open:boolean, index:number}>({open:false, index:0})
 
   if (!castData) return renderSkeletons();
+
+  const openGallery = (index:number) => {
+    setGalleryState({
+      open:true,
+      index:index,
+    });
+  }
+
+  const closeGallery = ()=>{
+    setGalleryState({
+      open:false,
+      index:0,
+    });
+  }
 
   return (
     <Box {...rest}>
@@ -62,33 +113,20 @@ const CastCollection: React.FC<CastCollectionProps> = (
                   characterName={data.character}
                   cardWidth={itemWidth -  2 * theme.spacing() * 2}
                   imageRatio={imageRatio}
+                  onClick={()=>openGallery(index)}
+                  style={{cursor:'pointer'}}
                 />
               </Box>
             )
           }}
         </HorizontalGrid>
-      {/* <HScroll>
-        {() => {
-          return castData.map((cast) => {
-            const imgQuery = buildImageQuery(
-              cast.profile_path,
-              "w138_and_h175_face"
-            );
-            return {
-              id: cast.cast_id,
-              element: (
-                <CastPoster
-                  imageSrc={imgQuery}
-                  name={cast.name}
-                  characterName={cast.character}
-                  imageWidth={138}
-                  imageHeight={175}
-                />
-              ),
-            };
-          });
-        }}
-      </HScroll> */}
+        <MotionGallery 
+        open={galleryState.open} 
+        onClose={closeGallery}
+        defaultIndex={galleryState.index} 
+        images={imageURLs}
+        imageInfos={imageInfos}
+        />
     </Box>
   );
 };

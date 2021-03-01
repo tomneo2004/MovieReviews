@@ -19,8 +19,8 @@ export default createStyles({
   }),
   fab: (props: IStyleProps) => ({
     position: "absolute",
-    right: props.compact ? 0 : "-5px",
-    top: props.compact ? 0 : "-5px",
+    right: props.compact ? 0 : "-35px",
+    top: props.compact ? 0 : "-35px",
   }),
   card: (props: IStyleProps) => ({
     [props.theme.breakpoints.down("xs")]: {

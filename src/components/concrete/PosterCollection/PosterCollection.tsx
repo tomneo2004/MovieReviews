@@ -45,6 +45,7 @@ const PosterCollection: React.FC<PosterCollectionProps> = (
                   widthAtMDUp={250}
                   widthAtLGUp={300}
                   widthAtXLUp={300}
+                  layoutId={poster.file_path}
                 />
               ),
             };
