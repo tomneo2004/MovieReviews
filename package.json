@@ -20,7 +20,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "next",
+    "dev": "next -p 8888",
     "build": "next build",
     "analyze-build": "ANALYZE=true npm run build",
     "start": "next start",

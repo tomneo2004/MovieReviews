@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import React from "react";
 import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
@@ -10,14 +10,6 @@ type GridVideosProps = React.ComponentProps<typeof Box> & {
 
 const GridVideos: React.FC<GridVideosProps> = (props: GridVideosProps) => {
   const { videoData, ...rest } = props;
-
-  if (!videoData) {
-    return (
-      <Box display="flex" justifyContent="center" alignItems="center">
-        <CircularProgress />
-      </Box>
-    );
-  }
 
   return (
     <Box {...rest}>
