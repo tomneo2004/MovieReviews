@@ -51,7 +51,7 @@ export default function MovieReviewApp(props: AppProps) {
         <title>{process.env.NEXT_PUBLIC_WEBSITE_NAME}</title>
         <meta
           name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
+          content="minimum-scale=1, initial-scale=1, maximum-scale=1, user-scalable=0, width=device-width"
         />
         {/* Import CSS for nprogress */}
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />

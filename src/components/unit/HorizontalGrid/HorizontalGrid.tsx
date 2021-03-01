@@ -100,7 +100,7 @@ const HorizontalGrid: React.FC<HorizontalGridProps> = (
       <AutoSizer defaultWidth={200} defaultHeight={200}>
         {({ width, height }) => (
           <Grid
-            style={{ outline: "none" }}
+            style={{ outline: "none", overflowY: "hidden" }}
             rowCount={1}
             columnCount={itemCount}
             width={width ? width : 200}

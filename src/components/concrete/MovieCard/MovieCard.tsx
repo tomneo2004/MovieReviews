@@ -78,10 +78,10 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     theme,
   });
 
-  const handleImageLoaded = ()=>{
+  const handleImageLoaded = () => {
     setShowRating(true);
-    if(onImageLoaded) onImageLoaded();
-  }
+    if (onImageLoaded) onImageLoaded();
+  };
 
   return (
     <Box {...rest} width={cardWidth}>
@@ -112,9 +112,9 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
           </Typography>
           <Typography variant="subtitle1">{releaseDate}</Typography>
         </Box>
-        {!showRating? null:
-            renderRating(ratingScore, ratingOffsetX, ratingOffsetY)
-        }
+        {!showRating
+          ? null
+          : renderRating(ratingScore, ratingOffsetX, ratingOffsetY)}
       </Box>
     </Box>
   );
