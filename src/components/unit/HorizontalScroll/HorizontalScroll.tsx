@@ -52,6 +52,10 @@ const isSameState = (
  * Listen for scroll state change
  *
  * return null if children given null
+ * 
+ * Note: this component is not ideal for rendering
+ * large amount of items, in order to render large amount
+ * of items use `HorizontalGrid` instead
  *
  * @param {HorizontalScrollProps} props
  */
