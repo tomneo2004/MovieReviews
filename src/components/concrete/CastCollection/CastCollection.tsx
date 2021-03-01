@@ -1,15 +1,18 @@
-import { Box } from "@material-ui/core";
+import { Box, useTheme } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import { ICastData } from "../../../utils/api/model/apiModelTypes";
 import { buildImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import HorizontalGrid from "../../unit/HorizontalGrid/HorizontalGrid";
 import HScroll, {
   HScrollChildProp,
 } from "../../unit/HorizontalScroll/HorizontalScroll";
-import CastPoster from "../CastPoster/CastPoster";
+import CastPoster from "../CastCard/CastCard";
 
 type CastCollectionProps = React.ComponentProps<typeof Box> & {
   castData: ICastData[];
+  collectionHeight:number;
+  itemWidth:number;
 };
 
 const renderSkeletons = () => {
@@ -34,13 +37,37 @@ const renderSkeletons = () => {
 const CastCollection: React.FC<CastCollectionProps> = (
   props: CastCollectionProps
 ) => {
-  const { castData, ...rest } = props;
+  const { castData, collectionHeight, itemWidth,  ...rest } = props;
+  const theme = useTheme();
 
   if (!castData) return renderSkeletons();
 
   return (
     <Box {...rest}>
-      <HScroll>
+       <HorizontalGrid 
+        height={collectionHeight} 
+        itemCount={castData.length}
+        itemWidth={itemWidth}
+        >
+          {({index})=>{
+            const data = castData[index];
+            const imgQuery = buildImageQuery(
+              data.profile_path,
+              "w138_and_h175_face"
+            );
+            return (
+              <Box width={itemWidth} p={2}>
+                <CastPoster
+                  src={imgQuery}
+                  name={data.name}
+                  characterName={data.character}
+                  cardWidth={itemWidth -  2 * theme.spacing() * 2}
+                />
+              </Box>
+            )
+          }}
+        </HorizontalGrid>
+      {/* <HScroll>
         {() => {
           return castData.map((cast) => {
             const imgQuery = buildImageQuery(
@@ -61,7 +88,7 @@ const CastCollection: React.FC<CastCollectionProps> = (
             };
           });
         }}
-      </HScroll>
+      </HScroll> */}
     </Box>
   );
 };

@@ -121,8 +121,8 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (
         }
       >
         <MovieCollection
-          collectionHeight={config.Collection_Height}
-          itemWidth={config.Collection_Item_Width}
+          collectionHeight={config.Movie_Collection_Height}
+          itemWidth={config.Movie_Collection_Item_Width}
           movieData={movieData}
           onHover={handleTrendingMovieHover}
           // scrollLeft={

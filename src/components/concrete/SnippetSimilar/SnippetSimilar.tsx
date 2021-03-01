@@ -47,8 +47,8 @@ const SnippetSimilar: React.FC<SnippetSimilarProps> = (
         }
       />
       <MovieCollection
-        collectionHeight={config.Collection_Height}
-        itemWidth={config.Collection_Item_Width}
+        collectionHeight={config.Movie_Collection_Height}
+        itemWidth={config.Movie_Collection_Item_Width}
         movieData={similars}
       />
     </Box>
