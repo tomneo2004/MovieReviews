@@ -8,7 +8,7 @@ export default {
 export const Default = () => {
   return (
     <Poster
-    cardWidth={200}
+      cardWidth={200}
       src={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
       title="This is a movie title"
       releaseDate="04 Oct 2020"
@@ -19,7 +19,7 @@ export const Default = () => {
 export const RatingGood = () => {
   return (
     <Poster
-    cardWidth={200}
+      cardWidth={200}
       src={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
       title="This is a movie title"
       releaseDate="04 Oct 2020"
@@ -33,7 +33,7 @@ export const RatingGood = () => {
 export const RatingAverage = () => {
   return (
     <Poster
-    cardWidth={200}
+      cardWidth={200}
       src={`https://image.tmdb.org/t/p/w200//h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg`}
       title="This is a movie title"
       releaseDate="04 Oct 2020"
@@ -47,7 +47,7 @@ export const RatingAverage = () => {
 export const RatingBad = () => {
   return (
     <Poster
-    cardWidth={200}
+      cardWidth={200}
       src={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
       title="This is a movie title"
       releaseDate="04 Oct 2020"
@@ -61,7 +61,7 @@ export const RatingBad = () => {
 export const FixedHeight = () => {
   return (
     <Poster
-    cardWidth={200}
+      cardWidth={200}
       height={100}
       src={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
       title="This is a movie title and this is pretty long title as well you see"
@@ -76,7 +76,7 @@ export const FixedHeight = () => {
 export const FixedTitleHeight = () => {
   return (
     <Poster
-    cardWidth={200}
+      cardWidth={200}
       src={`https://image.tmdb.org/t/p/w154/qRyy2UmjC5ur9bDi3kpNNRCc5nc.jpg`}
       title="This is a movie title and this is pretty long title as well you see"
       titleMaxHeight={40}

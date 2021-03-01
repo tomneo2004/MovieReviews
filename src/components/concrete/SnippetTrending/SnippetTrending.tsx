@@ -3,7 +3,10 @@ import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import { BackdropSize, getBackdropImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import {
+  BackdropSize,
+  getBackdropImageQuery,
+} from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import FancyTab from "../FancyTab/FancyTab";
 import PhantomText from "../PhantomText/PhantomText";
@@ -12,7 +15,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import TrendingIcon from "../../../assets/icons/trend.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
-import config from '../../../config/config';
+import config from "../../../config/config";
 
 let timerHandler: NodeJS.Timeout;
 
@@ -35,9 +38,11 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (
   const [trendingBg, setTrendingBg] = React.useState<string>("");
   const [movieData, setMovieData] = React.useState<IMovieData[]>(byDay);
 
-  const handleMovieHover = (index:number) => {
-    const data = movieData[index]
-    setTrendingBg(getBackdropImageQuery(data.backdrop_path, BackdropSize.original));
+  const handleMovieHover = (index: number) => {
+    const data = movieData[index];
+    setTrendingBg(
+      getBackdropImageQuery(data.backdrop_path, BackdropSize.original)
+    );
   };
 
   const handleWindowChange = (value: any) => {

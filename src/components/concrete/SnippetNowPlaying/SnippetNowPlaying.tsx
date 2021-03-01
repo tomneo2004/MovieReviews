@@ -12,7 +12,10 @@ import {
   // IMovieData,
   INowPlayingMoviesData,
 } from "../../../utils/api/model/apiModelTypes";
-import { BackdropSize, getBackdropImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import {
+  BackdropSize,
+  getBackdropImageQuery,
+} from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import PhantomText from "../PhantomText/PhantomText";
 // import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
@@ -21,7 +24,7 @@ import { formatDateTime } from "../../../utils/timeConverter";
 import PlayingIcon from "../../../assets/icons/cinema.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
-import config from '../../../config/config';
+import config from "../../../config/config";
 
 type SnippetNowPlayingProps = React.ComponentProps<typeof Box> & {
   nowPlayingMovies: INowPlayingMoviesData;
@@ -34,9 +37,11 @@ const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (
   const theme = useTheme();
   const [popularBg, setPopularBg] = React.useState<string>("");
 
-  const handleMovieHover = (index:number) => {
+  const handleMovieHover = (index: number) => {
     const data = nowPlayingMovies.results[index];
-    setPopularBg(getBackdropImageQuery(data.backdrop_path, BackdropSize.original));
+    setPopularBg(
+      getBackdropImageQuery(data.backdrop_path, BackdropSize.original)
+    );
   };
   return (
     <Box {...rest}>

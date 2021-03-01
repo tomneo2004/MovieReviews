@@ -10,7 +10,10 @@ import React from "react";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 // import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import {getPosterImageQuery, PosterSize } from "../../../utils/api/query/apiQueryBuilder";
+import {
+  getPosterImageQuery,
+  PosterSize,
+} from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
 // import getMovieRating from "../../../utils/movieRating";
 import { formatDateTime } from "../../../utils/timeConverter";
@@ -37,10 +40,10 @@ type SearchResultsProps = React.ComponentProps<typeof Box> & {
 
 const renderSkeletons = () => {
   return (
-    <Box display='flex' justifyContent='center' alignItems='center'>
+    <Box display="flex" justifyContent="center" alignItems="center">
       <CircularProgress />
     </Box>
-  )
+  );
 };
 
 /**
@@ -74,7 +77,7 @@ const SearchResults: React.FC<SearchResultsProps> = (
 
   return (
     <VerticalList itemCount={data.length} {...rest}>
-    {({index, measure})=>{
+      {({ index, measure }) => {
         const movieData = data[index];
 
         return (
@@ -82,23 +85,22 @@ const SearchResults: React.FC<SearchResultsProps> = (
             borderBottom={`2px solid ${theme.palette.primary.main}`}
             p={2}
             linkTo={getRoute(RouteType.movie, { id: movieData.id.toString() })}
-           src={getPosterImageQuery(movieData.poster_path, PosterSize.w185)}
-           imageWidth={185}
-           imageRatio={1.4}
-           title={movieData.title}
-           releaseDate={formatDateTime(movieData.release_date)}
-           ratingScore={
-             getMovieRating(
+            src={getPosterImageQuery(movieData.poster_path, PosterSize.w185)}
+            imageWidth={185}
+            imageRatio={1.4}
+            title={movieData.title}
+            releaseDate={formatDateTime(movieData.release_date)}
+            ratingScore={getMovieRating(
               movieData.vote_count,
               movieData.vote_average
             )}
-           onImageLoaded={measure}
-           onResize={measure}
+            onImageLoaded={measure}
+            onResize={measure}
           />
         );
       }}
     </VerticalList>
-  )
+  );
 
   // return (
   //   <Grid id={id} {...rest} container>

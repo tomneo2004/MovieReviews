@@ -12,7 +12,10 @@ import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
 import { GetStaticProps } from "next";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import RFCarousel from "../components/concrete/RFCarousel/RFCarousel";
-import { BackdropSize, getBackdropImageQuery } from "../utils/api/query/apiQueryBuilder";
+import {
+  BackdropSize,
+  getBackdropImageQuery,
+} from "../utils/api/query/apiQueryBuilder";
 import {
   fetchNowPlayingMovies,
   fetchPopularMovies,

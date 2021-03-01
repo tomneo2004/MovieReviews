@@ -109,7 +109,9 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
           </Typography>
           {/* release date */}
           <Typography component="div" variant="h5">
-            <Box fontWeight={400}>{formatDateTime(movieDetail.release_date)}</Box>
+            <Box fontWeight={400}>
+              {formatDateTime(movieDetail.release_date)}
+            </Box>
           </Typography>
         </Box>
       </Box>

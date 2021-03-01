@@ -7,16 +7,16 @@ import style from "./CastCardStyle";
 
 // import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import PosterImage from "../PosterImage/PosterImage";
-import ProfileIconRUL from '../../../assets/placeholder/profile.svg';
+import ProfileIconRUL from "../../../assets/placeholder/profile.svg";
 
 type CastCardProps = React.ComponentProps<typeof Card> & {
-  cardWidth:number;
+  cardWidth: number;
   src?: string;
   placeholderSrc?: string;
-  imageRatio?:number;
+  imageRatio?: number;
   name: string;
   characterName: string;
-  onImageLoaded?: ()=>void;
+  onImageLoaded?: () => void;
 };
 
 const CastCard: React.FC<CastCardProps> = (props: CastCardProps) => {
@@ -32,7 +32,7 @@ const CastCard: React.FC<CastCardProps> = (props: CastCardProps) => {
   } = props;
 
   const classes = makeStyles(style)({
-    width:cardWidth
+    width: cardWidth,
   });
 
   return (
@@ -44,7 +44,7 @@ const CastCard: React.FC<CastCardProps> = (props: CastCardProps) => {
         src={imageSrc ? imageSrc : imagePlacehoder}
       /> */}
       <PosterImage
-        src={src?src:ProfileIconRUL}
+        src={src ? src : ProfileIconRUL}
         placeholderSrc={placeholderSrc}
         aspectRatio={imageRatio}
         elevation={0}

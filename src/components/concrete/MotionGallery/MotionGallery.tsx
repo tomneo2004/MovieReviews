@@ -130,15 +130,15 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
               justifyContent="center"
               alignItems="center"
               src={images[imageIndex]}
-              postProcess={(node)=>{
+              postProcess={(node) => {
                 const info = imageInfos[imageIndex];
 
                 return (
-                  <Box display='flex' justifyContent='center'>
+                  <Box display="flex" justifyContent="center">
                     {node}
                     {info}
                   </Box>
-                )
+                );
               }}
             />
           </motion.div>

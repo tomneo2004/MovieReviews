@@ -2,7 +2,7 @@ import Box from "@material-ui/core/Box";
 import RootRef from "@material-ui/core/RootRef";
 import React from "react";
 import Measure, { ContentRect } from "react-measure";
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 
@@ -18,7 +18,7 @@ type ImageContainerProps = React.ComponentProps<typeof Box> & {
    * right away or return an element that wrapped img element
    */
   postProcess?: (node: React.ReactNode) => React.ReactNode;
-  onImageLoaded?: ()=>void;
+  onImageLoaded?: () => void;
 };
 
 let image: HTMLImageElement;
@@ -31,7 +31,14 @@ let image: HTMLImageElement;
  */
 const ImageContainer: React.FC<ImageContainerProps> = React.forwardRef(
   (props: ImageContainerProps, _ref) => {
-    const { src, placeholderSrc, onImageLoaded, alt = "Image", postProcess = (node) => node, ...rest } = props;
+    const {
+      src,
+      placeholderSrc,
+      onImageLoaded,
+      alt = "Image",
+      postProcess = (node) => node,
+      ...rest
+    } = props;
     const [
       [imageBaseWidth, imageBaseHeight],
       setImageBaseSize,
@@ -85,13 +92,15 @@ const ImageContainer: React.FC<ImageContainerProps> = React.forwardRef(
               <Box {...rest}>
                 {postProcess(
                   <LazyLoadImage
-                  alt={alt}
-                  src={src}
-                  effect='blur'
-                  width={imageWidth}
-                  height={imageHeight}
-                  placeholderSrc={placeholderSrc?placeholderSrc:imagePlacehoder}
-                  afterLoad={onImageLoaded}
+                    alt={alt}
+                    src={src}
+                    effect="blur"
+                    width={imageWidth}
+                    height={imageHeight}
+                    placeholderSrc={
+                      placeholderSrc ? placeholderSrc : imagePlacehoder
+                    }
+                    afterLoad={onImageLoaded}
                   />
                 )}
               </Box>

@@ -4,7 +4,7 @@ import SectionHeader from "../SectionHeader/SectionHeader";
 import PhantomText from "../PhantomText/PhantomText";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import config from '../../../config/config';
+import config from "../../../config/config";
 
 type SnippetRecommendationProps = React.ComponentProps<typeof Box> & {
   recommendations: IMovieData[];

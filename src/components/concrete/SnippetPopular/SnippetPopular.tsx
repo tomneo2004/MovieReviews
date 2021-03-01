@@ -8,7 +8,10 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
-import { BackdropSize, getBackdropImageQuery } from "../../../utils/api/query/apiQueryBuilder";
+import {
+  BackdropSize,
+  getBackdropImageQuery,
+} from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import PhantomText from "../PhantomText/PhantomText";
 // import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
@@ -16,7 +19,7 @@ import PhantomText from "../PhantomText/PhantomText";
 import PopularIcon from "../../../assets/icons/heat.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
-import config from '../../../config/config';
+import config from "../../../config/config";
 
 type SnippetPopularProps = React.ComponentProps<typeof Box> & {
   popularMovies: IMovieData[];
@@ -29,9 +32,11 @@ const SnippetPopular: React.FC<SnippetPopularProps> = (
   const theme = useTheme();
   const [popularBg, setPopularBg] = React.useState<string>("");
 
-  const handleMovieHover = (index:number) => {
+  const handleMovieHover = (index: number) => {
     const data = popularMovies[index];
-    setPopularBg(getBackdropImageQuery(data.backdrop_path, BackdropSize.original));
+    setPopularBg(
+      getBackdropImageQuery(data.backdrop_path, BackdropSize.original)
+    );
   };
   return (
     <Box {...rest}>

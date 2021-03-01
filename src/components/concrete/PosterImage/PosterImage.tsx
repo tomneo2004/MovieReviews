@@ -6,9 +6,9 @@ import style from "./PosterImageStyle";
 import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
-import 'react-lazy-load-image-component/src/effects/black-and-white.css';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-lazy-load-image-component/src/effects/black-and-white.css";
 import { motion } from "framer-motion";
 import { springTransition } from "../../../framer/Transition";
 
@@ -19,7 +19,7 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
     /**
      * Fixed width, otherwise give width for different size
      */
-    fixedWidth?:number;
+    fixedWidth?: number;
 
     /**
      * Ratio between image width and height
@@ -44,12 +44,12 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
     /**
      * callback when image complete loaded
      */
-    onImageLoaded?: ()=>void;
+    onImageLoaded?: () => void;
 
     /**
      * layoutId that used for transition between normal and enlarge
      */
-    layoutId?:string;
+    layoutId?: string;
   };
 
 /**
@@ -97,14 +97,19 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
     });
 
     const toggleEnlarge = () => setIsEnlarge((state) => !state);
-    const handleAfterLoad = ()=>{
-      if(onImageLoaded) onImageLoaded();
+    const handleAfterLoad = () => {
+      if (onImageLoaded) onImageLoaded();
       setLoaded(true);
-    }
+    };
 
     if (isEnlarge) {
       return (
-        <Modal className={classes.modal} open={true} onClose={toggleEnlarge} disablePortal>
+        <Modal
+          className={classes.modal}
+          open={true}
+          onClose={toggleEnlarge}
+          disablePortal
+        >
           <ImageContainer
             width="100%"
             height="100%"
@@ -115,9 +120,7 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
             alt={alt}
             onClick={toggleEnlarge}
             postProcess={(node) => (
-              <motion.div layoutId={layoutId}>
-              {node}
-              </motion.div>
+              <motion.div layoutId={layoutId}>{node}</motion.div>
             )}
           />
         </Modal>
@@ -125,26 +128,34 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
     }
 
     return (
-      <motion.div layoutId={layoutId} 
-      initial={{zIndex:theme.zIndex.modal+1}}
-      animate={{zIndex:0}} 
-      transition={springTransition(660,33,0.1)}>
+      <motion.div
+        layoutId={layoutId}
+        initial={{ zIndex: theme.zIndex.modal + 1 }}
+        animate={{ zIndex: 0 }}
+        transition={springTransition(660, 33, 0.1)}
+      >
         <Card
           {...rest}
           classes={{ root: classes.card }}
           onClick={enlargeEnabled ? toggleEnlarge : onClick}
         >
           <LazyLoadImage
-          alt={alt}
-          src={src}
-          effect='black-and-white'
-          width='100%'
-          height='100%'
-          placeholderSrc={loaded?undefined : placeholderSrc?placeholderSrc:imagePlacehoder}
-          afterLoad={handleAfterLoad}
+            alt={alt}
+            src={src}
+            effect="black-and-white"
+            width="100%"
+            height="100%"
+            placeholderSrc={
+              loaded
+                ? undefined
+                : placeholderSrc
+                ? placeholderSrc
+                : imagePlacehoder
+            }
+            afterLoad={handleAfterLoad}
           />
         </Card>
-        </motion.div>
+      </motion.div>
     );
   }
 );
