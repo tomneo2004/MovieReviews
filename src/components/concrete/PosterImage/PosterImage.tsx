@@ -8,6 +8,7 @@ import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 import { motion } from "framer-motion";
 import { springTransition } from "../../../framer/Transition";
 
@@ -136,7 +137,7 @@ const PosterImage: React.FC<PosterImageProps> = React.forwardRef(
           <LazyLoadImage
           alt={alt}
           src={src}
-          effect='blur'
+          effect='black-and-white'
           width='100%'
           height='100%'
           placeholderSrc={loaded?undefined : placeholderSrc?placeholderSrc:imagePlacehoder}

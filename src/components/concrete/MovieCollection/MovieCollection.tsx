@@ -19,6 +19,7 @@ import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 // import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import HorizontalGrid from "../../unit/HorizontalGrid/HorizontalGrid";
 import { useTheme } from "@material-ui/core";
+import { formatDateTime } from "../../../utils/timeConverter";
 
 type MovieCollectionProps = React.ComponentProps<typeof Box> & {
     movieData: IMovieData[];
@@ -120,7 +121,7 @@ const MovieCollection: React.FC<MovieCollectionProps> = (
               })}
               src={getPosterImageQuery(data.poster_path, posterSize)}
               title={data.title}
-              releaseDate={data.release_date}
+              releaseDate={formatDateTime(data.release_date)}
               ratingScore={getMovieRating(
                 data.vote_count,
                 data.vote_average

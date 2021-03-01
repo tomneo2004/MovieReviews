@@ -5,7 +5,6 @@ import { getCircularRating } from "../../unit/CircularRating/CircularRating";
 import PosterImage from "../PosterImage/PosterImage";
 import Link from "next/link";
 import style from "./MovieCardStyle";
-import { formatDateTime } from "../../../utils/timeConverter";
 import MovieIconURL from '../../../assets/placeholder/movie.svg';
 
 type MoviePosterProps = React.ComponentProps<typeof Box> & {
@@ -106,7 +105,7 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
             {title}
         </Typography>
         <Typography variant="subtitle1">
-          {formatDateTime(releaseDate)}
+          {releaseDate}
         </Typography>
       </Box>
       {renderRating(ratingScore, ratingOffsetX, ratingOffsetY)}

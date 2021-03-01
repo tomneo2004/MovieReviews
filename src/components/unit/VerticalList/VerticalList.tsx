@@ -92,6 +92,7 @@ const VerticalList:React.FC<VerticalListProps> = (props:VerticalListProps) => {
                     rowCount={itemCount} 
                     rowHeight={cache.rowHeight}
                     rowRenderer={(props)=>rowRenderer(props, children, cache)}
+                    style={{outline:'none'}}
                     />
                 </div>
             )}

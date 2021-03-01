@@ -26,7 +26,7 @@ const SnippetSimilar: React.FC<SnippetSimilarProps> = (
             height="100%"
             bgcolor={theme.palette.primary.light}
             px={1}
-            text={`Related Movies`}
+            text={`Related`}
             charDelayDefs={{
               0: { enter: 1, exit: 0 },
               1: { enter: 1.2, exit: 0 },
@@ -35,13 +35,6 @@ const SnippetSimilar: React.FC<SnippetSimilarProps> = (
               4: { enter: 1.8, exit: 0 },
               5: { enter: 2, exit: 0 },
               6: { enter: 2.2, exit: 0 },
-              7: { enter: 2.4, exit: 0 },
-              8: { enter: 2.6, exit: 0 },
-              9: { enter: 2.8, exit: 0 },
-              10: { enter: 3, exit: 0 },
-              11: { enter: 3.4, exit: 0 },
-              12: { enter: 3.6, exit: 0 },
-              13: { enter: 3.8, exit: 0 },
             }}
           />
         }
