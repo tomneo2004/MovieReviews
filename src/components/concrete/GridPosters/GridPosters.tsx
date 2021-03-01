@@ -1,4 +1,4 @@
-import { Box, Grid } from "@material-ui/core";
+import { Box, CircularProgress, Grid } from "@material-ui/core";
 import React from "react";
 import { IMoviePosterData } from "../../../utils/api/model/apiModelTypes";
 import {
@@ -30,6 +30,14 @@ const GridPosters: React.FC<GridPostersProps> = (props: GridPostersProps) => {
   const handlePosterClick = (i: number) => {
     if (onPosterClick) onPosterClick(i);
   };
+
+  if (!posterData) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box {...rest}>
