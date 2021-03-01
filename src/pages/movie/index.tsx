@@ -190,11 +190,11 @@ const renderTabs = (
 const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, recommendations, similars, error } = pageProps;
   const theme = useTheme();
-  const backdropPath = useMemo(
-    () =>
-      getBackdropImageQuery(movieDetail.backdrop_path, BackdropSize.original),
-    [movieDetail.backdrop_path]
-  );
+  // const backdropPath = useMemo(
+  //   () =>
+  //     getBackdropImageQuery(movieDetail.backdrop_path, BackdropSize.original),
+  //   [movieDetail.backdrop_path]
+  // );
   const [section, setSection] = React.useState<SectionTypes>(
     SectionTypes.overview
   );
@@ -224,8 +224,8 @@ const MoviePage = (pageProps: IPageProps) => {
 
   return (
     <PageLayout
-      backgroundURL={backdropPath}
-      banner={!backdropPath ? null : <Box width="inherit" height="400px" />}
+      // backgroundURL={backdropPath}
+      // banner={!backdropPath ? null : <Box width="inherit" height="400px" />}
       navigation={
         <CommonNavigation
           elevation={8}

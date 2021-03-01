@@ -73,9 +73,15 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
     ...rest
   } = props;
   const theme = useTheme();
+  const [showRating, setShowRating] = React.useState<boolean>(false);
   const classes = makeStyles(style)({
     theme,
   });
+
+  const handleImageLoaded = ()=>{
+    setShowRating(true);
+    if(onImageLoaded) onImageLoaded();
+  }
 
   return (
     <Box {...rest} width={cardWidth}>
@@ -96,7 +102,7 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
               onMouseOver={onMouseOver}
               hoverCursor="pointer"
               fixedWidth={cardWidth}
-              onImageLoaded={onImageLoaded}
+              onImageLoaded={handleImageLoaded}
             />
           </a>
         </Link>
@@ -106,7 +112,9 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
           </Typography>
           <Typography variant="subtitle1">{releaseDate}</Typography>
         </Box>
-        {renderRating(ratingScore, ratingOffsetX, ratingOffsetY)}
+        {!showRating? null:
+            renderRating(ratingScore, ratingOffsetX, ratingOffsetY)
+        }
       </Box>
     </Box>
   );
