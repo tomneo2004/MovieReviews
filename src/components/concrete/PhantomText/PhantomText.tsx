@@ -129,7 +129,7 @@ const PhantomText: React.FC<PhantomTextProps> = (props: PhantomTextProps) => {
                 defDelay ? defDelay.exit : (chars.length - i) * charDefaultDelay
               )}
             >
-              <Typography variant={variant} noWrap>
+              <Typography variant={variant}>
                 {value}
               </Typography>
             </RevealFadeMotion>

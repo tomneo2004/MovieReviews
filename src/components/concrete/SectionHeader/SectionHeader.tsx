@@ -1,5 +1,4 @@
 import { Box } from "@material-ui/core";
-import { motion } from "framer-motion";
 import React from "react";
 
 type SectionHeaderProps = React.ComponentProps<typeof Box> & {
@@ -38,7 +37,6 @@ const SectionHeader: React.FC<SectionHeaderProps> = (
   const py = headerAlign === "center" && items && items.length > 0 ? 1 : 0;
 
   return (
-    <motion.div layout>
       <Box {...rest}>
         <Box
           display="flex"
@@ -68,7 +66,6 @@ const SectionHeader: React.FC<SectionHeaderProps> = (
           </Box>
         </Box>
       </Box>
-    </motion.div>
   );
 };
 
