@@ -1,4 +1,5 @@
-import { LinearProgress, useTheme } from "@material-ui/core";
+import useTheme from "@material-ui/core/styles/useTheme";
+import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React from "react";

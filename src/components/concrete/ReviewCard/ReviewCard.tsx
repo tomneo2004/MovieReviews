@@ -1,15 +1,18 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import Card from "@material-ui/core/Card/Card";
+import CardHeader from "@material-ui/core/CardHeader/CardHeader";
+import CardContent from "@material-ui/core/CardContent/CardContent";
+import CardActions from "@material-ui/core/CardActions/CardActions";
+import Typography from "@material-ui/core/Typography/Typography";
+import IconButton from "@material-ui/core/IconButton/IconButton";
 import ExpandMore from "@material-ui/icons/ExpandMoreSharp";
-import { Box, Chip, makeStyles, useTheme } from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import Chip from "@material-ui/core/Chip/Chip";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
 import style from "./ReviewCardStyle";
 import clsx from "clsx";
-import { Rating } from "@material-ui/lab";
+import Rating from "@material-ui/lab/Rating";
 import { motion } from "framer-motion";
 
 type ReviewCardProps = React.ComponentProps<typeof Card> & {

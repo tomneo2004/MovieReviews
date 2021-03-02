@@ -1,5 +1,6 @@
-import { RootRef, Typography } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
+import RootRef from "@material-ui/core/RootRef/RootRef";
+import Typography from "@material-ui/core/Typography/Typography";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 import MovieIconURL from "../../../assets/placeholder/movie.svg";
 import { getCircularRating } from "../../unit/CircularRating/CircularRating";

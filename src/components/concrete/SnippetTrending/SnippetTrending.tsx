@@ -1,6 +1,9 @@
-import { fade, Hidden, SvgIcon, useTheme } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import Hidden from "@material-ui/core/Hidden/Hidden";
+import SvgIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Box from "@material-ui/core/Box/Box";
+import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import {
@@ -10,8 +13,6 @@ import {
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import FancyTab from "../FancyTab/FancyTab";
 import PhantomText from "../PhantomText/PhantomText";
-// import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
-// import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import TrendingIcon from "../../../assets/icons/trend.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
@@ -132,16 +133,6 @@ const SnippetTrending: React.FC<SnippetTrendingProps> = (
           posterSize={config.Movie_Collection_Poster_Size}
           movieData={movieData}
           onHover={handleMovieHover}
-          // scrollLeft={
-          //   <SvgIcon fontSize="large">
-          //     <LeftArrowIcon />
-          //   </SvgIcon>
-          // }
-          // scrollRight={
-          //   <SvgIcon fontSize="large">
-          //     <RightArrowIcon />
-          //   </SvgIcon>
-          // }
         />
       </BackgroundImage>
     </Box>

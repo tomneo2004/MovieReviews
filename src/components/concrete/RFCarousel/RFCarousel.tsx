@@ -1,5 +1,5 @@
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box/Box";
+import Typography from "@material-ui/core/Typography/Typography";
 import { AnimatePresence, Transition, useAnimation } from "framer-motion";
 import React from "react";
 import shortid from "shortid";

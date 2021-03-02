@@ -1,5 +1,7 @@
 import React from "react";
-import { Box, BoxProps, makeStyles, RootRef } from "@material-ui/core";
+import Box, { BoxProps } from "@material-ui/core/Box/Box";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import RootRef from "@material-ui/core/RootRef/RootRef";
 import clsx from "clsx";
 import { CSSProperties } from "@material-ui/core/styles/withStyles";
 import useLayoutEffect from "../../../effects/isomorphic/isomorphicEffect";

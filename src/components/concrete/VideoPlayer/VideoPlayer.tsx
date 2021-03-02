@@ -1,16 +1,14 @@
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardMedia,
-  Dialog,
-  Fab,
-  makeStyles,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
+import Box from "@material-ui/core/Box/Box";
+import Card from "@material-ui/core/Card/Card";
+import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia/CardMedia";
+import Dialog from "@material-ui/core/Dialog/Dialog";
+import Fab from "@material-ui/core/Fab/Fab";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Typography from "@material-ui/core/Typography/Typography";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Skeleton from "@material-ui/lab/Skeleton/Skeleton";
 import React from "react";
 import ReactPlayer from "react-player";
 import { useNoembed } from "../../../effects/apiFetch/noembed";

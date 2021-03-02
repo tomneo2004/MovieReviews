@@ -1,10 +1,7 @@
-import {
-  Box,
-  fade,
-  LinearProgress,
-  // SvgIcon,
-  useTheme,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
+import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import {
@@ -16,8 +13,6 @@ import MovieCollection from "../MovieCollection/MovieCollection";
 import PhantomText from "../PhantomText/PhantomText";
 import SectionHeader from "../SectionHeader/SectionHeader";
 import config from "../../../config/config";
-// import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
-// import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 
 type SnippetDiscoverProps = React.ComponentProps<typeof Box> & {
   discoverMovies: IMovieData[];
@@ -86,16 +81,6 @@ const SnippetDiscover: React.FC<SnippetDiscoverProps> = (
           posterSize={config.Movie_Collection_Poster_Size}
           movieData={discoverMovies}
           onHover={handleMovieHover}
-          // scrollLeft={
-          //   <SvgIcon fontSize="large">
-          //     <LeftArrowIcon />
-          //   </SvgIcon>
-          // }
-          // scrollRight={
-          //   <SvgIcon fontSize="large">
-          //     <RightArrowIcon />
-          //   </SvgIcon>
-          // }
         />
       </BackgroundImage>
     </Box>

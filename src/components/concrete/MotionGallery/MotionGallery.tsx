@@ -1,4 +1,8 @@
-import { Box, Button, makeStyles, Modal, useTheme } from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import Button from "@material-ui/core/Button/Button";
+import Modal from "@material-ui/core/Modal/Modal";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
 import { AnimatePresence, motion } from "framer-motion";
 import { wrap } from "popmotion";
 import React from "react";

@@ -1,11 +1,11 @@
-import Box from "@material-ui/core/Box";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 import Navigation from "../Navigation/Navigation";
 import SearchBar from "../SearchBar/SearchBar";
 import BrandIcon from "../../../assets/brand/brand.inline.svg";
-import SvgIcon from "@material-ui/core/SvgIcon";
+import SvgIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Link from "next/link";
-import { makeStyles } from "@material-ui/core";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./SearchNavigationStyle";
 
 type SearchNavigationProps = React.ComponentProps<typeof Navigation> & {

@@ -1,4 +1,5 @@
-import { createStyles, Theme } from "@material-ui/core/styles";
+import createStyles from "@material-ui/core/styles/createStyles";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 
 type IPosterImageStyle = ScreenWidthProps & {

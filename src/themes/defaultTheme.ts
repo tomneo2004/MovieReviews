@@ -1,4 +1,5 @@
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes";
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { red } from "@material-ui/core/colors";
 
 //Color scheme

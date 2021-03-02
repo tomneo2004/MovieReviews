@@ -1,4 +1,5 @@
-import { Box, useTheme } from "@material-ui/core";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 
 export type PageLayoutProps = React.ComponentProps<typeof Box> & {
@@ -20,22 +21,9 @@ const PageLayout: React.FC<PageLayoutProps> = (props: PageLayoutProps) => {
 
   const theme = useTheme();
 
-  // const classes = makeStyles({
-  //   fixedBg: {
-  //     backgroundColor: theme.palette.primary.light,
-  //     background: `url(${backgroundURL})`,
-  //     backgroundRepeat: "no-repeat",
-  //     backgroundAttachment: "fixed",
-  //     backgroundPosition: "center top",
-  //     backgroundOrigin: "border-box",
-  //     backgroundSize: "cover",
-  //   },
-  // })();
-
   return (
     <Box
       {...rest}
-      // className={backgroundURL ? classes.fixedBg : ""}
       position="relative"
       flexDirection="column"
       justifyContent="flex-start"

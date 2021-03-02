@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import PageLayout from "../../layouts/pageLayout";
 import SearchLayout from "../../layouts/search/searchLayout";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps } from "next/types/index";
 import { ISearchMovieData } from "../../utils/api/model/apiModelTypes";
 import axios from "axios";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";

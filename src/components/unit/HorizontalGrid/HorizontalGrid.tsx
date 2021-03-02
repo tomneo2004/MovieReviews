@@ -1,4 +1,4 @@
-import Box from "@material-ui/core/Box";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 import Grid, { GridCellProps } from "react-virtualized/dist/commonjs/Grid";
 import AutoSizer from "react-virtualized/dist/commonjs/AutoSizer";

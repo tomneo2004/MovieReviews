@@ -1,7 +1,7 @@
 import React from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-import AppBar from "@material-ui/core/AppBar";
-import Box from "@material-ui/core/Box";
+import Toolbar from "@material-ui/core/Toolbar/Toolbar";
+import AppBar from "@material-ui/core/AppBar/AppBar";
+import Box from "@material-ui/core/Box/Box";
 import useIsomorphicEffect from "../../../effects/isomorphic/isomorphicEffect";
 
 type NavigationProps = React.ComponentProps<typeof AppBar> & {

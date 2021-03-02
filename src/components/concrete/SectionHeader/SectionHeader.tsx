@@ -1,4 +1,4 @@
-import { Box } from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 
 type SectionHeaderProps = React.ComponentProps<typeof Box> & {
@@ -37,35 +37,35 @@ const SectionHeader: React.FC<SectionHeaderProps> = (
   const py = headerAlign === "center" && items && items.length > 0 ? 1 : 0;
 
   return (
-      <Box {...rest}>
+    <Box {...rest}>
+      <Box
+        display="flex"
+        flexDirection={flexDir}
+        alignItems={alignItems}
+        py={py}
+      >
         <Box
-          display="flex"
-          flexDirection={flexDir}
-          alignItems={alignItems}
-          py={py}
+          flex="initial"
+          order={headerOrder}
+          pb={py}
+          justifyContent="center"
+          alignItems="center"
         >
-          <Box
-            flex="initial"
-            order={headerOrder}
-            pb={py}
-            justifyContent="center"
-            alignItems="center"
-          >
-            {header}
-          </Box>
-          <Box
-            flex="auto"
-            order={itemsOrder}
-            display="flex"
-            justifyContent={itemsJC}
-            px={1}
-          >
-            {items.map((item, i) => {
-              return <React.Fragment key={i}>{item}</React.Fragment>;
-            })}
-          </Box>
+          {header}
+        </Box>
+        <Box
+          flex="auto"
+          order={itemsOrder}
+          display="flex"
+          justifyContent={itemsJC}
+          px={1}
+        >
+          {items.map((item, i) => {
+            return <React.Fragment key={i}>{item}</React.Fragment>;
+          })}
         </Box>
       </Box>
+    </Box>
   );
 };
 

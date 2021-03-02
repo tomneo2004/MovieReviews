@@ -1,5 +1,6 @@
-import { makeStyles, useTheme } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 import SearchField from "../../unit/SearchField/SearchField";
 import style from "./SearchBarStyle";

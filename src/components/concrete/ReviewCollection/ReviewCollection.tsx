@@ -1,15 +1,15 @@
-import Box from "@material-ui/core/Box";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import Skeleton from "@material-ui/lab/Skeleton";
+import Box from "@material-ui/core/Box/Box";
+import Card from "@material-ui/core/Card/Card";
+import CardContent from "@material-ui/core/CardContent/CardContent";
+import Typography from "@material-ui/core/Typography/Typography";
+import Skeleton from "@material-ui/lab/Skeleton/Skeleton";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { IMovieReviewsData } from "../../../utils/api/model/apiModelTypes";
 import { partialSentenceFrom } from "../../../utils/sentenceExtractor";
 import gfm from "remark-gfm";
 import { dateFromUTC } from "../../../utils/timeConverter";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 import { motion } from "framer-motion";
 import ReviewCard from "../ReviewCard/ReviewCard";
 

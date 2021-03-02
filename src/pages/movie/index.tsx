@@ -1,19 +1,16 @@
 import React from "react";
 import PageLayout from "../../layouts/pageLayout";
-// import {
-//   BackdropSize,
-//   getBackdropImageQuery,
-// } from "../../utils/api/query/apiQueryBuilder";
-import Box from "@material-ui/core/Box";
+import Box from "@material-ui/core/Box/Box";
+import Hidden from "@material-ui/core/Hidden/Hidden";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Tab from "@material-ui/core/Tab/Tab";
+import Tabs from "@material-ui/core/Tabs/Tabs";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import useTheme from "@material-ui/core/styles/useTheme";
 import {
-  Hidden,
-  makeStyles,
-  Tab,
-  Tabs,
-  Theme,
-  useTheme,
-} from "@material-ui/core";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+  GetServerSideProps,
+  GetServerSidePropsContext,
+} from "next/types/index";
 import {
   ICastData,
   IMovieDetailData,
@@ -32,7 +29,6 @@ import {
 } from "../../pageUtils/movie";
 import Overview from "../../components/concrete/Overview/Overview";
 import SnippetMedia from "../../components/concrete/SnippetMedia/SnippetMedia";
-// import Casts from "../../components/concrete/Casts/Casts";
 import Reviews from "../../components/concrete/Reviews/Reviews";
 import SnippetRecommendation from "../../components/concrete/SnippetRecommendation/SnippetRecommendation";
 import SnippetSimilar from "../../components/concrete/SnippetSimilar/SnippetSimilar";
@@ -190,11 +186,6 @@ const renderTabs = (
 const MoviePage = (pageProps: IPageProps) => {
   const { movieId, movieDetail, recommendations, similars, error } = pageProps;
   const theme = useTheme();
-  // const backdropPath = useMemo(
-  //   () =>
-  //     getBackdropImageQuery(movieDetail.backdrop_path, BackdropSize.original),
-  //   [movieDetail.backdrop_path]
-  // );
   const [section, setSection] = React.useState<SectionTypes>(
     SectionTypes.overview
   );
@@ -224,12 +215,9 @@ const MoviePage = (pageProps: IPageProps) => {
 
   return (
     <PageLayout
-      // backgroundURL={backdropPath}
-      // banner={!backdropPath ? null : <Box width="inherit" height="400px" />}
       navigation={
         <CommonNavigation
           elevation={8}
-          // onSearch={handleSearch}
           middleButtons={[
             <Hidden smDown>{renderTabs(section, handleSectionChange)}</Hidden>,
           ]}

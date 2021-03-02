@@ -1,15 +1,15 @@
 import React from "react";
 import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
 import theme from "../themes/defaultTheme";
 import type { AppProps /*, AppContext */ } from "next/app";
 import NProgress from "nprogress";
 import Router from "next/router";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import ErrorBoundary from "../components/concrete/ErrorBoundary/ErrorBoundary";
-import Box from "@material-ui/core/Box";
-import { Typography } from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import Typography from "@material-ui/core/Typography/Typography";
 import LinkTo from "../components/concrete/LinkTo/LinkTo";
 import { getRoute, RouteType } from "../routes/routesGenerator";
 

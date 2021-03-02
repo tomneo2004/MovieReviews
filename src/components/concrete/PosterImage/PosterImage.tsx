@@ -1,13 +1,13 @@
-import { makeStyles, Modal, useTheme } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Modal from "@material-ui/core/Modal/Modal";
+import Card from "@material-ui/core/Card/Card";
 import React from "react";
 import style from "./PosterImageStyle";
-
 import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import "react-lazy-load-image-component/src/effects/black-and-white.css";
 import { motion } from "framer-motion";
 import { springTransition } from "../../../framer/Transition";

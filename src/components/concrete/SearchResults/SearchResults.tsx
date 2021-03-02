@@ -1,24 +1,17 @@
-import { useTheme } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
-// import Card from "@material-ui/core/Card";
-// import CardContent from "@material-ui/core/CardContent";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Box from "@material-ui/core/Box/Box";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-// import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-// import Skeleton from "@material-ui/lab/Skeleton";
+import Typography from "@material-ui/core/Typography/Typography";
 import React from "react";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
-// import { getRoute, RouteType } from "../../../routes/routesGenerator";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import {
   getPosterImageQuery,
   PosterSize,
 } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
-// import getMovieRating from "../../../utils/movieRating";
 import { formatDateTime } from "../../../utils/timeConverter";
 import VerticalList from "../../unit/VerticalList/VerticalList";
-// import MoviePoster from "../MovieCard/MovieCard";
 import SearchCard from "../SearchCard/SearchCard";
 
 type SearchResultsProps = React.ComponentProps<typeof Box> & {
@@ -101,37 +94,6 @@ const SearchResults: React.FC<SearchResultsProps> = (
       }}
     </VerticalList>
   );
-
-  // return (
-  //   <Grid id={id} {...rest} container>
-  //     {data.map((movie) => {
-  //       return (
-  //         <Grid key={movie.id} item xs>
-  //           <Box
-  //             display="flex"
-  //             justifyContent="center"
-  //             alignItems="center"
-  //             p={2}
-  //           >
-  //             <MoviePoster
-  //               cardWidth={342}
-  //               linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
-  //               src={getPosterImageQuery(movie.poster_path, PosterSize.w342)}
-  //               title={movie.title}
-  //               releaseDate={movie.release_date}
-  //               ratingScore={getMovieRating(
-  //                 movie.vote_count,
-  //                 movie.vote_average
-  //               )}
-  //               ratingOffsetX={-8}
-  //               ratingOffsetY={-8}
-  //             />
-  //           </Box>
-  //         </Grid>
-  //       );
-  //     })}
-  //   </Grid>
-  // );
 };
 
 export default SearchResults;

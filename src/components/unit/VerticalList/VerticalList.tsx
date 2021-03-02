@@ -1,7 +1,6 @@
-import Box from "@material-ui/core/Box";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 import WindowScroller from "react-virtualized/dist/commonjs/WindowScroller";
-// import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer';
 import CellMeasurer, {
   CellMeasurerCache,
 } from "react-virtualized/dist/commonjs/CellMeasurer";

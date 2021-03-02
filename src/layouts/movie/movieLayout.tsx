@@ -1,5 +1,6 @@
-import { Grid, useTheme } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Grid from "@material-ui/core/Grid/Grid";
+import Box from "@material-ui/core/Box/Box";
 import React from "react";
 
 export interface IProps {

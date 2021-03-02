@@ -1,4 +1,5 @@
-import { Box, Grid } from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import Grid from "@material-ui/core/Grid/Grid";
 import React from "react";
 import { IMoviePosterData } from "../../../utils/api/model/apiModelTypes";
 import {

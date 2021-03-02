@@ -1,6 +1,9 @@
-import { Box, makeStyles, Typography, useTheme } from "@material-ui/core";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Box from "@material-ui/core/Box/Box";
+import Typography from "@material-ui/core/Typography/Typography";
+import Tab from "@material-ui/core/Tab/Tab";
+import Tabs from "@material-ui/core/Tabs/Tabs";
 import React from "react";
 import { tabsStyles, tabItemStyles } from "./FancyTabStyle";
 

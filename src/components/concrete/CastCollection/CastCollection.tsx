@@ -1,5 +1,7 @@
-import { Box, Typography, useTheme } from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
+import useTheme from "@material-ui/core/styles/useTheme";
+import Box from "@material-ui/core/Box/Box";
+import Typography from "@material-ui/core/Typography/Typography";
+import Skeleton from "@material-ui/lab/Skeleton/Skeleton";
 import React from "react";
 import { ICastData } from "../../../utils/api/model/apiModelTypes";
 import {

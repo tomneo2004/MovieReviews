@@ -1,4 +1,5 @@
-import { createStyles, Theme } from "@material-ui/core";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import createStyles from "@material-ui/core/styles/createStyles";
 
 export interface ITabsStyleProps {
   theme: Theme;
@@ -8,11 +9,6 @@ export interface ITabsStyleProps {
 export const tabsStyles = createStyles({
   root: (props: ITabsStyleProps) => ({
     borderRadius: props.borderRadius,
-    // background: 'linear-gradient(60deg, #ab47bc, #8e24aa)',
-    // background: `linear-gradient(180deg,
-    //         ${props.theme.palette.primary.dark} 0%,
-    //         ${props.theme.palette.primary.main} 70%,
-    //         ${props.theme.palette.primary.light}) 100%`,
     backgroundColor: `${props.theme.palette.primary.main}`,
     padding: 0,
     minHeight: "inherit",

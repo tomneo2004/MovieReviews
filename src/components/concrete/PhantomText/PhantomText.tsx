@@ -1,5 +1,6 @@
-import { RootRef, Typography } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
+import RootRef from "@material-ui/core/RootRef/RootRef";
+import Typography from "@material-ui/core/Typography/Typography";
+import Box from "@material-ui/core/Box/Box";
 import { useAnimation } from "framer-motion";
 import React from "react";
 import { useInView } from "react-intersection-observer";
@@ -129,9 +130,7 @@ const PhantomText: React.FC<PhantomTextProps> = (props: PhantomTextProps) => {
                 defDelay ? defDelay.exit : (chars.length - i) * charDefaultDelay
               )}
             >
-              <Typography variant={variant}>
-                {value}
-              </Typography>
+              <Typography variant={variant}>{value}</Typography>
             </RevealFadeMotion>
           );
         })}

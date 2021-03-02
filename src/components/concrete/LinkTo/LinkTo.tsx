@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography/Typography";
 import Link from "next/link";
 import React from "react";
 

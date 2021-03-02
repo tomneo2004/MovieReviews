@@ -1,11 +1,9 @@
-import {
-  Box,
-  fade,
-  Hidden,
-  LinearProgress,
-  SvgIcon,
-  useTheme,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import Hidden from "@material-ui/core/Hidden/Hidden";
+import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
+import SvgIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import { IMovieData } from "../../../utils/api/model/apiModelTypes";
 import {
@@ -14,8 +12,6 @@ import {
 } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import PhantomText from "../PhantomText/PhantomText";
-// import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
-// import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import ThumbUpIcon from "../../../assets/icons/thumb-up.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
 import SectionHeader from "../SectionHeader/SectionHeader";
@@ -106,16 +102,6 @@ const SnippetTopRated: React.FC<SnippetTopRatedProps> = (
           posterSize={config.Movie_Collection_Poster_Size}
           movieData={topRatedMovies}
           onHover={handleMovieHover}
-          // scrollLeft={
-          //   <SvgIcon fontSize="large">
-          //     <LeftArrowIcon />
-          //   </SvgIcon>
-          // }
-          // scrollRight={
-          //   <SvgIcon fontSize="large">
-          //     <RightArrowIcon />
-          //   </SvgIcon>
-          // }
         />
       </BackgroundImage>
     </Box>

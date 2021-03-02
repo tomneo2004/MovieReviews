@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next/types/index";
 import axios from "axios";
 import nextRequestHandler from "../../../../../utils/api/nextReqHandler/nextReqHandler";
 import { getMovieImagesQuery } from "../../../../../utils/api/query/apiQueryBuilder";

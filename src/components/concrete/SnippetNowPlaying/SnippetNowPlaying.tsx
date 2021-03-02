@@ -1,25 +1,18 @@
-import {
-  Box,
-  fade,
-  Hidden,
-  LinearProgress,
-  SvgIcon,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import Hidden from "@material-ui/core/Hidden/Hidden";
+import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
+import SvgIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import Typography from "@material-ui/core/Typography/Typography";
+import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
-import {
-  // IMovieData,
-  INowPlayingMoviesData,
-} from "../../../utils/api/model/apiModelTypes";
+import { INowPlayingMoviesData } from "../../../utils/api/model/apiModelTypes";
 import {
   BackdropSize,
   getBackdropImageQuery,
 } from "../../../utils/api/query/apiQueryBuilder";
 import BackgroundImage from "../BackgroundImage/BackgroundImage";
 import PhantomText from "../PhantomText/PhantomText";
-// import LeftArrowIcon from "../../../assets/icons/left-arrow.inline.svg";
-// import RightArrowIcon from "../../../assets/icons/right-arrow.inline.svg";
 import { formatDateTime } from "../../../utils/timeConverter";
 import PlayingIcon from "../../../assets/icons/cinema.inline.svg";
 import MovieCollection from "../MovieCollection/MovieCollection";
@@ -130,16 +123,6 @@ const SnippetNowPlaying: React.FC<SnippetNowPlayingProps> = (
           posterSize={config.Movie_Collection_Poster_Size}
           movieData={nowPlayingMovies.results}
           onHover={handleMovieHover}
-          // scrollLeft={
-          //   <SvgIcon fontSize="large">
-          //     <LeftArrowIcon />
-          //   </SvgIcon>
-          // }
-          // scrollRight={
-          //   <SvgIcon fontSize="large">
-          //     <RightArrowIcon />
-          //   </SvgIcon>
-          // }
         />
       </BackgroundImage>
     </Box>

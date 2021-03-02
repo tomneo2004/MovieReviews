@@ -1,7 +1,7 @@
-import { Typography } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import makeStyles from "@material-ui/styles/makeStyles";
+import Typography from "@material-ui/core/Typography/Typography";
+import Box from "@material-ui/core/Box/Box";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./CircularRatingStyle";
 import React from "react";
 import { Variant } from "@material-ui/core/styles/createTypography";

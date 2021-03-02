@@ -1,5 +1,6 @@
-import { Box, Paper } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box/Box";
+import Paper from "@material-ui/core/Paper/Paper";
+import Button from "@material-ui/core/Button/Button";
 import { useRouter } from "next/router";
 import React from "react";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";

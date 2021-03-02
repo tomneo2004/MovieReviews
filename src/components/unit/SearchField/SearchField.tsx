@@ -1,5 +1,8 @@
-import { Box, InputBase, makeStyles, useTheme } from "@material-ui/core";
-import { SearchSharp } from "@material-ui/icons";
+import Box from "@material-ui/core/Box/Box";
+import InputBase from "@material-ui/core/InputBase/InputBase";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import useTheme from "@material-ui/core/styles/useTheme";
+import SearchSharp from "@material-ui/icons/SearchSharp";
 import React from "react";
 import style from "./SearchFieldStyle";
 
@@ -11,11 +14,6 @@ export type SearchFieldProps = React.ComponentProps<typeof InputBase> & {
    * icon infront of input
    */
   icon?: React.ReactElement;
-
-  // /**
-  //  * On input field focus callback
-  //  */
-  // onFocus?: () => void;
 };
 
 const SearchField: React.FC<SearchFieldProps> = React.forwardRef(
@@ -26,19 +24,10 @@ const SearchField: React.FC<SearchFieldProps> = React.forwardRef(
       opacity = 0.15,
       opacityHover = 0.25,
       icon = <SearchSharp />,
-      // onFocus,
       endAdornment,
       id,
       ...restInput
     } = props;
-    // const inputRef = React.useRef<HTMLInputElement>();
-
-    // React.useEffect(() => {
-    //   inputRef.current.onfocus = onFocus;
-    //   return () => {
-    //     inputRef.current.onfocus = null;
-    //   };
-    // }, []);
 
     const classes = makeStyles(style)({
       theme,
@@ -58,12 +47,7 @@ const SearchField: React.FC<SearchFieldProps> = React.forwardRef(
           justifyContent="center"
           alignItems="center"
         >
-          <InputBase
-            ref={ref}
-            // inputRef={inputRef}
-            // className={classes.input}
-            {...restInput}
-          />
+          <InputBase ref={ref} {...restInput} />
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center">
           {endAdornment}

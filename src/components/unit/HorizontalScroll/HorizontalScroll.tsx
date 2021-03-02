@@ -1,6 +1,8 @@
-import { Box, Grid, GridSpacing, makeStyles } from "@material-ui/core";
+import Box from "@material-ui/core/Box/Box";
+import Grid, { GridSpacing } from "@material-ui/core/Grid/Grid";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./HorizontalScrollStyle";
-import React, { useMemo } from "react";
+import React from "react";
 
 export interface HScrollChildProp {
   id: string | number;
@@ -72,7 +74,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = (
 
   const classes = makeStyles(style)();
 
-  const childNodes = useMemo(() => children(), [children]);
+  const childNodes = React.useMemo(() => children(), [children]);
 
   if (!childNodes) return null;
 

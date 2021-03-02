@@ -1,5 +1,6 @@
-import { createStyles } from "@material-ui/core";
-import { fade, Theme } from "@material-ui/core/styles";
+import createStyles from "@material-ui/core/styles/createStyles";
+import { Theme } from "@material-ui/core/styles/createMuiTheme";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
 export interface IStyleProps {
   theme: Theme;

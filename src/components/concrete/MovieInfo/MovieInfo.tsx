@@ -1,6 +1,8 @@
-import { Chip, SvgIcon, Typography } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
-import Skeleton, { SkeletonProps } from "@material-ui/lab/Skeleton";
+import Chip from "@material-ui/core/Chip/Chip";
+import SvgIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import Typography from "@material-ui/core/Typography/Typography";
+import Box from "@material-ui/core/Box/Box";
+import Skeleton, { SkeletonProps } from "@material-ui/lab/Skeleton/Skeleton";
 import React from "react";
 import {
   IGenreData,
@@ -91,13 +93,7 @@ const MovieInfo: React.FC<MovieInfoProps> = (props: MovieInfoProps) => {
   );
 
   return (
-    <Box
-      {...rest}
-      display="flex"
-      flexDirection="column"
-      // justifyContent="space-between"
-      p={2}
-    >
+    <Box {...rest} display="flex" flexDirection="column" p={2}>
       {/* general info */}
       <Box display="flex">
         {/* user score */}

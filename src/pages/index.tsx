@@ -2,14 +2,14 @@ import dynamic from "next/dynamic";
 import PageLayout from "../layouts/pageLayout";
 import LandingLayout from "../layouts/landing/landingLayout";
 import HeroLayout from "../layouts/landing/heroLayout";
-import Box from "@material-ui/core/Box";
+import Box from "@material-ui/core/Box/Box";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@material-ui/core/Typography/Typography";
 import useTheme from "@material-ui/core/styles/useTheme";
 import React from "react";
 import HeroSearchBar from "../components/concrete/HeroSearchBar/HeroSearchBar";
-import { GetStaticProps } from "next";
+import { GetStaticProps } from "next/types/index";
 import ProgressiveImage from "../components/unit/ProgressiveImage/ProgressiveImage";
 import RFCarousel from "../components/concrete/RFCarousel/RFCarousel";
 import {

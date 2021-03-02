@@ -1,7 +1,7 @@
-import Box from "@material-ui/core/Box";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box/Box";
+import Tab from "@material-ui/core/Tab/Tab";
+import Tabs from "@material-ui/core/Tabs/Tabs";
+import Typography from "@material-ui/core/Typography/Typography";
 import React from "react";
 import {
   IMoviePosterData,

@@ -1,11 +1,9 @@
-// import CardMedia from "@material-ui/core/CardMedia";
-import Card from "@material-ui/core/Card";
+import Card from "@material-ui/core/Card/Card";
 import React from "react";
-import { CardContent, makeStyles, Typography } from "@material-ui/core";
-// import Box from "@material-ui/core/Box";
+import CardContent from "@material-ui/core/CardContent/CardContent";
+import Typography from "@material-ui/core/Typography/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import style from "./CastCardStyle";
-
-// import imagePlacehoder from "../../../assets/placeholder/poster.svg";
 import PosterImage from "../PosterImage/PosterImage";
 import ProfileIconRUL from "../../../assets/placeholder/profile.svg";
 
@@ -37,12 +35,6 @@ const CastCard: React.FC<CastCardProps> = (props: CastCardProps) => {
 
   return (
     <Card {...rest} className={classes.root} raised>
-      {/* <CardMedia
-        width={imageWidth}
-        height={imageHeight}
-        component="img"
-        src={imageSrc ? imageSrc : imagePlacehoder}
-      /> */}
       <PosterImage
         src={src ? src : ProfileIconRUL}
         placeholderSrc={placeholderSrc}

@@ -1,5 +1,5 @@
-import Box from "@material-ui/core/Box";
-import RootRef from "@material-ui/core/RootRef";
+import Box from "@material-ui/core/Box/Box";
+import RootRef from "@material-ui/core/RootRef/RootRef";
 import React from "react";
 import Measure, { ContentRect } from "react-measure";
 import "react-lazy-load-image-component/src/effects/blur.css";
