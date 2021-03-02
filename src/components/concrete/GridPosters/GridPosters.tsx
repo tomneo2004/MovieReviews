@@ -28,6 +28,7 @@ const GridPosters: React.FC<GridPostersProps> = (props: GridPostersProps) => {
     onPosterClick,
     ...rest
   } = props;
+
   const handlePosterClick = (i: number) => {
     if (onPosterClick) onPosterClick(i);
   };

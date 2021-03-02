@@ -16,8 +16,10 @@ type ImageContainerProps = React.ComponentProps<typeof Box> & {
    *
    * function take one paramter which is img element, you can return the element
    * right away or return an element that wrapped img element
+   *
+   * @param {LazyLoadImage} node LazyLoadImage component
    */
-  postProcess?: (node: React.ReactNode) => React.ReactNode;
+  preProcess?: (node: React.ReactNode) => React.ReactNode;
   onImageLoaded?: () => void;
 };
 
@@ -36,7 +38,7 @@ const ImageContainer: React.FC<ImageContainerProps> = React.forwardRef(
       placeholderSrc,
       onImageLoaded,
       alt = "Image",
-      postProcess = (node) => node,
+      preProcess = (node) => node,
       ...rest
     } = props;
     const [
@@ -90,7 +92,7 @@ const ImageContainer: React.FC<ImageContainerProps> = React.forwardRef(
           return (
             <RootRef rootRef={measureRef}>
               <Box {...rest}>
-                {postProcess(
+                {preProcess(
                   <LazyLoadImage
                     alt={alt}
                     src={src}

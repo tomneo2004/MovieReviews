@@ -9,8 +9,6 @@ import ImageContainer from "../../unit/ImageContainer/ImageContainer";
 import { ScreenWidthProps } from "../../../props/screenSizeProps";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/black-and-white.css";
-import { motion } from "framer-motion";
-import { springTransition } from "../../../framer/Transition";
 
 type PosterImageProps = React.ComponentProps<typeof Card> &
   ScreenWidthProps & {
@@ -47,9 +45,24 @@ type PosterImageProps = React.ComponentProps<typeof Card> &
     onImageLoaded?: () => void;
 
     /**
-     * layoutId that used for transition between normal and enlarge
+     * pre process image when englarge
+     *
+     * you can wrap node in side other component and return
+     *
+     * @param node is a `LazyLoadImage` component
+     *
+     * @return ReactNode
      */
-    layoutId?: string;
+    preProcessEnlarge?: (node: React.ReactNode) => React.ReactNode;
+
+    /**
+     * pre process image when not in enlarge mode
+     *
+     * you can wrap node in side other component and return
+     *
+     * @param node is a `Card` component
+     */
+    preProcess?: (node: React.ReactNode) => React.ReactNode;
   };
 
 /**
@@ -76,8 +89,9 @@ const PosterImage: React.FC<PosterImageProps> = (props: PosterImageProps) => {
     hoverCursor = "auto",
     enlargeEnabled = false,
     onImageLoaded,
-    layoutId = undefined,
     onClick,
+    preProcessEnlarge,
+    preProcess = (node) => node,
     ...rest
   } = props;
   const theme = useTheme();
@@ -118,43 +132,38 @@ const PosterImage: React.FC<PosterImageProps> = (props: PosterImageProps) => {
           src={src}
           alt={alt}
           onClick={toggleEnlarge}
-          postProcess={(node) => (
-            <motion.div layoutId={layoutId}>{node}</motion.div>
-          )}
+          preProcess={preProcessEnlarge}
         />
       </Modal>
     );
   }
 
   return (
-    <motion.div
-      layoutId={layoutId}
-      initial={{ zIndex: theme.zIndex.modal + 1 }}
-      animate={{ zIndex: 0 }}
-      transition={springTransition(660, 33, 0.1)}
-    >
-      <Card
-        {...rest}
-        classes={{ root: classes.card }}
-        onClick={enlargeEnabled ? toggleEnlarge : onClick}
-      >
-        <LazyLoadImage
-          alt={alt}
-          src={src}
-          effect="black-and-white"
-          width="100%"
-          height="100%"
-          placeholderSrc={
-            loaded
-              ? undefined
-              : placeholderSrc
-              ? placeholderSrc
-              : imagePlacehoder
-          }
-          afterLoad={handleAfterLoad}
-        />
-      </Card>
-    </motion.div>
+    <React.Fragment>
+      {preProcess(
+        <Card
+          {...rest}
+          classes={{ root: classes.card }}
+          onClick={enlargeEnabled ? toggleEnlarge : onClick}
+        >
+          <LazyLoadImage
+            alt={alt}
+            src={src}
+            effect="black-and-white"
+            width="100%"
+            height="100%"
+            placeholderSrc={
+              loaded
+                ? undefined
+                : placeholderSrc
+                ? placeholderSrc
+                : imagePlacehoder
+            }
+            afterLoad={handleAfterLoad}
+          />
+        </Card>
+      )}
+    </React.Fragment>
   );
 };
 
