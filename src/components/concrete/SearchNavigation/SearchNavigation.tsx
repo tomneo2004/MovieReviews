@@ -59,7 +59,7 @@ const SearchNavigation: React.FC<SearchNavigationProps> = (
         <Box id="nav-search-bar">
           <SearchBar
             fullWidth
-            placeholder="Search ..."
+            placeholder="Title ..."
             onEnter={onSearch}
             opacity={0.5}
             opacityHover={0.7}

@@ -34,7 +34,7 @@ const HeroSearchBar: React.FC<HeroSearchBarProps> = (
       <Paper elevation={10}>
         <SearchBar
           fullWidth
-          placeholder="Search ..."
+          placeholder="Title ..."
           opacity={0.5}
           opacityHover={0.7}
           inputWidth="20em"
