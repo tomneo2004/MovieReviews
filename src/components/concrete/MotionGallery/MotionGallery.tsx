@@ -134,7 +134,7 @@ const MotionGallery: React.FC<MotionGalleryProps> = (
               justifyContent="center"
               alignItems="center"
               src={images[imageIndex]}
-              postProcess={(node) => {
+              preProcess={(node) => {
                 const info = imageInfos[imageIndex];
 
                 return (
