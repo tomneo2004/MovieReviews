@@ -77,9 +77,10 @@ Run application
 
 3. In your project folder run 
    ```
-   npm install
+   npm install --legacy-peer-deps 
    ``` 
    to install all dependencies
+   `--legacy-peer-deps` is because @cypress/react plugin not compatible with next.js version 10.x
    
 4. In your project folder run 
    ```
