@@ -4,8 +4,9 @@ orbs:
 workflows:
   build:
     jobs:
-      - cypress/install:
+      - cypress/run:
           name: Install Dependencies
+          command: npm install --legacy-peer-deps
 
       - cypress/run:
           name: Testing Project
