@@ -116,8 +116,13 @@ export function getPouplarMoviesQuery(params: IParams = defaultParams) {
  * Get query for discover movie
  * @param {IParams} params
  */
-export function getDiscoverMoviesQuery(params: IParams = defaultParams) {
-  const queryString = "/discover/movie";
+export function getDiscoverMoviesQuery(
+  genreId:string = '',
+  params: IParams = defaultParams) {
+  let queryString = '/discover/movie?';
+  if(genreId){
+    queryString += `&with_genres=${genreId}`
+  }
   const builtQuery = buildAPIQuery(
     queryString,
     movieAPI,

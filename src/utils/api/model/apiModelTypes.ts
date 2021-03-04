@@ -225,3 +225,4 @@ export type INowPlayingMoviesData = IGenericMoviesData & {
 };
 export type ISimilarMoviesData = IGenericMoviesData;
 export type IRecommendationMoviesData = IGenericMoviesData;
+export type IDiscoverMoviesData = IGenericMoviesData;
