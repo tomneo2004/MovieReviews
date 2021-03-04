@@ -48,6 +48,7 @@ const renderSkeletons = () => {
 
 const renderGenre = (genre: IGenreData[]) => {
   return genre.map((g, i) => {
+    if(!g.name) return null;
     return (
       <ScaleFadeMotion
         key={g.name}
@@ -66,6 +67,7 @@ const renderGenre = (genre: IGenreData[]) => {
 
 const renderLangs = (langs: ISpokenLanguageData[]) => {
   return langs.map((lang, i) => {
+    if(!lang.name) return null;
     return (
       <ScaleFadeMotion
         key={lang.name}
