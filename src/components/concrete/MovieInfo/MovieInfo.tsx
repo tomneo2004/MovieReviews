@@ -17,7 +17,7 @@ import { springTransition } from "../../../framer/Transition";
 import ScaleFadeMotion from "../../../framer/ScaleFadeMotion/ScaleFadeMotion";
 import LinkTo from "../LinkTo/LinkTo";
 import { formatDateTime } from "../../../utils/timeConverter";
-import Link from 'next/link';
+import Link from "next/link";
 import { getRoute, RouteType } from "../../../routes/routesGenerator";
 
 type MovieInfoProps = React.ComponentProps<typeof Box> & {
@@ -50,7 +50,7 @@ const renderSkeletons = () => {
 
 const renderGenre = (genre: IGenreData[]) => {
   return genre.map((g, i) => {
-    if(!g.name) return null;
+    if (!g.name) return null;
     return (
       <ScaleFadeMotion
         key={g.name}
@@ -59,8 +59,10 @@ const renderGenre = (genre: IGenreData[]) => {
       >
         <Typography key={g.id} component="div" variant="h4">
           <Box pl={i ? 2 : 0} fontWeight={500}>
-            <Link href={getRoute(RouteType.genre, {genreId:g.id.toString()})}>
-            <Chip variant="outlined" color="primary" label={g.name} />
+            <Link
+              href={getRoute(RouteType.genre, { genreId: g.id.toString() })}
+            >
+              <Chip variant="outlined" color="primary" label={g.name} />
             </Link>
           </Box>
         </Typography>
@@ -71,7 +73,7 @@ const renderGenre = (genre: IGenreData[]) => {
 
 const renderLangs = (langs: ISpokenLanguageData[]) => {
   return langs.map((lang, i) => {
-    if(!lang.name) return null;
+    if (!lang.name) return null;
     return (
       <ScaleFadeMotion
         key={lang.name}

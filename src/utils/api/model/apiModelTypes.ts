@@ -201,14 +201,14 @@ export type ILatestMovieData = {
 };
 
 export type IMovieGenreListData = {
-  genres: IGenreData[],
-}
+  genres: IGenreData[];
+};
 
 export type IGenericMoviesData = {
-  page: number,
-  results: IMovieData[],
-  total_results: number,
-  total_pages: number,
+  page: number;
+  results: IMovieData[];
+  total_results: number;
+  total_pages: number;
 };
 
 export type ITopRatedMoviesData = IGenericMoviesData;
