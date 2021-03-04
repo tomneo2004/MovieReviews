@@ -1,6 +1,7 @@
 export enum RouteType {
   "home" = "/",
   "search" = "/search",
+  "genre" = "/genre",
   "movie" = "/movie",
   "movie video" = "/movie/media/videos",
   "movie poster" = "/movie/media/posters",

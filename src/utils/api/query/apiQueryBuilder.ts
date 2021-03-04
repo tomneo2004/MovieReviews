@@ -364,3 +364,22 @@ export function getMovieImagesQuery(
   );
   return builtQuery;
 }
+
+/**
+ * Query for genres for movies
+ * @param id movie id
+ * @param params
+ */
+export function getMovieGenreListQuery(
+  params: IParams = defaultParams
+) {
+  const queryString = '/genre/movie/list';
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}

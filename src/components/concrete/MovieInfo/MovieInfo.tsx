@@ -17,6 +17,8 @@ import { springTransition } from "../../../framer/Transition";
 import ScaleFadeMotion from "../../../framer/ScaleFadeMotion/ScaleFadeMotion";
 import LinkTo from "../LinkTo/LinkTo";
 import { formatDateTime } from "../../../utils/timeConverter";
+import Link from 'next/link';
+import { getRoute, RouteType } from "../../../routes/routesGenerator";
 
 type MovieInfoProps = React.ComponentProps<typeof Box> & {
   movieDetail: IMovieDetailData;
@@ -57,7 +59,9 @@ const renderGenre = (genre: IGenreData[]) => {
       >
         <Typography key={g.id} component="div" variant="h4">
           <Box pl={i ? 2 : 0} fontWeight={500}>
+            <Link href={getRoute(RouteType.genre, {genreId:g.id.toString()})}>
             <Chip variant="outlined" color="primary" label={g.name} />
+            </Link>
           </Box>
         </Typography>
       </ScaleFadeMotion>
