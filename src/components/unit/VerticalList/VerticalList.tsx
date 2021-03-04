@@ -78,7 +78,7 @@ const VerticalList: React.FC<VerticalListProps> = (
 
   return (
     <Box width={width} height={height} {...rest}>
-      <WindowScroller>
+      <WindowScroller serverWidth={200} serverHeight={200}>
         {({
           width,
           height,
@@ -93,6 +93,7 @@ const VerticalList: React.FC<VerticalListProps> = (
               autoHeight
               width={width}
               height={height}
+              overscanRowCount={6}
               isScrolling={isScrolling}
               onScroll={onChildScroll}
               scrollTop={scrollTop}
