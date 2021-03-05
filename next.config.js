@@ -6,7 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer({
     target: "serverless",
     compress: true,
-    webpack : (config, options) => {
+    webpack : (config, {isServer}) => {
         config.module.rules.push(
             {
                 test: /\.(png|jpg|gif|svg)$/i,
@@ -26,7 +26,6 @@ module.exports = withBundleAnalyzer({
                 ]
             },
         )
-        
 
         return config;
     }

@@ -17,6 +17,7 @@ import {
   IMoviePosterData,
   IRecommendationMoviesData,
   ISimilarMoviesData,
+  IStreamProvidersData,
   IVideoData,
 } from "../../utils/api/model/apiModelTypes";
 import { getRoute, RouteType } from "../../routes/routesGenerator";
@@ -25,6 +26,7 @@ import {
   fetchMovieDetail,
   fetchRecommendations,
   fetchSimilars,
+  fetchWatchProvider,
   IPageProps,
 } from "../../pageUtils/movie";
 import Overview from "../../components/concrete/Overview/Overview";
@@ -34,6 +36,8 @@ import SnippetRecommendation from "../../components/concrete/SnippetRecommendati
 import SnippetSimilar from "../../components/concrete/SnippetSimilar/SnippetSimilar";
 import CastCollection from "../../components/concrete/CastCollection/CastCollection";
 import config from "../../config/config";
+import { useCountryCode } from "../../effects/apiFetch/countryCode";
+import StreamServices from "../../components/concrete/StreamServices/StreamServices";
 
 export const getServerSideProps: GetServerSideProps<IPageProps> = async (
   context: GetServerSidePropsContext
@@ -48,6 +52,7 @@ export const getServerSideProps: GetServerSideProps<IPageProps> = async (
         movieDetail: null,
         recommendations: null,
         similars: null,
+        watchProviders: null,
         error: "Movie id was not given",
       },
     };
@@ -57,6 +62,7 @@ export const getServerSideProps: GetServerSideProps<IPageProps> = async (
     const movieDetail = await fetchMovieDetail(id);
     const recommendations = await fetchRecommendations(id);
     const similars = await fetchSimilars(id);
+    const watchProviders = await fetchWatchProvider(id);
 
     return {
       props: {
@@ -64,6 +70,7 @@ export const getServerSideProps: GetServerSideProps<IPageProps> = async (
         movieDetail: movieDetail,
         recommendations,
         similars,
+        watchProviders,
         error: null,
       },
     };
@@ -75,6 +82,7 @@ export const getServerSideProps: GetServerSideProps<IPageProps> = async (
         movieDetail: null,
         recommendations: null,
         similars: null,
+        watchProviders: null,
         error: e.message,
       },
     };
@@ -85,6 +93,7 @@ enum SectionTypes {
   "overview" = "overview",
   "media" = "media",
   "casts" = "casts",
+  "watch" = "watch",
 }
 
 type SectionMapToData = {
@@ -98,6 +107,10 @@ type SectionMapToData = {
     posters: IMoviePosterData[];
   };
   [SectionTypes.casts]: ICastData[];
+  [SectionTypes.watch]: {
+    provider: IStreamProvidersData;
+    countryName: string;
+  };
 };
 
 /**
@@ -151,6 +164,11 @@ const renderSection = (
           castData={data[section]}
         />
       );
+    case SectionTypes.watch:
+      const provider = data[section].provider;
+      const countryName = data[section].countryName;
+
+      return <StreamServices provider={provider} countryName={countryName} />;
   }
 };
 
@@ -179,13 +197,22 @@ const renderTabs = (
       <Tab value={SectionTypes.overview} label="Overview" />
       <Tab value={SectionTypes.media} label="Media" />
       <Tab value={SectionTypes.casts} label="Casts" />
+      <Tab value={SectionTypes.watch} label="Watch" />
     </Tabs>
   );
 };
 
 const MoviePage = (pageProps: IPageProps) => {
-  const { movieId, movieDetail, recommendations, similars, error } = pageProps;
+  const {
+    movieId,
+    movieDetail,
+    recommendations,
+    similars,
+    watchProviders,
+    error,
+  } = pageProps;
   const theme = useTheme();
+  const countryCode = useCountryCode();
   const [section, setSection] = React.useState<SectionTypes>(
     SectionTypes.overview
   );
@@ -201,8 +228,18 @@ const MoviePage = (pageProps: IPageProps) => {
         posters: movieDetail.images.posters,
       },
       casts: movieDetail.credits.cast,
+      watch: {
+        provider:
+          countryCode.isLoading || countryCode.error
+            ? null
+            : watchProviders.results[countryCode.data.countryCode],
+        countryName:
+          countryCode.isLoading || countryCode.error
+            ? " your country"
+            : countryCode.data.countryName,
+      },
     };
-  }, [movieId]);
+  }, [movieId, countryCode]);
 
   if (error) throw error;
 

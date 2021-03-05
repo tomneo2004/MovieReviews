@@ -95,6 +95,30 @@ export function getBackdropImageQuery(
   return buildQuery;
 }
 
+export enum LogoSize {
+  "w45" = "w45",
+  "w92" = "w92",
+  "w154" = "w154",
+  "w185" = "w185",
+  "w300" = "w300",
+  "original" = "original",
+}
+
+/**
+ * Return query for backdrop image
+ *
+ * @param imagePath image path relative to themoviedb
+ * @param {BackdropSize}imageSize size of backdrop
+ */
+export function getLogoImageQuery(
+  imagePath: string,
+  logoSize: LogoSize = LogoSize.w45
+) {
+  const buildQuery = buildImageQuery(imagePath, logoSize);
+
+  return buildQuery;
+}
+
 /**
  * Get query for popular movie
  *
@@ -373,6 +397,26 @@ export function getMovieImagesQuery(
  */
 export function getMovieGenreListQuery(params: IParams = defaultParams) {
   const queryString = "/genre/movie/list";
+  const builtQuery = buildAPIQuery(
+    queryString,
+    movieAPI,
+    movieAPIVersion,
+    movieAPIKey,
+    params
+  );
+  return builtQuery;
+}
+
+/**
+ * Query for watch provider for movies
+ * @param id movie id
+ * @param params
+ */
+export function getWatchProviderQuery(
+  id: string,
+  params: IParams = defaultParams
+) {
+  const queryString = `/movie/${id}/watch/providers`;
   const builtQuery = buildAPIQuery(
     queryString,
     movieAPI,

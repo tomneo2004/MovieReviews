@@ -200,6 +200,27 @@ export type ILatestMovieData = {
   vote_count: number;
 };
 
+export type IStreamServiceData = {
+  display_priority: number;
+  logo_path: string;
+  provider_id: number;
+  provider_name: string;
+};
+
+export type IStreamProvidersData = {
+  link: string;
+  flatrate: IStreamServiceData[];
+  rent: IStreamServiceData[];
+  buy: IStreamServiceData[];
+};
+
+export type IWatchProviderData = {
+  id: number;
+  results: {
+    [countryCode: string]: IStreamProvidersData;
+  };
+};
+
 export type IMovieGenreListData = {
   genres: IGenreData[];
 };

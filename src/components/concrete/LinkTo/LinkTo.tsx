@@ -1,21 +1,19 @@
-import Typography from "@material-ui/core/Typography/Typography";
 import Link from "next/link";
 import React from "react";
 
-type LinkToProps = React.ComponentProps<typeof Typography> & {
+type LinkToProps = React.ComponentProps<typeof React.Component> & {
   text: string;
   linkTo: string;
   shallow?: boolean;
+  display?: "inline" | "block" | "initial";
 };
 
 const LinkTo: React.FC<LinkToProps> = (props: LinkToProps) => {
-  const { text, linkTo, shallow = false, ...rest } = props;
+  const { text, linkTo, shallow = false, display = "inline" } = props;
   return (
-    <Typography {...rest}>
-      <Link href={linkTo} shallow={shallow}>
-        <a>{text}</a>
-      </Link>
-    </Typography>
+    <Link href={linkTo} shallow={shallow}>
+      <a style={{ display: display }}>{text}</a>
+    </Link>
   );
 };
 
