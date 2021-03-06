@@ -3,7 +3,6 @@ import Typography from "@material-ui/core/Typography/Typography";
 import React from "react";
 import { IVideoData } from "../../../utils/api/model/apiModelTypes";
 import { getVideoURL } from "../../../utils/api/video/videoHelper";
-import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 
 type VideoCollectionProps = React.ComponentProps<typeof Box> & {
@@ -31,17 +30,22 @@ const VideoCollection: React.FC<VideoCollectionProps> = (
 
   return (
     <Box {...rest}>
-      <HScroll>
-        {() => {
-          return trailersData.map((trailer) => {
-            const videoURL = getVideoURL(trailer.key, trailer.site);
-            return {
-              id: trailer.id,
-              element: <VideoPlayer videoSrc={videoURL} />,
-            };
-          });
-        }}
-      </HScroll>
+      <Box
+        position="relative"
+        display="flex"
+        alignItems="center"
+        flexWrap="nowrap"
+        overflow="scroll"
+      >
+        {trailersData.map((trailer) => {
+          const videoURL = getVideoURL(trailer.key, trailer.site);
+          return (
+            <Box key={trailer.id} m={2} position="relative">
+              <VideoPlayer videoSrc={videoURL} />
+            </Box>
+          );
+        })}
+      </Box>
     </Box>
   );
 };

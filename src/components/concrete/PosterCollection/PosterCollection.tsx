@@ -9,7 +9,6 @@ import {
   getPosterImageQuery,
   PosterSize,
 } from "../../../utils/api/query/apiQueryBuilder";
-import HScroll from "../../unit/HorizontalScroll/HorizontalScroll";
 import PosterImage from "../PosterImage/PosterImage";
 
 type PosterCollectionProps = React.ComponentProps<typeof Box> & {
@@ -36,49 +35,53 @@ const PosterCollection: React.FC<PosterCollectionProps> = (
   }
   return (
     <Box {...rest}>
-      <HScroll>
-        {() => {
-          return posters.map((poster) => {
-            const posterURL = getPosterImageQuery(
-              poster.file_path,
-              PosterSize.w500
-            );
-            return {
-              id: poster.file_path,
-              element: (
-                <PosterImage
-                  src={posterURL}
-                  enlargeEnabled
-                  hoverCursor="pointer"
-                  widthAtSMDown={200}
-                  widthAtSMUp={250}
-                  widthAtMDUp={250}
-                  widthAtLGUp={300}
-                  widthAtXLUp={300}
-                  preProcessEnlarge={(node) => (
-                    <motion.div
-                      layoutId={poster.file_path}
-                      transition={springTransition(660, 33, 0.1)}
-                    >
-                      {node}
-                    </motion.div>
-                  )}
-                  preProcess={(node) => (
-                    <motion.div
-                      layoutId={poster.file_path}
-                      initial={{ zIndex: theme.zIndex.modal + 1 }}
-                      animate={{ zIndex: 0 }}
-                      transition={springTransition(660, 33, 0.1)}
-                    >
-                      {node}
-                    </motion.div>
-                  )}
-                />
-              ),
-            };
-          });
-        }}
-      </HScroll>
+      <Box
+        position="relative"
+        display="flex"
+        alignItems="center"
+        flexWrap="nowrap"
+        overflow="scroll"
+      >
+        {posters.map((poster) => {
+          const posterURL = getPosterImageQuery(
+            poster.file_path,
+            PosterSize.w500
+          );
+          return (
+            <Box key={poster.file_path} m={2} position="relative">
+              <PosterImage
+                src={posterURL}
+                enlargeEnabled
+                hoverCursor="pointer"
+                widthAtSMDown={200}
+                widthAtSMUp={250}
+                widthAtMDUp={250}
+                widthAtLGUp={300}
+                widthAtXLUp={300}
+                preProcessEnlarge={(node) => (
+                  <motion.div
+                    style={{ position: "relative" }}
+                    transition={springTransition(660, 33, 0.1)}
+                  >
+                    {node}
+                  </motion.div>
+                )}
+                preProcess={(node) => (
+                  <motion.div
+                    style={{ position: "relative" }}
+                    layout
+                    initial={{ zIndex: theme.zIndex.modal + 1 }}
+                    animate={{ zIndex: 0 }}
+                    transition={springTransition(660, 33, 0.1)}
+                  >
+                    {node}
+                  </motion.div>
+                )}
+              />
+            </Box>
+          );
+        })}
+      </Box>
     </Box>
   );
 };
