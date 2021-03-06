@@ -96,19 +96,16 @@ const MovieCard: React.FC<MoviePosterProps> = (props: MoviePosterProps) => {
       >
         <Link href={linkTo} passHref>
           <a onMouseOver={onMouseOver}>
-            <Box 
-            position='relative' 
-            zIndex={-1}
-            >
-            <PosterImage
-              src={src ? src : MovieIconURL}
-              placeholderSrc={placeholderSrc}
-              aspectRatio={imageRatio}
-              elevation={4}
-              hoverCursor="pointer"
-              fixedWidth={cardWidth}
-              onImageLoaded={handleImageLoaded}
-            />
+            <Box position="relative" zIndex={-1}>
+              <PosterImage
+                src={src ? src : MovieIconURL}
+                placeholderSrc={placeholderSrc}
+                aspectRatio={imageRatio}
+                elevation={4}
+                hoverCursor="pointer"
+                fixedWidth={cardWidth}
+                onImageLoaded={handleImageLoaded}
+              />
             </Box>
           </a>
         </Link>
