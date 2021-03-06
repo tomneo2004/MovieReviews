@@ -52,7 +52,7 @@ const StreamServices: React.FC<StreamServicesProps> = (
     return (
       <Box display="flex" justifyContent="center">
         <Typography variant="h4" align="center">
-          We could not find any stream services in {countryName}
+          We could not find any streaming services in {countryName}
         </Typography>
       </Box>
     );
