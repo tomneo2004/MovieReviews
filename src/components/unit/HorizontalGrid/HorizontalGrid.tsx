@@ -107,7 +107,7 @@ const HorizontalGrid: React.FC<HorizontalGridProps> = (
             height={height ? height : 200}
             columnWidth={cache.columnWidth}
             rowHeight={cache.rowHeight}
-            overscanColumnCount={6}
+            overscanColumnCount={10}
             cellRenderer={(props) => cellRenderer(props, children, cache)}
           />
         )}

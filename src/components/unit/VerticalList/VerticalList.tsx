@@ -93,7 +93,7 @@ const VerticalList: React.FC<VerticalListProps> = (
               autoHeight
               width={width}
               height={height}
-              overscanRowCount={6}
+              overscanRowCount={10}
               isScrolling={isScrolling}
               onScroll={onChildScroll}
               scrollTop={scrollTop}
