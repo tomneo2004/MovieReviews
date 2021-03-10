@@ -1,3 +1,4 @@
+import Chip from '@material-ui/core/Chip';
 import dynamic from "next/dynamic";
 import PageLayout from "../layouts/pageLayout";
 import LandingLayout from "../layouts/landing/landingLayout";
