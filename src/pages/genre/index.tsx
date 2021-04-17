@@ -12,6 +12,8 @@ import {
   IDiscoverMoviesData,
   IMovieGenreListData,
 } from "../../utils/api/model/apiModelTypes";
+import Container from "@material-ui/core/Container/Container";
+import Box from "@material-ui/core/Box/Box";
 interface IPageProps {
   genreId: string;
   genreTypes: IMovieGenreListData;
@@ -102,17 +104,19 @@ const GenrePage = (pageProps: IPageProps) => {
   return (
     <PageLayout navigation={<CommonNavigation />}>
       <SearchLayout>
-        <React.Fragment>
-          <SearchResults data={data.results} keywords={genre.name} />
-          <Pagination
-            id="paging"
-            count={data.total_pages}
-            page={data.page}
-            onChange={handlePageChange}
-            showFirstButton
-            showLastButton
-          />
-        </React.Fragment>
+          <Container maxWidth='xl'>
+            <SearchResults data={data.results} keywords={genre.name} />
+          </Container>
+          <Box mt={2}>
+            <Pagination
+              id="paging"
+              count={data.total_pages}
+              page={data.page}
+              onChange={handlePageChange}
+              showFirstButton
+              showLastButton
+            />
+          </Box>
       </SearchLayout>
     </PageLayout>
   );
