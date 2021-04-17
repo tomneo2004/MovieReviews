@@ -43,8 +43,9 @@ const renderSkeletons = () => {
  * Component SearchResults
  *
  * A concrete component, display an array of data of IMovieData
- * with Material-UI Grid
+ *  vertically with `SearchCard`
  *
+ * Wrapped Material-UI `Box` https://material-ui.com/components/box/#box
  *
  * @param {SearchResultsProps} props
  */
@@ -67,33 +68,6 @@ const SearchResults: React.FC<SearchResultsProps> = (
       </Typography>
     );
   }
-
-  // return (
-  //   <VerticalList itemCount={data.length} {...rest}>
-  //     {({ index, measure }) => {
-  //       const movieData = data[index];
-
-  //       return (
-  //         <SearchCard
-  //           borderBottom={`2px solid ${theme.palette.primary.main}`}
-  //           p={2}
-  //           linkTo={getRoute(RouteType.movie, { id: movieData.id.toString() })}
-  //           src={getPosterImageQuery(movieData.poster_path, PosterSize.w185)}
-  //           imageWidth={185}
-  //           imageRatio={1.4}
-  //           title={movieData.title}
-  //           releaseDate={formatDateTime(movieData.release_date)}
-  //           ratingScore={getMovieRating(
-  //             movieData.vote_count,
-  //             movieData.vote_average
-  //           )}
-  //           onImageLoaded={measure}
-  //           onResize={measure}
-  //         />
-  //       );
-  //     }}
-  //   </VerticalList>
-  // );
 
   return (
     <Box {...rest}>
