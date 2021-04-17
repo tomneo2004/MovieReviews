@@ -9,6 +9,8 @@ import axios from "axios";
 import CommonNavigation from "../../components/concrete/CommonNavigation/CommonNavigation";
 import Pagination from "@material-ui/lab/Pagination/Pagination";
 import SearchResults from "../../components/concrete/SearchResults/SearchResults";
+import Box from "@material-ui/core/Box/Box";
+import Container from "@material-ui/core/Container/Container";
 
 interface IPageProps {
   query: string;
@@ -69,17 +71,19 @@ const SearchPage = (pageProps: IPageProps) => {
   return (
     <PageLayout navigation={<CommonNavigation />}>
       <SearchLayout>
-        <React.Fragment>
-          <SearchResults data={data.results} keywords={query} />
-          <Pagination
-            id="paging"
-            count={data.total_pages}
-            page={data.page}
-            onChange={handlePageChange}
-            showFirstButton
-            showLastButton
-          />
-        </React.Fragment>
+          <Container maxWidth='xl'>
+            <SearchResults data={data.results} keywords={query} width='100%' />
+          </Container>
+          <Box mt={2}>
+            <Pagination
+              id="paging"
+              count={data.total_pages}
+              page={data.page}
+              onChange={handlePageChange}
+              showFirstButton
+              showLastButton
+            />
+          </Box>
       </SearchLayout>
     </PageLayout>
   );

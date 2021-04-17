@@ -11,7 +11,7 @@ import {
 } from "../../../utils/api/query/apiQueryBuilder";
 import getMovieRating from "../../../utils/movieRating";
 import { formatDateTime } from "../../../utils/timeConverter";
-import VerticalList from "../../unit/VerticalList/VerticalList";
+// import VerticalList from "../../unit/VerticalList/VerticalList";
 import SearchCard from "../SearchCard/SearchCard";
 
 type SearchResultsProps = React.ComponentProps<typeof Box> & {
@@ -68,32 +68,56 @@ const SearchResults: React.FC<SearchResultsProps> = (
     );
   }
 
-  return (
-    <VerticalList itemCount={data.length} {...rest}>
-      {({ index, measure }) => {
-        const movieData = data[index];
+  // return (
+  //   <VerticalList itemCount={data.length} {...rest}>
+  //     {({ index, measure }) => {
+  //       const movieData = data[index];
 
-        return (
+  //       return (
+  //         <SearchCard
+  //           borderBottom={`2px solid ${theme.palette.primary.main}`}
+  //           p={2}
+  //           linkTo={getRoute(RouteType.movie, { id: movieData.id.toString() })}
+  //           src={getPosterImageQuery(movieData.poster_path, PosterSize.w185)}
+  //           imageWidth={185}
+  //           imageRatio={1.4}
+  //           title={movieData.title}
+  //           releaseDate={formatDateTime(movieData.release_date)}
+  //           ratingScore={getMovieRating(
+  //             movieData.vote_count,
+  //             movieData.vote_average
+  //           )}
+  //           onImageLoaded={measure}
+  //           onResize={measure}
+  //         />
+  //       );
+  //     }}
+  //   </VerticalList>
+  // );
+
+  return (
+    <Box {...rest}>
+      <Box display='flex' flexDirection='column'>
+        {data.map(movie=>(
           <SearchCard
-            borderBottom={`2px solid ${theme.palette.primary.main}`}
-            p={2}
-            linkTo={getRoute(RouteType.movie, { id: movieData.id.toString() })}
-            src={getPosterImageQuery(movieData.poster_path, PosterSize.w185)}
-            imageWidth={185}
-            imageRatio={1.4}
-            title={movieData.title}
-            releaseDate={formatDateTime(movieData.release_date)}
-            ratingScore={getMovieRating(
-              movieData.vote_count,
-              movieData.vote_average
-            )}
-            onImageLoaded={measure}
-            onResize={measure}
+          key={movie.id}
+          borderBottom={`2px solid ${theme.palette.primary.main}`}
+          p={2}
+          linkTo={getRoute(RouteType.movie, { id: movie.id.toString() })}
+          src={getPosterImageQuery(movie.poster_path, PosterSize.w185)}
+          imageWidth={185}
+          imageRatio={1.4}
+          title={movie.title}
+          releaseDate={formatDateTime(movie.release_date)}
+          ratingScore={getMovieRating(
+            movie.vote_count,
+            movie.vote_average
+          )}
           />
-        );
-      }}
-    </VerticalList>
-  );
+        ))}
+      </Box>
+    </Box>
+  )
 };
 
 export default SearchResults;
